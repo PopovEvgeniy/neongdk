@@ -224,19 +224,14 @@ ORGF_Frame::~ORGF_Frame()
 {
  if(buffer!=NULL)
  {
-  buffer=NULL;
   free(buffer);
+  buffer=NULL;
  }
 
 }
 
 void ORGF_Frame::create_render_buffer()
 {
- if(buffer!=NULL)
- {
-  buffer=NULL;
-  free(buffer);
- }
  length=frame_width*frame_height*sizeof(ORGF_Pixel);
  buffer=(ORGF_Pixel*)calloc(length,1);
  if(buffer==NULL)
