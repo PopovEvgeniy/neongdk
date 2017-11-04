@@ -1,4 +1,9 @@
 /*
+Orthodox game framework was create by Popov Evgeniy Alekseyevich
+Some code bases on code from SVGALib(http://www.svgalib.org/).
+
+Orthodox game framework license
+
 Copyright © 2017, Popov Evgeniy Alekseyevich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -13,6 +18,10 @@ copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Third–party code license
+
+SVGALib is public domain. SVGALib homepage: http://www.svgalib.org/
 */
 
 #include <stdio.h>
@@ -143,14 +152,6 @@ struct PCX_head
  unsigned char filled[54];
 };
 
-struct ORGF_Pixel
-{
- unsigned char blue:8;
- unsigned char green:8;
- unsigned char red:8;
- unsigned char alpha:8;
-};
-
 LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
 
 class ORGF_Base
@@ -195,12 +196,12 @@ class ORGF_Frame
  unsigned long int frame_width;
  unsigned long int frame_height;
  unsigned long int length;
- ORGF_Pixel *buffer;
+ unsigned long int *buffer;
  void create_render_buffer();
  public:
  ORGF_Frame();
  ~ORGF_Frame();
- void draw_pixel(unsigned long int x,unsigned long int y,unsigned char red,unsigned char green,unsigned char blue);
+ void draw_pixel(const unsigned long int x,const unsigned long int y,const unsigned long int red,const unsigned long int green,const unsigned long int blue);
  void clear_screen();
  unsigned long int get_frame_width();
  unsigned long int get_frame_height();
