@@ -1342,6 +1342,16 @@ ORGF_Sprite* ORGF_Sprite::get_handle()
  return this;
 }
 
+ORGF_Box ORGF_Sprite::get_box()
+{
+ ORGF_Box target;
+ target.x=current_x;
+ target.y=current_y;
+ target.width=width/frames;
+ target.height=height;
+ return target;
+}
+
 ORGF_Text::ORGF_Text()
 {
  current_x=0;
@@ -1384,29 +1394,29 @@ void ORGF_Text::draw_text(const char *text)
 
 }
 
-bool ORGF_Collision::check_horizontal_collision(ORGF_Sprite &first,ORGF_Sprite &second)
+bool ORGF_Collision::check_horizontal_collision(ORGF_Box first,ORGF_Box second)
 {
  bool result;
  result=false;
- if((first.get_x()+first.get_sprite_width())>=second.get_x())
+ if((first.x+first.width)>=second.x)
  {
-  if(first.get_x()<=(second.get_x()+second.get_sprite_width())) result=true;
+  if(first.x<=(second.x+second.width)) result=true;
  }
  return result;
 }
 
-bool ORGF_Collision::check_vertical_collision(ORGF_Sprite &first,ORGF_Sprite &second)
+bool ORGF_Collision::check_vertical_collision(ORGF_Box first,ORGF_Box second)
 {
  bool result;
  result=false;
- if((first.get_y()+first.get_sprite_height())>=second.get_y())
+ if((first.y+first.height)>=second.y)
  {
-  if(first.get_y()<=(second.get_y()+second.get_sprite_height())) result=true;
+  if(first.y<=(second.y+second.height)) result=true;
  }
  return result;
 }
 
-bool ORGF_Collision::check_collision(ORGF_Sprite &first,ORGF_Sprite &second)
+bool ORGF_Collision::check_collision(ORGF_Box first,ORGF_Box second)
 {
  bool result;
  result=false;

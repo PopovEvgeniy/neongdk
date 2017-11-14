@@ -152,6 +152,14 @@ struct PCX_head
  unsigned char filled[54];
 };
 
+struct ORGF_Box
+{
+ unsigned long int x:32;
+ unsigned long int y:32;
+ unsigned long int width:32;
+ unsigned long int height:32;
+};
+
 LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
 
 class ORGF_Base
@@ -409,6 +417,7 @@ class ORGF_Sprite:public ORGF_Canvas
  unsigned long int get_sprite_width();
  unsigned long int get_sprite_height();
  ORGF_Sprite* get_handle();
+ ORGF_Box get_box();
 };
 
 class ORGF_Text
@@ -428,7 +437,7 @@ class ORGF_Text
 class ORGF_Collision
 {
  public:
- bool check_horizontal_collision(ORGF_Sprite &first,ORGF_Sprite &second);
- bool check_vertical_collision(ORGF_Sprite &first,ORGF_Sprite &second);
- bool check_collision(ORGF_Sprite &first,ORGF_Sprite &second);
+ bool check_horizontal_collision(ORGF_Box first,ORGF_Box second);
+ bool check_vertical_collision(ORGF_Box first,ORGF_Box second);
+ bool check_collision(ORGF_Box first,ORGF_Box second);
 };
