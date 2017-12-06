@@ -18,6 +18,7 @@ int main(void)
  ORGF_Sprite ship,font;
  ORGF_Text text;
  System.enable_logging("log.txt");
+ keyboard.initialize();
  screen.initialize();
  space.initialize(screen.get_handle());
  ship.initialize(screen.get_handle());

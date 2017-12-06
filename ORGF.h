@@ -242,6 +242,7 @@ class ORGF_Keyboard
  public:
  ORGF_Keyboard();
  ~ORGF_Keyboard();
+ void initialize();
  bool check_hold(const unsigned char code);
  bool check_press(const unsigned char code);
  bool check_release(const unsigned char code);

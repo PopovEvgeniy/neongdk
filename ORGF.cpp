@@ -333,6 +333,16 @@ ORGF_Screen* ORGF_Screen::get_handle()
 
 ORGF_Keyboard::ORGF_Keyboard()
 {
+ preversion=NULL;
+}
+
+ORGF_Keyboard::~ORGF_Keyboard()
+{
+ if(preversion!=NULL) free(preversion);
+}
+
+void ORGF_Keyboard::initialize()
+{
  preversion=(unsigned char*)calloc(ORGF_KEYBOARD,1);
  if(preversion==NULL)
  {
@@ -340,11 +350,6 @@ ORGF_Keyboard::ORGF_Keyboard()
   exit(EXIT_FAILURE);
  }
 
-}
-
-ORGF_Keyboard::~ORGF_Keyboard()
-{
- if(preversion!=NULL) free(preversion);
 }
 
 bool ORGF_Keyboard::check_hold(const unsigned char code)
