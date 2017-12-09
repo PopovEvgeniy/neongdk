@@ -94,6 +94,21 @@ ORGF_Base::~ORGF_Base()
 
 ORGF_Synchronization::ORGF_Synchronization()
 {
+ timer=NULL;
+}
+
+ORGF_Synchronization::~ORGF_Synchronization()
+{
+ if(timer==NULL)
+ {
+  CancelWaitableTimer(timer);
+  CloseHandle(timer);
+ }
+
+}
+
+void ORGF_Synchronization::create_timer()
+{
  timer=CreateWaitableTimer(NULL,FALSE,NULL);
  if (timer==NULL)
  {
@@ -101,12 +116,6 @@ ORGF_Synchronization::ORGF_Synchronization()
   exit(EXIT_FAILURE);
  }
 
-}
-
-ORGF_Synchronization::~ORGF_Synchronization()
-{
- CancelWaitableTimer(timer);
- CloseHandle(timer);
 }
 
 void ORGF_Synchronization::set_timer(unsigned long int interval)
@@ -311,6 +320,7 @@ void ORGF_Render::refresh()
 void ORGF_Screen::initialize()
 {
  this->create_render_buffer();
+ this->create_timer();
  this->create_window();
  this->capture_mouse();
  this->set_render_setting();
