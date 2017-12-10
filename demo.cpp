@@ -59,11 +59,38 @@ int main(void)
   if(keyboard.check_hold(77)==true) x+=2;
   if(keyboard.check_press(71)==true) ship.mirror_image(0);
   if(keyboard.check_press(79)==true) ship.mirror_image(1);
+  switch (gamepad.get_dpad())
+  {
+   case ORGF_GAMEPAD_UP:
+   y--;
+   break;
+   case ORGF_GAMEPAD_DOWN:
+   y++;
+   break;
+   case ORGF_GAMEPAD_UPLEFT:
+   y--;
+   x--;
+   break;
+   case ORGF_GAMEPAD_UPRIGHT:
+   y--;
+   x++;
+   break;
+   case ORGF_GAMEPAD_DOWNLEFT:
+   y++;
+   x--;
+   break;
+   case ORGF_GAMEPAD_DOWNRIGHT:
+   y++;
+   x++;
+   break;
+   case ORGF_GAMEPAD_LEFT:
+   x--;
+   break;
+   case ORGF_GAMEPAD_RIGHT:
+   x++;
+   break;
+  }
   if(gamepad.check_hold(ORGF_GAMEPAD_BUTTON2)==true) break;
-  if(gamepad.get_dpad()==ORGF_GAMEPAD_UP) y-=2;
-  if(gamepad.get_dpad()==ORGF_GAMEPAD_DOWN) y+=2;
-  if(gamepad.get_dpad()==ORGF_GAMEPAD_LEFT) x-=2;
-  if(gamepad.get_dpad()==ORGF_GAMEPAD_RIGHT) x+=2;
   if(gamepad.check_press(ORGF_GAMEPAD_BUTTON4)==true) ship.mirror_image(0);
   if(gamepad.check_press(ORGF_GAMEPAD_BUTTON3)==true) ship.mirror_image(1);
   if((x<=0)||(x>=screen_width)) x=screen_width/2;

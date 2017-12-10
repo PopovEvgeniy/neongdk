@@ -118,7 +118,7 @@ void ORGF_Synchronization::create_timer()
 
 }
 
-void ORGF_Synchronization::set_timer(unsigned long int interval)
+void ORGF_Synchronization::set_timer(const unsigned long int interval)
 {
  LARGE_INTEGER start;
  start.QuadPart=0;
@@ -579,6 +579,18 @@ unsigned char ORGF_Gamepad::get_dpad()
   break;
   case JOY_POVRIGHT:
   result=ORGF_GAMEPAD_RIGHT;
+  break;
+  case JOYSTICK_UPLEFT:
+  result=ORGF_GAMEPAD_UPLEFT;
+  break;
+  case JOYSTICK_UPRIGHT:
+  result=ORGF_GAMEPAD_UPRIGHT;
+  break;
+  case JOYSTICK_DOWNLEFT:
+  result=ORGF_GAMEPAD_DOWNLEFT;
+  break;
+  case JOYSTICK_DOWNRIGHT:
+  result=ORGF_GAMEPAD_DOWNRIGHT;
   break;
  }
  return result;

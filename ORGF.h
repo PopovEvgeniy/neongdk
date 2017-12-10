@@ -45,11 +45,19 @@ SVGALib is public domain. SVGALib homepage: http://www.svgalib.org/
 #define ORGF_MOUSE_RIGHT 1
 #define ORGF_MOUSE_MIDDLE 2
 
+#define JOYSTICK_UPLEFT 31500
+#define JOYSTICK_UPRIGHT 4500
+#define JOYSTICK_DOWNLEFT 22500
+#define JOYSTICK_DOWNRIGHT 13500
 #define ORGF_GAMEPAD_NONE 0
 #define ORGF_GAMEPAD_UP 1
 #define ORGF_GAMEPAD_DOWN 2
 #define ORGF_GAMEPAD_LEFT 3
 #define ORGF_GAMEPAD_RIGHT 4
+#define ORGF_GAMEPAD_UPLEFT 5
+#define ORGF_GAMEPAD_UPRIGHT 6
+#define ORGF_GAMEPAD_DOWNLEFT 7
+#define ORGF_GAMEPAD_DOWNRIGHT 8
 #define ORGF_GAMEPAD1 JOYSTICKID1
 #define ORGF_GAMEPAD2 2
 #define ORGF_GAMEPAD3 3
@@ -175,7 +183,7 @@ class ORGF_Synchronization
  HANDLE timer;
  protected:
  void create_timer();
- void set_timer(unsigned long int interval);
+ void set_timer(const unsigned long int interval);
  void wait_timer();
  public:
  ORGF_Synchronization();
