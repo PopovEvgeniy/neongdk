@@ -227,8 +227,12 @@ class ORGF_Frame
 class ORGF_Render:public ORGF_Engine, public ORGF_Frame
 {
  protected:
+ DEVMODE display;
  HDC context;
  BITMAPINFO setting;
+ DEVMODE get_video_mode();
+ void set_video_mode(DEVMODE mode);
+ void check_video_mode();
  void set_render_setting();
  void refresh();
  public:

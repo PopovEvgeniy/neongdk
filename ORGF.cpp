@@ -286,12 +286,47 @@ unsigned long int ORGF_Frame::get_frame_height()
 
 ORGF_Render::ORGF_Render()
 {
+ memset(&display,0,sizeof(DEVMODE));
  memset(&setting,0,sizeof(BITMAPINFO));
  context=NULL;
 }
 
 ORGF_Render::~ORGF_Render()
 {
+ ChangeDisplaySettings(NULL,0);
+}
+
+void ORGF_Render::set_video_mode(DEVMODE mode)
+{
+ if (ChangeDisplaySettings(&mode,CDS_FULLSCREEN)!=DISP_CHANGE_SUCCESSFUL)
+ {
+  puts("Can't change video mode");
+  exit(EXIT_FAILURE);
+ }
+
+}
+
+DEVMODE ORGF_Render::get_video_mode()
+{
+ DEVMODE mode;
+ memset(&mode,0,sizeof(DEVMODE));
+ mode.dmSize=sizeof(DEVMODE);
+ if (EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&mode)==FALSE)
+ {
+  puts("Can't get display setting");
+  exit(EXIT_FAILURE);
+ }
+ return mode;
+}
+
+void ORGF_Render::check_video_mode()
+{
+ display=this->get_video_mode();
+ if(display.dmBitsPerPel<16)
+ {
+  display.dmBitsPerPel=16;
+  this->set_video_mode(display);
+ }
 
 }
 
@@ -319,6 +354,7 @@ void ORGF_Render::refresh()
 
 void ORGF_Screen::initialize()
 {
+ this->check_video_mode();
  this->create_render_buffer();
  this->create_timer();
  this->create_window();
