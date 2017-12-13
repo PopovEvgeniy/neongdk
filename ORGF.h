@@ -398,6 +398,7 @@ class ORGF_Canvas
  public:
  ORGF_Canvas();
  ~ORGF_Canvas();
+ ORGF_Color *get_image();
  unsigned long int get_width();
  unsigned long int get_height();
  void set_frames(const unsigned long int amount);
@@ -424,6 +425,7 @@ class ORGF_Sprite:public ORGF_Canvas
  public:
  ORGF_Sprite();
  ~ORGF_Sprite();
+ void clone(ORGF_Sprite &target);
  void draw_sprite_frame(const unsigned long int x,const unsigned long int y,const unsigned long int frame);
  void draw_sprite(const unsigned long int x,const unsigned long int y);
  unsigned long int get_x();

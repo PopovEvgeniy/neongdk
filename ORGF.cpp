@@ -1181,6 +1181,11 @@ ORGF_Canvas::~ORGF_Canvas()
  if(image!=NULL) free(image);
 }
 
+ORGF_Color *ORGF_Canvas::get_image()
+{
+ return image;
+}
+
 unsigned long int ORGF_Canvas::get_width()
 {
  return width;
@@ -1352,6 +1357,22 @@ ORGF_Sprite::ORGF_Sprite()
 ORGF_Sprite::~ORGF_Sprite()
 {
 
+}
+
+void ORGF_Sprite::clone(ORGF_Sprite &target)
+{
+ unsigned long int length;
+ frames=target.get_frames();
+ width=target.get_sprite_width();
+ height=target.get_sprite_height();
+ length=width*height*3;
+ image=(ORGF_Color*)calloc(length,1);
+ if(image==NULL)
+ {
+  puts("Can't allocate memory for image buffer");
+  exit(EXIT_FAILURE);
+ }
+ memmove(image,target.get_image(),length);
 }
 
 void ORGF_Sprite::draw_sprite_frame(const unsigned long int x,const unsigned long int y,const unsigned long int frame)
