@@ -528,11 +528,13 @@ bool ORGF_Mouse::check_release(const unsigned char button)
 ORGF_Gamepad::ORGF_Gamepad()
 {
  active=ORGF_GAMEPAD1;
- length=sizeof(JOYINFOEX);
- memset(&current,0,length);
- memset(&preversion,0,length);
- current.dwSize=length;
- preversion.dwSize=length;
+ length[0]=sizeof(JOYCAPS);
+ length[1]=sizeof(JOYINFOEX);
+ memset(&configuration,0,length[0]);
+ memset(&current,0,length[1]);
+ memset(&preversion,0,length[1]);
+ current.dwSize=length[1];
+ preversion.dwSize=length[1];
  current.dwFlags=JOY_RETURNALL;
  preversion.dwFlags=JOY_RETURNALL;
  current.dwPOV=JOY_POVCENTERED;
@@ -542,6 +544,14 @@ ORGF_Gamepad::ORGF_Gamepad()
 ORGF_Gamepad::~ORGF_Gamepad()
 {
 
+}
+
+bool ORGF_Gamepad::read_configuration()
+{
+ bool result;
+ result=false;
+ if(joyGetDevCaps(active,&configuration,length[0])==JOYERR_NOERROR) result=true;
+ return result;
 }
 
 bool ORGF_Gamepad::read_state()
@@ -554,10 +564,11 @@ bool ORGF_Gamepad::read_state()
 
 void ORGF_Gamepad::clear_state()
 {
- memset(&current,0,length);
- memset(&preversion,0,length);
- current.dwSize=length;
- preversion.dwSize=length;
+ memset(&configuration,0,length[0]);
+ memset(&current,0,length[1]);
+ memset(&preversion,0,length[1]);
+ current.dwSize=length[1];
+ preversion.dwSize=length[1];
  current.dwFlags=JOY_RETURNALL;
  preversion.dwFlags=JOY_RETURNALL;
  current.dwPOV=JOY_POVCENTERED;
@@ -585,6 +596,14 @@ unsigned int ORGF_Gamepad::get_active()
 unsigned int ORGF_Gamepad::get_amount()
 {
  return joyGetNumDevs();
+}
+
+unsigned int ORGF_Gamepad::get_button_amount()
+{
+ unsigned int result;
+ result=0;
+ if(this->read_configuration()==true) result=configuration.wMaxButtons;
+ return result;
 }
 
 bool ORGF_Gamepad::check_connection()
