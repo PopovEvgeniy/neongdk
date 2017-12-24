@@ -585,7 +585,12 @@ bool ORGF_Gamepad::check_button(const unsigned long int button,JOYINFOEX &target
 
 void ORGF_Gamepad::set_active(const unsigned int gamepad)
 {
- if(active<=ORGF_GAMEPAD15) active=gamepad;
+ if(active<=ORGF_GAMEPAD15)
+ {
+  this->clear_state();
+  active=gamepad;
+ }
+
 }
 
 unsigned int ORGF_Gamepad::get_active()
@@ -602,7 +607,7 @@ unsigned int ORGF_Gamepad::get_button_amount()
 {
  unsigned int result;
  result=0;
- if(this->read_configuration()==true) result=configuration.wMaxButtons;
+ if(this->read_configuration()==true) result=configuration.wNumButtons;
  return result;
 }
 
@@ -647,6 +652,62 @@ unsigned char ORGF_Gamepad::get_dpad()
   case JOYSTICK_DOWNRIGHT:
   result=ORGF_GAMEPAD_DOWNRIGHT;
   break;
+ }
+ return result;
+}
+
+char ORGF_Gamepad::get_stick_x(const unsigned char stick)
+{
+ char result;
+ unsigned long int control;
+ result=0;
+ if(stick==ORGF_GAMEPAD_LEFT_STICK)
+ {
+  if(this->read_configuration()==true)
+  {
+   control=(configuration.wXmax-configuration.wXmin)/2;
+   if(current.dwXpos<control) result=-1;
+   if(current.dwXpos>control) result=1;
+  }
+
+ }
+ if(stick==ORGF_GAMEPAD_RIGHT_STICK)
+ {
+  if(this->read_configuration()==true)
+  {
+   control=(configuration.wZmax-configuration.wZmin)/2;
+   if(current.dwZpos<control) result=-1;
+   if(current.dwZpos>control) result=1;
+  }
+
+ }
+ return result;
+}
+
+char ORGF_Gamepad::get_stick_y(const unsigned char stick)
+{
+ char result;
+ unsigned long int control;
+ result=0;
+ if(stick==ORGF_GAMEPAD_LEFT_STICK)
+ {
+  if(this->read_configuration()==true)
+  {
+   control=(configuration.wYmax-configuration.wYmin)/2;
+   if(current.dwYpos<control) result=-1;
+   if(current.dwYpos>control) result=1;
+  }
+
+ }
+ if(stick==ORGF_GAMEPAD_RIGHT_STICK)
+ {
+  if(this->read_configuration()==true)
+  {
+   control=(configuration.wRmax-configuration.wRmin)/2;
+   if(current.dwRpos<control) result=-1;
+   if(current.dwRpos>control) result=1;
+  }
+
  }
  return result;
 }

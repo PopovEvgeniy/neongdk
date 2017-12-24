@@ -90,6 +90,10 @@ int main(void)
    x++;
    break;
   }
+  if(gamepad.get_stick_x(ORGF_GAMEPAD_LEFT_STICK)==-1) x--;
+  if(gamepad.get_stick_x(ORGF_GAMEPAD_LEFT_STICK)==1) x++;
+  if(gamepad.get_stick_y(ORGF_GAMEPAD_LEFT_STICK)==-1) y--;
+  if(gamepad.get_stick_y(ORGF_GAMEPAD_LEFT_STICK)==1) y++;
   if(gamepad.check_hold(ORGF_GAMEPAD_BUTTON2)==true) break;
   if(gamepad.check_press(ORGF_GAMEPAD_BUTTON4)==true) ship.mirror_image(0);
   if(gamepad.check_press(ORGF_GAMEPAD_BUTTON3)==true) ship.mirror_image(1);
