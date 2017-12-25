@@ -1,9 +1,4 @@
 /*
-Orthodox game framework was create by Popov Evgeniy Alekseyevich
-Some code bases on code from SVGALib(http://www.svgalib.org/).
-
-Orthodox game framework license
-
 Copyright © 2017, Popov Evgeniy Alekseyevich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,10 +13,6 @@ copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-Third–party code license
-
-SVGALib is public domain. SVGALib homepage: http://www.svgalib.org/
 */
 
 #include "ORGF.h"
@@ -250,8 +241,8 @@ ORGF_Frame::~ORGF_Frame()
 
 void ORGF_Frame::create_render_buffer()
 {
- length=frame_width*frame_height*sizeof(unsigned long int);
- buffer=(unsigned long int*)calloc(length,1);
+ length=frame_width*frame_height*sizeof(COLORREF);
+ buffer=(COLORREF*)calloc(length,1);
  if(buffer==NULL)
  {
   puts("Can't allocate memory for render buffer");
@@ -264,7 +255,7 @@ void ORGF_Frame::draw_pixel(const unsigned long int x,const unsigned long int y,
 {
  if((x<frame_width)&&(y<frame_height))
  {
-  buffer[x+y*frame_width]=blue+256*green+65536*red; //This code bases on code from SVGALib
+  buffer[x+y*frame_width]=RGB(blue,green,red);
  }
 
 }

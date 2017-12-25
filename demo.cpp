@@ -1,4 +1,3 @@
-#define MINGW_GCC
 #include "ORGF.h"
 
 int main(void)
