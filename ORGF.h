@@ -1,5 +1,5 @@
 /*
-Copyright © 2017, Popov Evgeniy Alekseyevich
+Copyright © 2017-2018, Popov Evgeniy Alekseyevich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -316,14 +316,15 @@ class ORGF_Multimedia: public ORGF_Base
  IVideoWindow *video;
  wchar_t *convert_file_name(const char *target);
  void open(const wchar_t *target);
+ void rewind();
  public:
  ORGF_Multimedia();
  ~ORGF_Multimedia();
  void initialize();
  void load(const char *target);
- void play();
+ bool is_end();
  void stop();
- bool check_playing();
+ void play();
 };
 
 class ORGF_Memory

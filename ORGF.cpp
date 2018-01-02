@@ -740,7 +740,7 @@ ORGF_Multimedia::ORGF_Multimedia()
 
 ORGF_Multimedia::~ORGF_Multimedia()
 {
- if(player!=NULL) player->Stop();
+ if(player!=NULL) player->StopWhenReady();
  if(video!=NULL) video->Release();
  if(controler!=NULL) controler->Release();
  if(player!=NULL) player->Release();
@@ -764,18 +764,25 @@ wchar_t *ORGF_Multimedia::convert_file_name(const char *target)
 
 void ORGF_Multimedia::open(const wchar_t *target)
 {
- player->Stop();
+ player->StopWhenReady();
  if(loader->RenderFile(target,NULL)!=S_OK)
  {
   puts("Can't load a multimedia file");
   exit(EXIT_FAILURE);
  }
- if(controler->SetRate(1)!=S_OK)
+ video->put_FullScreenMode(OATRUE);
+}
+
+void ORGF_Multimedia::rewind()
+{
+ long long position;
+ position=0;
+ if(controler->SetPositions(&position,AM_SEEKING_AbsolutePositioning,NULL,AM_SEEKING_NoPositioning)!=S_OK)
  {
-  puts("Can't set playing rate");
+  puts("Can't set start position");
   exit(EXIT_FAILURE);
  }
- video->put_FullScreenMode(OATRUE);
+
 }
 
 void ORGF_Multimedia::initialize()
@@ -811,34 +818,33 @@ void ORGF_Multimedia::load(const char *target)
  free(name);
 }
 
-void ORGF_Multimedia::play()
-{
- long long position;
- position=0;
- player->Stop();
- if(controler->SetPositions(&position,AM_SEEKING_AbsolutePositioning,NULL,AM_SEEKING_NoPositioning)!=S_OK)
- {
-  puts("Can't set start position");
-  exit(EXIT_FAILURE);
- }
- player->Run();
-}
-
-void ORGF_Multimedia::stop()
-{
- player->Stop();
-}
-
-bool ORGF_Multimedia::check_playing()
+bool ORGF_Multimedia::is_end()
 {
  bool result;
  long long current,stop;
  result=false;
  if(controler->GetPositions(&current,&stop)==S_OK)
  {
-  if(current<stop) result=true;
+  if(current>=stop) result=true;
+ }
+ else
+ {
+  puts("Can't get the current and the end position");
+  exit(EXIT_FAILURE);
  }
  return result;
+}
+
+void ORGF_Multimedia::stop()
+{
+ player->StopWhenReady();
+}
+
+void ORGF_Multimedia::play()
+{
+ this->stop();
+ this->rewind();
+ player->Run();
 }
 
 ORGF_Memory::ORGF_Memory()
