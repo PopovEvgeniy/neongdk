@@ -316,13 +316,14 @@ class ORGF_Multimedia: public ORGF_Base
  IVideoWindow *video;
  wchar_t *convert_file_name(const char *target);
  void open(const wchar_t *target);
+ bool is_end();
  void rewind();
  public:
  ORGF_Multimedia();
  ~ORGF_Multimedia();
  void initialize();
  void load(const char *target);
- bool is_end();
+ bool check_playing();
  void stop();
  void play();
 };

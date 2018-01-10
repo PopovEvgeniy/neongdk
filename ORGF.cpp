@@ -773,6 +773,23 @@ void ORGF_Multimedia::open(const wchar_t *target)
  video->put_FullScreenMode(OATRUE);
 }
 
+bool ORGF_Multimedia::is_end()
+{
+ bool result;
+ long long current,stop;
+ result=false;
+ if(controler->GetPositions(&current,&stop)==S_OK)
+ {
+  if(current>=stop) result=true;
+ }
+ else
+ {
+  puts("Can't get the current and the end position");
+  exit(EXIT_FAILURE);
+ }
+ return result;
+}
+
 void ORGF_Multimedia::rewind()
 {
  long long position;
@@ -818,19 +835,23 @@ void ORGF_Multimedia::load(const char *target)
  free(name);
 }
 
-bool ORGF_Multimedia::is_end()
+bool ORGF_Multimedia::check_playing()
 {
+ OAFilterState state;
  bool result;
- long long current,stop;
  result=false;
- if(controler->GetPositions(&current,&stop)==S_OK)
+ if(player->GetState(INFINITE,&state)==E_FAIL)
  {
-  if(current>=stop) result=true;
+  puts("Can't get the multimedia state");
+  exit(EXIT_FAILURE);
  }
  else
  {
-  puts("Can't get the current and the end position");
-  exit(EXIT_FAILURE);
+  if(state==State_Running)
+  {
+   if(this->is_end()==false) result=true;
+  }
+
  }
  return result;
 }
