@@ -647,6 +647,29 @@ unsigned char ORGF_Gamepad::get_dpad()
  return result;
 }
 
+unsigned long int ORGF_Gamepad::get_sticks_amount()
+{
+ unsigned long int result;
+ result=0;
+ if(this->read_configuration()==true)
+ {
+  switch (configuration.wNumAxes)
+  {
+   case 2:
+   result=1;
+   break;
+   case 4:
+   result=2;
+   break;
+   default:
+   result=0;
+   break;
+  }
+
+ }
+ return result;
+}
+
 char ORGF_Gamepad::get_stick_x(const unsigned char stick)
 {
  char result;
@@ -656,9 +679,13 @@ char ORGF_Gamepad::get_stick_x(const unsigned char stick)
  {
   if(this->read_configuration()==true)
   {
-   control=(configuration.wXmax-configuration.wXmin)/2;
-   if(current.dwXpos<control) result=-1;
-   if(current.dwXpos>control) result=1;
+   if((configuration.wNumAxes==2)||(configuration.wNumAxes==4))
+   {
+    control=(configuration.wXmax-configuration.wXmin)/2;
+    if(current.dwXpos<control) result=-1;
+    if(current.dwXpos>control) result=1;
+   }
+
   }
 
  }
@@ -666,9 +693,13 @@ char ORGF_Gamepad::get_stick_x(const unsigned char stick)
  {
   if(this->read_configuration()==true)
   {
-   control=(configuration.wZmax-configuration.wZmin)/2;
-   if(current.dwZpos<control) result=-1;
-   if(current.dwZpos>control) result=1;
+   if(configuration.wNumAxes==4)
+   {
+    control=(configuration.wZmax-configuration.wZmin)/2;
+    if(current.dwZpos<control) result=-1;
+    if(current.dwZpos>control) result=1;
+   }
+
   }
 
  }
@@ -684,9 +715,13 @@ char ORGF_Gamepad::get_stick_y(const unsigned char stick)
  {
   if(this->read_configuration()==true)
   {
-   control=(configuration.wYmax-configuration.wYmin)/2;
-   if(current.dwYpos<control) result=-1;
-   if(current.dwYpos>control) result=1;
+   if((configuration.wNumAxes==2)||(configuration.wNumAxes==4))
+   {
+    control=(configuration.wYmax-configuration.wYmin)/2;
+    if(current.dwYpos<control) result=-1;
+    if(current.dwYpos>control) result=1;
+   }
+
   }
 
  }
@@ -694,9 +729,13 @@ char ORGF_Gamepad::get_stick_y(const unsigned char stick)
  {
   if(this->read_configuration()==true)
   {
-   control=(configuration.wRmax-configuration.wRmin)/2;
-   if(current.dwRpos<control) result=-1;
-   if(current.dwRpos>control) result=1;
+   if(configuration.wNumAxes==4)
+   {
+    control=(configuration.wRmax-configuration.wRmin)/2;
+    if(current.dwRpos<control) result=-1;
+    if(current.dwRpos>control) result=1;
+   }
+
   }
 
  }
