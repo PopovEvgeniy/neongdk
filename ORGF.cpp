@@ -62,27 +62,6 @@ LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPA
  return DefWindowProc(window,Message,wParam,lParam);
 }
 
-ORGF_Base::ORGF_Base()
-{
- HRESULT status;
- status=CoInitialize(NULL);
- if(status!=S_OK)
- {
-  if(status!=S_FALSE)
-  {
-   puts("Can't initialize COM");
-   exit(EXIT_FAILURE);
-  }
-
- }
-
-}
-
-ORGF_Base::~ORGF_Base()
-{
- CoUninitialize();
-}
-
 ORGF_Synchronization::ORGF_Synchronization()
 {
  timer=NULL;
@@ -129,22 +108,42 @@ void ORGF_Synchronization::wait_timer()
 ORGF_Engine::ORGF_Engine()
 {
  window_class.lpszClassName=TEXT("ORGF");
- window_class.hInstance=GetModuleHandle(NULL);
  window_class.style=CS_HREDRAW|CS_VREDRAW|CS_OWNDC;
  window_class.lpfnWndProc=(WNDPROC)ORGF_Process_Message;
- window_class.hbrBackground=(HBRUSH)GetStockObject(BLACK_BRUSH);
- window_class.hIcon=LoadIcon(NULL,IDI_APPLICATION);
- window_class.hCursor=LoadCursor(NULL,IDC_ARROW);
+ window_class.hbrBackground=NULL;
+ window_class.hInstance=NULL;
+ window_class.hIcon=NULL;
+ window_class.hCursor=NULL;
  window_class.cbClsExtra=0;
  window_class.cbWndExtra=0;
- if (window_class.hCursor==NULL)
+ width=0;
+ height=0;
+}
+
+ORGF_Engine::~ORGF_Engine()
+{
+ if(window!=NULL) CloseWindow(window);
+ UnregisterClass(window_class.lpszClassName,window_class.hInstance);
+}
+
+void ORGF_Engine::prepare_engine()
+{
+ window_class.hInstance=GetModuleHandle(NULL);
+ if(window_class.hInstance==NULL)
  {
-  puts("Can't load the standart cursor");
+  puts("Can't get the application instance");
   exit(EXIT_FAILURE);
  }
+ window_class.hIcon=LoadIcon(NULL,IDI_APPLICATION);
  if (window_class.hIcon==NULL)
  {
   puts("Can't load the standart program icon");
+  exit(EXIT_FAILURE);
+ }
+ window_class.hCursor=LoadCursor(NULL,IDC_ARROW);
+ if (window_class.hCursor==NULL)
+ {
+  puts("Can't load the standart cursor");
   exit(EXIT_FAILURE);
  }
  if (RegisterClass(&window_class)==0)
@@ -152,14 +151,7 @@ ORGF_Engine::ORGF_Engine()
   puts("Can't register window class");
   exit(EXIT_FAILURE);
  }
- width=GetSystemMetrics(SM_CXSCREEN);
- height=GetSystemMetrics(SM_CYSCREEN);
-}
 
-ORGF_Engine::~ORGF_Engine()
-{
- if(window!=NULL) CloseWindow(window);
- UnregisterClass(window_class.lpszClassName,window_class.hInstance);
 }
 
 void ORGF_Engine::create_window()
@@ -307,6 +299,11 @@ DEVMODE ORGF_Render::get_video_mode()
   puts("Can't get display setting");
   exit(EXIT_FAILURE);
  }
+ else
+ {
+  width=mode.dmPelsWidth;
+  height=mode.dmPelsHeight;
+ }
  return mode;
 }
 
@@ -345,6 +342,7 @@ void ORGF_Render::refresh()
 
 void ORGF_Screen::initialize()
 {
+ this->prepare_engine();
  this->check_video_mode();
  this->create_render_buffer();
  this->create_timer();
@@ -784,6 +782,7 @@ ORGF_Multimedia::~ORGF_Multimedia()
  if(controler!=NULL) controler->Release();
  if(player!=NULL) player->Release();
  if(loader!=NULL) loader->Release();
+ CoUninitialize();
 }
 
 wchar_t *ORGF_Multimedia::convert_file_name(const char *target)
@@ -843,6 +842,17 @@ void ORGF_Multimedia::rewind()
 
 void ORGF_Multimedia::initialize()
 {
+ HRESULT status;
+ status=CoInitialize(NULL);
+ if(status!=S_OK)
+ {
+  if(status!=S_FALSE)
+  {
+   puts("Can't initialize COM");
+   exit(EXIT_FAILURE);
+  }
+
+ }
  if(CoCreateInstance(CLSID_FilterGraph,NULL,CLSCTX_INPROC_SERVER,IID_IGraphBuilder,(void**)&loader)!=S_OK)
  {
   puts("Can't create a multimedia loader");

@@ -170,13 +170,6 @@ struct ORGF_Box
 
 LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
 
-class ORGF_Base
-{
- public:
- ORGF_Base();
- ~ORGF_Base();
-};
-
 class ORGF_Synchronization
 {
  private:
@@ -197,6 +190,7 @@ class ORGF_Engine
  WNDCLASS window_class;
  unsigned long int width;
  unsigned long int height;
+ void prepare_engine();
  void create_window();
  void capture_mouse();
  bool process_message();
@@ -308,7 +302,7 @@ class ORGF_Gamepad
  bool check_release(const unsigned long int button);
 };
 
-class ORGF_Multimedia: public ORGF_Base
+class ORGF_Multimedia
 {
  private:
  IGraphBuilder *loader;
