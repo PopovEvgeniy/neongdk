@@ -327,6 +327,7 @@ class ORGF_Memory
 {
  private:
  MEMORYSTATUSEX memory;
+ void get_status();
  public:
  ORGF_Memory();
  ~ORGF_Memory();

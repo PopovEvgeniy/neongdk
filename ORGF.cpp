@@ -1,5 +1,5 @@
 /*
-Copyright © 2017, Popov Evgeniy Alekseyevich
+Copyright © 2017-2018, Popov Evgeniy Alekseyevich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -919,6 +919,7 @@ void ORGF_Multimedia::play()
 
 ORGF_Memory::ORGF_Memory()
 {
+ memset(&memory,0,sizeof(MEMORYSTATUSEX));
  memory.dwLength=sizeof(MEMORYSTATUSEX);
 }
 
@@ -927,15 +928,25 @@ ORGF_Memory::~ORGF_Memory()
 
 }
 
+void ORGF_Memory::get_status()
+{
+ if(GlobalMemoryStatusEx(&memory)==FALSE)
+ {
+  puts("Can't get the memory status");
+  exit(EXIT_FAILURE);
+ }
+
+}
+
 unsigned long long int ORGF_Memory::get_total_memory()
 {
- GlobalMemoryStatusEx(&memory);
+ this->get_status();
  return memory.ullTotalPhys;
 }
 
 unsigned long long int ORGF_Memory::get_free_memory()
 {
- GlobalMemoryStatusEx(&memory);
+ this->get_status();
  return memory.ullAvailPhys;
 }
 
