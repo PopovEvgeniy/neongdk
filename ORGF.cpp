@@ -134,6 +134,12 @@ void ORGF_Engine::prepare_engine()
   puts("Can't get the application instance");
   exit(EXIT_FAILURE);
  }
+ window_class.hbrBackground=(HBRUSH)GetStockObject(BLACK_BRUSH);
+ if (window_class.hbrBackground==NULL)
+ {
+  puts("Can't set background color");
+  exit(EXIT_FAILURE);
+ }
  window_class.hIcon=LoadIcon(NULL,IDI_APPLICATION);
  if (window_class.hIcon==NULL)
  {
