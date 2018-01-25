@@ -1,6 +1,6 @@
 #include "ORGF.h"
 
-int main(void)
+int WINAPI WinMain(HINSTANCE hThisInstance,HINSTANCE hPrevInstance,LPSTR lpszArgument,int nCmdShow)
 {
  long int x,y,screen_width,screen_height;
  unsigned char frame;
@@ -8,16 +8,14 @@ int main(void)
  char perfomance[8];
  ORGF_Timer timer;
  ORGF_Screen screen;
- ORGF_System System;
  ORGF_Keyboard keyboard;
  ORGF_Gamepad gamepad;
  ORGF_Mouse mouse;
- ORGF_Multimedia media;
+ ORGF_Sound media;
  ORGF_Image image;
  ORGF_Background space;
  ORGF_Sprite ship,font;
  ORGF_Text text;
- System.enable_logging("log.txt");
  keyboard.initialize();
  screen.initialize();
  space.initialize(screen.get_handle());
@@ -37,19 +35,16 @@ int main(void)
  text.set_position(font.get_sprite_width(),font.get_sprite_width());
  ship.set_frames(2);
  screen.clear_screen();
- space.resize_image(screen_width,screen_height);
  frame=1;
  mouse.hide();
  timer.set_timer(1);
- media.initialize();
- media.load("space.mp3");
+ media.play("space.wav",true);
  fps=0;
  memset(perfomance,0,8);
  while(screen.sync()==false)
  {
   fps++;
   gamepad.update();
-  if(media.check_playing()==false) media.play();
   if(mouse.check_press(ORGF_MOUSE_LEFT)==true) break;
   if(keyboard.check_hold(57)==true) break;
   if(keyboard.check_hold(72)==true) y-=2;

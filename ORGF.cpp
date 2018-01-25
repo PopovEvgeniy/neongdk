@@ -62,52 +62,77 @@ LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPA
  return DefWindowProc(window,Message,wParam,lParam);
 }
 
+void ORGF_Message(const char *message)
+{
+ MessageBox(NULL,(LPCSTR)message,NULL,MB_OK);
+}
+
 ORGF_Synchronization::ORGF_Synchronization()
 {
- timer=NULL;
+ memset(&resolution,0,sizeof(TIMECAPS));
+ start=0;
+ delay=0;
 }
 
 ORGF_Synchronization::~ORGF_Synchronization()
 {
- if(timer==NULL)
- {
-  CancelWaitableTimer(timer);
-  CloseHandle(timer);
- }
 
 }
 
 void ORGF_Synchronization::create_timer()
 {
- timer=CreateWaitableTimer(NULL,FALSE,NULL);
- if (timer==NULL)
+ if(timeGetDevCaps(&resolution,sizeof(TIMECAPS))!=MMSYSERR_NOERROR)
  {
-  puts("Can't create synchronization timer");
+  ORGF_Message("Can't get timer resolution");
   exit(EXIT_FAILURE);
  }
 
+}
+
+void ORGF_Synchronization::set_timer_resolution()
+{
+ if(timeBeginPeriod(resolution.wPeriodMax)!=TIMERR_NOERROR)
+ {
+  ORGF_Message("Can't set timer resolution");
+  exit(EXIT_FAILURE);
+ }
+
+}
+
+void ORGF_Synchronization::reset_timer_resolution()
+{
+ if(timeEndPeriod(resolution.wPeriodMax)!=TIMERR_NOERROR)
+ {
+  ORGF_Message("Can't reset timer resolution");
+  exit(EXIT_FAILURE);
+ }
+
+}
+
+void ORGF_Synchronization::pause(const unsigned long int interval)
+{
+ this->set_timer_resolution();
+ Sleep(interval);
+ this->reset_timer_resolution();
 }
 
 void ORGF_Synchronization::set_timer(const unsigned long int interval)
 {
- LARGE_INTEGER start;
- start.QuadPart=0;
- if(SetWaitableTimer(timer,&start,interval,NULL,NULL,FALSE)==FALSE)
- {
-  puts("Can't set timer");
-  exit(EXIT_FAILURE);
- }
-
+ delay=interval;
+ start=timeGetTime();
 }
 
 void ORGF_Synchronization::wait_timer()
 {
- WaitForSingleObject(timer,INFINITE);
+ unsigned long int interval;
+ interval=timeGetTime()-start;
+ if(interval<delay) this->pause(delay-interval);
+ start=timeGetTime();
 }
 
 ORGF_Engine::ORGF_Engine()
 {
- window_class.lpszClassName=TEXT("ORGF");
+ window_class.lpszClassName="ORGF";
  window_class.style=CS_HREDRAW|CS_VREDRAW|CS_OWNDC;
  window_class.lpfnWndProc=(WNDPROC)ORGF_Process_Message;
  window_class.hbrBackground=NULL;
@@ -131,30 +156,30 @@ void ORGF_Engine::prepare_engine()
  window_class.hInstance=GetModuleHandle(NULL);
  if(window_class.hInstance==NULL)
  {
-  puts("Can't get the application instance");
+  ORGF_Message("Can't get the application instance");
   exit(EXIT_FAILURE);
  }
  window_class.hbrBackground=(HBRUSH)GetStockObject(BLACK_BRUSH);
  if (window_class.hbrBackground==NULL)
  {
-  puts("Can't set background color");
+  ORGF_Message("Can't set background color");
   exit(EXIT_FAILURE);
  }
  window_class.hIcon=LoadIcon(NULL,IDI_APPLICATION);
  if (window_class.hIcon==NULL)
  {
-  puts("Can't load the standart program icon");
+  ORGF_Message("Can't load the standart program icon");
   exit(EXIT_FAILURE);
  }
  window_class.hCursor=LoadCursor(NULL,IDC_ARROW);
  if (window_class.hCursor==NULL)
  {
-  puts("Can't load the standart cursor");
+  ORGF_Message("Can't load the standart cursor");
   exit(EXIT_FAILURE);
  }
  if (RegisterClass(&window_class)==0)
  {
-  puts("Can't register window class");
+  ORGF_Message("Can't register window class");
   exit(EXIT_FAILURE);
  }
 
@@ -165,7 +190,7 @@ void ORGF_Engine::create_window()
  window=CreateWindow(window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,width,height,NULL,NULL,window_class.hInstance,NULL);
  if (window==NULL)
  {
-  puts("Can't create window");
+  ORGF_Message("Can't create window");
   exit(EXIT_FAILURE);
  }
  EnableWindow(window,TRUE);
@@ -177,12 +202,12 @@ void ORGF_Engine::capture_mouse()
  RECT border;
  if(GetClientRect(window,&border)==FALSE)
  {
-  puts("Can't capture window");
+  ORGF_Message("Can't capture window");
   exit(EXIT_FAILURE);
  }
  if(ClipCursor(&border)==FALSE)
  {
-  puts("Can't capture cursor");
+  ORGF_Message("Can't capture cursor");
   exit(EXIT_FAILURE);
  }
 
@@ -222,8 +247,8 @@ unsigned long int ORGF_Engine::get_height()
 
 ORGF_Frame::ORGF_Frame()
 {
- frame_width=512;
- frame_height=512;
+ frame_width=320;
+ frame_height=200;
  buffer=NULL;
 }
 
@@ -243,7 +268,7 @@ void ORGF_Frame::create_render_buffer()
  buffer=(COLORREF*)calloc(length,1);
  if(buffer==NULL)
  {
-  puts("Can't allocate memory for render buffer");
+  ORGF_Message("Can't allocate memory for render buffer");
   exit(EXIT_FAILURE);
  }
 
@@ -289,7 +314,7 @@ void ORGF_Render::set_video_mode(DEVMODE mode)
 {
  if (ChangeDisplaySettings(&mode,CDS_FULLSCREEN)!=DISP_CHANGE_SUCCESSFUL)
  {
-  puts("Can't change video mode");
+  ORGF_Message("Can't change video mode");
   exit(EXIT_FAILURE);
  }
 
@@ -302,26 +327,21 @@ DEVMODE ORGF_Render::get_video_mode()
  mode.dmSize=sizeof(DEVMODE);
  if (EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&mode)==FALSE)
  {
-  puts("Can't get display setting");
+  ORGF_Message("Can't get display setting");
   exit(EXIT_FAILURE);
- }
- else
- {
-  width=mode.dmPelsWidth;
-  height=mode.dmPelsHeight;
  }
  return mode;
 }
 
-void ORGF_Render::check_video_mode()
+void ORGF_Render::set_display_mode()
 {
+ width=640;
+ height=480;
  display=this->get_video_mode();
- if(display.dmBitsPerPel<16)
- {
-  display.dmBitsPerPel=16;
-  this->set_video_mode(display);
- }
-
+ display.dmBitsPerPel=32;
+ display.dmPelsWidth=width;
+ display.dmPelsHeight=height;
+ this->set_video_mode(display);
 }
 
 void ORGF_Render::set_render_setting()
@@ -339,7 +359,7 @@ void ORGF_Render::refresh()
  context=GetDC(window);
  if(context==NULL)
  {
-  puts("Can't get window context");
+  ORGF_Message("Can't get window context");
   exit(EXIT_FAILURE);
  }
  StretchDIBits(context,0,0,width,height,0,0,frame_width,frame_height,buffer,&setting,DIB_RGB_COLORS,SRCCOPY);
@@ -349,13 +369,13 @@ void ORGF_Render::refresh()
 void ORGF_Screen::initialize()
 {
  this->prepare_engine();
- this->check_video_mode();
+ this->set_display_mode();
  this->create_render_buffer();
  this->create_timer();
  this->create_window();
  this->capture_mouse();
  this->set_render_setting();
- this->set_timer(17);
+ this->set_timer(20);
 }
 
 bool ORGF_Screen::sync()
@@ -387,7 +407,7 @@ void ORGF_Keyboard::initialize()
  preversion=(unsigned char*)calloc(ORGF_KEYBOARD,1);
  if(preversion==NULL)
  {
-  puts("Can't allocate memory for keyboard state buffer");
+  ORGF_Message("Can't allocate memory for keyboard state buffer");
   exit(EXIT_FAILURE);
  }
 
@@ -432,24 +452,24 @@ ORGF_Mouse::ORGF_Mouse()
 
 ORGF_Mouse::~ORGF_Mouse()
 {
- while(ShowCursor(TRUE)<1) ;
+ while(ShowCursor(TRUE)<1);
 }
 
 void ORGF_Mouse::show()
 {
- while(ShowCursor(TRUE)<1) ;
+ while(ShowCursor(TRUE)<1);
 }
 
 void ORGF_Mouse::hide()
 {
- while(ShowCursor(FALSE)>-2) ;
+ while(ShowCursor(FALSE)>-2);
 }
 
 void ORGF_Mouse::set_position(const unsigned long int x,const unsigned long int y)
 {
  if(SetCursorPos(x,y)==FALSE)
  {
-  puts("Can't set the mouse cursor position");
+  ORGF_Message("Can't set the mouse cursor position");
   exit(EXIT_FAILURE);
  }
 
@@ -460,7 +480,7 @@ unsigned long int ORGF_Mouse::get_x()
  POINT position;
  if(GetCursorPos(&position)==FALSE)
  {
-  puts("Can't get the mouse cursor position");
+  ORGF_Message("Can't get the mouse cursor position");
   exit(EXIT_FAILURE);
  }
  return position.x;
@@ -471,7 +491,7 @@ unsigned long int ORGF_Mouse::get_y()
  POINT position;
  if(GetCursorPos(&position)==FALSE)
  {
-  puts("Can't get the mouse cursor position");
+  ORGF_Message("Can't get the mouse cursor position");
   exit(EXIT_FAILURE);
  }
  return position.y;
@@ -773,160 +793,38 @@ bool ORGF_Gamepad::check_release(const unsigned long int button)
  return result;
 }
 
-ORGF_Multimedia::ORGF_Multimedia()
+ORGF_Sound::ORGF_Sound()
 {
- loader=NULL;
- player=NULL;
- controler=NULL;
- video=NULL;
+
 }
 
-ORGF_Multimedia::~ORGF_Multimedia()
+ORGF_Sound::~ORGF_Sound()
 {
- if(player!=NULL) player->StopWhenReady();
- if(video!=NULL) video->Release();
- if(controler!=NULL) controler->Release();
- if(player!=NULL) player->Release();
- if(loader!=NULL) loader->Release();
- CoUninitialize();
+ PlaySound(NULL,NULL,SND_ASYNC);
 }
 
-wchar_t *ORGF_Multimedia::convert_file_name(const char *target)
+void ORGF_Sound::stop()
 {
- wchar_t *name;
- unsigned long int index,length;
- length=strlen(target);
- name=(wchar_t*)calloc(length+1,sizeof(wchar_t));
- if(name==NULL)
+ PlaySound(NULL,NULL,SND_ASYNC);
+}
+
+void ORGF_Sound::play(const char *name,const bool loop)
+{
+ if(loop==false)
  {
-  puts("Can't allocate memory");
-  exit(EXIT_FAILURE);
- }
- for(index=0;index<length;index++) name[index]=btowc(target[index]);
- return name;
-}
-
-void ORGF_Multimedia::open(const wchar_t *target)
-{
- player->StopWhenReady();
- if(loader->RenderFile(target,NULL)!=S_OK)
- {
-  puts("Can't load a multimedia file");
-  exit(EXIT_FAILURE);
- }
- video->put_FullScreenMode(OATRUE);
-}
-
-bool ORGF_Multimedia::is_end()
-{
- bool result;
- long long current,stop;
- result=false;
- if(controler->GetPositions(&current,&stop)==S_OK)
- {
-  if(current>=stop) result=true;
+  PlaySound((LPCSTR)name,NULL,SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
  }
  else
  {
-  puts("Can't get the current and the end position");
-  exit(EXIT_FAILURE);
- }
- return result;
-}
-
-void ORGF_Multimedia::rewind()
-{
- long long position;
- position=0;
- if(controler->SetPositions(&position,AM_SEEKING_AbsolutePositioning,NULL,AM_SEEKING_NoPositioning)!=S_OK)
- {
-  puts("Can't set start position");
-  exit(EXIT_FAILURE);
+  PlaySound((LPCSTR)name,NULL,SND_FILENAME|SND_NODEFAULT|SND_ASYNC|SND_LOOP);
  }
 
-}
-
-void ORGF_Multimedia::initialize()
-{
- HRESULT status;
- status=CoInitialize(NULL);
- if(status!=S_OK)
- {
-  if(status!=S_FALSE)
-  {
-   puts("Can't initialize COM");
-   exit(EXIT_FAILURE);
-  }
-
- }
- if(CoCreateInstance(CLSID_FilterGraph,NULL,CLSCTX_INPROC_SERVER,IID_IGraphBuilder,(void**)&loader)!=S_OK)
- {
-  puts("Can't create a multimedia loader");
-  exit(EXIT_FAILURE);
- }
- if(loader->QueryInterface(IID_IMediaControl,(void**)&player)!=S_OK)
- {
-  puts("Can't create a multimedia player");
-  exit(EXIT_FAILURE);
- }
- if(loader->QueryInterface(IID_IMediaSeeking,(void**)&controler)!=S_OK)
- {
-  puts("Can't create a player controler");
-  exit(EXIT_FAILURE);
- }
- if(loader->QueryInterface(IID_IVideoWindow,(void**)&video)!=S_OK)
- {
-  puts("Can't create a video player");
-  exit(EXIT_FAILURE);
- }
-
-}
-
-void ORGF_Multimedia::load(const char *target)
-{
- wchar_t *name;
- name=this->convert_file_name(target);
- this->open(name);
- free(name);
-}
-
-bool ORGF_Multimedia::check_playing()
-{
- OAFilterState state;
- bool result;
- result=false;
- if(player->GetState(INFINITE,&state)==E_FAIL)
- {
-  puts("Can't get the multimedia state");
-  exit(EXIT_FAILURE);
- }
- else
- {
-  if(state==State_Running)
-  {
-   if(this->is_end()==false) result=true;
-  }
-
- }
- return result;
-}
-
-void ORGF_Multimedia::stop()
-{
- player->StopWhenReady();
-}
-
-void ORGF_Multimedia::play()
-{
- this->stop();
- this->rewind();
- player->Run();
 }
 
 ORGF_Memory::ORGF_Memory()
 {
- memset(&memory,0,sizeof(MEMORYSTATUSEX));
- memory.dwLength=sizeof(MEMORYSTATUSEX);
+ memset(&memory,0,sizeof(MEMORYSTATUS));
+ memory.dwLength=sizeof(MEMORYSTATUS);
 }
 
 ORGF_Memory::~ORGF_Memory()
@@ -934,26 +832,16 @@ ORGF_Memory::~ORGF_Memory()
 
 }
 
-void ORGF_Memory::get_status()
+unsigned long int ORGF_Memory::get_total_memory()
 {
- if(GlobalMemoryStatusEx(&memory)==FALSE)
- {
-  puts("Can't get the memory status");
-  exit(EXIT_FAILURE);
- }
-
+ GlobalMemoryStatus(&memory);
+ return memory.dwTotalPhys;
 }
 
-unsigned long long int ORGF_Memory::get_total_memory()
+unsigned long int ORGF_Memory::get_free_memory()
 {
- this->get_status();
- return memory.ullTotalPhys;
-}
-
-unsigned long long int ORGF_Memory::get_free_memory()
-{
- this->get_status();
- return memory.ullAvailPhys;
+ GlobalMemoryStatus(&memory);
+ return memory.dwAvailPhys;
 }
 
 ORGF_System::ORGF_System()
@@ -984,16 +872,6 @@ void ORGF_System::run(const char *command)
 char* ORGF_System::read_environment(const char *variable)
 {
  return getenv(variable);
-}
-
-void ORGF_System::enable_logging(const char *name)
-{
- if(freopen(name,"wt",stdout)==NULL)
- {
-  puts("Can't create log file");
-  exit(EXIT_FAILURE);
- }
-
 }
 
 ORGF_Timer::ORGF_Timer()
@@ -1128,7 +1006,7 @@ void ORGF_Image::load_tga(const char *name)
  target=fopen(name,"rb");
  if(target==NULL)
  {
-  puts("Can't open a image file");
+  ORGF_Message("Can't open a image file");
   exit(EXIT_FAILURE);
  }
  if(data!=NULL)
@@ -1144,14 +1022,14 @@ void ORGF_Image::load_tga(const char *name)
  fread(&image,10,1,target);
  if((head.color_map!=0)||(image.color!=24))
  {
-  puts("Invalid image format");
+  ORGF_Message("Invalid image format");
   exit(EXIT_FAILURE);
  }
  if(head.type!=2)
  {
   if(head.type!=10)
   {
-   puts("Invalid image format");
+   ORGF_Message("Invalid image format");
    exit(EXIT_FAILURE);
   }
 
@@ -1162,7 +1040,7 @@ void ORGF_Image::load_tga(const char *name)
  uncompressed=(unsigned char*)calloc(uncompressed_length,1);
  if(uncompressed==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  if(head.type==2)
@@ -1174,7 +1052,7 @@ void ORGF_Image::load_tga(const char *name)
   compressed=(unsigned char*)calloc(compressed_length,1);
   if(compressed==NULL)
   {
-   puts("Can't allocate memory for image buffer");
+   ORGF_Message("Can't allocate memory for image buffer");
    exit(EXIT_FAILURE);
   }
   fread(compressed,compressed_length,1,target);
@@ -1218,7 +1096,7 @@ void ORGF_Image::load_pcx(const char *name)
  target=fopen(name,"rb");
  if(target==NULL)
  {
-  puts("Can't open a image file");
+  ORGF_Message("Can't open a image file");
   exit(EXIT_FAILURE);
  }
  if(data!=NULL)
@@ -1232,7 +1110,7 @@ void ORGF_Image::load_pcx(const char *name)
  fread(&head,128,1,target);
  if((head.color*head.planes!=24)&&(head.compress!=1))
  {
-  puts("Incorrect image format");
+  ORGF_Message("Incorrect image format");
   exit(EXIT_FAILURE);
  }
  width=head.max_x-head.min_x+1;
@@ -1245,13 +1123,13 @@ void ORGF_Image::load_pcx(const char *name)
  original=(unsigned char*)calloc(length,1);
  if(original==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  uncompressed=(unsigned char*)calloc(uncompressed_length,1);
  if(uncompressed==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  fread(original,length,1,target);
@@ -1279,7 +1157,7 @@ void ORGF_Image::load_pcx(const char *name)
  original=(unsigned char*)calloc(uncompressed_length,1);
  if(original==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  for(x=0;x<width;x++)
@@ -1385,7 +1263,7 @@ void ORGF_Canvas::load_image(ORGF_Image &buffer)
  image=(ORGF_Color*)calloc(length,1);
  if (image==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  memmove(image,buffer.get_data(),length);
@@ -1399,7 +1277,7 @@ void ORGF_Canvas::mirror_image(const unsigned char kind)
  mirrored_image=(ORGF_Color*)calloc(width*height,3);
  if (mirrored_image==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  if (kind==0)
@@ -1442,7 +1320,7 @@ void ORGF_Canvas::resize_image(const unsigned long int new_width,const unsigned 
  scaled_image=(ORGF_Color*)calloc(new_width*new_height,3);
  if (scaled_image==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  x_ratio=(float)width/(float)new_width;
@@ -1533,7 +1411,7 @@ void ORGF_Sprite::clone(ORGF_Sprite &target)
  image=(ORGF_Color*)calloc(length,1);
  if(image==NULL)
  {
-  puts("Can't allocate memory for image buffer");
+  ORGF_Message("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  memmove(image,target.get_image(),length);
