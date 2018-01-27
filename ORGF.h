@@ -15,15 +15,21 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#pragma comment(lib,"kernel32.lib")
 #pragma comment(lib,"user32.lib")
 #pragma comment(lib,"gdi32.lib")
+#pragma comment(lib,"ole32.lib")
+#pragma comment(lib,"strmiids.lib")
 #pragma comment(lib,"winmm.lib")
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <wchar.h>
 #include <windows.h>
+#include <unknwn.h>
+#include <dshow.h>
 #include <mmsystem.h>
 
 #define ORGF_KEYBOARD 256
@@ -163,19 +169,13 @@ struct ORGF_Box
 };
 
 LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
-void ORGF_Message(const char *message);
 
 class ORGF_Synchronization
 {
  private:
- TIMECAPS resolution;
- unsigned long int start;
- unsigned long int delay;
+ HANDLE timer;
  protected:
  void create_timer();
- void set_timer_resolution();
- void reset_timer_resolution();
- void pause(const unsigned long int interval);
  void set_timer(const unsigned long int interval);
  void wait_timer();
  public:
@@ -206,27 +206,35 @@ class ORGF_Frame
  protected:
  unsigned long int frame_width;
  unsigned long int frame_height;
- unsigned long int length;
+ unsigned long int buffer_length;
  COLORREF *buffer;
  void create_render_buffer();
  public:
  ORGF_Frame();
  ~ORGF_Frame();
- void draw_pixel(const unsigned long int x,const unsigned long int y,const unsigned long int red,const unsigned long int green,const unsigned long int blue);
+ void draw_pixel(const unsigned long int x,const unsigned long int y,const unsigned char red,const unsigned char green,const unsigned char blue);
  void clear_screen();
  unsigned long int get_frame_width();
  unsigned long int get_frame_height();
 };
 
-class ORGF_Render:public ORGF_Engine, public ORGF_Frame
+class ORGF_Display:public ORGF_Engine
 {
  protected:
  DEVMODE display;
- HDC context;
- BITMAPINFO setting;
  DEVMODE get_video_mode();
  void set_video_mode(DEVMODE mode);
- void set_display_mode();
+ void check_video_mode();
+ public:
+ ORGF_Display();
+ ~ORGF_Display();
+};
+
+class ORGF_Render:public ORGF_Display, public ORGF_Frame
+{
+ protected:
+ HDC context;
+ BITMAPINFO setting;
  void set_render_setting();
  void refresh();
  public:
@@ -302,24 +310,37 @@ class ORGF_Gamepad
  bool check_release(const unsigned long int button);
 };
 
-class ORGF_Sound
+class ORGF_Multimedia
 {
+ private:
+ IGraphBuilder *loader;
+ IMediaControl *player;
+ IMediaSeeking *controler;
+ IVideoWindow *video;
+ wchar_t *convert_file_name(const char *target);
+ void open(const wchar_t *target);
+ bool is_end();
+ void rewind();
  public:
- ORGF_Sound();
- ~ORGF_Sound();
+ ORGF_Multimedia();
+ ~ORGF_Multimedia();
+ void initialize();
+ void load(const char *target);
+ bool check_playing();
  void stop();
- void play(const char *name,const bool loop);
+ void play();
 };
 
 class ORGF_Memory
 {
  private:
- MEMORYSTATUS memory;
+ MEMORYSTATUSEX memory;
+ void get_status();
  public:
  ORGF_Memory();
  ~ORGF_Memory();
- unsigned long int get_total_memory();
- unsigned long int get_free_memory();
+ unsigned long long int get_total_memory();
+ unsigned long long int get_free_memory();
 };
 
 class ORGF_System
@@ -331,6 +352,7 @@ class ORGF_System
  void quit();
  void run(const char *command);
  char* read_environment(const char *variable);
+ void enable_logging(const char *name);
 };
 
 class ORGF_Timer
