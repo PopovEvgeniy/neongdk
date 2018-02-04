@@ -1636,15 +1636,14 @@ void ORGF_Text::load_font(ORGF_Sprite *font)
 
 void ORGF_Text::draw_text(const char *text)
 {
- unsigned long int index,length,step_x,step_y;
+ unsigned long int index,length,step_x;
  length=strlen(text);
  step_x=current_x;
- step_y=current_y;
  for (index=0;index<length;index++)
  {
   if ((text[index]>31)||(text[index]<0))
   {
-   sprite->draw_sprite_frame(step_x,step_y,(unsigned char)text[index]+1);
+   sprite->draw_sprite_frame(step_x,current_y,(unsigned long int)text[index]+1);
    step_x+=sprite->get_sprite_width();
   }
 
@@ -1676,8 +1675,5 @@ bool ORGF_Collision::check_vertical_collision(ORGF_Box first,ORGF_Box second)
 
 bool ORGF_Collision::check_collision(ORGF_Box first,ORGF_Box second)
 {
- bool result;
- result=false;
- if((this->check_horizontal_collision(first,second)==true)||(this->check_vertical_collision(first,second)==true)) result=true;
- return result;
+ return this->check_horizontal_collision(first,second) || this->check_vertical_collision(first,second);
 }
