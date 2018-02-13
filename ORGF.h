@@ -212,8 +212,9 @@ class ORGF_Frame
  unsigned long int frame_width;
  unsigned long int frame_height;
  unsigned long int buffer_length;
- COLORREF *buffer;
+ unsigned long int *buffer;
  void create_render_buffer();
+ unsigned long int get_rgb(const unsigned long int red,const unsigned long int green,const unsigned long int blue);
  public:
  ORGF_Frame();
  ~ORGF_Frame();
