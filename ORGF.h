@@ -429,9 +429,9 @@ class ORGF_Canvas
 class ORGF_Background:public ORGF_Canvas
 {
  public:
- void draw_background();
  void draw_horizontal_background(const unsigned long int frame);
  void draw_vertical_background(const unsigned long int frame);
+ void draw_background();
 };
 
 class ORGF_Sprite:public ORGF_Canvas
@@ -439,6 +439,7 @@ class ORGF_Sprite:public ORGF_Canvas
  private:
  unsigned long int current_x;
  unsigned long int current_y;
+ bool compare_pixels(const ORGF_Color &first,const ORGF_Color &second);
  public:
  ORGF_Sprite();
  ~ORGF_Sprite();

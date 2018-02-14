@@ -1502,21 +1502,6 @@ void ORGF_Canvas::resize_image(const unsigned long int new_width,const unsigned 
  height=new_height;
 }
 
-void ORGF_Background::draw_background()
-{
- unsigned long int x,y,offset;
- for (x=0;x<width;++x)
- {
-  for (y=0;y<height;++y)
-  {
-   offset=x+(width*y);
-   surface->draw_pixel(x,y,image[offset].red,image[offset].green,image[offset].blue);
-  }
-
- }
-
-}
-
 void ORGF_Background::draw_horizontal_background(const unsigned long int frame)
 {
  unsigned long int x,y,offset,start,frame_width;
@@ -1551,6 +1536,11 @@ void ORGF_Background::draw_vertical_background(const unsigned long int frame)
 
 }
 
+void ORGF_Background::draw_background()
+{
+ this->draw_horizontal_background(1);
+}
+
 ORGF_Sprite::ORGF_Sprite()
 {
  current_x=0;
@@ -1560,6 +1550,21 @@ ORGF_Sprite::ORGF_Sprite()
 ORGF_Sprite::~ORGF_Sprite()
 {
 
+}
+
+bool ORGF_Sprite::compare_pixels(const ORGF_Color &first,const ORGF_Color &second)
+{
+ bool result;
+ result=false;
+ if ((first.red!=second.red)||(first.green!=second.green))
+ {
+  result=true;
+ }
+ else
+ {
+  if(first.blue!=second.blue) result=true;
+ }
+ return result;
 }
 
 void ORGF_Sprite::clone(ORGF_Sprite &target)
@@ -1590,7 +1595,7 @@ void ORGF_Sprite::draw_sprite_frame(const unsigned long int x,const unsigned lon
   for(sprite_y=0;sprite_y<height;++sprite_y)
   {
    offset=start+sprite_x+(sprite_y*width);
-   if(memcmp(&image[0],&image[offset],3)!=0) surface->draw_pixel(x+sprite_x,y+sprite_y,image[offset].red,image[offset].green,image[offset].blue);
+   if(this->compare_pixels(image[0],image[offset])==true) surface->draw_pixel(x+sprite_x,y+sprite_y,image[offset].red,image[offset].green,image[offset].blue);
   }
 
  }
