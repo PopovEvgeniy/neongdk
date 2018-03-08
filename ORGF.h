@@ -192,7 +192,6 @@ class ORGF_Engine
  unsigned long int height;
  void prepare_engine();
  void create_window();
- void destroy_window();
  void capture_mouse();
  bool process_message();
  public:
@@ -227,7 +226,6 @@ class ORGF_Display:public ORGF_Engine
  DEVMODE get_video_mode();
  void set_video_mode(DEVMODE mode);
  void check_video_mode();
- void set_display_mode(const unsigned long int screen_width, const unsigned long int screen_height);
  public:
  ORGF_Display();
  ~ORGF_Display();
@@ -248,7 +246,6 @@ class ORGF_Render:public ORGF_Display, public ORGF_Frame
 class ORGF_Screen:public ORGF_Synchronization, public ORGF_Render
 {
  public:
- void set_mode(const unsigned long int screen_width, const unsigned long int screen_height);
  void initialize();
  bool sync();
  ORGF_Screen* get_handle();

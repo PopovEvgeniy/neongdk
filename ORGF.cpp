@@ -172,11 +172,6 @@ void ORGF_Engine::create_window()
  SetFocus(window);
 }
 
-void ORGF_Engine::destroy_window()
-{
- if(window!=NULL) CloseWindow(window);
-}
-
 void ORGF_Engine::capture_mouse()
 {
  RECT border;
@@ -329,16 +324,6 @@ void ORGF_Display::check_video_mode()
  this->set_video_mode(display);
 }
 
-void ORGF_Display::set_display_mode(const unsigned long int screen_width, const unsigned long int screen_height)
-{
- display=this->get_video_mode();
- width=screen_width;
- height=screen_height;
- display.dmPelsWidth=width;
- display.dmPelsHeight=height;
- this->set_video_mode(display);
-}
-
 ORGF_Render::ORGF_Render()
 {
  memset(&setting,0,sizeof(BITMAPINFO));
@@ -370,14 +355,6 @@ void ORGF_Render::refresh()
  }
  StretchDIBits(context,0,0,width,height,0,0,frame_width,frame_height,buffer,&setting,DIB_RGB_COLORS,SRCCOPY);
  ReleaseDC(window,context);
-}
-
-void ORGF_Screen::set_mode(const unsigned long int screen_width, const unsigned long int screen_height)
-{
- this->destroy_window();
- this->set_display_mode(screen_width,screen_height);
- this->create_window();
- this->capture_mouse();
 }
 
 void ORGF_Screen::initialize()
@@ -1519,7 +1496,7 @@ void ORGF_Background::draw_vertical_background(const unsigned long int frame)
 {
  unsigned long int x,y,offset,start,frame_height;
  frame_height=height/frames;
- start=(frame-1)*frame_height;
+ start=(frame-1)*frame_height*width;
  for (x=0;x<width;++x)
  {
   for (y=0;y<frame_height;++y)
