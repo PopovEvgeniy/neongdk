@@ -394,6 +394,7 @@ class ORGF_Image
  unsigned long int width;
  unsigned long int height;
  unsigned char *data;
+ unsigned char *create_buffer(const unsigned long int length);
  public:
  ORGF_Image();
  ~ORGF_Image();
@@ -414,6 +415,7 @@ class ORGF_Canvas
  unsigned long int frames;
  ORGF_Screen *surface;
  ORGF_Color *image;
+ ORGF_Color *create_buffer(const unsigned long int length);
  public:
  ORGF_Canvas();
  ~ORGF_Canvas();
@@ -473,7 +475,7 @@ class ORGF_Text
 class ORGF_Collision
 {
  public:
- bool check_horizontal_collision(ORGF_Box first,ORGF_Box second);
- bool check_vertical_collision(ORGF_Box first,ORGF_Box second);
- bool check_collision(ORGF_Box first,ORGF_Box second);
+ bool check_horizontal_collision(const ORGF_Box &first,const ORGF_Box &second);
+ bool check_vertical_collision(const ORGF_Box &first,const ORGF_Box &second);
+ bool check_collision(const ORGF_Box &first,const ORGF_Box &second);
 };
