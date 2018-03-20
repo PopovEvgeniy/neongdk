@@ -29,6 +29,7 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMA
 #define _CRT_NONSTDC_NO_WARNINGS
 */
 
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -213,7 +214,7 @@ class ORGF_Frame
  protected:
  unsigned long int frame_width;
  unsigned long int frame_height;
- unsigned long int buffer_length;
+ size_t buffer_length;
  unsigned long int *buffer;
  void create_render_buffer();
  unsigned long int get_rgb(const unsigned long int red,const unsigned long int green,const unsigned long int blue);
@@ -395,6 +396,9 @@ class ORGF_Image
  unsigned long int height;
  unsigned char *data;
  unsigned char *create_buffer(const unsigned long int length);
+ void clear_buffer();
+ FILE *open_image(const char *name);
+ unsigned long int get_file_size(FILE *target);
  public:
  ORGF_Image();
  ~ORGF_Image();
@@ -415,7 +419,7 @@ class ORGF_Canvas
  unsigned long int frames;
  ORGF_Screen *surface;
  ORGF_Color *image;
- ORGF_Color *create_buffer(const unsigned long int length);
+ ORGF_Color *create_buffer(const unsigned long int image_width,const unsigned long int image_height);
  public:
  ORGF_Canvas();
  ~ORGF_Canvas();

@@ -245,12 +245,16 @@ ORGF_Frame::~ORGF_Frame()
 
 void ORGF_Frame::create_render_buffer()
 {
- buffer_length=frame_width*frame_height*sizeof(unsigned long int);
- buffer=(unsigned long int*)calloc(buffer_length,1);
+ buffer_length=(size_t)frame_width*(size_t)frame_height;
+ buffer=(unsigned long int*)calloc(buffer_length,sizeof(unsigned long int));
  if(buffer==NULL)
  {
   puts("Can't allocate memory for render buffer");
   exit(EXIT_FAILURE);
+ }
+ else
+ {
+  buffer_length*=sizeof(unsigned long int);
  }
 
 }
@@ -264,7 +268,7 @@ void ORGF_Frame::draw_pixel(const unsigned long int x,const unsigned long int y,
 {
  if((x<frame_width)&&(y<frame_height))
  {
-  buffer[x+y*frame_width]=this->get_rgb(blue,green,red);
+  buffer[(size_t)x+(size_t)y*(size_t)frame_width]=this->get_rgb(blue,green,red);
  }
 
 }
@@ -815,7 +819,7 @@ ORGF_Multimedia::~ORGF_Multimedia()
 wchar_t *ORGF_Multimedia::convert_file_name(const char *target)
 {
  wchar_t *name;
- unsigned long int index,length;
+ size_t index,length;
  length=strlen(target);
  name=(wchar_t*)calloc(length+1,sizeof(wchar_t));
  if(name==NULL)
@@ -1140,13 +1144,44 @@ ORGF_Image::~ORGF_Image()
 unsigned char *ORGF_Image::create_buffer(const unsigned long int length)
 {
  unsigned char *result;
- result=(unsigned char*)calloc(length,1);
+ result=(unsigned char*)calloc((size_t)length,sizeof(unsigned char));
  if(result==NULL)
  {
   puts("Can't allocate memory for image buffer");
   exit(EXIT_FAILURE);
  }
  return result;
+}
+
+void ORGF_Image::clear_buffer()
+{
+ if(data!=NULL)
+ {
+  free(data);
+  data=NULL;
+ }
+
+}
+
+FILE *ORGF_Image::open_image(const char *name)
+{
+ FILE *target;
+ target=fopen(name,"rb");
+ if(target==NULL)
+ {
+  puts("Can't open a image file");
+  exit(EXIT_FAILURE);
+ }
+ return target;
+}
+
+unsigned long int ORGF_Image::get_file_size(FILE *target)
+{
+ unsigned long int length;
+ fseek(target,0,SEEK_END);
+ length=ftell(target);
+ rewind(target);
+ return length;
 }
 
 void ORGF_Image::load_tga(const char *name)
@@ -1158,20 +1193,9 @@ void ORGF_Image::load_tga(const char *name)
  TGA_head head;
  TGA_map color_map;
  TGA_image image;
- target=fopen(name,"rb");
- if(target==NULL)
- {
-  puts("Can't open a image file");
-  exit(EXIT_FAILURE);
- }
- if(data!=NULL)
- {
-  free(data);
-  data=NULL;
- }
- fseek(target,0,SEEK_END);
- compressed_length=ftell(target)-18;
- rewind(target);
+ this->clear_buffer();
+ target=this->open_image(name);
+ compressed_length=this->get_file_size(target)-18;
  fread(&head,3,1,target);
  fread(&color_map,5,1,target);
  fread(&image,10,1,target);
@@ -1191,31 +1215,31 @@ void ORGF_Image::load_tga(const char *name)
  }
  index=0;
  position=0;
- uncompressed_length=3*(unsigned long int)image.width*(unsigned long int)image.height;
+ uncompressed_length=3*image.width*image.height;
  uncompressed=this->create_buffer(uncompressed_length);
  if(head.type==2)
  {
-  fread(uncompressed,uncompressed_length,1,target);
+  fread(uncompressed,(size_t)uncompressed_length,1,target);
  }
  if(head.type==10)
  {
   compressed=this->create_buffer(compressed_length);
-  fread(compressed,compressed_length,1,target);
+  fread(compressed,(size_t)compressed_length,1,target);
   while(index<uncompressed_length)
   {
-   if(compressed[position]<128)
+   if(compressed[(size_t)position]<128)
    {
-    amount=compressed[position]+1;
+    amount=compressed[(size_t)position]+1;
     amount*=3;
-    memmove(uncompressed+index,compressed+(position+1),amount);
+    memmove(uncompressed+(size_t)index,compressed+(size_t)(position+1),(size_t)amount);
     index+=amount;
     position+=1+amount;
    }
    else
    {
-    for(amount=compressed[position]-127;amount>0;--amount)
+    for(amount=compressed[(size_t)position]-127;amount>0;--amount)
     {
-     memmove(uncompressed+index,compressed+(position+1),3);
+     memmove(uncompressed+(size_t)index,compressed+(size_t)(position+1),3);
      index+=3;
     }
     position+=4;
@@ -1238,20 +1262,9 @@ void ORGF_Image::load_pcx(const char *name)
  unsigned char *original;
  unsigned char *uncompressed;
  PCX_head head;
- target=fopen(name,"rb");
- if(target==NULL)
- {
-  puts("Can't open a image file");
-  exit(EXIT_FAILURE);
- }
- if(data!=NULL)
- {
-  free(data);
-  data=NULL;
- }
- fseek(target,0,SEEK_END);
- length=ftell(target)-128;
- rewind(target);
+ this->clear_buffer();
+ target=this->open_image(name);
+ length=this->get_file_size(target)-128;
  fread(&head,128,1,target);
  if((head.color*head.planes!=24)&&(head.compress!=1))
  {
@@ -1267,21 +1280,21 @@ void ORGF_Image::load_pcx(const char *name)
  position=0;
  original=this->create_buffer(length);
  uncompressed=this->create_buffer(uncompressed_length);
- fread(original,length,1,target);
+ fread(original,(size_t)length,1,target);
  fclose(target);
  while (index<length)
  {
-  if (original[index]<192)
+  if (original[(size_t)index]<192)
   {
-   uncompressed[position]=original[index];
+   uncompressed[(size_t)position]=original[(size_t)index];
    position++;
    index++;
   }
   else
   {
-   for (repeat=original[index]-192;repeat>0;--repeat)
+   for (repeat=original[(size_t)index]-192;repeat>0;--repeat)
    {
-    uncompressed[position]=original[index+1];
+    uncompressed[(size_t)position]=original[(size_t)index+1];
     position++;
    }
    index+=2;
@@ -1296,9 +1309,9 @@ void ORGF_Image::load_pcx(const char *name)
   {
    index=x*3+y*row;
    position=x+y*line;
-   original[index]=uncompressed[position+2*head.plane_length];
-   original[index+1]=uncompressed[position+head.plane_length];
-   original[index+2]=uncompressed[position];
+   original[(size_t)index]=uncompressed[(size_t)position+2*(size_t)head.plane_length];
+   original[(size_t)index+1]=uncompressed[(size_t)position+(size_t)head.plane_length];
+   original[(size_t)index+2]=uncompressed[(size_t)position];
   }
 
  }
@@ -1328,14 +1341,9 @@ unsigned char *ORGF_Image::get_data()
 
 void ORGF_Image::destroy_image()
 {
- if(data!=NULL)
- {
-  width=0;
-  height=0;
-  free(data);
-  data=NULL;
- }
-
+ width=0;
+ height=0;
+ this->clear_buffer();
 }
 
 ORGF_Canvas::ORGF_Canvas()
@@ -1353,10 +1361,12 @@ ORGF_Canvas::~ORGF_Canvas()
  if(image!=NULL) free(image);
 }
 
-ORGF_Color *ORGF_Canvas::create_buffer(const unsigned long int length)
+ORGF_Color *ORGF_Canvas::create_buffer(const unsigned long int image_width,const unsigned long int image_height)
 {
  ORGF_Color *result;
- result=(ORGF_Color*)calloc(length,1);
+ size_t length;
+ length=(size_t)image_width*(size_t)image_height;
+ result=(ORGF_Color*)calloc(length,3);
  if(result==NULL)
  {
   puts("Can't allocate memory for image buffer");
@@ -1402,8 +1412,8 @@ void ORGF_Canvas::load_image(ORGF_Image &buffer)
  height=buffer.get_height();
  length=buffer.get_data_length();
  if(image!=NULL) free(image);
- image=this->create_buffer(length);
- memmove(image,buffer.get_data(),length);
+ image=this->create_buffer(width,height);
+ memmove(image,buffer.get_data(),(size_t)length);
  buffer.destroy_image();
 }
 
@@ -1411,7 +1421,7 @@ void ORGF_Canvas::mirror_image(const unsigned char kind)
 {
  unsigned long int x,y,index,index2;
  ORGF_Color *mirrored_image;
- mirrored_image=image=this->create_buffer(width*height*3);
+ mirrored_image=this->create_buffer(width,height);
  if (kind==0)
  {
   for (x=0;x<width;++x)
@@ -1420,7 +1430,7 @@ void ORGF_Canvas::mirror_image(const unsigned char kind)
    {
     index=x+(y*width);
     index2=(width-x-1)+(y*width);
-    mirrored_image[index]=image[index2];
+    mirrored_image[(size_t)index]=image[(size_t)index2];
    }
 
   }
@@ -1434,7 +1444,7 @@ void ORGF_Canvas::mirror_image(const unsigned char kind)
    {
     index=x+(y*width);
     index2=x+(height-y-1)*width;
-    mirrored_image[index]=image[index2];
+    mirrored_image[(size_t)index]=image[(size_t)index2];
    }
 
   }
@@ -1449,7 +1459,7 @@ void ORGF_Canvas::resize_image(const unsigned long int new_width,const unsigned 
  float x_ratio,y_ratio;
  unsigned long int x,y,index,index2;
  ORGF_Color *scaled_image;
- scaled_image=this->create_buffer(new_width*new_height*3);
+ scaled_image=this->create_buffer(new_width,new_height);
  x_ratio=(float)width/(float)new_width;
  y_ratio=(float)height/(float)new_height;
  for (x=0;x<new_width;++x)
@@ -1458,7 +1468,7 @@ void ORGF_Canvas::resize_image(const unsigned long int new_width,const unsigned 
   {
    index=x+(y*new_width);
    index2=(unsigned long int)(x_ratio*(float)x)+width*(unsigned long int)(y_ratio*(float)y);
-   scaled_image[index]=image[index2];
+   scaled_image[(size_t)index]=image[(size_t)index2];
   }
 
  }
@@ -1470,15 +1480,15 @@ void ORGF_Canvas::resize_image(const unsigned long int new_width,const unsigned 
 
 void ORGF_Background::draw_horizontal_background(const unsigned long int frame)
 {
- unsigned long int x,y,offset,start,frame_width;
+ unsigned long int x,y,start,offset,frame_width;
  frame_width=width/frames;
  start=(frame-1)*frame_width;
  for (x=0;x<frame_width;++x)
  {
   for (y=0;y<height;++y)
   {
-   offset=start+x+(width*y);
-   surface->draw_pixel(x,y,image[offset].red,image[offset].green,image[offset].blue);
+   offset=(start+x)+(width*y);
+   surface->draw_pixel(x,y,image[(size_t)offset].red,image[(size_t)offset].green,image[(size_t)offset].blue);
   }
 
  }
@@ -1487,15 +1497,15 @@ void ORGF_Background::draw_horizontal_background(const unsigned long int frame)
 
 void ORGF_Background::draw_vertical_background(const unsigned long int frame)
 {
- unsigned long int x,y,offset,start,frame_height;
+ unsigned long int x,y,start,offset,frame_height;
  frame_height=height/frames;
  start=(frame-1)*frame_height*width;
  for (x=0;x<width;++x)
  {
   for (y=0;y<frame_height;++y)
   {
-   offset=start+x+(width*y);
-   surface->draw_pixel(x,y,image[offset].red,image[offset].green,image[offset].blue);
+   offset=(start+x)+(width*y);
+   surface->draw_pixel(x,y,image[(size_t)offset].red,image[(size_t)offset].green,image[(size_t)offset].blue);
   }
 
  }
@@ -1540,13 +1550,13 @@ void ORGF_Sprite::clone(ORGF_Sprite &target)
  width=target.get_sprite_width();
  height=target.get_sprite_height();
  length=width*height*3;
- image=this->create_buffer(length);
- memmove(image,target.get_image(),length);
+ image=this->create_buffer(width,height);
+ memmove(image,target.get_image(),(size_t)length);
 }
 
 void ORGF_Sprite::draw_sprite_frame(const unsigned long int x,const unsigned long int y,const unsigned long int frame)
 {
- unsigned long int sprite_x,sprite_y,offset,start,frame_width;
+ unsigned long int sprite_x,sprite_y,start,offset,frame_width;
  current_x=x;
  current_y=y;
  frame_width=width/frames;
@@ -1555,8 +1565,8 @@ void ORGF_Sprite::draw_sprite_frame(const unsigned long int x,const unsigned lon
  {
   for(sprite_y=0;sprite_y<height;++sprite_y)
   {
-   offset=start+sprite_x+(sprite_y*width);
-   if(this->compare_pixels(image[0],image[offset])==true) surface->draw_pixel(x+sprite_x,y+sprite_y,image[offset].red,image[offset].green,image[offset].blue);
+   offset=(start+sprite_x)+(sprite_y*width);
+   if(this->compare_pixels(image[0],image[(size_t)offset])==true) surface->draw_pixel(x+sprite_x,y+sprite_y,image[(size_t)offset].red,image[(size_t)offset].green,image[(size_t)offset].blue);
   }
 
  }
@@ -1631,14 +1641,14 @@ void ORGF_Text::load_font(ORGF_Sprite *font)
 
 void ORGF_Text::draw_text(const char *text)
 {
- unsigned long int index,length,step_x;
- length=strlen(text);
+ unsigned long int current,step_x,index;
  step_x=current_x;
- for (index=0;index<length;++index)
+ for (index=0;text[(size_t)index]!=0;++index)
  {
-  if ((text[index]>31)||(text[index]<0))
+  if ((text[(size_t)index]>31)||(text[(size_t)index]<0))
   {
-   sprite->draw_sprite_frame(step_x,current_y,(unsigned long int)text[index]+1);
+   current=(unsigned long int)text[(size_t)index];
+   sprite->draw_sprite_frame(step_x,current_y,current+1);
    step_x+=sprite->get_sprite_width();
   }
 
