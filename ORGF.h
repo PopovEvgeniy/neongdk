@@ -395,7 +395,6 @@ class ORGF_Canvas
  size_t get_offset(const unsigned long int start,const unsigned long int x,const unsigned long int y);
  private:
  void clear_buffer();
- void check_size();
  public:
  ORGF_Canvas();
  ~ORGF_Canvas();
@@ -412,6 +411,8 @@ class ORGF_Canvas
 
 class ORGF_Background:public ORGF_Canvas
 {
+ private:
+ void draw_background_image(const unsigned long int start,const unsigned long int frame_width,const unsigned long int frame_height);
  public:
  void draw_horizontal_background(const unsigned long int frame);
  void draw_vertical_background(const unsigned long int frame);
@@ -444,7 +445,9 @@ class ORGF_Text
  private:
  unsigned long int current_x;
  unsigned long int current_y;
+ unsigned long int step_x;
  ORGF_Sprite *sprite;
+ void draw_character(const char target);
  public:
  ORGF_Text();
  ~ORGF_Text();
