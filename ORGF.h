@@ -141,6 +141,13 @@ struct ORGF_Box
 
 LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
 
+class ORGF_Base
+{
+ public:
+ ORGF_Base();
+ ~ORGF_Base();
+};
+
 class ORGF_Synchronization
 {
  private:
@@ -290,7 +297,7 @@ class ORGF_Gamepad
  char get_stick_y(const unsigned char stick);
 };
 
-class ORGF_Multimedia
+class ORGF_Multimedia:public ORGF_Base
 {
  private:
  IGraphBuilder *loader;

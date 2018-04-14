@@ -66,6 +66,27 @@ LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPA
  return DefWindowProc(window,Message,wParam,lParam);
 }
 
+ORGF_Base::ORGF_Base()
+{
+ HRESULT status;
+ status=CoInitialize(NULL);
+ if(status!=S_OK)
+ {
+  if(status!=S_FALSE)
+  {
+   puts("Can't initialize COM");
+   exit(EXIT_FAILURE);
+  }
+
+ }
+
+}
+
+ORGF_Base::~ORGF_Base()
+{
+ CoUninitialize();
+}
+
 ORGF_Synchronization::ORGF_Synchronization()
 {
  timer=NULL;
@@ -837,7 +858,6 @@ ORGF_Multimedia::~ORGF_Multimedia()
  if(controler!=NULL) controler->Release();
  if(player!=NULL) player->Release();
  if(loader!=NULL) loader->Release();
- CoUninitialize();
 }
 
 wchar_t *ORGF_Multimedia::convert_file_name(const char *target)
@@ -897,17 +917,6 @@ void ORGF_Multimedia::rewind()
 
 void ORGF_Multimedia::initialize()
 {
- HRESULT status;
- status=CoInitialize(NULL);
- if(status!=S_OK)
- {
-  if(status!=S_FALSE)
-  {
-   puts("Can't initialize COM");
-   exit(EXIT_FAILURE);
-  }
-
- }
  if(CoCreateInstance(CLSID_FilterGraph,NULL,CLSCTX_INPROC_SERVER,IID_IGraphBuilder,(void**)&loader)!=S_OK)
  {
   puts("Can't create a multimedia loader");
