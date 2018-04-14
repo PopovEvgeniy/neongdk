@@ -568,76 +568,65 @@ bool ORGF_Mouse::check_release(const unsigned char button)
 
 ORGF_Gamepad::ORGF_Gamepad()
 {
- length=sizeof(XINPUT_STATE);
- XInputEnable(TRUE);
- memset(&current,0,length);
- memset(&preversion,0,length);
- memset(&vibration,0,sizeof(XINPUT_VIBRATION));
- memset(&battery,0,sizeof(XINPUT_BATTERY_INFORMATION));
- active=0;
+ active=ORGF_GAMEPAD1;
+ length[0]=(unsigned long int)sizeof(JOYCAPS);
+ length[1]=(unsigned long int)sizeof(JOYINFOEX);
+ memset(&configuration,0,sizeof(JOYCAPS));
+ memset(&current,0,sizeof(JOYINFOEX));
+ memset(&preversion,0,sizeof(JOYINFOEX));
+ current.dwSize=length[1];
+ preversion.dwSize=length[1];
+ current.dwFlags=JOY_RETURNALL;
+ preversion.dwFlags=JOY_RETURNALL;
+ current.dwPOV=JOY_POVCENTERED;
+ preversion.dwPOV=JOY_POVCENTERED;
 }
 
 ORGF_Gamepad::~ORGF_Gamepad()
 {
- XInputEnable(FALSE);
+
 }
 
-bool ORGF_Gamepad::read_battery_status()
+bool ORGF_Gamepad::read_configuration()
 {
  bool result;
  result=false;
- if(XInputGetBatteryInformation(active,BATTERY_DEVTYPE_GAMEPAD,&battery)==ERROR_SUCCESS) return result;
+ if(joyGetDevCaps(active,&configuration,length[0])==JOYERR_NOERROR) result=true;
  return result;
-}
-
-void ORGF_Gamepad::clear_state()
-{
- memset(&current,0,length);
- memset(&preversion,0,length);
 }
 
 bool ORGF_Gamepad::read_state()
 {
  bool result;
  result=false;
- if(XInputGetState(active,&current)==ERROR_SUCCESS) result=true;
+ if(joyGetPosEx(active,&current)==JOYERR_NOERROR) result=true;
  return result;
 }
 
-bool ORGF_Gamepad::write_state()
+void ORGF_Gamepad::clear_state()
+{
+ memset(&configuration,0,sizeof(JOYCAPS));
+ memset(&current,0,sizeof(JOYINFOEX));
+ memset(&preversion,0,sizeof(JOYINFOEX));
+ current.dwSize=length[1];
+ preversion.dwSize=length[1];
+ current.dwFlags=JOY_RETURNALL;
+ preversion.dwFlags=JOY_RETURNALL;
+ current.dwPOV=JOY_POVCENTERED;
+ preversion.dwPOV=JOY_POVCENTERED;
+}
+
+bool ORGF_Gamepad::check_button(const unsigned long int button,const JOYINFOEX &target)
 {
  bool result;
  result=false;
- if(XInputSetState(active,&vibration)==ERROR_SUCCESS) result=true;
+ if(target.dwButtons&button) result=true;
  return result;
 }
 
-void ORGF_Gamepad::set_motor(const unsigned short int left,const unsigned short int right)
+void ORGF_Gamepad::set_active(const unsigned int gamepad)
 {
- vibration.wLeftMotorSpeed=left;
- vibration.wRightMotorSpeed=right;
-}
-
-bool ORGF_Gamepad::check_button(XINPUT_STATE &target,const unsigned short int button)
-{
- bool result;
- result=false;
- if(target.Gamepad.wButtons&button) result=true;
- return result;
-}
-
-bool ORGF_Gamepad::check_trigger(XINPUT_STATE &target,const unsigned char trigger)
-{
- bool result;
- result=false;
- if((trigger==ORGF_GAMEPAD_LEFT_TRIGGER)&&(target.Gamepad.bLeftTrigger>=XINPUT_GAMEPAD_TRIGGER_THRESHOLD)) result=true;
- if((trigger==ORGF_GAMEPAD_RIGHT_TRIGGER)&&(target.Gamepad.bRightTrigger>=XINPUT_GAMEPAD_TRIGGER_THRESHOLD)) result=true;
- return result;
-}
-
-void ORGF_Gamepad::set_active(const unsigned long int gamepad)
-{
- if(active<ORGF_GAMEPAD_AMOUNT)
+ if(active<=ORGF_GAMEPAD15)
  {
   this->clear_state();
   active=gamepad;
@@ -645,26 +634,21 @@ void ORGF_Gamepad::set_active(const unsigned long int gamepad)
 
 }
 
-unsigned long int ORGF_Gamepad::get_active()
+unsigned int ORGF_Gamepad::get_active()
 {
  return active;
 }
 
-unsigned long int ORGF_Gamepad::get_amount()
+unsigned int ORGF_Gamepad::get_amount()
 {
- unsigned long int old,result;
- result=0;
- old=active;
- for(active=0;active<ORGF_GAMEPAD_AMOUNT;++active)
- {
-  if(this->read_state()==true)
-  {
-   this->clear_state();
-   result=active+1;
-  }
+ return joyGetNumDevs();
+}
 
- }
- active=old;
+unsigned int ORGF_Gamepad::get_button_amount()
+{
+ unsigned int result;
+ result=0;
+ if(this->read_configuration()==true) result=configuration.wNumButtons;
  return result;
 }
 
@@ -673,152 +657,101 @@ bool ORGF_Gamepad::check_connection()
  return this->read_state();
 }
 
-bool ORGF_Gamepad::is_wireless()
-{
- bool result;
- result=false;
- if(this->read_battery_status()==true)
- {
-  if(battery.BatteryType!=BATTERY_TYPE_DISCONNECTED)
-  {
-   if(battery.BatteryType!=BATTERY_TYPE_WIRED) result=true;
-  }
-
- }
- return result;
-}
-
-unsigned char ORGF_Gamepad::get_battery_type()
-{
- unsigned char result;
- result=ORGF_GAMEPAD_BATTERY_ERROR;
- if(this->read_battery_status()==true)
- {
-  switch (battery.BatteryType)
-  {
-   case BATTERY_TYPE_ALKALINE:
-   result=ORGF_GAMEPAD_BATTERY_ALKAINE;
-   break;
-   case BATTERY_TYPE_NIMH:
-   result=ORGF_GAMEPAD_BATTERY_NIMH;
-   break;
-   case BATTERY_TYPE_UNKNOWN:
-   result=ORGF_GAMEPAD_BATTERY_UNKNOW;
-   break;
-  }
-
- }
- return result;
-}
-
-unsigned char ORGF_Gamepad::get_battery_level()
-{
- unsigned char result;
- result=ORGF_GAMEPAD_BATTERY_ERROR;
- if(this->read_battery_status()==true)
- {
-  switch (battery.BatteryType)
-  {
-   case BATTERY_LEVEL_EMPTY:
-   result=ORGF_GAMEPAD_BATTERY_EMPTY;
-   break;
-   case BATTERY_LEVEL_LOW:
-   result=ORGF_GAMEPAD_BATTERY_LOW;
-   break;
-   case BATTERY_LEVEL_MEDIUM:
-   result=ORGF_GAMEPAD_BATTERY_MEDIUM;
-   break;
-   case BATTERY_LEVEL_FULL:
-   result=ORGF_GAMEPAD_BATTERY_FULL;
-   break;
-  }
-  if((battery.BatteryType==BATTERY_TYPE_WIRED)||(battery.BatteryType==BATTERY_TYPE_DISCONNECTED)) result=ORGF_GAMEPAD_BATTERY_ERROR;
- }
- return result;
-}
-
 void ORGF_Gamepad::update()
 {
  preversion=current;
  if(this->read_state()==false) this->clear_state();
 }
 
-bool ORGF_Gamepad::check_button_hold(const unsigned short int button)
+unsigned char ORGF_Gamepad::get_dpad()
 {
- return this->check_button(current,button);
-}
-
-bool ORGF_Gamepad::check_button_press(const unsigned short int button)
-{
- bool result;
- result=false;
- if(this->check_button(current,button)==true)
+ unsigned char result;
+ result=ORGF_GAMEPAD_NONE;
+ switch (current.dwPOV)
  {
-  if(this->check_button(preversion,button)==false) result=true;
+  case JOY_POVFORWARD:
+  result=ORGF_GAMEPAD_UP;
+  break;
+  case JOY_POVBACKWARD:
+  result=ORGF_GAMEPAD_DOWN;
+  break;
+  case JOY_POVLEFT:
+  result=ORGF_GAMEPAD_LEFT;
+  break;
+  case JOY_POVRIGHT:
+  result=ORGF_GAMEPAD_RIGHT;
+  break;
+  case JOYSTICK_UPLEFT:
+  result=ORGF_GAMEPAD_UPLEFT;
+  break;
+  case JOYSTICK_UPRIGHT:
+  result=ORGF_GAMEPAD_UPRIGHT;
+  break;
+  case JOYSTICK_DOWNLEFT:
+  result=ORGF_GAMEPAD_DOWNLEFT;
+  break;
+  case JOYSTICK_DOWNRIGHT:
+  result=ORGF_GAMEPAD_DOWNRIGHT;
+  break;
  }
  return result;
 }
 
-bool ORGF_Gamepad::check_button_release(const unsigned short int button)
+unsigned long int ORGF_Gamepad::get_sticks_amount()
 {
- bool result;
- result=false;
- if(this->check_button(current,button)==false)
+ unsigned long int result;
+ result=0;
+ if(this->read_configuration()==true)
  {
-  if(this->check_button(preversion,button)==true) result=true;
+  switch (configuration.wNumAxes)
+  {
+   case 2:
+   result=1;
+   break;
+   case 4:
+   result=2;
+   break;
+   default:
+   result=0;
+   break;
+  }
+
  }
  return result;
-}
-
-bool ORGF_Gamepad::check_trigger_hold(const unsigned char trigger)
-{
- return this->check_trigger(current,trigger);
-}
-
-bool ORGF_Gamepad::check_trigger_press(const unsigned char trigger)
-{
- bool result;
- result=false;
- if(this->check_trigger(current,trigger)==true)
- {
-  if(this->check_trigger(preversion,trigger)==false) result=true;
- }
- return result;
-}
-
-bool ORGF_Gamepad::check_trigger_release(const unsigned char trigger)
-{
- bool result;
- result=false;
- if(this->check_trigger(current,trigger)==false)
- {
-  if(this->check_trigger(preversion,trigger)==true) result=true;
- }
- return result;
-}
-
-bool ORGF_Gamepad::set_vibration(const unsigned short int left,const unsigned short int right)
-{
- this->set_motor(left,right);
- return this->write_state();
 }
 
 char ORGF_Gamepad::get_stick_x(const unsigned char stick)
 {
  char result;
- short int control;
+ unsigned long int control;
  result=0;
  if(stick==ORGF_GAMEPAD_LEFT_STICK)
  {
-  control=32767-XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
-  if(current.Gamepad.sThumbLX>=control) result=1;
-  if(current.Gamepad.sThumbLX<=-1*control) result=-1;
+  if(this->read_configuration()==true)
+  {
+   if((configuration.wNumAxes==2)||(configuration.wNumAxes==4))
+   {
+    control=(configuration.wXmax-configuration.wXmin)/2;
+    if(current.dwXpos<control) result=-1;
+    if(current.dwXpos>control) result=1;
+   }
+
+  }
+
  }
  if(stick==ORGF_GAMEPAD_RIGHT_STICK)
  {
-  control=32767-XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
-  if(current.Gamepad.sThumbRX>=control) result=1;
-  if(current.Gamepad.sThumbRX<=-1*control) result=-1;
+  if(this->read_configuration()==true)
+  {
+   if(configuration.wNumAxes==4)
+   {
+    control=(configuration.wZmax-configuration.wZmin)/2;
+    if(current.dwZpos<control) result=-1;
+    if(current.dwZpos>control) result=1;
+   }
+
+  }
+
  }
  return result;
 }
@@ -826,19 +759,62 @@ char ORGF_Gamepad::get_stick_x(const unsigned char stick)
 char ORGF_Gamepad::get_stick_y(const unsigned char stick)
 {
  char result;
- short int control;
+ unsigned long int control;
  result=0;
  if(stick==ORGF_GAMEPAD_LEFT_STICK)
  {
-  control=32767-XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
-  if(current.Gamepad.sThumbLY>=control) result=1;
-  if(current.Gamepad.sThumbLY<=-1*control) result=-1;
+  if(this->read_configuration()==true)
+  {
+   if((configuration.wNumAxes==2)||(configuration.wNumAxes==4))
+   {
+    control=(configuration.wYmax-configuration.wYmin)/2;
+    if(current.dwYpos<control) result=-1;
+    if(current.dwYpos>control) result=1;
+   }
+
+  }
+
  }
  if(stick==ORGF_GAMEPAD_RIGHT_STICK)
  {
-  control=32767-XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
-  if(current.Gamepad.sThumbRY>=control) result=1;
-  if(current.Gamepad.sThumbRY<=-1*control) result=-1;
+  if(this->read_configuration()==true)
+  {
+   if(configuration.wNumAxes==4)
+   {
+    control=(configuration.wRmax-configuration.wRmin)/2;
+    if(current.dwRpos<control) result=-1;
+    if(current.dwRpos>control) result=1;
+   }
+
+  }
+
+ }
+ return result;
+}
+
+bool ORGF_Gamepad::check_hold(const unsigned long int button)
+{
+ return this->check_button(button,current);
+}
+
+bool ORGF_Gamepad::check_press(const unsigned long int button)
+{
+ bool result;
+ result=false;
+ if(this->check_button(button,current)==true)
+ {
+  if(this->check_button(button,preversion)==false) result=true;
+ }
+ return result;
+}
+
+bool ORGF_Gamepad::check_release(const unsigned long int button)
+{
+ bool result;
+ result=false;
+ if(this->check_button(button,current)==false)
+ {
+  if(this->check_button(button,preversion)==true) result=true;
  }
  return result;
 }
