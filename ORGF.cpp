@@ -1068,6 +1068,9 @@ ORGF_Primitive::ORGF_Primitive()
 
 ORGF_Primitive::~ORGF_Primitive()
 {
+ color.red=0;
+ color.green=0;
+ color.blue=0;
  surface=NULL;
 }
 
@@ -1076,7 +1079,14 @@ void ORGF_Primitive::initialize(ORGF_Screen *Screen)
  surface=Screen;
 }
 
-void ORGF_Primitive::draw_line(const unsigned long int x1,const unsigned long int y1,const unsigned long int x2,const unsigned long int y2,const unsigned char red,const unsigned char green,const unsigned char blue)
+void ORGF_Primitive::set_color(const unsigned char red,const unsigned char green,const unsigned char blue)
+{
+ color.red=red;
+ color.green=green;
+ color.blue=blue;
+}
+
+void ORGF_Primitive::draw_line(const unsigned long int x1,const unsigned long int y1,const unsigned long int x2,const unsigned long int y2)
 {
  unsigned long int delta_x,delta_y,index,steps;
  float x,y,shift_x,shift_y;
@@ -1106,23 +1116,23 @@ void ORGF_Primitive::draw_line(const unsigned long int x1,const unsigned long in
  {
   x+=shift_x;
   y+=shift_y;
-  surface->draw_pixel(x,y,red,green,blue);
+  surface->draw_pixel(x,y,color.red,color.green,color.blue);
  }
 
 }
 
-void ORGF_Primitive::draw_rectangle(const unsigned long int x,const unsigned long int y,const unsigned long int width,const unsigned long int height,const unsigned char red,const unsigned char green,const unsigned char blue)
+void ORGF_Primitive::draw_rectangle(const unsigned long int x,const unsigned long int y,const unsigned long int width,const unsigned long int height)
 {
  unsigned long int stop_x,stop_y;
  stop_x=x+width;
  stop_y=y+height;
- this->draw_line(x,y,stop_x,y,red,green,blue);
- this->draw_line(x,stop_y,stop_x,stop_y,red,green,blue);
- this->draw_line(x,y,x,stop_y,red,green,blue);
- this->draw_line(stop_x,y,stop_x,stop_y,red,green,blue);
+ this->draw_line(x,y,stop_x,y);
+ this->draw_line(x,stop_y,stop_x,stop_y);
+ this->draw_line(x,y,x,stop_y);
+ this->draw_line(stop_x,y,stop_x,stop_y);
 }
 
-void ORGF_Primitive::draw_filled_rectangle(const unsigned long int x,const unsigned long int y,const unsigned long int width,const unsigned long int height,const unsigned char red,const unsigned char green,const unsigned char blue)
+void ORGF_Primitive::draw_filled_rectangle(const unsigned long int x,const unsigned long int y,const unsigned long int width,const unsigned long int height)
 {
  unsigned long int step_x,step_y,stop_x,stop_y;
  stop_x=x+width;
@@ -1131,7 +1141,7 @@ void ORGF_Primitive::draw_filled_rectangle(const unsigned long int x,const unsig
  {
   for(step_y=y;step_y<stop_y;++step_y)
   {
-   surface->draw_pixel(step_x,step_y,red,green,blue);
+   surface->draw_pixel(step_x,step_y,color.red,color.green,color.blue);
   }
 
  }
@@ -1390,7 +1400,7 @@ ORGF_Color *ORGF_Canvas::create_buffer(const unsigned long int image_width,const
  return result;
 }
 
-void ORGF_Canvas::draw_image_pixel(size_t offset,const unsigned long int x,const unsigned long int y)
+void ORGF_Canvas::draw_image_pixel(const size_t offset,const unsigned long int x,const unsigned long int y)
 {
  surface->draw_pixel(x,y,image[offset].red,image[offset].green,image[offset].blue);
 }
@@ -1566,7 +1576,7 @@ bool ORGF_Sprite::compare_pixels(const ORGF_Color &first,const ORGF_Color &secon
  return result;
 }
 
-void ORGF_Sprite::draw_sprite_pixel(size_t offset,const unsigned long int x,const unsigned long int y)
+void ORGF_Sprite::draw_sprite_pixel(const size_t offset,const unsigned long int x,const unsigned long int y)
 {
  if(this->compare_pixels(image[0],image[offset])==true) this->draw_image_pixel(offset,x,y);
 }
