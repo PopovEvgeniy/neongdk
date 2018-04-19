@@ -89,45 +89,72 @@ ORGF_Base::~ORGF_Base()
 
 ORGF_Synchronization::ORGF_Synchronization()
 {
- timer=NULL;
+ memset(&resolution,0,sizeof(TIMECAPS));
+ start=0;
+ delay=0;
 }
 
 ORGF_Synchronization::~ORGF_Synchronization()
 {
- if(timer==NULL)
- {
-  CancelWaitableTimer(timer);
-  CloseHandle(timer);
- }
 
 }
 
 void ORGF_Synchronization::create_timer()
 {
- timer=CreateWaitableTimer(NULL,FALSE,NULL);
- if (timer==NULL)
+ if(timeGetDevCaps(&resolution,sizeof(TIMECAPS))!=MMSYSERR_NOERROR)
  {
-  puts("Can't create synchronization timer");
+  puts("Can't get timer resolution");
   exit(EXIT_FAILURE);
  }
 
+}
+
+void ORGF_Synchronization::set_timer_resolution()
+{
+ if(timeBeginPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
+ {
+  puts("Can't set timer resolution");
+  exit(EXIT_FAILURE);
+ }
+
+}
+
+void ORGF_Synchronization::reset_timer_resolution()
+{
+ if(timeEndPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
+ {
+  puts("Can't reset timer resolution");
+  exit(EXIT_FAILURE);
+ }
+
+}
+
+void ORGF_Synchronization::pause(const unsigned long int interval)
+{
+ this->set_timer_resolution();
+ Sleep(interval);
+ this->reset_timer_resolution();
 }
 
 void ORGF_Synchronization::set_timer(const unsigned long int interval)
 {
- LARGE_INTEGER start;
- start.QuadPart=0;
- if(SetWaitableTimer(timer,&start,interval,NULL,NULL,FALSE)==FALSE)
- {
-  puts("Can't set timer");
-  exit(EXIT_FAILURE);
- }
-
+ delay=interval;
+ start=timeGetTime();
 }
 
 void ORGF_Synchronization::wait_timer()
 {
- WaitForSingleObject(timer,INFINITE);
+ unsigned long int interval;
+ interval=timeGetTime()-start;
+ if(interval<delay)
+ {
+  this->pause(delay-interval);
+ }
+ else
+ {
+  this->pause(interval-delay);
+ }
+ start=timeGetTime();
 }
 
 ORGF_Engine::ORGF_Engine()
