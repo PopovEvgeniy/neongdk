@@ -268,6 +268,7 @@ class ORGF_Screen:public ORGF_Synchronization, public ORGF_Render
  public:
  void initialize();
  bool sync();
+ void set_fps_limit(const unsigned long int fps);
  ORGF_Screen* get_handle();
 };
 

@@ -440,6 +440,11 @@ bool ORGF_Screen::sync()
  return quit;
 }
 
+void ORGF_Screen::set_fps_limit(const unsigned long int fps)
+{
+ if(fps>0) this->set_timer(1000/fps);
+}
+
 ORGF_Screen* ORGF_Screen::get_handle()
 {
  return this;
