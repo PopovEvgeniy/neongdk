@@ -225,6 +225,11 @@ void ORGF_Engine::create_window()
  SetFocus(window);
 }
 
+void ORGF_Engine::destroy_window()
+{
+ if(window!=NULL) CloseWindow(window);
+}
+
 void ORGF_Engine::capture_mouse()
 {
  RECT border;
@@ -293,6 +298,7 @@ ORGF_Frame::~ORGF_Frame()
 
 void ORGF_Frame::create_render_buffer()
 {
+ if(buffer!=NULL) free(buffer);
  buffer_length=(size_t)frame_width*(size_t)frame_height;
  buffer=(unsigned long int*)calloc(buffer_length,sizeof(unsigned long int));
  if(buffer==NULL)
@@ -353,6 +359,11 @@ void ORGF_Display::set_video_mode(DEVMODE mode)
   puts("Can't change video mode");
   exit(EXIT_FAILURE);
  }
+ else
+ {
+  width=mode.dmPelsWidth;
+  height=mode.dmPelsHeight;
+ }
 
 }
 
@@ -366,11 +377,6 @@ DEVMODE ORGF_Display::get_video_mode()
   puts("Can't get display setting");
   exit(EXIT_FAILURE);
  }
- else
- {
-  width=mode.dmPelsWidth;
-  height=mode.dmPelsHeight;
- }
  return mode;
 }
 
@@ -378,6 +384,19 @@ void ORGF_Display::check_video_mode()
 {
  display=this->get_video_mode();
  if(display.dmBitsPerPel<16) display.dmBitsPerPel=16;
+ this->set_video_mode(display);
+}
+
+void ORGF_Display::reset_display()
+{
+ ChangeDisplaySettings(NULL,0);
+}
+
+void ORGF_Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height)
+{
+ display=this->get_video_mode();
+ display.dmPelsWidth=screen_width;
+ display.dmPelsHeight=screen_height;
  this->set_video_mode(display);
 }
 
@@ -402,6 +421,15 @@ void ORGF_Render::set_render_setting()
  setting.bmiHeader.biCompression=BI_RGB;
 }
 
+void ORGF_Render::create_render()
+{
+ this->check_video_mode();
+ this->create_render_buffer();
+ this->create_window();
+ this->capture_mouse();
+ this->set_render_setting();
+}
+
 void ORGF_Render::refresh()
 {
  context=GetDC(window);
@@ -421,13 +449,17 @@ void ORGF_Render::refresh()
 void ORGF_Screen::initialize()
 {
  this->prepare_engine();
- this->check_video_mode();
- this->create_render_buffer();
+ this->create_render();
  this->create_timer();
- this->create_window();
- this->capture_mouse();
- this->set_render_setting();
- this->create_timer();
+ this->set_timer(17);
+}
+
+void ORGF_Screen::set_mode(const unsigned long int screen_width,const unsigned long int screen_height)
+{
+ this->destroy_window();
+ this->reset_display();
+ this->set_display_mode(screen_width,screen_height);
+ this->create_render();
  this->set_timer(17);
 }
 
@@ -438,11 +470,6 @@ bool ORGF_Screen::sync()
  quit=this->process_message();
  this->wait_timer();
  return quit;
-}
-
-void ORGF_Screen::set_fps_limit(const unsigned long int fps)
-{
- if(fps>0) this->set_timer(1000/fps);
 }
 
 ORGF_Screen* ORGF_Screen::get_handle()
