@@ -89,72 +89,45 @@ ORGF_Base::~ORGF_Base()
 
 ORGF_Synchronization::ORGF_Synchronization()
 {
- memset(&resolution,0,sizeof(TIMECAPS));
- start=0;
- delay=0;
+ timer=NULL;
 }
 
 ORGF_Synchronization::~ORGF_Synchronization()
 {
+ if(timer==NULL)
+ {
+  CancelWaitableTimer(timer);
+  CloseHandle(timer);
+ }
 
 }
 
 void ORGF_Synchronization::create_timer()
 {
- if(timeGetDevCaps(&resolution,sizeof(TIMECAPS))!=MMSYSERR_NOERROR)
+ timer=CreateWaitableTimer(NULL,FALSE,NULL);
+ if (timer==NULL)
  {
-  puts("Can't get timer resolution");
+  puts("Can't create synchronization timer");
   exit(EXIT_FAILURE);
  }
 
-}
-
-void ORGF_Synchronization::set_timer_resolution()
-{
- if(timeBeginPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
- {
-  puts("Can't set timer resolution");
-  exit(EXIT_FAILURE);
- }
-
-}
-
-void ORGF_Synchronization::reset_timer_resolution()
-{
- if(timeEndPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
- {
-  puts("Can't reset timer resolution");
-  exit(EXIT_FAILURE);
- }
-
-}
-
-void ORGF_Synchronization::pause(const unsigned long int interval)
-{
- this->set_timer_resolution();
- Sleep(interval);
- this->reset_timer_resolution();
 }
 
 void ORGF_Synchronization::set_timer(const unsigned long int interval)
 {
- delay=interval;
- start=timeGetTime();
+ LARGE_INTEGER start;
+ start.QuadPart=0;
+ if(SetWaitableTimer(timer,&start,interval,NULL,NULL,FALSE)==FALSE)
+ {
+  puts("Can't set timer");
+  exit(EXIT_FAILURE);
+ }
+
 }
 
 void ORGF_Synchronization::wait_timer()
 {
- unsigned long int interval;
- interval=timeGetTime()-start;
- if(interval<delay)
- {
-  this->pause(delay-interval);
- }
- else
- {
-  this->pause(interval-delay);
- }
- start=timeGetTime();
+ WaitForSingleObject(timer,INFINITE);
 }
 
 ORGF_Engine::ORGF_Engine()
@@ -298,7 +271,6 @@ ORGF_Frame::~ORGF_Frame()
 
 void ORGF_Frame::create_render_buffer()
 {
- if(buffer!=NULL) free(buffer);
  buffer_length=(size_t)frame_width*(size_t)frame_height;
  buffer=(unsigned long int*)calloc(buffer_length,sizeof(unsigned long int));
  if(buffer==NULL)
@@ -424,7 +396,6 @@ void ORGF_Render::set_render_setting()
 void ORGF_Render::create_render()
 {
  this->check_video_mode();
- this->create_render_buffer();
  this->create_window();
  this->capture_mouse();
  this->set_render_setting();
@@ -450,6 +421,7 @@ void ORGF_Screen::initialize()
 {
  this->prepare_engine();
  this->create_render();
+ this->create_render_buffer();
  this->create_timer();
  this->set_timer(17);
 }
@@ -460,7 +432,6 @@ void ORGF_Screen::set_mode(const unsigned long int screen_width,const unsigned l
  this->reset_display();
  this->set_display_mode(screen_width,screen_height);
  this->create_render();
- this->set_timer(17);
 }
 
 bool ORGF_Screen::sync()
