@@ -369,6 +369,7 @@ void ORGF_Display::set_display_mode(const unsigned long int screen_width,const u
  display=this->get_video_mode();
  display.dmPelsWidth=screen_width;
  display.dmPelsHeight=screen_height;
+ if(display.dmBitsPerPel<16) display.dmBitsPerPel=16;
  this->set_video_mode(display);
 }
 
@@ -395,7 +396,6 @@ void ORGF_Render::set_render_setting()
 
 void ORGF_Render::create_render()
 {
- this->check_video_mode();
  this->create_window();
  this->capture_mouse();
  this->set_render_setting();
@@ -419,6 +419,7 @@ void ORGF_Render::refresh()
 
 void ORGF_Screen::initialize()
 {
+ this->check_video_mode();
  this->prepare_engine();
  this->create_render();
  this->create_render_buffer();
