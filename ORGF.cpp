@@ -599,14 +599,12 @@ bool ORGF_Mouse::check_release(const unsigned char button)
 
 ORGF_Gamepad::ORGF_Gamepad()
 {
- active=ORGF_GAMEPAD1;
- length[0]=(unsigned long int)sizeof(JOYCAPS);
- length[1]=(unsigned long int)sizeof(JOYINFOEX);
+ active=0;
  memset(&configuration,0,sizeof(JOYCAPS));
  memset(&current,0,sizeof(JOYINFOEX));
  memset(&preversion,0,sizeof(JOYINFOEX));
- current.dwSize=length[1];
- preversion.dwSize=length[1];
+ current.dwSize=sizeof(JOYINFOEX);
+ preversion.dwSize=sizeof(JOYINFOEX);
  current.dwFlags=JOY_RETURNALL;
  preversion.dwFlags=JOY_RETURNALL;
  current.dwPOV=JOY_POVCENTERED;
@@ -622,7 +620,7 @@ bool ORGF_Gamepad::read_configuration()
 {
  bool result;
  result=false;
- if(joyGetDevCaps(active,&configuration,length[0])==JOYERR_NOERROR) result=true;
+ if(joyGetDevCaps(active,&configuration,sizeof(JOYCAPS))==JOYERR_NOERROR) result=true;
  return result;
 }
 
@@ -639,35 +637,20 @@ void ORGF_Gamepad::clear_state()
  memset(&configuration,0,sizeof(JOYCAPS));
  memset(&current,0,sizeof(JOYINFOEX));
  memset(&preversion,0,sizeof(JOYINFOEX));
- current.dwSize=length[1];
- preversion.dwSize=length[1];
+ current.dwSize=sizeof(JOYINFOEX);
+ preversion.dwSize=sizeof(JOYINFOEX);
  current.dwFlags=JOY_RETURNALL;
  preversion.dwFlags=JOY_RETURNALL;
  current.dwPOV=JOY_POVCENTERED;
  preversion.dwPOV=JOY_POVCENTERED;
 }
 
-bool ORGF_Gamepad::check_button(const unsigned long int button,const JOYINFOEX &target)
+bool ORGF_Gamepad::check_button(const ORGF_GAMEPAD_BUTTONS button,const JOYINFOEX &target)
 {
  bool result;
  result=false;
  if(target.dwButtons&button) result=true;
  return result;
-}
-
-void ORGF_Gamepad::set_active(const unsigned int gamepad)
-{
- if(active<=ORGF_GAMEPAD15)
- {
-  this->clear_state();
-  active=gamepad;
- }
-
-}
-
-unsigned int ORGF_Gamepad::get_active()
-{
- return active;
 }
 
 unsigned int ORGF_Gamepad::get_amount()
@@ -694,9 +677,47 @@ void ORGF_Gamepad::update()
  if(this->read_state()==false) this->clear_state();
 }
 
-unsigned char ORGF_Gamepad::get_dpad()
+unsigned long int ORGF_Gamepad::get_sticks_amount()
 {
- unsigned char result;
+ unsigned long int result;
+ result=0;
+ if(this->read_configuration()==true)
+ {
+  switch (configuration.wNumAxes)
+  {
+   case 2:
+   result=1;
+   break;
+   case 4:
+   result=2;
+   break;
+   default:
+   result=0;
+   break;
+  }
+
+ }
+ return result;
+}
+
+void ORGF_Gamepad::set_active(const unsigned int gamepad)
+{
+ if(active<16)
+ {
+  this->clear_state();
+  active=gamepad;
+ }
+
+}
+
+unsigned int ORGF_Gamepad::get_active()
+{
+ return active;
+}
+
+ORGF_GAMEPAD_DPAD ORGF_Gamepad::get_dpad()
+{
+ ORGF_GAMEPAD_DPAD result;
  result=ORGF_GAMEPAD_NONE;
  switch (current.dwPOV)
  {
@@ -728,30 +749,7 @@ unsigned char ORGF_Gamepad::get_dpad()
  return result;
 }
 
-unsigned long int ORGF_Gamepad::get_sticks_amount()
-{
- unsigned long int result;
- result=0;
- if(this->read_configuration()==true)
- {
-  switch (configuration.wNumAxes)
-  {
-   case 2:
-   result=1;
-   break;
-   case 4:
-   result=2;
-   break;
-   default:
-   result=0;
-   break;
-  }
-
- }
- return result;
-}
-
-char ORGF_Gamepad::get_stick_x(const unsigned char stick)
+char ORGF_Gamepad::get_stick_x(const ORGF_GAMEPAD_STICKS stick)
 {
  char result;
  unsigned long int control;
@@ -787,7 +785,7 @@ char ORGF_Gamepad::get_stick_x(const unsigned char stick)
  return result;
 }
 
-char ORGF_Gamepad::get_stick_y(const unsigned char stick)
+char ORGF_Gamepad::get_stick_y(const ORGF_GAMEPAD_STICKS stick)
 {
  char result;
  unsigned long int control;
@@ -823,12 +821,12 @@ char ORGF_Gamepad::get_stick_y(const unsigned char stick)
  return result;
 }
 
-bool ORGF_Gamepad::check_hold(const unsigned long int button)
+bool ORGF_Gamepad::check_hold(const ORGF_GAMEPAD_BUTTONS button)
 {
  return this->check_button(button,current);
 }
 
-bool ORGF_Gamepad::check_press(const unsigned long int button)
+bool ORGF_Gamepad::check_press(const ORGF_GAMEPAD_BUTTONS button)
 {
  bool result;
  result=false;
@@ -839,7 +837,7 @@ bool ORGF_Gamepad::check_press(const unsigned long int button)
  return result;
 }
 
-bool ORGF_Gamepad::check_release(const unsigned long int button)
+bool ORGF_Gamepad::check_release(const ORGF_GAMEPAD_BUTTONS button)
 {
  bool result;
  result=false;
@@ -878,7 +876,7 @@ wchar_t *ORGF_Multimedia::convert_file_name(const char *target)
   puts("Can't allocate memory");
   exit(EXIT_FAILURE);
  }
- for(index=0;index<length;index++) name[index]=btowc(target[index]);
+ for(index=0;index<length;++index) name[index]=btowc(target[index]);
  return name;
 }
 
@@ -1094,6 +1092,9 @@ bool ORGF_Timer::check_timer()
 
 ORGF_Primitive::ORGF_Primitive()
 {
+ color.red=0;
+ color.green=0;
+ color.blue=0;
  surface=NULL;
 }
 
