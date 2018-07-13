@@ -756,29 +756,21 @@ char ORGF_Gamepad::get_stick_x(const ORGF_GAMEPAD_STICKS stick)
  result=0;
  if(stick==ORGF_GAMEPAD_LEFT_STICK)
  {
-  if(this->read_configuration()==true)
+  if(this->get_sticks_amount()>0)
   {
-   if((configuration.wNumAxes==2)||(configuration.wNumAxes==4))
-   {
-    control=(configuration.wXmax-configuration.wXmin)/2;
-    if(current.dwXpos<control) result=-1;
-    if(current.dwXpos>control) result=1;
-   }
-
+   control=(configuration.wXmax-configuration.wXmin)/2;
+   if(current.dwXpos<control) result=-1;
+   if(current.dwXpos>control) result=1;
   }
 
  }
  if(stick==ORGF_GAMEPAD_RIGHT_STICK)
  {
-  if(this->read_configuration()==true)
+  if(this->get_sticks_amount()>1)
   {
-   if(configuration.wNumAxes==4)
-   {
-    control=(configuration.wZmax-configuration.wZmin)/2;
-    if(current.dwZpos<control) result=-1;
-    if(current.dwZpos>control) result=1;
-   }
-
+   control=(configuration.wZmax-configuration.wZmin)/2;
+   if(current.dwZpos<control) result=-1;
+   if(current.dwZpos>control) result=1;
   }
 
  }
@@ -792,29 +784,21 @@ char ORGF_Gamepad::get_stick_y(const ORGF_GAMEPAD_STICKS stick)
  result=0;
  if(stick==ORGF_GAMEPAD_LEFT_STICK)
  {
-  if(this->read_configuration()==true)
+  if(this->get_sticks_amount()>0)
   {
-   if((configuration.wNumAxes==2)||(configuration.wNumAxes==4))
-   {
-    control=(configuration.wYmax-configuration.wYmin)/2;
-    if(current.dwYpos<control) result=-1;
-    if(current.dwYpos>control) result=1;
-   }
-
+   control=(configuration.wYmax-configuration.wYmin)/2;
+   if(current.dwYpos<control) result=-1;
+   if(current.dwYpos>control) result=1;
   }
 
  }
  if(stick==ORGF_GAMEPAD_RIGHT_STICK)
  {
-  if(this->read_configuration()==true)
+  if(this->get_sticks_amount()>1)
   {
-   if(configuration.wNumAxes==4)
-   {
-    control=(configuration.wRmax-configuration.wRmin)/2;
-    if(current.dwRpos<control) result=-1;
-    if(current.dwRpos>control) result=1;
-   }
-
+   control=(configuration.wRmax-configuration.wRmin)/2;
+   if(current.dwRpos<control) result=-1;
+   if(current.dwRpos>control) result=1;
   }
 
  }
