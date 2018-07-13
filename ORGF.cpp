@@ -269,6 +269,12 @@ ORGF_Frame::~ORGF_Frame()
 
 }
 
+void ORGF_Frame::set_size(const unsigned long int surface_width,const unsigned long int surface_height)
+{
+ frame_width=surface_width;
+ frame_height=surface_height;
+}
+
 void ORGF_Frame::create_render_buffer()
 {
  buffer_length=(size_t)frame_width*(size_t)frame_height;
@@ -420,6 +426,12 @@ void ORGF_Screen::initialize()
  this->create_render_buffer();
  this->create_timer();
  this->set_timer(17);
+}
+
+void ORGF_Screen::initialize(const unsigned long int surface_width,const unsigned long int surface_height)
+{
+ this->set_size(surface_width,surface_height);
+ this->initialize();
 }
 
 void ORGF_Screen::set_mode(const unsigned long int screen_width,const unsigned long int screen_height)

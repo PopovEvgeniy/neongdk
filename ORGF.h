@@ -170,6 +170,7 @@ class ORGF_Frame
  unsigned long int frame_height;
  size_t buffer_length;
  COLORREF *buffer;
+ void set_size(const unsigned long int surface_width,const unsigned long int surface_height);
  void create_render_buffer();
  public:
  ORGF_Frame();
@@ -211,6 +212,7 @@ class ORGF_Screen:public ORGF_Synchronization, public ORGF_Render
 {
  public:
  void initialize();
+ void initialize(const unsigned long int surface_width,const unsigned long int surface_height);
  void set_mode(const unsigned long int screen_width,const unsigned long int screen_height);
  bool update();
  bool sync();
