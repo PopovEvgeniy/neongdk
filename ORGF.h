@@ -196,9 +196,9 @@ class ORGF_Display:public ORGF_Engine
 
 class ORGF_Render:public ORGF_Display, public ORGF_Frame
 {
- protected:
- HDC context;
+ private:
  BITMAPINFO setting;
+ protected:
  void set_render_setting();
  void create_render();
  void refresh();
@@ -212,6 +212,7 @@ class ORGF_Screen:public ORGF_Synchronization, public ORGF_Render
  public:
  void initialize();
  void set_mode(const unsigned long int screen_width,const unsigned long int screen_height);
+ bool update();
  bool sync();
  ORGF_Screen* get_handle();
 };

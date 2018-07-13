@@ -371,7 +371,6 @@ void ORGF_Display::set_display_mode(const unsigned long int screen_width,const u
 ORGF_Render::ORGF_Render()
 {
  memset(&setting,0,sizeof(BITMAPINFO));
- context=NULL;
 }
 
 ORGF_Render::~ORGF_Render()
@@ -398,6 +397,7 @@ void ORGF_Render::create_render()
 
 void ORGF_Render::refresh()
 {
+ HDC context;
  context=GetDC(window);
  if(context==NULL)
  {
@@ -430,11 +430,16 @@ void ORGF_Screen::set_mode(const unsigned long int screen_width,const unsigned l
  this->create_render();
 }
 
+bool ORGF_Screen::update()
+{
+ this->refresh();
+ return this->process_message();
+}
+
 bool ORGF_Screen::sync()
 {
  bool quit;
- this->refresh();
- quit=this->process_message();
+ quit=this->update();
  this->wait_timer();
  return quit;
 }
