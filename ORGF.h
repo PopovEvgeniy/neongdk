@@ -165,10 +165,11 @@ class ORGF_Engine
 
 class ORGF_Frame
 {
+ private:
+ size_t buffer_length;
  protected:
  unsigned long int frame_width;
  unsigned long int frame_height;
- size_t buffer_length;
  COLORREF *buffer;
  void set_size(const unsigned long int surface_width,const unsigned long int surface_height);
  void create_render_buffer();
