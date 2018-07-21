@@ -632,7 +632,7 @@ bool ORGF_Gamepad::read_configuration()
 {
  bool result;
  result=false;
- if(joyGetDevCaps(active,&configuration,sizeof(JOYCAPS))==JOYERR_NOERROR) result=true;
+ if(joyGetDevCaps((UINT_PTR)active,&configuration,sizeof(JOYCAPS))==JOYERR_NOERROR) result=true;
  return result;
 }
 
@@ -1478,13 +1478,13 @@ void ORGF_Canvas::load_image(ORGF_Image &buffer)
  buffer.destroy_image();
 }
 
-void ORGF_Canvas::mirror_image(const unsigned char kind)
+void ORGF_Canvas::mirror_image(const ORGF_MIRROR_TYPE kind)
 {
  unsigned long int x,y;
  size_t index,index2;
  ORGF_Color *mirrored_image;
  mirrored_image=this->create_buffer(width,height);
- if (kind==0)
+ if (kind==ORGF_MIRROR_HORIZONTAL)
  {
   for (x=0;x<width;++x)
   {
@@ -1498,7 +1498,7 @@ void ORGF_Canvas::mirror_image(const unsigned char kind)
   }
 
  }
- else
+ if(kind==ORGF_MIRROR_VERTICAL)
  {
    for (x=0;x<width;++x)
   {
