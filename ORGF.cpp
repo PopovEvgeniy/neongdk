@@ -133,7 +133,7 @@ void ORGF_Synchronization::wait_timer()
 ORGF_Engine::ORGF_Engine()
 {
  window_class.lpszClassName=TEXT("ORGF");
- window_class.style=CS_HREDRAW|CS_VREDRAW|CS_OWNDC;
+ window_class.style=CS_HREDRAW|CS_VREDRAW|CS_OWNDC|CS_SAVEBITS;
  window_class.lpfnWndProc=(WNDPROC)ORGF_Process_Message;
  window_class.hInstance=NULL;
  window_class.hbrBackground=NULL;
@@ -390,7 +390,7 @@ void ORGF_Render::set_render_setting()
  setting.bmiHeader.biWidth=frame_width;
  setting.bmiHeader.biHeight=-1*(long int)frame_height;
  setting.bmiHeader.biPlanes=1;
- setting.bmiHeader.biBitCount=32;
+ setting.bmiHeader.biBitCount=CHAR_BIT*sizeof(COLORREF);
  setting.bmiHeader.biCompression=BI_RGB;
 }
 
