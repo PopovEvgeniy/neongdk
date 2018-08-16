@@ -392,8 +392,6 @@ class ORGF_Canvas
  ORGF_Canvas();
  ~ORGF_Canvas();
  ORGF_Color *get_image();
- unsigned long int get_width();
- unsigned long int get_height();
  void set_frames(const unsigned long int amount);
  unsigned long int get_frames();
  void initialize(ORGF_Screen *Screen);
@@ -422,18 +420,22 @@ class ORGF_Sprite:public ORGF_Canvas
  private:
  unsigned long int current_x;
  unsigned long int current_y;
+ unsigned long int sprite_width;
+ unsigned long int sprite_height;
+ unsigned long int start;
  bool compare_pixels(const ORGF_Color &first,const ORGF_Color &second);
  void draw_sprite_pixel(const size_t offset,const unsigned long int x,const unsigned long int y);
+ void draw_sprite_image(const unsigned long int x,const unsigned long int y);
  public:
  ORGF_Sprite();
  ~ORGF_Sprite();
+ unsigned long int get_x();
+ unsigned long int get_y();
+ unsigned long int get_width();
+ unsigned long int get_height();
  void clone(ORGF_Sprite &target);
  void draw_sprite_frame(const unsigned long int x,const unsigned long int y,const unsigned long int frame);
  void draw_sprite(const unsigned long int x,const unsigned long int y);
- unsigned long int get_x();
- unsigned long int get_y();
- unsigned long int get_sprite_width();
- unsigned long int get_sprite_height();
  ORGF_Sprite* get_handle();
  ORGF_Box get_box();
 };
