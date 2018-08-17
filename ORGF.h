@@ -172,7 +172,8 @@ class ORGF_Frame
  protected:
  unsigned long int frame_width;
  unsigned long int frame_height;
- COLORREF *buffer;
+ unsigned int *buffer;
+ unsigned int get_rgb(const unsigned int red,const unsigned int green,const unsigned int blue);
  void set_size(const unsigned long int surface_width,const unsigned long int surface_height);
  void create_render_buffer();
  public:

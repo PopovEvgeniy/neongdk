@@ -269,6 +269,11 @@ ORGF_Frame::~ORGF_Frame()
 
 }
 
+unsigned int ORGF_Frame::get_rgb(const unsigned int red,const unsigned int green,const unsigned int blue)
+{
+ return red+(green<<8)+(blue<<16);
+}
+
 void ORGF_Frame::set_size(const unsigned long int surface_width,const unsigned long int surface_height)
 {
  frame_width=surface_width;
@@ -278,7 +283,7 @@ void ORGF_Frame::set_size(const unsigned long int surface_width,const unsigned l
 void ORGF_Frame::create_render_buffer()
 {
  buffer_length=(size_t)frame_width*(size_t)frame_height;
- buffer=(COLORREF*)calloc(buffer_length,sizeof(COLORREF));
+ buffer=(unsigned int*)calloc(buffer_length,sizeof(unsigned int));
  if(buffer==NULL)
  {
   puts("Can't allocate memory for render buffer");
@@ -286,7 +291,7 @@ void ORGF_Frame::create_render_buffer()
  }
  else
  {
-  buffer_length*=sizeof(COLORREF);
+  buffer_length*=sizeof(unsigned int);
  }
 
 }
@@ -295,7 +300,7 @@ void ORGF_Frame::draw_pixel(const unsigned long int x,const unsigned long int y,
 {
  if((x<frame_width)&&(y<frame_height))
  {
-  buffer[(size_t)x+(size_t)y*(size_t)frame_width]=RGB(blue,green,red);
+  buffer[(size_t)x+(size_t)y*(size_t)frame_width]=this->get_rgb(blue,green,red);
  }
 
 }
