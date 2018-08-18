@@ -3,20 +3,23 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 /*
-Copyright © 2017-2018, Popov Evgeniy Alekseyevich
+Copyright (C) 2016-2018 Popov Evgeniy Alekseyevich
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any damages
+arising from the use of this software.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+1. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software. If you use this software
+   in a product, an acknowledgment in the product documentation would be
+   appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+   misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
 */
 
 #include "ORGF.h"
@@ -1419,6 +1422,16 @@ void ORGF_Canvas::clear_buffer()
  if(image!=NULL) free(image);
 }
 
+void ORGF_Canvas::set_width(const unsigned long int image_width)
+{
+ width=image_width;
+}
+
+void ORGF_Canvas::set_height(const unsigned long int image_height)
+{
+ height=image_height;
+}
+
 ORGF_Color *ORGF_Canvas::create_buffer(const unsigned long int image_width,const unsigned long int image_height)
 {
  ORGF_Color *result;
@@ -1446,6 +1459,21 @@ size_t ORGF_Canvas::get_offset(const unsigned long int start,const unsigned long
 ORGF_Color *ORGF_Canvas::get_image()
 {
  return image;
+}
+
+size_t ORGF_Canvas::get_length()
+{
+ return (size_t)width*(size_t)height;
+}
+
+unsigned long int ORGF_Canvas::get_image_width()
+{
+ return width;
+}
+
+unsigned long int ORGF_Canvas::get_image_height()
+{
+ return height;
 }
 
 void ORGF_Canvas::set_frames(const unsigned long int amount)
@@ -1539,8 +1567,10 @@ void ORGF_Canvas::resize_image(const unsigned long int new_width,const unsigned 
 ORGF_Background::ORGF_Background()
 {
  start=0;
- frame_width=0;
- frame_height=0;
+ background_width=0;
+ background_height=0;
+ frame=1;
+ current_kind=ORGF_NORMAL_BACKGROUND;
 }
 
 ORGF_Background::~ORGF_Background()
@@ -1548,13 +1578,46 @@ ORGF_Background::~ORGF_Background()
 
 }
 
-void ORGF_Background::draw_background_image()
+void ORGF_Background::set_kind(ORGF_BACKGROUND_TYPE kind)
+{
+ switch(kind)
+ {
+  case ORGF_NORMAL_BACKGROUND:
+  background_width=this->get_image_width();
+  background_height=this->get_image_height();
+  start=0;
+  break;
+  case ORGF_HORIZONTAL_BACKGROUND:
+  background_width=this->get_image_width()/this->get_frames();
+  background_height=this->get_image_height();
+  start=(frame-1)*background_width;
+  break;
+  case ORGF_VERTICAL_BACKGROUND:
+  background_width=this->get_image_width();
+  background_height=this->get_image_height()/this->get_frames();
+  start=(frame-1)*background_width*background_height;
+  break;
+ }
+ current_kind=kind;
+}
+
+void ORGF_Background::set_target(const unsigned long int target)
+{
+ if((target>0)&&(target<=this->get_frames()))
+ {
+  frame=target;
+  this->set_kind(current_kind);
+ }
+
+}
+
+void ORGF_Background::draw_background()
 {
  unsigned long int x,y;
  size_t offset;
- for(x=0;x<frame_width;++x)
+ for(x=0;x<background_width;++x)
  {
-  for(y=0;y<frame_height;++y)
+  for(y=0;y<background_height;++y)
   {
    offset=this->get_offset(start,x,y);
    this->draw_image_pixel(offset,x,y);
@@ -1564,34 +1627,15 @@ void ORGF_Background::draw_background_image()
 
 }
 
-void ORGF_Background::draw_horizontal_background(const unsigned long int frame)
-{
- frame_width=width/frames;
- frame_height=height;
- start=(frame-1)*frame_width;
- this->draw_background_image();
-}
-
-void ORGF_Background::draw_vertical_background(const unsigned long int frame)
-{
- frame_width=width;
- frame_height=height/frames;
- start=(frame-1)*frame_height*width;
- this->draw_background_image();
-}
-
-void ORGF_Background::draw_background()
-{
- this->draw_horizontal_background(1);
-}
-
 ORGF_Sprite::ORGF_Sprite()
 {
  current_x=0;
  current_y=0;
  sprite_width=0;
  sprite_height=0;
+ frame=0;
  start=0;
+ current_kind=ORGF_SINGE_SPRITE;
 }
 
 ORGF_Sprite::~ORGF_Sprite()
@@ -1619,7 +1663,85 @@ void ORGF_Sprite::draw_sprite_pixel(const size_t offset,const unsigned long int 
  if(this->compare_pixels(image[0],image[offset])==true) this->draw_image_pixel(offset,x,y);
 }
 
-void ORGF_Sprite::draw_sprite_image(const unsigned long int x,const unsigned long int y)
+unsigned long int ORGF_Sprite::get_x()
+{
+ return current_x;
+}
+
+unsigned long int ORGF_Sprite::get_y()
+{
+ return current_y;
+}
+
+unsigned long int ORGF_Sprite::get_width()
+{
+ return sprite_width;
+}
+
+unsigned long int ORGF_Sprite::get_height()
+{
+ return sprite_height;
+}
+
+ORGF_Sprite* ORGF_Sprite::get_handle()
+{
+ return this;
+}
+
+ORGF_Box ORGF_Sprite::get_box()
+{
+ ORGF_Box target;
+ target.x=current_x;
+ target.y=current_y;
+ target.width=sprite_width;
+ target.height=sprite_height;
+ return target;
+}
+
+void ORGF_Sprite::set_kind(const ORGF_SPRITE_TYPE kind)
+{
+ switch(kind)
+ {
+  case ORGF_SINGE_SPRITE:
+  sprite_width=this->get_image_width();
+  sprite_height=this->get_image_height();
+  start=0;
+  break;
+  case ORGF_ANIMATED_SPRITE:
+  sprite_width=this->get_image_width()/this->get_frames();
+  sprite_height=this->get_image_height();
+  start=(frame-1)*sprite_width;
+  break;
+ }
+ current_kind=kind;
+}
+
+ORGF_SPRITE_TYPE ORGF_Sprite::get_kind()
+{
+ return current_kind;
+}
+
+void ORGF_Sprite::set_target(const unsigned long int target)
+{
+ if((target>0)&&(target<=this->get_frames()))
+ {
+  frame=target;
+  this->set_kind(current_kind);
+ }
+
+}
+
+void ORGF_Sprite::clone(ORGF_Sprite &target)
+{
+ this->set_width(target.get_image_width());
+ this->set_height(target.get_image_height());
+ this->set_frames(target.get_frames());
+ this->set_kind(target.get_kind());
+ image=this->create_buffer(target.get_image_width(),target.get_image_width());
+ memmove(image,target.get_image(),target.get_length());
+}
+
+void ORGF_Sprite::draw_sprite(const unsigned long int x,const unsigned long int y)
 {
  size_t offset;
  unsigned long int sprite_x,sprite_y;
@@ -1635,65 +1757,6 @@ void ORGF_Sprite::draw_sprite_image(const unsigned long int x,const unsigned lon
 
  }
 
-}
-
-unsigned long int ORGF_Sprite::get_x()
-{
- return current_x;
-}
-
-unsigned long int ORGF_Sprite::get_y()
-{
- return current_y;
-}
-
-unsigned long int ORGF_Sprite::get_width()
-{
- return width/frames;
-}
-
-unsigned long int ORGF_Sprite::get_height()
-{
- return height;
-}
-
-void ORGF_Sprite::clone(ORGF_Sprite &target)
-{
- size_t length;
- frames=target.get_frames();
- width=target.get_width();
- height=target.get_height();
- length=(size_t)width*(size_t)height*3;
- image=this->create_buffer(width,height);
- memmove(image,target.get_image(),length);
-}
-
-void ORGF_Sprite::draw_sprite_frame(const unsigned long int x,const unsigned long int y,const unsigned long int frame)
-{
- sprite_width=width/frames;
- sprite_height=height;
- start=(frame-1)*sprite_width;
- this->draw_sprite_image(x,y);
-}
-
-void ORGF_Sprite::draw_sprite(const unsigned long int x,const unsigned long int y)
-{
- this->draw_sprite_frame(x,y,1);
-}
-
-ORGF_Sprite* ORGF_Sprite::get_handle()
-{
- return this;
-}
-
-ORGF_Box ORGF_Sprite::get_box()
-{
- ORGF_Box target;
- target.x=current_x;
- target.y=current_y;
- target.width=width/frames;
- target.height=height;
- return target;
 }
 
 ORGF_Text::ORGF_Text()
@@ -1713,7 +1776,8 @@ void ORGF_Text::draw_character(const char target)
 {
  if((target>31)||(target<0))
  {
-  sprite->draw_sprite_frame(step_x,current_y,(unsigned long int)target+1);
+  sprite->set_target((unsigned long int)target+1);
+  sprite->draw_sprite(step_x,current_y);
   step_x+=sprite->get_width();
  }
 
@@ -1729,6 +1793,7 @@ void ORGF_Text::load_font(ORGF_Sprite *font)
 {
  sprite=font;
  sprite->set_frames(256);
+ sprite->set_kind(ORGF_ANIMATED_SPRITE);
 }
 
 void ORGF_Text::draw_text(const char *text)
