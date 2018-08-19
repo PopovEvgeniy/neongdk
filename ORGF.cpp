@@ -155,6 +155,11 @@ ORGF_Engine::~ORGF_Engine()
  UnregisterClass(window_class.lpszClassName,window_class.hInstance);
 }
 
+HWND ORGF_Engine::get_window()
+{
+ return window;
+}
+
 void ORGF_Engine::prepare_engine()
 {
  window_class.hInstance=GetModuleHandle(NULL);
@@ -191,6 +196,8 @@ void ORGF_Engine::prepare_engine()
 
 void ORGF_Engine::create_window()
 {
+ width=GetSystemMetrics(SM_CXSCREEN);
+ height=GetSystemMetrics(SM_CYSCREEN);
  window=CreateWindow(window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,width,height,NULL,NULL,window_class.hInstance,NULL);
  if (window==NULL)
  {
@@ -299,6 +306,11 @@ void ORGF_Frame::create_render_buffer()
 
 }
 
+unsigned int *ORGF_Frame::get_buffer()
+{
+ return buffer;
+}
+
 void ORGF_Frame::draw_pixel(const unsigned long int x,const unsigned long int y,const unsigned char red,const unsigned char green,const unsigned char blue)
 {
  if((x<frame_width)&&(y<frame_height))
@@ -326,6 +338,7 @@ unsigned long int ORGF_Frame::get_frame_height()
 ORGF_Display::ORGF_Display()
 {
  memset(&display,0,sizeof(DEVMODE));
+ display.dmSize=sizeof(DEVMODE);
 }
 
 ORGF_Display::~ORGF_Display()
@@ -333,39 +346,31 @@ ORGF_Display::~ORGF_Display()
  ChangeDisplaySettings(NULL,0);
 }
 
-void ORGF_Display::set_video_mode(DEVMODE mode)
+void ORGF_Display::set_video_mode()
 {
- if (ChangeDisplaySettings(&mode,CDS_FULLSCREEN)!=DISP_CHANGE_SUCCESSFUL)
+ if (ChangeDisplaySettings(&display,CDS_FULLSCREEN)!=DISP_CHANGE_SUCCESSFUL)
  {
   puts("Can't change video mode");
   exit(EXIT_FAILURE);
  }
- else
- {
-  width=mode.dmPelsWidth;
-  height=mode.dmPelsHeight;
- }
 
 }
 
-DEVMODE ORGF_Display::get_video_mode()
+void ORGF_Display::get_video_mode()
 {
- DEVMODE mode;
- memset(&mode,0,sizeof(DEVMODE));
- mode.dmSize=sizeof(DEVMODE);
- if (EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&mode)==FALSE)
+ if (EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&display)==FALSE)
  {
   puts("Can't get display setting");
   exit(EXIT_FAILURE);
  }
- return mode;
+
 }
 
 void ORGF_Display::check_video_mode()
 {
- display=this->get_video_mode();
+ this->get_video_mode();
  if(display.dmBitsPerPel<16) display.dmBitsPerPel=16;
- this->set_video_mode(display);
+ this->set_video_mode();
 }
 
 void ORGF_Display::reset_display()
@@ -375,11 +380,11 @@ void ORGF_Display::reset_display()
 
 void ORGF_Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height)
 {
- display=this->get_video_mode();
+ this->get_video_mode();
  display.dmPelsWidth=screen_width;
  display.dmPelsHeight=screen_height;
  if(display.dmBitsPerPel<16) display.dmBitsPerPel=16;
- this->set_video_mode(display);
+ this->set_video_mode();
 }
 
 ORGF_Render::ORGF_Render()
@@ -395,10 +400,10 @@ ORGF_Render::~ORGF_Render()
 void ORGF_Render::set_render_setting()
 {
  setting.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
- setting.bmiHeader.biWidth=frame_width;
- setting.bmiHeader.biHeight=-1*(long int)frame_height;
+ setting.bmiHeader.biWidth=this->get_frame_width();
+ setting.bmiHeader.biHeight=-1*(long int)this->get_frame_height();
  setting.bmiHeader.biPlanes=1;
- setting.bmiHeader.biBitCount=CHAR_BIT*sizeof(COLORREF);
+ setting.bmiHeader.biBitCount=CHAR_BIT*sizeof(unsigned int);
  setting.bmiHeader.biCompression=BI_RGB;
 }
 
@@ -412,7 +417,7 @@ void ORGF_Render::create_render()
 void ORGF_Render::refresh()
 {
  HDC context;
- context=GetDC(window);
+ context=GetDC(this->get_window());
  if(context==NULL)
  {
   puts("Can't get window context");
@@ -420,8 +425,8 @@ void ORGF_Render::refresh()
  }
  else
  {
-  StretchDIBits(context,0,0,width,height,0,0,frame_width,frame_height,buffer,&setting,DIB_RGB_COLORS,SRCCOPY);
-  ReleaseDC(window,context);
+  StretchDIBits(context,0,0,this->get_width(),this->get_height(),0,0,this->get_frame_width(),this->get_frame_height(),this->get_buffer(),&setting,DIB_RGB_COLORS,SRCCOPY);
+  ReleaseDC(this->get_window(),context);
  }
 
 }

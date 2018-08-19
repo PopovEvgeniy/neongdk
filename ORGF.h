@@ -153,11 +153,13 @@ class ORGF_Synchronization
 
 class ORGF_Engine
 {
- protected:
- HWND window;
+ private:
  WNDCLASS window_class;
+ HWND window;
  unsigned long int width;
  unsigned long int height;
+ protected:
+ HWND get_window();
  void prepare_engine();
  void create_window();
  void destroy_window();
@@ -174,13 +176,14 @@ class ORGF_Frame
 {
  private:
  size_t buffer_length;
- protected:
  unsigned long int frame_width;
  unsigned long int frame_height;
  unsigned int *buffer;
  unsigned int get_rgb(const unsigned int red,const unsigned int green,const unsigned int blue);
+ protected:
  void set_size(const unsigned long int surface_width,const unsigned long int surface_height);
  void create_render_buffer();
+ unsigned int *get_buffer();
  public:
  ORGF_Frame();
  ~ORGF_Frame();
@@ -190,12 +193,13 @@ class ORGF_Frame
  unsigned long int get_frame_height();
 };
 
-class ORGF_Display:public ORGF_Engine
+class ORGF_Display
 {
- protected:
+ private:
  DEVMODE display;
- DEVMODE get_video_mode();
- void set_video_mode(DEVMODE mode);
+ void get_video_mode();
+ void set_video_mode();
+ protected:
  void check_video_mode();
  void reset_display();
  void set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height);
@@ -204,7 +208,7 @@ class ORGF_Display:public ORGF_Engine
  ~ORGF_Display();
 };
 
-class ORGF_Render:public ORGF_Display, public ORGF_Frame
+class ORGF_Render:public ORGF_Display, public ORGF_Engine, public ORGF_Frame
 {
  private:
  BITMAPINFO setting;
