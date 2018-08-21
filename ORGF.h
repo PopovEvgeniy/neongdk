@@ -208,7 +208,7 @@ class ORGF_Display
  ~ORGF_Display();
 };
 
-class ORGF_Render:public ORGF_Display, public ORGF_Engine, public ORGF_Frame
+class ORGF_Render:public ORGF_Frame, public ORGF_Display, public ORGF_Engine
 {
  private:
  BITMAPINFO setting;
