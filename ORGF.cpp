@@ -293,7 +293,7 @@ void ORGF_Frame::set_size(const unsigned long int surface_width,const unsigned l
 void ORGF_Frame::create_render_buffer()
 {
  buffer_length=(size_t)frame_width*(size_t)frame_height;
- buffer=(unsigned int*)calloc(buffer_length,sizeof(unsigned int));
+ buffer=static_cast<unsigned int*>(calloc(buffer_length,sizeof(unsigned int)));
  if(buffer==NULL)
  {
   puts("Can't allocate memory for render buffer");
@@ -1204,7 +1204,7 @@ ORGF_Image::~ORGF_Image()
 unsigned char *ORGF_Image::create_buffer(const size_t length)
 {
  unsigned char *result;
- result=(unsigned char*)calloc(length,sizeof(unsigned char));
+ result=static_cast<unsigned char*>(calloc(length,sizeof(unsigned char)));
  if(result==NULL)
  {
   puts("Can't allocate memory for image buffer");
