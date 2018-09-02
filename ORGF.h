@@ -130,6 +130,7 @@ struct ORGF_Box
 };
 
 LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
+void ORGF_Show_Error(const char *message);
 
 class ORGF_Base
 {
