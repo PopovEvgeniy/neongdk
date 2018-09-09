@@ -60,10 +60,10 @@ LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPA
   ORGF_Buttons[ORGF_MOUSE_MIDDLE]=ORGFKEY_RELEASE;
   break;
   case WM_KEYDOWN:
-  ORGF_Keys[(lParam >> 16)&0x7f]=ORGFKEY_PRESS;
+  ORGF_Keys[ORGF_GETSCANCODE(lParam)]=ORGFKEY_PRESS;
   break;
   case WM_KEYUP:
-  ORGF_Keys[(lParam >> 16)&0x7f]=ORGFKEY_RELEASE;
+  ORGF_Keys[ORGF_GETSCANCODE(lParam)]=ORGFKEY_RELEASE;
   break;
  }
  return DefWindowProc(window,Message,wParam,lParam);

@@ -44,6 +44,7 @@ freely, subject to the following restrictions:
 #include <dshow.h>
 #include <mmsystem.h>
 
+#define ORGF_GETSCANCODE(argument) ((argument >> 16)&0x7f)
 #define ORGF_KEYBOARD 256
 #define ORGF_MOUSE 3
 
