@@ -45,12 +45,12 @@ freely, subject to the following restrictions:
 #include <mmsystem.h>
 
 #define ORGF_GETSCANCODE(argument) ((argument >> 16)&0x7f)
+
 #define ORGF_KEYBOARD 256
 #define ORGF_MOUSE 3
 
-#define ORGFKEY_NONE 0
+#define ORGFKEY_RELEASE 0
 #define ORGFKEY_PRESS 1
-#define ORGFKEY_RELEASE 2
 
 #define ORGF_MOUSE_LEFT 0
 #define ORGF_MOUSE_RIGHT 1

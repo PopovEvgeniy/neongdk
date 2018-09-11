@@ -38,8 +38,8 @@ LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPA
   PostQuitMessage(0);
   break;
   case WM_CREATE:
-  memset(ORGF_Keys,ORGFKEY_NONE,ORGF_KEYBOARD);
-  memset(ORGF_Buttons,ORGFKEY_NONE,ORGF_MOUSE);
+  memset(ORGF_Keys,ORGFKEY_RELEASE,ORGF_KEYBOARD);
+  memset(ORGF_Buttons,ORGFKEY_RELEASE,ORGF_MOUSE);
   break;
   case WM_LBUTTONDOWN:
   ORGF_Buttons[ORGF_MOUSE_LEFT]=ORGFKEY_PRESS;
@@ -477,7 +477,7 @@ ORGF_Keyboard::~ORGF_Keyboard()
 
 void ORGF_Keyboard::initialize()
 {
- preversion=(unsigned char*)calloc(ORGF_KEYBOARD,1);
+ preversion=(unsigned char*)calloc(ORGF_KEYBOARD,sizeof(unsigned char));
  if(preversion==NULL)
  {
   ORGF_Show_Error("Can't allocate memory for keyboard state buffer");
@@ -490,6 +490,7 @@ bool ORGF_Keyboard::check_hold(const unsigned char code)
  bool result;
  result=false;
  if(ORGF_Keys[code]==ORGFKEY_PRESS) result=true;
+ preversion[code]=ORGF_Keys[code];
  return result;
 }
 
@@ -499,7 +500,7 @@ bool ORGF_Keyboard::check_press(const unsigned char code)
  result=false;
  if(ORGF_Keys[code]==ORGFKEY_PRESS)
  {
-  if(preversion[code]!=ORGFKEY_PRESS) result=true;
+  if(preversion[code]==ORGFKEY_RELEASE) result=true;
  }
  preversion[code]=ORGF_Keys[code];
  return result;
@@ -511,15 +512,15 @@ bool ORGF_Keyboard::check_release(const unsigned char code)
  result=false;
  if(ORGF_Keys[code]==ORGFKEY_RELEASE)
  {
-  result=true;
-  ORGF_Keys[code]=ORGFKEY_NONE;
+  if(preversion[code]==ORGFKEY_PRESS) result=true;
  }
+ preversion[code]=ORGF_Keys[code];
  return result;
 }
 
 ORGF_Mouse::ORGF_Mouse()
 {
- memset(preversion,ORGFKEY_NONE,ORGF_MOUSE);
+ memset(preversion,ORGFKEY_RELEASE,ORGF_MOUSE);
 }
 
 ORGF_Mouse::~ORGF_Mouse()
@@ -573,6 +574,7 @@ bool ORGF_Mouse::check_hold(const unsigned char button)
  if(button<=ORGF_MOUSE_MIDDLE)
  {
   if(ORGF_Buttons[button]==ORGFKEY_PRESS) result=true;
+  preversion[button]=ORGF_Buttons[button];
  }
  return result;
 }
@@ -585,7 +587,7 @@ bool ORGF_Mouse::check_press(const unsigned char button)
  {
   if(ORGF_Buttons[button]==ORGFKEY_PRESS)
   {
-   if(preversion[button]!=ORGFKEY_PRESS) result=true;
+   if(preversion[button]==ORGFKEY_RELEASE) result=true;
   }
 
  }
@@ -601,11 +603,11 @@ bool ORGF_Mouse::check_release(const unsigned char button)
  {
   if(ORGF_Buttons[button]==ORGFKEY_RELEASE)
   {
-   result=true;
-   ORGF_Buttons[button]=ORGFKEY_NONE;
+   if(preversion[button]==ORGFKEY_PRESS) result=true;
   }
 
  }
+ preversion[button]=ORGF_Buttons[button];
  return result;
 }
 
