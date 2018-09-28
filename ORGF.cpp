@@ -763,18 +763,18 @@ ORGF_GAMEPAD_DPAD ORGF_Gamepad::get_dpad()
  return result;
 }
 
-char ORGF_Gamepad::get_stick_x(const ORGF_GAMEPAD_STICKS stick)
+ORGF_GAMEPAD_DIRECTION ORGF_Gamepad::get_stick_x(const ORGF_GAMEPAD_STICKS stick)
 {
- char result;
+ ORGF_GAMEPAD_DIRECTION result;
  unsigned long int control;
- result=0;
+ result=ORGF_NEUTRAL_DIRECTION;
  if(stick==ORGF_GAMEPAD_LEFT_STICK)
  {
   if(this->get_sticks_amount()>0)
   {
    control=(configuration.wXmax-configuration.wXmin)/2;
-   if(current.dwXpos<control) result=-1;
-   if(current.dwXpos>control) result=1;
+   if(current.dwXpos<control) result=ORGF_NEGATIVE_DIRECTION;
+   if(current.dwXpos>control) result=ORGF_POSITIVE_DIRECTION;
   }
 
  }
@@ -783,26 +783,26 @@ char ORGF_Gamepad::get_stick_x(const ORGF_GAMEPAD_STICKS stick)
   if(this->get_sticks_amount()>1)
   {
    control=(configuration.wZmax-configuration.wZmin)/2;
-   if(current.dwZpos<control) result=-1;
-   if(current.dwZpos>control) result=1;
+   if(current.dwZpos<control) result=ORGF_NEGATIVE_DIRECTION;
+   if(current.dwZpos>control) result=ORGF_POSITIVE_DIRECTION;
   }
 
  }
  return result;
 }
 
-char ORGF_Gamepad::get_stick_y(const ORGF_GAMEPAD_STICKS stick)
+ORGF_GAMEPAD_DIRECTION ORGF_Gamepad::get_stick_y(const ORGF_GAMEPAD_STICKS stick)
 {
- char result;
+ ORGF_GAMEPAD_DIRECTION result;
  unsigned long int control;
- result=0;
+ result=ORGF_NEUTRAL_DIRECTION;
  if(stick==ORGF_GAMEPAD_LEFT_STICK)
  {
   if(this->get_sticks_amount()>0)
   {
    control=(configuration.wYmax-configuration.wYmin)/2;
-   if(current.dwYpos<control) result=-1;
-   if(current.dwYpos>control) result=1;
+   if(current.dwYpos<control) result=ORGF_NEGATIVE_DIRECTION;
+   if(current.dwYpos>control) result=ORGF_POSITIVE_DIRECTION;
   }
 
  }
@@ -811,8 +811,8 @@ char ORGF_Gamepad::get_stick_y(const ORGF_GAMEPAD_STICKS stick)
   if(this->get_sticks_amount()>1)
   {
    control=(configuration.wRmax-configuration.wRmin)/2;
-   if(current.dwRpos<control) result=-1;
-   if(current.dwRpos>control) result=1;
+   if(current.dwRpos<control) result=ORGF_NEGATIVE_DIRECTION;
+   if(current.dwRpos>control) result=ORGF_POSITIVE_DIRECTION;
   }
 
  }
