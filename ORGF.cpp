@@ -1049,6 +1049,68 @@ void ORGF_System::enable_logging(const char *name)
 
 }
 
+ORGF_File::ORGF_File()
+{
+ target=NULL;
+}
+
+ORGF_File::~ORGF_File()
+{
+ if(target!=NULL) fclose(target);
+}
+
+void ORGF_File::open(const char *name)
+{
+ target=fopen(name,"w+b");
+ if(target==NULL)
+ {
+  ORGF_Show_Error("Can't open the binary file");
+ }
+
+}
+
+void ORGF_File::close()
+{
+ if(target!=NULL) fclose(target);
+}
+
+void ORGF_File::set_position(const off_t offset)
+{
+ fseek(target,offset,SEEK_SET);
+}
+
+long int ORGF_File::get_position()
+{
+ return ftell(target);
+}
+
+long int ORGF_File::get_length()
+{
+ long int result;
+ fseek(target,0,SEEK_END);
+ result=ftell(target);
+ rewind(target);
+ return result;
+}
+
+void ORGF_File::read(void *buffer,const size_t length)
+{
+ fread(buffer,length,1,target);
+}
+
+void ORGF_File::write(void *buffer,const size_t length)
+{
+ fwrite(buffer,length,1,target);
+}
+
+bool ORGF_File::check_error()
+{
+ bool result;
+ result=false;
+ if(ferror(target)!=0) result=true;
+ return result;
+}
+
 ORGF_Timer::ORGF_Timer()
 {
  interval=0;
