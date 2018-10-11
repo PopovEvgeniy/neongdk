@@ -475,8 +475,9 @@ class ORGF_Sprite:public ORGF_Canvas
  void set_kind(const ORGF_SPRITE_TYPE kind);
  ORGF_SPRITE_TYPE get_kind();
  void set_target(const unsigned long int target);
+ void set_position(const unsigned long int x,const unsigned long int y);
  void clone(ORGF_Sprite &target);
- void draw_sprite(const unsigned long int x,const unsigned long int y);
+ void draw_sprite();
 };
 
 class ORGF_Text

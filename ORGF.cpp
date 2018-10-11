@@ -1778,6 +1778,12 @@ void ORGF_Sprite::set_target(const unsigned long int target)
 
 }
 
+void ORGF_Sprite::set_position(const unsigned long int x,const unsigned long int y)
+{
+ current_x=x;
+ current_y=y;
+}
+
 void ORGF_Sprite::clone(ORGF_Sprite &target)
 {
  this->set_width(target.get_image_width());
@@ -1788,18 +1794,16 @@ void ORGF_Sprite::clone(ORGF_Sprite &target)
  memmove(image,target.get_image(),target.get_length());
 }
 
-void ORGF_Sprite::draw_sprite(const unsigned long int x,const unsigned long int y)
+void ORGF_Sprite::draw_sprite()
 {
  size_t offset;
  unsigned long int sprite_x,sprite_y;
- current_x=x;
- current_y=y;
  for(sprite_x=0;sprite_x<sprite_width;++sprite_x)
  {
   for(sprite_y=0;sprite_y<sprite_height;++sprite_y)
   {
    offset=this->get_offset(start,sprite_x,sprite_y);
-   this->draw_sprite_pixel(offset,x+sprite_x,y+sprite_y);
+   this->draw_sprite_pixel(offset,current_x+sprite_x,current_y+sprite_y);
   }
 
  }
@@ -1824,7 +1828,8 @@ void ORGF_Text::draw_character(const char target)
  if((target>31)||(target<0))
  {
   sprite->set_target((unsigned long int)target+1);
-  sprite->draw_sprite(step_x,current_y);
+  sprite->set_position(step_x,current_y);
+  sprite->draw_sprite();
   step_x+=sprite->get_width();
  }
 
