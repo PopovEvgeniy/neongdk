@@ -279,6 +279,11 @@ unsigned int ORGF_Frame::get_rgb(const unsigned int red,const unsigned int green
  return red+(green<<8)+(blue<<16);
 }
 
+size_t ORGF_Frame::get_offset(const unsigned long int x,const unsigned long int y)
+{
+ return (size_t)x+(size_t)y*(size_t)frame_width;
+}
+
 void ORGF_Frame::set_size(const unsigned long int surface_width,const unsigned long int surface_height)
 {
  frame_width=surface_width;
@@ -309,7 +314,7 @@ void ORGF_Frame::draw_pixel(const unsigned long int x,const unsigned long int y,
 {
  if((x<frame_width)&&(y<frame_height))
  {
-  buffer[(size_t)x+(size_t)y*(size_t)frame_width]=this->get_rgb(blue,green,red);
+  buffer[this->get_offset(x,y)]=this->get_rgb(blue,green,red);
  }
 
 }
@@ -361,8 +366,12 @@ void ORGF_Display::get_video_mode()
 void ORGF_Display::check_video_mode()
 {
  this->get_video_mode();
- if(display.dmBitsPerPel<16) display.dmBitsPerPel=16;
- this->set_video_mode();
+ if(display.dmBitsPerPel<16)
+ {
+  display.dmBitsPerPel=16;
+  this->set_video_mode();
+ }
+
 }
 
 void ORGF_Display::reset_display()

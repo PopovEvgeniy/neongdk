@@ -183,6 +183,7 @@ class ORGF_Frame
  unsigned long int frame_height;
  unsigned int *buffer;
  unsigned int get_rgb(const unsigned int red,const unsigned int green,const unsigned int blue);
+ size_t get_offset(const unsigned long int x,const unsigned long int y);
  protected:
  void set_size(const unsigned long int surface_width,const unsigned long int surface_height);
  void create_render_buffer();
