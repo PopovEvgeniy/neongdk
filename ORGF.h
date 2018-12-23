@@ -197,6 +197,20 @@ class ORGF_Frame
  unsigned long int get_frame_height();
 };
 
+class ORGF_FPS
+{
+ private:
+ time_t start;
+ unsigned long int current;
+ unsigned long int fps;
+ protected:
+ void update_counter();
+ public:
+ ORGF_FPS();
+ ~ORGF_FPS();
+ unsigned long int get_fps();
+};
+
 class ORGF_Display
 {
  private:
@@ -224,7 +238,7 @@ class ORGF_Render:public ORGF_Display, public ORGF_Engine, public ORGF_Frame
  ~ORGF_Render();
 };
 
-class ORGF_Screen:public ORGF_Synchronization, public ORGF_Render
+class ORGF_Screen:public ORGF_FPS, public ORGF_Synchronization, public ORGF_Render
 {
  public:
  void initialize();
