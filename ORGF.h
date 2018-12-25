@@ -178,7 +178,7 @@ class ORGF_Engine
 class ORGF_Frame
 {
  private:
- size_t buffer_length;
+ size_t pixels;
  unsigned long int frame_width;
  unsigned long int frame_height;
  unsigned int *buffer;

@@ -260,7 +260,7 @@ ORGF_Frame::ORGF_Frame()
 {
  frame_width=512;
  frame_height=512;
- buffer_length=0;
+ pixels=0;
  buffer=NULL;
 }
 
@@ -292,15 +292,11 @@ void ORGF_Frame::set_size(const unsigned long int surface_width,const unsigned l
 
 void ORGF_Frame::create_render_buffer()
 {
- buffer_length=(size_t)frame_width*(size_t)frame_height;
- buffer=(unsigned int*)calloc(buffer_length,sizeof(unsigned int));
+ pixels=(size_t)frame_width*(size_t)frame_height;
+ buffer=(unsigned int*)calloc(pixels,sizeof(unsigned int));
  if(buffer==NULL)
  {
   ORGF_Show_Error("Can't allocate memory for render buffer");
- }
- else
- {
-  buffer_length*=sizeof(unsigned int);
  }
 
 }
@@ -321,7 +317,12 @@ void ORGF_Frame::draw_pixel(const unsigned long int x,const unsigned long int y,
 
 void ORGF_Frame::clear_screen()
 {
- memset(buffer,0,buffer_length);
+ size_t index;
+ for (index=0;index<pixels;++index)
+ {
+  buffer[index]=0;
+ }
+
 }
 
 unsigned long int ORGF_Frame::get_frame_width()
