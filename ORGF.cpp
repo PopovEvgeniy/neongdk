@@ -262,6 +262,7 @@ ORGF_Frame::ORGF_Frame()
  frame_height=512;
  pixels=0;
  buffer=NULL;
+ shadow=NULL;
 }
 
 ORGF_Frame::~ORGF_Frame()
@@ -270,6 +271,11 @@ ORGF_Frame::~ORGF_Frame()
  {
   free(buffer);
   buffer=NULL;
+ }
+ if(shadow!=NULL)
+ {
+  free(shadow);
+  shadow=NULL;
  }
 
 }
@@ -290,15 +296,22 @@ void ORGF_Frame::set_size(const unsigned long int surface_width,const unsigned l
  frame_height=surface_height;
 }
 
-void ORGF_Frame::create_render_buffer()
+unsigned int *ORGF_Frame::create_buffer(const char *error)
 {
+ unsigned int *target;
  pixels=(size_t)frame_width*(size_t)frame_height;
- buffer=(unsigned int*)calloc(pixels,sizeof(unsigned int));
- if(buffer==NULL)
+ target=(unsigned int*)calloc(pixels,sizeof(unsigned int));
+ if(target==NULL)
  {
-  ORGF_Show_Error("Can't allocate memory for render buffer");
+  ORGF_Show_Error(error);
  }
+ return target;
+}
 
+void ORGF_Frame::create_buffers()
+{
+ buffer=this->create_buffer("Can't allocate memory for render buffer");
+ shadow=this->create_buffer("Can't allocate memory for shadow buffer");
 }
 
 unsigned int *ORGF_Frame::get_buffer()
@@ -321,6 +334,26 @@ void ORGF_Frame::clear_screen()
  for (index=0;index<pixels;++index)
  {
   buffer[index]=0;
+ }
+
+}
+
+void ORGF_Frame::save()
+{
+ size_t index;
+ for (index=0;index<pixels;++index)
+ {
+  shadow[index]=buffer[index];
+ }
+
+}
+
+void ORGF_Frame::restore()
+{
+ size_t index;
+ for (index=0;index<pixels;++index)
+ {
+  buffer[index]=shadow[index];
  }
 
 }
@@ -466,7 +499,7 @@ void ORGF_Screen::initialize()
  this->check_video_mode();
  this->prepare_engine();
  this->create_render();
- this->create_render_buffer();
+ this->create_buffers();
  this->create_timer();
  this->set_timer(17);
 }
@@ -1504,6 +1537,16 @@ void ORGF_Canvas::clear_buffer()
  if(image!=NULL) free(image);
 }
 
+void ORGF_Canvas::save()
+{
+ surface->save();
+}
+
+void ORGF_Canvas::restore()
+{
+ surface->restore();
+}
+
 void ORGF_Canvas::set_width(const unsigned long int image_width)
 {
  width=image_width;
@@ -1650,12 +1693,29 @@ ORGF_Background::ORGF_Background()
  start=0;
  background_width=0;
  background_height=0;
+ current=0;
  frame=1;
  current_kind=ORGF_NORMAL_BACKGROUND;
 }
 
 ORGF_Background::~ORGF_Background()
 {
+
+}
+
+void ORGF_Background::slow_draw_background()
+{
+ unsigned long int x,y;
+ size_t offset;
+ for(x=0;x<background_width;++x)
+ {
+  for(y=0;y<background_height;++y)
+  {
+   offset=this->get_offset(start,x,y);
+   this->draw_image_pixel(offset,x,y);
+  }
+
+ }
 
 }
 
@@ -1694,16 +1754,15 @@ void ORGF_Background::set_target(const unsigned long int target)
 
 void ORGF_Background::draw_background()
 {
- unsigned long int x,y;
- size_t offset;
- for(x=0;x<background_width;++x)
+ if (current!=frame)
  {
-  for(y=0;y<background_height;++y)
-  {
-   offset=this->get_offset(start,x,y);
-   this->draw_image_pixel(offset,x,y);
-  }
-
+  this->slow_draw_background();
+  this->save();
+  current=frame;
+ }
+ else
+ {
+  this->restore();
  }
 
 }
