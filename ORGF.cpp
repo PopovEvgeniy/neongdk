@@ -1703,16 +1703,21 @@ ORGF_Background::~ORGF_Background()
 
 }
 
+void ORGF_Background::draw_background_pixel(const unsigned long int x,const unsigned long int y)
+{
+ size_t offset;
+ offset=this->get_offset(start,x,y);
+ this->draw_image_pixel(offset,x,y);
+}
+
 void ORGF_Background::slow_draw_background()
 {
  unsigned long int x,y;
- size_t offset;
  for(x=0;x<background_width;++x)
  {
   for(y=0;y<background_height;++y)
   {
-   offset=this->get_offset(start,x,y);
-   this->draw_image_pixel(offset,x,y);
+   this->draw_background_pixel(x,y);
   }
 
  }
