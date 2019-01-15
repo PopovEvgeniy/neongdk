@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2016-2018 Popov Evgeniy Alekseyevich
+Copyright (C) 2016-2019 Popov Evgeniy Alekseyevich
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -489,6 +489,8 @@ class ORGF_Sprite:public ORGF_Canvas
  public:
  ORGF_Sprite();
  ~ORGF_Sprite();
+ void set_x(const unsigned long int x);
+ void set_y(const unsigned long int y);
  unsigned long int get_x();
  unsigned long int get_y();
  unsigned long int get_width();

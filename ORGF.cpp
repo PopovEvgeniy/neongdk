@@ -3,7 +3,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 /*
-Copyright (C) 2016-2018 Popov Evgeniy Alekseyevich
+Copyright (C) 2016-2019 Popov Evgeniy Alekseyevich
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -1808,6 +1808,16 @@ void ORGF_Sprite::draw_sprite_pixel(const size_t offset,const unsigned long int 
  if(this->compare_pixels(image[0],image[offset])==true) this->draw_image_pixel(offset,x,y);
 }
 
+void ORGF_Sprite::set_x(const unsigned long int x)
+{
+ current_x=x;
+}
+
+void ORGF_Sprite::set_y(const unsigned long int y)
+{
+ current_y=y;
+}
+
 unsigned long int ORGF_Sprite::get_x()
 {
  return current_x;
@@ -1931,7 +1941,7 @@ void ORGF_Text::draw_character(const char target)
  if((target>31)||(target<0))
  {
   sprite->set_target((unsigned long int)target+1);
-  sprite->set_position(step_x,current_y);
+  sprite->set_x(step_x);
   sprite->draw_sprite();
   step_x+=sprite->get_width();
  }
@@ -1956,6 +1966,7 @@ void ORGF_Text::draw_text(const char *text)
  size_t index,length;
  length=strlen(text);
  step_x=current_x;
+ sprite->set_position(current_x,current_y);
  for (index=0;index<length;++index)
  {
   this->draw_character(text[index]);
