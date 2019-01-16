@@ -1928,22 +1928,22 @@ ORGF_Text::ORGF_Text()
  current_x=0;
  current_y=0;
  step_x=0;
- sprite=NULL;
+ font=NULL;
 }
 
 ORGF_Text::~ORGF_Text()
 {
- sprite=NULL;
+ font=NULL;
 }
 
 void ORGF_Text::draw_character(const char target)
 {
  if((target>31)||(target<0))
  {
-  sprite->set_target((unsigned long int)target+1);
-  sprite->set_x(step_x);
-  sprite->draw_sprite();
-  step_x+=sprite->get_width();
+  font->set_position(step_x,current_y);
+  font->set_target((unsigned long int)target+1);
+  font->draw_sprite();
+  step_x+=font->get_width();
  }
 
 }
@@ -1954,11 +1954,11 @@ void ORGF_Text::set_position(const unsigned long int x,const unsigned long int y
  current_y=y;
 }
 
-void ORGF_Text::load_font(ORGF_Sprite *font)
+void ORGF_Text::load_font(ORGF_Sprite *target)
 {
- sprite=font;
- sprite->set_frames(256);
- sprite->set_kind(ORGF_HORIZONTAL_STRIP);
+ font=target;
+ font->set_frames(256);
+ font->set_kind(ORGF_HORIZONTAL_STRIP);
 }
 
 void ORGF_Text::draw_text(const char *text)
@@ -1966,7 +1966,6 @@ void ORGF_Text::draw_text(const char *text)
  size_t index,length;
  length=strlen(text);
  step_x=current_x;
- sprite->set_position(current_x,current_y);
  for (index=0;index<length;++index)
  {
   this->draw_character(text[index]);

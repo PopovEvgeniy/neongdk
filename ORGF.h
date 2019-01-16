@@ -511,13 +511,13 @@ class ORGF_Text
  unsigned long int current_x;
  unsigned long int current_y;
  unsigned long int step_x;
- ORGF_Sprite *sprite;
+ ORGF_Sprite *font;
  void draw_character(const char target);
  public:
  ORGF_Text();
  ~ORGF_Text();
  void set_position(const unsigned long int x,const unsigned long int y);
- void load_font(ORGF_Sprite *font);
+ void load_font(ORGF_Sprite *target);
  void draw_text(const char *text);
 };
 
