@@ -482,6 +482,7 @@ class ORGF_Background:public ORGF_Canvas
 class ORGF_Sprite:public ORGF_Canvas
 {
  private:
+ bool transparent;
  unsigned long int current_x;
  unsigned long int current_y;
  unsigned long int sprite_width;
@@ -494,6 +495,8 @@ class ORGF_Sprite:public ORGF_Canvas
  public:
  ORGF_Sprite();
  ~ORGF_Sprite();
+ void set_transparent(const bool enabled);
+ bool get_transparent();
  void set_x(const unsigned long int x);
  void set_y(const unsigned long int y);
  unsigned long int get_x();

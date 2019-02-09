@@ -1797,6 +1797,7 @@ void ORGF_Background::draw_background()
 
 ORGF_Sprite::ORGF_Sprite()
 {
+ transparent=true;
  current_x=0;
  current_y=0;
  sprite_width=0;
@@ -1828,7 +1829,25 @@ bool ORGF_Sprite::compare_pixels(const ORGF_Color &first,const ORGF_Color &secon
 
 void ORGF_Sprite::draw_sprite_pixel(const size_t offset,const unsigned long int x,const unsigned long int y)
 {
- if(this->compare_pixels(image[0],image[offset])==true) this->draw_image_pixel(offset,x,y);
+ if (transparent==true)
+ {
+  if(this->compare_pixels(image[0],image[offset])==true) this->draw_image_pixel(offset,x,y);
+ }
+ else
+ {
+  this->draw_image_pixel(offset,x,y);
+ }
+
+}
+
+void ORGF_Sprite::set_transparent(const bool enabled)
+{
+ transparent=enabled;
+}
+
+bool ORGF_Sprite::get_transparent()
+{
+ return transparent;
 }
 
 void ORGF_Sprite::set_x(const unsigned long int x)
@@ -1926,6 +1945,7 @@ void ORGF_Sprite::clone(ORGF_Sprite &target)
  this->set_height(target.get_image_height());
  this->set_frames(target.get_frames());
  this->set_kind(target.get_kind());
+ this->set_transparent(target.get_transparent());
  image=this->create_buffer(target.get_image_width(),target.get_image_width());
  memmove(image,target.get_image(),target.get_length());
 }
