@@ -97,66 +97,43 @@ ORGF_Base::~ORGF_Base()
 
 ORGF_Synchronization::ORGF_Synchronization()
 {
- resolution.wPeriodMin=0;
- resolution.wPeriodMax=0;
- start=0;
- delay=0;
+ timer=NULL;
 }
 
 ORGF_Synchronization::~ORGF_Synchronization()
 {
-
-}
-
-void ORGF_Synchronization::set_timer_resolution()
-{
- if(timeBeginPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
+ if(timer==NULL)
  {
-  ORGF_Show_Error("Can't set timer resolution");
+  CancelWaitableTimer(timer);
+  CloseHandle(timer);
  }
 
-}
-
-void ORGF_Synchronization::reset_timer_resolution()
-{
- if(timeEndPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
- {
-  ORGF_Show_Error("Can't reset timer resolution");
- }
-
-}
-
-void ORGF_Synchronization::pause(const unsigned long int interval)
-{
- this->set_timer_resolution();
- Sleep(interval);
- this->reset_timer_resolution();
 }
 
 void ORGF_Synchronization::create_timer()
 {
- if(timeGetDevCaps(&resolution,sizeof(TIMECAPS))!=MMSYSERR_NOERROR)
+ timer=CreateWaitableTimer(NULL,FALSE,NULL);
+ if (timer==NULL)
  {
-  ORGF_Show_Error("Can't get timer resolution");
+  ORGF_Show_Error("Can't create synchronization timer");
  }
 
 }
 
 void ORGF_Synchronization::set_timer(const unsigned long int interval)
 {
- delay=interval;
- start=timeGetTime();
+ LARGE_INTEGER start;
+ start.QuadPart=0;
+ if(SetWaitableTimer(timer,&start,interval,NULL,NULL,FALSE)==FALSE)
+ {
+  ORGF_Show_Error("Can't set timer");
+ }
+
 }
 
 void ORGF_Synchronization::wait_timer()
 {
- unsigned long int interval;
- interval=timeGetTime()-start;
- if(interval<delay)
- {
-  this->pause(delay-interval);
- }
- start=timeGetTime();
+ WaitForSingleObject(timer,INFINITE);
 }
 
 ORGF_Engine::ORGF_Engine()
