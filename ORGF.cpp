@@ -1094,6 +1094,12 @@ unsigned long long int ORGF_Memory::get_free_virtual()
  return memory.ullAvailVirtual;
 }
 
+unsigned long int ORGF_Memory::get_usage()
+{
+ this->get_status();
+ return memory.dwMemoryLoad;
+}
+
 ORGF_System::ORGF_System()
 {
  srand(time(NULL));
