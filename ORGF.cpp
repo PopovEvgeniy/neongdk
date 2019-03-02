@@ -547,14 +547,20 @@ ORGF_Keyboard::~ORGF_Keyboard()
  if(preversion!=NULL) free(preversion);
 }
 
+unsigned char *ORGF_Keyboard::create_buffer(const char *error)
+{
+ unsigned char *buffer;
+ buffer=(unsigned char*)calloc(ORGF_KEYBOARD,sizeof(unsigned char));
+ if(buffer==NULL)
+ {
+  ORGF_Show_Error(error);
+ }
+ return buffer;
+}
+
 void ORGF_Keyboard::initialize()
 {
- preversion=(unsigned char*)calloc(ORGF_KEYBOARD,sizeof(unsigned char));
- if(preversion==NULL)
- {
-  ORGF_Show_Error("Can't allocate memory for keyboard state buffer");
- }
-
+ preversion=this->create_buffer("Can't allocate memory for keyboard state buffer");
 }
 
 bool ORGF_Keyboard::check_hold(const unsigned char code)

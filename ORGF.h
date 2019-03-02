@@ -257,6 +257,7 @@ class ORGF_Keyboard
 {
  private:
  unsigned char *preversion;
+ unsigned char *create_buffer(const char *error);
  public:
  ORGF_Keyboard();
  ~ORGF_Keyboard();
