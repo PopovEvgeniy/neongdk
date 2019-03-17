@@ -44,32 +44,32 @@ freely, subject to the following restrictions:
 #include <dshow.h>
 #include <mmsystem.h>
 
-#define ORGF_GETSCANCODE(argument) ((argument >> 16)&0x7f)
+#define GETSCANCODE(argument) ((argument >> 16)&0x7f)
 
-#define ORGF_KEYBOARD 256
-#define ORGF_MOUSE 3
+#define KEYBOARD 256
+#define MOUSE 3
 
-#define ORGFKEY_RELEASE 0
-#define ORGFKEY_PRESS 1
+#define KEY_RELEASE 0
+#define KEY_PRESS 1
 
-#define ORGF_MOUSE_LEFT 0
-#define ORGF_MOUSE_RIGHT 1
-#define ORGF_MOUSE_MIDDLE 2
+#define MOUSE_LEFT 0
+#define MOUSE_RIGHT 1
+#define MOUSE_MIDDLE 2
 
 #define JOYSTICK_UPLEFT 31500
 #define JOYSTICK_UPRIGHT 4500
 #define JOYSTICK_DOWNLEFT 22500
 #define JOYSTICK_DOWNRIGHT 13500
 
-enum ORGF_MIRROR_TYPE {ORGF_MIRROR_HORIZONTAL=0,ORGF_MIRROR_VERTICAL=1};
-enum ORGF_BACKGROUND_TYPE {ORGF_NORMAL_BACKGROUND=0,ORGF_HORIZONTAL_BACKGROUND=1,ORGF_VERTICAL_BACKGROUND=2};
-enum ORGF_SPRITE_TYPE {ORGF_SINGE_SPRITE=0,ORGF_HORIZONTAL_STRIP=1,ORGF_VERTICAL_STRIP=2};
-enum ORGF_GAMEPAD_DIRECTION {ORGF_NEUTRAL_DIRECTION=0,ORGF_NEGATIVE_DIRECTION=-1,ORGF_POSITIVE_DIRECTION=1};
-enum ORGF_GAMEPAD_STICKS {ORGF_GAMEPAD_LEFT_STICK=0,ORGF_GAMEPAD_RIGHT_STICK=1};
-enum ORGF_GAMEPAD_DPAD {ORGF_GAMEPAD_NONE=0,ORGF_GAMEPAD_UP=1,ORGF_GAMEPAD_DOWN=2,ORGF_GAMEPAD_LEFT=3,ORGF_GAMEPAD_RIGHT=4,ORGF_GAMEPAD_UPLEFT=5,ORGF_GAMEPAD_UPRIGHT=6,ORGF_GAMEPAD_DOWNLEFT=7,ORGF_GAMEPAD_DOWNRIGHT=8};
-enum ORGF_GAMEPAD_BUTTONS {ORGF_GAMEPAD_BUTTON1=JOY_BUTTON1,ORGF_GAMEPAD_BUTTON2=JOY_BUTTON2,ORGF_GAMEPAD_BUTTON3=JOY_BUTTON3,ORGF_GAMEPAD_BUTTON4=JOY_BUTTON4,ORGF_GAMEPAD_BUTTON5=JOY_BUTTON5,ORGF_GAMEPAD_BUTTON6=JOY_BUTTON6,ORGF_GAMEPAD_BUTTON7=JOY_BUTTON7,ORGF_GAMEPAD_BUTTON8=JOY_BUTTON8,ORGF_GAMEPAD_BUTTON9=JOY_BUTTON9,ORGF_GAMEPAD_BUTTON10=JOY_BUTTON10,ORGF_GAMEPAD_BUTTON11=JOY_BUTTON11,ORGF_GAMEPAD_BUTTON12=JOY_BUTTON12,ORGF_GAMEPAD_BUTTON113=JOY_BUTTON13,ORGF_GAMEPAD_BUTTON14=JOY_BUTTON14,ORGF_GAMEPAD_BUTTON15=JOY_BUTTON15,ORGF_GAMEPAD_BUTTON16=JOY_BUTTON16,ORGF_GAMEPAD_BUTTON17=JOY_BUTTON17,ORGF_GAMEPAD_BUTTON18=JOY_BUTTON18,ORGF_GAMEPAD_BUTTON19=JOY_BUTTON19,ORGF_GAMEPAD_BUTTON20=JOY_BUTTON20,ORGF_GAMEPAD_BUTTON21=JOY_BUTTON21,ORGF_GAMEPAD_BUTTON22=JOY_BUTTON22,ORGF_GAMEPAD_BUTTON23=JOY_BUTTON23,ORGF_GAMEPAD_BUTTON24=JOY_BUTTON24,ORGF_GAMEPAD_BUTTON25=JOY_BUTTON25,ORGF_GAMEPAD_BUTTON26=JOY_BUTTON26,ORGF_GAMEPAD_BUTTON27=JOY_BUTTON27,ORGF_GAMEPAD_BUTTON28=JOY_BUTTON28,ORGF_GAMEPAD_BUTTON29=JOY_BUTTON29,ORGF_GAMEPAD_BUTTON30=JOY_BUTTON30,ORGF_GAMEPAD_BUTTON31=JOY_BUTTON31,ORGF_GAMEPAD_BUTTON32=JOY_BUTTON32};
+enum MIRROR_TYPE {MIRROR_HORIZONTAL=0,MIRROR_VERTICAL=1};
+enum BACKGROUND_TYPE {NORMAL_BACKGROUND=0,HORIZONTAL_BACKGROUND=1,VERTICAL_BACKGROUND=2};
+enum SPRITE_TYPE {SINGLE_SPRITE=0,HORIZONTAL_STRIP=1,VERTICAL_STRIP=2};
+enum GAMEPAD_DIRECTION {GAMEPAD_NEUTRAL_DIRECTION=0,GAMEPAD_NEGATIVE_DIRECTION=-1,GAMEPAD_POSITIVE_DIRECTION=1};
+enum GAMEPAD_STICKS {GAMEPAD_LEFT_STICK=0,GAMEPAD_RIGHT_STICK=1};
+enum GAMEPAD_DPAD {GAMEPAD_NONE=0,GAMEPAD_UP=1,GAMEPAD_DOWN=2,GAMEPAD_LEFT=3,GAMEPAD_RIGHT=4,GAMEPAD_UPLEFT=5,GAMEPAD_UPRIGHT=6,GAMEPAD_DOWNLEFT=7,GAMEPAD_DOWNRIGHT=8};
+enum GAMEPAD_BUTTONS {GAMEPAD_BUTTON1=JOY_BUTTON1,GAMEPAD_BUTTON2=JOY_BUTTON2,GAMEPAD_BUTTON3=JOY_BUTTON3,GAMEPAD_BUTTON4=JOY_BUTTON4,GAMEPAD_BUTTON5=JOY_BUTTON5,GAMEPAD_BUTTON6=JOY_BUTTON6,GAMEPAD_BUTTON7=JOY_BUTTON7,GAMEPAD_BUTTON8=JOY_BUTTON8,GAMEPAD_BUTTON9=JOY_BUTTON9,GAMEPAD_BUTTON10=JOY_BUTTON10,GAMEPAD_BUTTON11=JOY_BUTTON11,GAMEPAD_BUTTON12=JOY_BUTTON12,GAMEPAD_BUTTON113=JOY_BUTTON13,GAMEPAD_BUTTON14=JOY_BUTTON14,GAMEPAD_BUTTON15=JOY_BUTTON15,GAMEPAD_BUTTON16=JOY_BUTTON16,GAMEPAD_BUTTON17=JOY_BUTTON17,GAMEPAD_BUTTON18=JOY_BUTTON18,GAMEPAD_BUTTON19=JOY_BUTTON19,GAMEPAD_BUTTON20=JOY_BUTTON20,GAMEPAD_BUTTON21=JOY_BUTTON21,GAMEPAD_BUTTON22=JOY_BUTTON22,GAMEPAD_BUTTON23=JOY_BUTTON23,GAMEPAD_BUTTON24=JOY_BUTTON24,GAMEPAD_BUTTON25=JOY_BUTTON25,GAMEPAD_BUTTON26=JOY_BUTTON26,GAMEPAD_BUTTON27=JOY_BUTTON27,GAMEPAD_BUTTON28=JOY_BUTTON28,GAMEPAD_BUTTON29=JOY_BUTTON29,GAMEPAD_BUTTON30=JOY_BUTTON30,GAMEPAD_BUTTON31=JOY_BUTTON31,GAMEPAD_BUTTON32=JOY_BUTTON32};
 
-struct ORGF_Color
+struct IMG_Pixel
 {
  unsigned char blue:8;
  unsigned char green:8;
@@ -123,7 +123,7 @@ struct PCX_head
  unsigned char filled[54];
 };
 
-struct ORGF_Box
+struct Collision_Box
 {
  unsigned long int x:32;
  unsigned long int y:32;
@@ -131,17 +131,20 @@ struct ORGF_Box
  unsigned long int height:32;
 };
 
-LRESULT CALLBACK ORGF_Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
-void ORGF_Show_Error(const char *message);
+LRESULT CALLBACK Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
+void Show_Error(const char *message);
 
-class ORGF_Base
+namespace ORGF
+{
+
+class COM_Base
 {
  public:
- ORGF_Base();
- ~ORGF_Base();
+ COM_Base();
+ ~COM_Base();
 };
 
-class ORGF_Synchronization
+class Synchronization
 {
  private:
  HANDLE timer;
@@ -150,11 +153,11 @@ class ORGF_Synchronization
  void set_timer(const unsigned long int interval);
  void wait_timer();
  public:
- ORGF_Synchronization();
- ~ORGF_Synchronization();
+ Synchronization();
+ ~Synchronization();
 };
 
-class ORGF_Engine
+class Engine
 {
  private:
  WNDCLASS window_class;
@@ -169,13 +172,13 @@ class ORGF_Engine
  void capture_mouse();
  bool process_message();
  public:
- ORGF_Engine();
- ~ORGF_Engine();
+ Engine();
+ ~Engine();
  unsigned long int get_width();
  unsigned long int get_height();
 };
 
-class ORGF_Frame
+class Frame
 {
  private:
  size_t pixels;
@@ -191,8 +194,8 @@ class ORGF_Frame
  void create_buffers();
  unsigned int *get_buffer();
  public:
- ORGF_Frame();
- ~ORGF_Frame();
+ Frame();
+ ~Frame();
  void draw_pixel(const unsigned long int x,const unsigned long int y,const unsigned char red,const unsigned char green,const unsigned char blue);
  void clear_screen();
  void save();
@@ -201,7 +204,7 @@ class ORGF_Frame
  unsigned long int get_frame_height();
 };
 
-class ORGF_FPS
+class FPS
 {
  private:
  time_t start;
@@ -210,12 +213,12 @@ class ORGF_FPS
  protected:
  void update_counter();
  public:
- ORGF_FPS();
- ~ORGF_FPS();
+ FPS();
+ ~FPS();
  unsigned long int get_fps();
 };
 
-class ORGF_Display
+class Display
 {
  private:
  DEVMODE display;
@@ -225,11 +228,11 @@ class ORGF_Display
  void check_video_mode();
  void set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height);
  public:
- ORGF_Display();
- ~ORGF_Display();
+ Display();
+ ~Display();
 };
 
-class ORGF_Render:public ORGF_Display, public ORGF_Engine, public ORGF_Frame
+class Render:public Display, public Engine, public Frame
 {
  private:
  BITMAPINFO setting;
@@ -238,11 +241,11 @@ class ORGF_Render:public ORGF_Display, public ORGF_Engine, public ORGF_Frame
  void create_render();
  void refresh();
  public:
- ORGF_Render();
- ~ORGF_Render();
+ Render();
+ ~Render();
 };
 
-class ORGF_Screen:public ORGF_FPS, public ORGF_Synchronization, public ORGF_Render
+class Screen:public FPS, public Synchronization, public Render
 {
  public:
  void initialize();
@@ -250,30 +253,30 @@ class ORGF_Screen:public ORGF_FPS, public ORGF_Synchronization, public ORGF_Rend
  void set_mode(const unsigned long int screen_width,const unsigned long int screen_height);
  bool update();
  bool sync();
- ORGF_Screen* get_handle();
+ Screen* get_handle();
 };
 
-class ORGF_Keyboard
+class Keyboard
 {
  private:
  unsigned char *preversion;
  unsigned char *create_buffer(const char *error);
  public:
- ORGF_Keyboard();
- ~ORGF_Keyboard();
+ Keyboard();
+ ~Keyboard();
  void initialize();
  bool check_hold(const unsigned char code);
  bool check_press(const unsigned char code);
  bool check_release(const unsigned char code);
 };
 
-class ORGF_Mouse
+class Mouse
 {
  private:
- unsigned char preversion[ORGF_MOUSE];
+ unsigned char preversion[MOUSE];
  public:
- ORGF_Mouse();
- ~ORGF_Mouse();
+ Mouse();
+ ~Mouse();
  void show();
  void hide();
  void set_position(const unsigned long int x,const unsigned long int y);
@@ -284,7 +287,7 @@ class ORGF_Mouse
  bool check_release(const unsigned char button);
 };
 
-class ORGF_Gamepad
+class Gamepad
 {
  private:
  JOYINFOEX current;
@@ -294,10 +297,10 @@ class ORGF_Gamepad
  bool read_configuration();
  bool read_state();
  void clear_state();
- bool check_button(const ORGF_GAMEPAD_BUTTONS button,const JOYINFOEX &target);
+ bool check_button(const GAMEPAD_BUTTONS button,const JOYINFOEX &target);
  public:
- ORGF_Gamepad();
- ~ORGF_Gamepad();
+ Gamepad();
+ ~Gamepad();
  unsigned int get_amount();
  unsigned int get_button_amount();
  bool check_connection();
@@ -305,15 +308,15 @@ class ORGF_Gamepad
  unsigned long int get_sticks_amount();
  void set_active(const unsigned int gamepad);
  unsigned int get_active();
- ORGF_GAMEPAD_DPAD get_dpad();
- ORGF_GAMEPAD_DIRECTION get_stick_x(const ORGF_GAMEPAD_STICKS stick);
- ORGF_GAMEPAD_DIRECTION get_stick_y(const ORGF_GAMEPAD_STICKS stick);
- bool check_hold(const ORGF_GAMEPAD_BUTTONS button);
- bool check_press(const ORGF_GAMEPAD_BUTTONS button);
- bool check_release(const ORGF_GAMEPAD_BUTTONS button);
+ GAMEPAD_DPAD get_dpad();
+ GAMEPAD_DIRECTION get_stick_x(const GAMEPAD_STICKS stick);
+ GAMEPAD_DIRECTION get_stick_y(const GAMEPAD_STICKS stick);
+ bool check_hold(const GAMEPAD_BUTTONS button);
+ bool check_press(const GAMEPAD_BUTTONS button);
+ bool check_release(const GAMEPAD_BUTTONS button);
 };
 
-class ORGF_Multimedia:public ORGF_Base
+class Multimedia:public COM_Base
 {
  private:
  IGraphBuilder *loader;
@@ -325,8 +328,8 @@ class ORGF_Multimedia:public ORGF_Base
  bool is_end();
  void rewind();
  public:
- ORGF_Multimedia();
- ~ORGF_Multimedia();
+ Multimedia();
+ ~Multimedia();
  void initialize();
  void load(const char *target);
  bool check_playing();
@@ -334,14 +337,14 @@ class ORGF_Multimedia:public ORGF_Base
  void play();
 };
 
-class ORGF_Memory
+class Memory
 {
  private:
  MEMORYSTATUSEX memory;
  void get_status();
  public:
- ORGF_Memory();
- ~ORGF_Memory();
+ Memory();
+ ~Memory();
  unsigned long long int get_total_physical();
  unsigned long long int get_free_physical();
  unsigned long long int get_total_virtual();
@@ -349,11 +352,11 @@ class ORGF_Memory
  unsigned long int get_usage();
 };
 
-class ORGF_System
+class System
 {
  public:
- ORGF_System();
- ~ORGF_System();
+ System();
+ ~System();
  unsigned long int get_random(const unsigned long int number);
  void quit();
  void run(const char *command);
@@ -361,13 +364,13 @@ class ORGF_System
  void enable_logging(const char *name);
 };
 
-class ORGF_File
+class Binary_File
 {
  private:
  FILE *target;
  public:
- ORGF_File();
- ~ORGF_File();
+ Binary_File();
+ ~Binary_File();
  void open(const char *name);
  void close();
  void set_position(const off_t offset);
@@ -378,34 +381,34 @@ class ORGF_File
  bool check_error();
 };
 
-class ORGF_Timer
+class Timer
 {
  private:
  unsigned long int interval;
  time_t start;
  public:
- ORGF_Timer();
- ~ORGF_Timer();
+ Timer();
+ ~Timer();
  void set_timer(const unsigned long int seconds);
  bool check_timer();
 };
 
-class ORGF_Primitive
+class Primitive
 {
  private:
- ORGF_Color color;
- ORGF_Screen *surface;
+ IMG_Pixel color;
+ Screen *surface;
  public:
- ORGF_Primitive();
- ~ORGF_Primitive();
- void initialize(ORGF_Screen *Screen);
+ Primitive();
+ ~Primitive();
+ void initialize(Screen *Screen);
  void set_color(const unsigned char red,const unsigned char green,const unsigned char blue);
  void draw_line(const unsigned long int x1,const unsigned long int y1,const unsigned long int x2,const unsigned long int y2);
  void draw_rectangle(const unsigned long int x,const unsigned long int y,const unsigned long int width,const unsigned long int height);
  void draw_filled_rectangle(const unsigned long int x,const unsigned long int y,const unsigned long int width,const unsigned long int height);
 };
 
-class ORGF_Image
+class Image
 {
  private:
  unsigned long int width;
@@ -416,8 +419,8 @@ class ORGF_Image
  FILE *open_image(const char *name);
  unsigned long int get_file_size(FILE *target);
  public:
- ORGF_Image();
- ~ORGF_Image();
+ Image();
+ ~Image();
  void load_tga(const char *name);
  void load_pcx(const char *name);
  unsigned long int get_width();
@@ -427,39 +430,39 @@ class ORGF_Image
  void destroy_image();
 };
 
-class ORGF_Canvas
+class Canvas
 {
  private:
  unsigned long int width;
  unsigned long int height;
  unsigned long int frames;
- ORGF_Screen *surface;
+ Screen *surface;
  void clear_buffer();
  protected:
- ORGF_Color *image;
+ IMG_Pixel *image;
  void save();
  void restore();
  void set_width(const unsigned long int image_width);
  void set_height(const unsigned long int image_height);
- ORGF_Color *create_buffer(const unsigned long int image_width,const unsigned long int image_height);
+ IMG_Pixel *create_buffer(const unsigned long int image_width,const unsigned long int image_height);
  void draw_image_pixel(const size_t offset,const unsigned long int x,const unsigned long int y);
  size_t get_offset(const unsigned long int start,const unsigned long int x,const unsigned long int y);
  public:
- ORGF_Canvas();
- ~ORGF_Canvas();
- ORGF_Color *get_image();
+ Canvas();
+ ~Canvas();
+ IMG_Pixel *get_image();
  size_t get_length();
  unsigned long int get_image_width();
  unsigned long int get_image_height();
  void set_frames(const unsigned long int amount);
  unsigned long int get_frames();
- void initialize(ORGF_Screen *Screen);
- void load_image(ORGF_Image &buffer);
- void mirror_image(const ORGF_MIRROR_TYPE kind);
+ void initialize(Screen *Screen);
+ void load_image(Image &buffer);
+ void mirror_image(const MIRROR_TYPE kind);
  void resize_image(const unsigned long int new_width,const unsigned long int new_height);
 };
 
-class ORGF_Background:public ORGF_Canvas
+class Background:public Canvas
 {
  private:
  unsigned long int start;
@@ -467,18 +470,18 @@ class ORGF_Background:public ORGF_Canvas
  unsigned long int background_height;
  unsigned long int frame;
  unsigned long int current;
- ORGF_BACKGROUND_TYPE current_kind;
+ BACKGROUND_TYPE current_kind;
  void draw_background_pixel(const unsigned long int x,const unsigned long int y);
  void slow_draw_background();
  public:
- ORGF_Background();
- ~ORGF_Background();
- void set_kind(ORGF_BACKGROUND_TYPE kind);
+ Background();
+ ~Background();
+ void set_kind(BACKGROUND_TYPE kind);
  void set_target(const unsigned long int target);
  void draw_background();
 };
 
-class ORGF_Sprite:public ORGF_Canvas
+class Sprite:public Canvas
 {
  private:
  bool transparent;
@@ -488,12 +491,12 @@ class ORGF_Sprite:public ORGF_Canvas
  unsigned long int sprite_height;
  unsigned long int frame;
  unsigned long int start;
- ORGF_SPRITE_TYPE current_kind;
- bool compare_pixels(const ORGF_Color &first,const ORGF_Color &second);
+ SPRITE_TYPE current_kind;
+ bool compare_pixels(const IMG_Pixel &first,const IMG_Pixel &second);
  void draw_sprite_pixel(const size_t offset,const unsigned long int x,const unsigned long int y);
  public:
- ORGF_Sprite();
- ~ORGF_Sprite();
+ Sprite();
+ ~Sprite();
  void set_transparent(const bool enabled);
  bool get_transparent();
  void set_x(const unsigned long int x);
@@ -502,36 +505,38 @@ class ORGF_Sprite:public ORGF_Canvas
  unsigned long int get_y();
  unsigned long int get_width();
  unsigned long int get_height();
- ORGF_Sprite* get_handle();
- ORGF_Box get_box();
- void set_kind(const ORGF_SPRITE_TYPE kind);
- ORGF_SPRITE_TYPE get_kind();
+ Sprite* get_handle();
+ Collision_Box get_box();
+ void set_kind(const SPRITE_TYPE kind);
+ SPRITE_TYPE get_kind();
  void set_target(const unsigned long int target);
  void set_position(const unsigned long int x,const unsigned long int y);
- void clone(ORGF_Sprite &target);
+ void clone(Sprite &target);
  void draw_sprite();
 };
 
-class ORGF_Text
+class Text
 {
  private:
  unsigned long int current_x;
  unsigned long int current_y;
  unsigned long int step_x;
- ORGF_Sprite *font;
+ Sprite *font;
  void draw_character(const char target);
  public:
- ORGF_Text();
- ~ORGF_Text();
+ Text();
+ ~Text();
  void set_position(const unsigned long int x,const unsigned long int y);
- void load_font(ORGF_Sprite *target);
+ void load_font(Sprite *target);
  void draw_text(const char *text);
 };
 
-class ORGF_Collision
+class Collision
 {
  public:
- bool check_horizontal_collision(const ORGF_Box &first,const ORGF_Box &second);
- bool check_vertical_collision(const ORGF_Box &first,const ORGF_Box &second);
- bool check_collision(const ORGF_Box &first,const ORGF_Box &second);
+ bool check_horizontal_collision(const Collision_Box &first,const Collision_Box &second);
+ bool check_vertical_collision(const Collision_Box &first,const Collision_Box &second);
+ bool check_collision(const Collision_Box &first,const Collision_Box &second);
+};
+
 };
