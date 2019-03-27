@@ -299,6 +299,21 @@ void Frame::set_size(const unsigned long int surface_width,const unsigned long i
  frame_height=surface_height;
 }
 
+void Frame::set_size(const SURFACE surface)
+{
+ if(surface==SURFACE_SMALL)
+ {
+  frame_width=256;
+  frame_height=256;
+ }
+ if(surface==SURFACE_LARGE)
+ {
+  frame_width=512;
+  frame_height=512;
+ }
+
+}
+
 unsigned int *Frame::create_buffer(const char *error)
 {
  unsigned int *target;
@@ -510,6 +525,12 @@ void Screen::initialize()
 void Screen::initialize(const unsigned long int surface_width,const unsigned long int surface_height)
 {
  this->set_size(surface_width,surface_height);
+ this->initialize();
+}
+
+void Screen::initialize(const SURFACE surface)
+{
+ this->set_size(surface);
  this->initialize();
 }
 

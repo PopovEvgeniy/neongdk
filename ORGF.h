@@ -64,6 +64,7 @@ freely, subject to the following restrictions:
 enum MIRROR_TYPE {MIRROR_HORIZONTAL=0,MIRROR_VERTICAL=1};
 enum BACKGROUND_TYPE {NORMAL_BACKGROUND=0,HORIZONTAL_BACKGROUND=1,VERTICAL_BACKGROUND=2};
 enum SPRITE_TYPE {SINGLE_SPRITE=0,HORIZONTAL_STRIP=1,VERTICAL_STRIP=2};
+enum SURFACE {SURFACE_SMALL=0,SURFACE_LARGE=1};
 enum GAMEPAD_DIRECTION {GAMEPAD_NEUTRAL_DIRECTION=0,GAMEPAD_NEGATIVE_DIRECTION=-1,GAMEPAD_POSITIVE_DIRECTION=1};
 enum GAMEPAD_STICKS {GAMEPAD_LEFT_STICK=0,GAMEPAD_RIGHT_STICK=1};
 enum GAMEPAD_DPAD {GAMEPAD_NONE=0,GAMEPAD_UP=1,GAMEPAD_DOWN=2,GAMEPAD_LEFT=3,GAMEPAD_RIGHT=4,GAMEPAD_UPLEFT=5,GAMEPAD_UPRIGHT=6,GAMEPAD_DOWNLEFT=7,GAMEPAD_DOWNRIGHT=8};
@@ -190,6 +191,7 @@ class Frame
  size_t get_offset(const unsigned long int x,const unsigned long int y);
  protected:
  void set_size(const unsigned long int surface_width,const unsigned long int surface_height);
+ void set_size(const SURFACE surface);
  unsigned int *create_buffer(const char *error);
  void create_buffers();
  unsigned int *get_buffer();
@@ -250,6 +252,7 @@ class Screen:public FPS, public Synchronization, public Render
  public:
  void initialize();
  void initialize(const unsigned long int surface_width,const unsigned long int surface_height);
+ void initialize(const SURFACE surface);
  void set_mode(const unsigned long int screen_width,const unsigned long int screen_height);
  bool update();
  bool sync();
