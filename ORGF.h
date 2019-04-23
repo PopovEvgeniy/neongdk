@@ -229,9 +229,11 @@ class Display
  protected:
  void check_video_mode();
  void set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height);
+ void set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth);
  public:
  Display();
  ~Display();
+ unsigned long int get_color();
 };
 
 class Render:public Display, public Engine, public Frame
@@ -254,6 +256,7 @@ class Screen:public FPS, public Synchronization, public Render
  void initialize(const unsigned long int surface_width,const unsigned long int surface_height);
  void initialize(const SURFACE surface);
  void set_mode(const unsigned long int screen_width,const unsigned long int screen_height);
+ void set_mode(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth);
  bool update();
  bool sync();
  Screen* get_handle();
