@@ -457,14 +457,6 @@ void Display::check_video_mode()
 
 }
 
-void Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height)
-{
- this->get_video_mode();
- display.dmPelsWidth=screen_width;
- display.dmPelsHeight=screen_height;
- this->set_video_mode();
-}
-
 void Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth)
 {
  this->get_video_mode();
@@ -472,6 +464,11 @@ void Display::set_display_mode(const unsigned long int screen_width,const unsign
  display.dmPelsWidth=screen_width;
  display.dmPelsHeight=screen_height;
  this->set_video_mode();
+}
+
+void Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height)
+{
+ this->set_display_mode(screen_width,screen_height,display.dmBitsPerPel);
 }
 
 unsigned long int Display::get_color()
