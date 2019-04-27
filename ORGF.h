@@ -167,6 +167,7 @@ class Engine
  unsigned long int height;
  protected:
  HWND get_window();
+ HDC get_context();
  void prepare_engine();
  void create_window();
  void destroy_window();

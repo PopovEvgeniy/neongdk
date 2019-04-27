@@ -166,6 +166,11 @@ HWND Engine::get_window()
  return window;
 }
 
+HDC Engine::get_context()
+{
+ return GetDC(window);
+}
+
 void Engine::prepare_engine()
 {
  window_class.hInstance=GetModuleHandle(NULL);
@@ -506,7 +511,7 @@ void Render::create_render()
 void Render::refresh()
 {
  HDC context;
- context=GetDC(this->get_window());
+ context=this->get_context();
  if(context==NULL)
  {
   Show_Error("Can't get window context");
