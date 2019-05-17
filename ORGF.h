@@ -301,6 +301,7 @@ class Gamepad
  JOYINFOEX preversion;
  JOYCAPS configuration;
  unsigned int active;
+ unsigned int max_amount;
  bool read_configuration();
  bool read_state();
  void clear_state();
@@ -310,10 +311,12 @@ class Gamepad
  ~Gamepad();
  unsigned int get_amount();
  unsigned int get_button_amount();
+ unsigned int get_last_index();
  bool check_connection();
  void update();
  unsigned long int get_sticks_amount();
  void set_active(const unsigned int gamepad);
+ unsigned int get_max_amount();
  unsigned int get_active();
  GAMEPAD_DPAD get_dpad();
  GAMEPAD_DIRECTION get_stick_x(const GAMEPAD_STICKS stick);
