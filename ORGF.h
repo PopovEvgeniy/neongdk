@@ -337,6 +337,10 @@ class Multimedia:public COM_Base
  void open(const wchar_t *target);
  bool is_end();
  void rewind();
+ void create_loader();
+ void create_player();
+ void create_controler();
+ void create_video_player();
  public:
  Multimedia();
  ~Multimedia();
@@ -381,7 +385,8 @@ class Binary_File
  public:
  Binary_File();
  ~Binary_File();
- void open(const char *name);
+ void open_read(const char *name);
+ void open_write(const char *name);
  void close();
  void set_position(const long int offset);
  long int get_position();
