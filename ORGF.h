@@ -382,6 +382,7 @@ class Binary_File
 {
  private:
  FILE *target;
+ void open(const char *name,const char *mode);
  public:
  Binary_File();
  ~Binary_File();
