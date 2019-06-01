@@ -462,23 +462,16 @@ void Display::check_video_mode()
 
 }
 
-void Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth)
-{
- this->get_video_mode();
- if(depth>=16) display.dmBitsPerPel=depth;
- display.dmPelsWidth=screen_width;
- display.dmPelsHeight=screen_height;
- this->set_video_mode();
-}
-
 void Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height)
 {
- this->set_display_mode(screen_width,screen_height,display.dmBitsPerPel);
-}
+ this->get_video_mode();
+ if((display.dmPelsWidth!=screen_width)||(display.dmPelsHeight!=screen_height))
+ {
+  display.dmPelsWidth=screen_width;
+  display.dmPelsHeight=screen_height;
+  this->set_video_mode();
+ }
 
-unsigned long int Display::get_color()
-{
- return display.dmBitsPerPel;
 }
 
 Render::Render()
@@ -550,13 +543,6 @@ void Screen::set_mode(const unsigned long int screen_width,const unsigned long i
 {
  this->destroy_window();
  this->set_display_mode(screen_width,screen_height);
- this->create_render();
-}
-
-void Screen::set_mode(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth)
-{
- this->destroy_window();
- this->set_display_mode(screen_width,screen_height,depth);
  this->create_render();
 }
 
