@@ -213,11 +213,6 @@ void Engine::create_window()
  SetFocus(window);
 }
 
-void Engine::destroy_window()
-{
- if(window!=NULL) CloseWindow(window);
-}
-
 void Engine::capture_mouse()
 {
  RECT border;
@@ -333,15 +328,8 @@ unsigned int *Frame::create_buffer(const char *error)
 
 void Frame::create_buffers()
 {
- if (buffer==NULL)
- {
-  buffer=this->create_buffer("Can't allocate memory for render buffer");
- }
- if (shadow==NULL)
- {
-  shadow=this->create_buffer("Can't allocate memory for shadow buffer");
- }
-
+ buffer=this->create_buffer("Can't allocate memory for render buffer");
+ shadow=this->create_buffer("Can't allocate memory for shadow buffer");
 }
 
 unsigned int *Frame::get_buffer()
@@ -449,29 +437,6 @@ void Display::set_video_mode()
 
 }
 
-void Display::set_display_setting(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth)
-{
- if (depth<16)
- {
-  display.dmBitsPerPel=16;
- }
- else
- {
-  display.dmBitsPerPel=depth;
- }
- display.dmPelsWidth=screen_width;
- display.dmPelsHeight=screen_height;
-}
-
-bool Display::check_display_setting(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth)
-{
- bool result;
- result=false;
- if (display.dmBitsPerPel!=depth) result=true;
- if ((display.dmPelsWidth!=screen_width)||(display.dmPelsHeight=screen_height)) result=true;
- return result;
-}
-
 void Display::get_video_mode()
 {
  if (EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&display)==FALSE)
@@ -490,22 +455,6 @@ void Display::check_video_mode()
   this->set_video_mode();
  }
 
-}
-
-void Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth)
-{
- this->get_video_mode();
- if (this->check_display_setting(screen_width,screen_height,depth)==true)
- {
-  this->set_display_setting(screen_width,screen_height,depth);
-  this->set_video_mode();
- }
-
-}
-
-unsigned long int Display::get_color()
-{
- return display.dmBitsPerPel;
 }
 
 Render::Render()
@@ -571,18 +520,6 @@ void Screen::initialize(const SURFACE surface)
 {
  this->set_size(surface);
  this->initialize();
-}
-
-void Screen::set_mode(const unsigned long int screen_width,const unsigned long int screen_height,const unsigned long int depth)
-{
- this->destroy_window();
- this->set_display_mode(screen_width,screen_height,depth);
- this->create_render();
-}
-
-void Screen::set_mode(const unsigned long int screen_width,const unsigned long int screen_height)
-{
- this->set_mode(screen_width,screen_height,this->get_color());
 }
 
 bool Screen::update()
