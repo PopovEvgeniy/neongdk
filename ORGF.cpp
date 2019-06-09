@@ -1694,7 +1694,6 @@ void Canvas::load_image(Image &buffer)
  this->clear_buffer();
  image=this->create_buffer(width,height);
  memmove(image,buffer.get_data(),buffer.get_data_length());
- buffer.destroy_image();
 }
 
 void Canvas::mirror_image(const MIRROR_TYPE kind)
@@ -2091,7 +2090,6 @@ void Tileset::load_tileset(Image &buffer,const unsigned long int row_amount,cons
  this->clear_buffer();
  image=this->create_buffer(width,height);
  memmove(image,buffer.get_data(),buffer.get_data_length());
- buffer.destroy_image();
 }
 
 Text::Text()
