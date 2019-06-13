@@ -1800,7 +1800,17 @@ void Background::slow_draw_background()
 
 }
 
-void Background::set_kind(BACKGROUND_TYPE kind)
+unsigned long int Background::get_background_width()
+{
+ return background_width;
+}
+
+unsigned long int Background::get_background_height()
+{
+ return background_height;
+}
+
+void Background::set_kind(const BACKGROUND_TYPE kind)
 {
  switch(kind)
  {
@@ -1825,7 +1835,7 @@ void Background::set_kind(BACKGROUND_TYPE kind)
 
 void Background::set_target(const unsigned long int target)
 {
- if((target>0)&&(target<=this->get_frames()))
+ if(target<=this->get_frames())
  {
   frame=target;
   this->set_kind(current_kind);
@@ -1978,7 +1988,7 @@ SPRITE_TYPE Sprite::get_kind()
 
 void Sprite::set_target(const unsigned long int target)
 {
- if((target>0)&&(target<=this->get_frames()))
+ if(target<=this->get_frames())
  {
   frame=target;
   this->set_kind(current_kind);
