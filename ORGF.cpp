@@ -229,9 +229,9 @@ void Engine::capture_mouse()
 
 bool Engine::process_message()
 {
- bool quit;
+ bool run;
  MSG Message;
- quit=false;
+ run=true;
  while(PeekMessage(&Message,window,0,0,PM_NOREMOVE)==TRUE)
  {
   if(GetMessage(&Message,window,0,0)==TRUE)
@@ -241,12 +241,12 @@ bool Engine::process_message()
   }
   else
   {
-   quit=true;
+   run=false;
    break;
   }
 
  }
- return quit;
+ return run;
 }
 
 unsigned long int Engine::get_width()
@@ -457,6 +457,11 @@ void Display::check_video_mode()
 
 }
 
+unsigned long int Display::get_color()
+{
+ return display.dmBitsPerPel;
+}
+
 Render::Render()
 {
  memset(&setting,0,sizeof(BITMAPINFO));
@@ -531,10 +536,10 @@ bool Screen::update()
 
 bool Screen::sync()
 {
- bool quit;
- quit=this->update();
+ bool run;
+ run=this->update();
  this->wait_timer();
- return quit;
+ return run;
 }
 
 Screen* Screen::get_handle()

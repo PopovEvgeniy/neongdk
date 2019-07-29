@@ -231,6 +231,7 @@ class Display
  public:
  Display();
  ~Display();
+ unsigned long int get_color();
 };
 
 class Render:public Display, public Engine, public Frame
