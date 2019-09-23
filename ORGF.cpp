@@ -69,14 +69,14 @@ LRESULT CALLBACK Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM l
  return DefWindowProc(window,Message,wParam,lParam);
 }
 
-void Show_Error(const char *message)
+namespace ORGF
+{
+
+void Halt(const char *message)
 {
  puts(message);
  exit(EXIT_FAILURE);
 }
-
-namespace ORGF
-{
 
  COM_Base::COM_Base()
 {
@@ -86,7 +86,7 @@ namespace ORGF
  {
   if(status!=S_FALSE)
   {
-   Show_Error("Can't initialize COM");
+   Halt("Can't initialize COM");
   }
 
  }
@@ -118,7 +118,7 @@ void Synchronization::create_timer()
  timer=CreateWaitableTimer(NULL,FALSE,NULL);
  if (timer==NULL)
  {
-  Show_Error("Can't create synchronization timer");
+  Halt("Can't create synchronization timer");
  }
 
 }
@@ -129,7 +129,7 @@ void Synchronization::set_timer(const unsigned long int interval)
  start.QuadPart=0;
  if(SetWaitableTimer(timer,&start,interval,NULL,NULL,FALSE)==FALSE)
  {
-  Show_Error("Can't set timer");
+  Halt("Can't set timer");
  }
 
 }
@@ -176,26 +176,26 @@ void Engine::prepare_engine()
  window_class.hInstance=GetModuleHandle(NULL);
  if(window_class.hInstance==NULL)
  {
-  Show_Error("Can't get the application instance");
+  Halt("Can't get the application instance");
  }
  window_class.hbrBackground=(HBRUSH)GetStockObject(BLACK_BRUSH);
  if (window_class.hbrBackground==NULL)
  {
-  Show_Error("Can't set background color");
+  Halt("Can't set background color");
  }
  window_class.hIcon=LoadIcon(NULL,IDI_APPLICATION);
  if (window_class.hIcon==NULL)
  {
-  Show_Error("Can't load the standart program icon");
+  Halt("Can't load the standart program icon");
  }
  window_class.hCursor=LoadCursor(NULL,IDC_ARROW);
  if (window_class.hCursor==NULL)
  {
-  Show_Error("Can't load the standart cursor");
+  Halt("Can't load the standart cursor");
  }
  if (!RegisterClass(&window_class))
  {
-  Show_Error("Can't register window class");
+  Halt("Can't register window class");
  }
 
 }
@@ -207,7 +207,7 @@ void Engine::create_window()
  window=CreateWindow(window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,width,height,NULL,NULL,window_class.hInstance,NULL);
  if (window==NULL)
  {
-  Show_Error("Can't create window");
+  Halt("Can't create window");
  }
  EnableWindow(window,TRUE);
  SetFocus(window);
@@ -218,11 +218,11 @@ void Engine::capture_mouse()
  RECT border;
  if(GetClientRect(window,&border)==FALSE)
  {
-  Show_Error("Can't capture window");
+  Halt("Can't capture window");
  }
  if(ClipCursor(&border)==FALSE)
  {
-  Show_Error("Can't capture cursor");
+  Halt("Can't capture cursor");
  }
 
 }
@@ -321,7 +321,7 @@ unsigned int *Frame::create_buffer(const char *error)
  target=(unsigned int*)calloc(pixels,sizeof(unsigned int));
  if(target==NULL)
  {
-  Show_Error(error);
+  Halt(error);
  }
  return target;
 }
@@ -432,7 +432,7 @@ void Display::set_video_mode()
 {
  if (ChangeDisplaySettings(&display,CDS_FULLSCREEN)!=DISP_CHANGE_SUCCESSFUL)
  {
-  Show_Error("Can't change video mode");
+  Halt("Can't change video mode");
  }
 
 }
@@ -441,7 +441,7 @@ void Display::get_video_mode()
 {
  if (EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&display)==FALSE)
  {
-  Show_Error("Can't get display setting");
+  Halt("Can't get display setting");
  }
 
 }
@@ -495,7 +495,7 @@ void Render::refresh()
  context=this->get_context();
  if(context==NULL)
  {
-  Show_Error("Can't get window context");
+  Halt("Can't get window context");
  }
  else
  {
@@ -563,7 +563,7 @@ unsigned char *Keyboard::create_buffer(const char *error)
  buffer=(unsigned char*)calloc(KEYBOARD,sizeof(unsigned char));
  if(buffer==NULL)
  {
-  Show_Error(error);
+  Halt(error);
  }
  return buffer;
 }
@@ -630,7 +630,7 @@ void Mouse::set_position(const unsigned long int x,const unsigned long int y)
 {
  if(SetCursorPos(x,y)==FALSE)
  {
-  Show_Error("Can't set the mouse cursor position");
+  Halt("Can't set the mouse cursor position");
  }
 
 }
@@ -640,7 +640,7 @@ unsigned long int Mouse::get_x()
  POINT position;
  if(GetCursorPos(&position)==FALSE)
  {
-  Show_Error("Can't get the mouse cursor position");
+  Halt("Can't get the mouse cursor position");
  }
  return position.x;
 }
@@ -650,7 +650,7 @@ unsigned long int Mouse::get_y()
  POINT position;
  if(GetCursorPos(&position)==FALSE)
  {
-  Show_Error("Can't get the mouse cursor position");
+  Halt("Can't get the mouse cursor position");
  }
  return position.y;
 }
@@ -973,7 +973,7 @@ wchar_t *Multimedia::convert_file_name(const char *target)
  name=(wchar_t*)calloc(length+1,sizeof(wchar_t));
  if(name==NULL)
  {
-  Show_Error("Can't allocate memory");
+  Halt("Can't allocate memory");
  }
  for(index=0;index<length;++index) name[index]=btowc(target[index]);
  return name;
@@ -984,7 +984,7 @@ void Multimedia::open(const wchar_t *target)
  player->StopWhenReady();
  if(loader->RenderFile(target,NULL)!=S_OK)
  {
-  Show_Error("Can't load a multimedia file");
+  Halt("Can't load a multimedia file");
  }
  video->put_FullScreenMode(OATRUE);
 }
@@ -1000,7 +1000,7 @@ bool Multimedia::is_end()
  }
  else
  {
-  Show_Error("Can't get the current and the end position");
+  Halt("Can't get the current and the end position");
  }
  return result;
 }
@@ -1011,7 +1011,7 @@ void Multimedia::rewind()
  position=0;
  if(controler->SetPositions(&position,AM_SEEKING_AbsolutePositioning,NULL,AM_SEEKING_NoPositioning)!=S_OK)
  {
-  Show_Error("Can't set start position");
+  Halt("Can't set start position");
  }
 
 }
@@ -1020,7 +1020,7 @@ void Multimedia::create_loader()
 {
  if(CoCreateInstance(CLSID_FilterGraph,NULL,CLSCTX_INPROC_SERVER,IID_IGraphBuilder,(void**)&loader)!=S_OK)
  {
-  Show_Error("Can't create a multimedia loader");
+  Halt("Can't create a multimedia loader");
  }
 
 }
@@ -1029,7 +1029,7 @@ void Multimedia::create_player()
 {
  if(loader->QueryInterface(IID_IMediaControl,(void**)&player)!=S_OK)
  {
-  Show_Error("Can't create a multimedia player");
+  Halt("Can't create a multimedia player");
  }
 
 }
@@ -1038,7 +1038,7 @@ void Multimedia::create_controler()
 {
  if(loader->QueryInterface(IID_IMediaSeeking,(void**)&controler)!=S_OK)
  {
-  Show_Error("Can't create a player controler");
+  Halt("Can't create a player controler");
  }
 
 }
@@ -1047,7 +1047,7 @@ void Multimedia::create_video_player()
 {
  if(loader->QueryInterface(IID_IVideoWindow,(void**)&video)!=S_OK)
  {
-  Show_Error("Can't create a video player");
+  Halt("Can't create a video player");
  }
 
 }
@@ -1075,7 +1075,7 @@ bool Multimedia::check_playing()
  result=false;
  if(player->GetState(INFINITE,&state)==E_FAIL)
  {
-  Show_Error("Can't get the multimedia state");
+  Halt("Can't get the multimedia state");
  }
  else
  {
@@ -1115,7 +1115,7 @@ void Memory::get_status()
 {
  if(GlobalMemoryStatusEx(&memory)==FALSE)
  {
-  Show_Error("Can't get the memory status");
+  Halt("Can't get the memory status");
  }
 
 }
@@ -1184,7 +1184,7 @@ void System::enable_logging(const char *name)
 {
  if(freopen(name,"wt",stdout)==NULL)
  {
-  Show_Error("Can't create log file");
+  Halt("Can't create log file");
  }
 
 }
@@ -1209,7 +1209,7 @@ void Binary_File::open(const char *name,const char *mode)
  target=fopen(name,mode);
  if(target==NULL)
  {
-  Show_Error("Can't open the binary file");
+  Halt("Can't open the binary file");
  }
 
 }
@@ -1410,7 +1410,7 @@ unsigned char *Image::create_buffer(const size_t length)
  result=(unsigned char*)calloc(length,sizeof(unsigned char));
  if(result==NULL)
  {
-  Show_Error("Can't allocate memory for image buffer");
+  Halt("Can't allocate memory for image buffer");
  }
  return result;
 }
@@ -1442,13 +1442,13 @@ void Image::load_tga(const char *name)
  target.read(&image,10);
  if((head.color_map!=0)||(image.color!=24))
  {
-  Show_Error("Invalid image format");
+  Halt("Invalid image format");
  }
  if(head.type!=2)
  {
   if(head.type!=10)
   {
-   Show_Error("Invalid image format");
+   Halt("Invalid image format");
   }
 
  }
@@ -1508,7 +1508,7 @@ void Image::load_pcx(const char *name)
  target.read(&head,128);
  if((head.color*head.planes!=24)&&(head.compress!=1))
  {
-  Show_Error("Incorrect image format");
+  Halt("Incorrect image format");
  }
  width=head.max_x-head.min_x+1;
  height=head.max_y-head.min_y+1;
@@ -1607,7 +1607,7 @@ IMG_Pixel *Surface::create_buffer(const unsigned long int image_width,const unsi
  result=(IMG_Pixel*)calloc(length,3);
  if(result==NULL)
  {
-  Show_Error("Can't allocate memory for image buffer");
+  Halt("Can't allocate memory for image buffer");
  }
  return result;
 }

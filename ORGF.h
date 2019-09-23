@@ -133,10 +133,11 @@ struct Collision_Box
 };
 
 LRESULT CALLBACK Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
-void Show_Error(const char *message);
 
 namespace ORGF
 {
+
+void Halt(const char *message);
 
 class COM_Base
 {
