@@ -175,6 +175,7 @@ class Engine
  HWND get_window();
  HDC get_context();
  void prepare_engine();
+ void destroy_window();
  void create_window();
  void capture_mouse();
  bool process_message();
@@ -234,6 +235,7 @@ class Display
  void set_video_mode();
  protected:
  void check_video_mode();
+ void set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height);
  public:
  Display();
  ~Display();
@@ -259,6 +261,7 @@ class Screen:public FPS, public Synchronization, public Render
  void initialize();
  void initialize(const unsigned long int surface_width,const unsigned long int surface_height);
  void initialize(const SURFACE surface);
+ void set_mode(const unsigned long int screen_width,const unsigned long int screen_height);
  bool update();
  bool sync();
  Screen* get_handle();

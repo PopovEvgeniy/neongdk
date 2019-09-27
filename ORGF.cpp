@@ -229,6 +229,11 @@ void Engine::prepare_engine()
  this->register_window_class();
 }
 
+void Engine::destroy_window()
+{
+ if(window!=NULL) CloseWindow(window);
+}
+
 void Engine::create_window()
 {
  width=GetSystemMetrics(SM_CXSCREEN);
@@ -486,6 +491,18 @@ void Display::check_video_mode()
 
 }
 
+void Display::set_display_mode(const unsigned long int screen_width,const unsigned long int screen_height)
+{
+ this->get_video_mode();
+ if((display.dmPelsWidth!=screen_width)||(display.dmPelsHeight!=screen_height))
+ {
+  display.dmPelsWidth=screen_width;
+  display.dmPelsHeight=screen_height;
+  this->set_video_mode();
+ }
+
+}
+
 unsigned long int Display::get_color()
 {
  return display.dmBitsPerPel;
@@ -554,6 +571,13 @@ void Screen::initialize(const SURFACE surface)
 {
  this->set_size(surface);
  this->initialize();
+}
+
+void Screen::set_mode(const unsigned long int screen_width,const unsigned long int screen_height)
+{
+ this->destroy_window();
+ this->set_display_mode(screen_width,screen_height);
+ this->create_render();
 }
 
 bool Screen::update()
