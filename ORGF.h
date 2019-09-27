@@ -164,8 +164,6 @@ class Engine
  private:
  WNDCLASS window_class;
  HWND window;
- unsigned long int width;
- unsigned long int height;
  void get_instance();
  void set_backgrond_color();
  void load_icon();
@@ -182,8 +180,6 @@ class Engine
  public:
  Engine();
  ~Engine();
- unsigned long int get_width();
- unsigned long int get_height();
 };
 
 class Frame
@@ -240,6 +236,8 @@ class Display
  Display();
  ~Display();
  unsigned long int get_color();
+ unsigned long int get_width();
+ unsigned long int get_height();
 };
 
 class Render:public Display, public Engine, public Frame
