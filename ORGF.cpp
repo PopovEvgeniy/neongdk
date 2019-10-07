@@ -229,7 +229,12 @@ void Engine::prepare_engine()
 
 void Engine::destroy_window()
 {
- if(window!=NULL) CloseWindow(window);
+ if(window!=NULL)
+ {
+  CloseWindow(window);
+  window=NULL;
+ }
+
 }
 
 void Engine::create_window()
