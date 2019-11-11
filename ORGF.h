@@ -190,12 +190,12 @@ class Frame
  unsigned long int frame_height;
  unsigned int *buffer;
  unsigned int *shadow;
+ unsigned int *create_buffer(const char *error);
  unsigned int get_rgb(const unsigned int red,const unsigned int green,const unsigned int blue);
  size_t get_offset(const unsigned long int x,const unsigned long int y);
  protected:
  void set_size(const unsigned long int surface_width,const unsigned long int surface_height);
  void set_size(const SURFACE surface);
- unsigned int *create_buffer(const char *error);
  void create_buffers();
  unsigned int *get_buffer();
  public:
