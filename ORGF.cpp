@@ -142,7 +142,7 @@ void Synchronization::wait_timer()
 Engine::Engine()
 {
  window_class.lpszClassName=TEXT("ORGF");
- window_class.style=CS_HREDRAW|CS_VREDRAW|CS_SAVEBITS;
+ window_class.style=CS_HREDRAW|CS_VREDRAW;
  window_class.lpfnWndProc=(WNDPROC)Process_Message;
  window_class.hInstance=NULL;
  window_class.hbrBackground=NULL;
