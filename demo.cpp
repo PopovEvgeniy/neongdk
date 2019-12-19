@@ -2,23 +2,23 @@
 
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
-#include "ORGF.h"
+#include "neongdk.h"
 
 int main(void)
 {
  long int x,y,screen_width,screen_height;
  char perfomance[8];
- ORGF::Timer timer;
- ORGF::Screen screen;
- ORGF::System System;
- ORGF::Keyboard keyboard;
- ORGF::Gamepad gamepad;
- ORGF::Mouse mouse;
- ORGF::Multimedia media;
- ORGF::Image image;
- ORGF::Background space;
- ORGF::Sprite ship,font;
- ORGF::Text text;
+ NEONGDK::Timer timer;
+ NEONGDK::Screen screen;
+ NEONGDK::System System;
+ NEONGDK::Keyboard keyboard;
+ NEONGDK::Gamepad gamepad;
+ NEONGDK::Mouse mouse;
+ NEONGDK::Multimedia media;
+ NEONGDK::Image image;
+ NEONGDK::Background space;
+ NEONGDK::Sprite ship,font;
+ NEONGDK::Text text;
  System.enable_logging("log.txt");
  keyboard.initialize();
  space.initialize(screen.get_handle());

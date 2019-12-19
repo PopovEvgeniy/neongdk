@@ -22,7 +22,7 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include "ORGF.h"
+#include "neongdk.h"
 
 unsigned char Keys[KEYBOARD];
 unsigned char Buttons[MOUSE];
@@ -69,7 +69,7 @@ LRESULT CALLBACK Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM l
  return DefWindowProc(window,Message,wParam,lParam);
 }
 
-namespace ORGF
+namespace NEONGDK
 {
 
 void Halt(const char *message)
@@ -156,6 +156,7 @@ Engine::Engine()
 Engine::~Engine()
 {
  if(window!=NULL) CloseWindow(window);
+ if(window_class.hbrBackground!=NULL) DeleteObject(window_class.hbrBackground);
  UnregisterClass(window_class.lpszClassName,window_class.hInstance);
 }
 
@@ -171,7 +172,7 @@ void Engine::get_instance()
 
 void Engine::set_backgrond_color()
 {
- window_class.hbrBackground=(HBRUSH)GetStockObject(BLACK_BRUSH);
+ window_class.hbrBackground=CreateSolidBrush(RGB(0,0,0));
  if (window_class.hbrBackground==NULL)
  {
   Halt("Can't set background color");

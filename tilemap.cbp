@@ -41,8 +41,8 @@
 			<Add library="strmiids" />
 			<Add library="winmm" />
 		</Linker>
-		<Unit filename="ORGF.cpp" />
-		<Unit filename="ORGF.h" />
+		<Unit filename="neongdk.cpp" />
+		<Unit filename="neongdk.h" />
 		<Unit filename="tilemap.cpp" />
 		<Extensions>
 			<code_completion />

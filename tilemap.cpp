@@ -2,7 +2,7 @@
 
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
-#include "ORGF.h"
+#include "neongdk.h"
 
 #define MAP_WIDTH 16
 #define MAP_HEIGHT 16
@@ -10,7 +10,7 @@
 unsigned char MAP_ROWS[MAP_WIDTH]={1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 unsigned char MAP_COLUMNS[MAP_HEIGHT]={2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
 
-ORGF::Tileset tilemap;
+NEONGDK::Tileset tilemap;
 
 void draw_map()
 {
@@ -34,11 +34,11 @@ void draw_map()
 
 int main(void)
 {
- ORGF::Screen screen;
- ORGF::Sprite font;
- ORGF::Text text;
- ORGF::Image image;
- ORGF::Keyboard keyboard;
+ NEONGDK::Screen screen;
+ NEONGDK::Sprite font;
+ NEONGDK::Text text;
+ NEONGDK::Image image;
+ NEONGDK::Keyboard keyboard;
  font.initialize(screen.get_handle());
  tilemap.initialize(screen.get_handle());
  keyboard.initialize();

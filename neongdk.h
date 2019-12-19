@@ -134,7 +134,7 @@ struct Collision_Box
 
 LRESULT CALLBACK Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
 
-namespace ORGF
+namespace NEONGDK
 {
 
 void Halt(const char *message);

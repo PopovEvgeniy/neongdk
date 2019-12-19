@@ -41,9 +41,9 @@
 			<Add library="strmiids" />
 			<Add library="winmm" />
 		</Linker>
-		<Unit filename="ORGF.cpp" />
-		<Unit filename="ORGF.h" />
 		<Unit filename="demo.cpp" />
+		<Unit filename="neongdk.cpp" />
+		<Unit filename="neongdk.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
