@@ -309,16 +309,11 @@ unsigned int *Frame::create_buffer(const char *error)
  return target;
 }
 
-unsigned int Frame::get_rgb(const unsigned int red,const unsigned int green,const unsigned int blue)
-{
- return red+(green<<8)+(blue<<16);
-}
-
 void Frame::put_pixel(const size_t offset,const unsigned int red,const unsigned int green,const unsigned int blue)
 {
  if (offset<pixels)
  {
-  buffer[offset]=this->get_rgb(blue,green,red);
+  buffer[offset]=red+(green<<8)+(blue<<16);
  }
 
 }
@@ -363,7 +358,7 @@ size_t Frame::get_pixels() const
 
 void Frame::draw_pixel(const unsigned long int x,const unsigned long int y,const unsigned char red,const unsigned char green,const unsigned char blue)
 {
- this->put_pixel(this->get_offset(x,y),red,green,blue);
+ this->put_pixel(this->get_offset(x,y),blue,green,red);
 }
 
 void Frame::clear_screen()
