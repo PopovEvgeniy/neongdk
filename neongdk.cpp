@@ -77,7 +77,7 @@ void Halt(const char *message)
  COM_Base::COM_Base()
 {
  HRESULT status;
- status=CoInitialize(NULL);
+ status=CoInitializeEx(NULL,COINIT_APARTMENTTHREADED);
  if(status!=S_OK)
  {
   if(status!=S_FALSE)
@@ -132,7 +132,7 @@ void Synchronization::set_timer(const unsigned long int interval)
 
 void Synchronization::wait_timer()
 {
- WaitForSingleObject(timer,INFINITE);
+ WaitForSingleObjectEx(timer,INFINITE,TRUE);
 }
 
 Engine::Engine()
@@ -225,7 +225,7 @@ void Engine::destroy_window()
 
 void Engine::create_window()
 {
- window=CreateWindow(window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
+ window=CreateWindowEx(WS_EX_APPWINDOW,window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
  if (window==NULL)
  {
   Halt("Can't create window");
@@ -552,7 +552,7 @@ void Display::set_video_mode()
 
 void Display::get_video_mode()
 {
- if (EnumDisplaySettings(NULL,ENUM_CURRENT_SETTINGS,&display)==FALSE)
+ if (EnumDisplaySettingsEx(NULL,ENUM_CURRENT_SETTINGS,&display,EDS_RAWMODE)==FALSE)
  {
   Halt("Can't get display setting");
  }
