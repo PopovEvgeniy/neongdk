@@ -345,6 +345,7 @@ void Frame::set_size(const unsigned long int surface_width,const unsigned long i
 void Frame::set_size(const SURFACE surface)
 {
  if (surface==SURFACE_SMALL) this->set_size(256,256);
+ if (surface==SURFACE_MIDDLE) this->set_size(320,240);
  if (surface==SURFACE_LARGE) this->set_size(512,512);
 }
 
