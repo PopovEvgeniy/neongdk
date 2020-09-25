@@ -20,6 +20,14 @@ freely, subject to the following restrictions:
 
 #include "neongdk.h"
 
+const size_t KEYBOARD=256;
+const unsigned char KEY_RELEASE=0;
+const unsigned char KEY_PRESS=1;
+const unsigned long int JOYSTICK_UPLEFT=31500;
+const unsigned long int JOYSTICK_UPRIGHT=4500;
+const unsigned long int JOYSTICK_DOWNLEFT=22500;
+const unsigned long int JOYSTICK_DOWNRIGHT=13500;
+
 unsigned char Keys[KEYBOARD];
 unsigned char Buttons[MOUSE];
 
