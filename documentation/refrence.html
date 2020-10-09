@@ -9,7 +9,7 @@
     </div>
     <big><br>
       <br>
-      Table of content<br>
+      Table of contents<br>
     </big>
     <ul id="mozToc">
       <!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6-->
@@ -375,8 +375,8 @@ C++
       Surface size preset look as predefined constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 566px; height: 124px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Surface size preset<br>
@@ -561,8 +561,8 @@ C++
       Mirror type codes look as predefined constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 370px; height: 94px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Mirror type code<br>
@@ -655,8 +655,8 @@ C++
       bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 524px; height: 124px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Background type<br>
@@ -702,10 +702,12 @@ C++
       background.<br style="font-style: italic;">
       <span style="font-style: italic;">void Background::step();</span> –
       Increase number of target frame in scrolling background. Set it to 1 if
-      number of target frame more than amount of frames.<br>
-      <span style="font-style: italic;">void Background::set_kind(const
-        BACKGROUND_TYPE target);</span> – Set background type.<br>
-      <span style="font-style: italic;">void Background::draw_background();</span>
+      number of target frame more than amount of frames.</big><br>
+    <big> <span style="font-style: italic;">void Background::set_kind(const
+        BACKGROUND_TYPE target);</span> – Set background type.</big><br>
+    <big><i>void Background::set_setting(const BACKGROUND_TYPE kind,const
+        unsigned long int frames);</i> – Set background setting.</big><br>
+    <big> <span style="font-style: italic;">void Background::draw_background();</span>
       – Draw a background.<br>
       <br>
       <span style="text-decoration: underline;">Important notes</span><br>
@@ -713,7 +715,8 @@ C++
       Always call <span style="font-style: italic;">set_kind</span> method
       after load background image. Always call <span style="font-style: italic;">set_frames</span>
       method before call <span style="font-style: italic;">set_kind</span>
-      method if you will use scrolling background.<br>
+      method if you will use scrolling background. Also you can use <i>set_setting</i>
+      method instead calling <i>set_kind</i> method.<br>
       <br>
     </big>
     <h2><a class="mozTocH2" name="mozTocId662651"></a><big> Chapter 8. Sprites</big></h2>
@@ -743,8 +746,8 @@ C++
       Sprite types codes look as predefined constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 332px; height: 124px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Sprite type<br>
@@ -950,8 +953,8 @@ C++
       supported format below.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 527px; height: 94px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Format<br>
@@ -1647,8 +1650,8 @@ C++
       Mouse button codes look as predefined constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 306px; height: 124px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Mouse button code<br>
@@ -1703,8 +1706,8 @@ C++
       D-pad button codes look as predefined constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 575px; height: 304px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>D-pad button code<br>
@@ -1775,8 +1778,8 @@ C++
       Sticks identifiers look as predefined constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 372px; height: 94px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Identifiers<br>
@@ -1804,8 +1807,8 @@ C++
       Stick direction look as predefined constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 498px; height: 124px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Value<br>
@@ -1923,8 +1926,8 @@ C++
       You can see list of supported formats bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 259px; height: 236px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Format<br>
@@ -2070,8 +2073,8 @@ Multimedia
       constants. You can see it bellow.<br>
       <br>
     </big>
-    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
-      border="1">
+    <table style="text-align: left; width: 458px; height: 94px;" cellspacing="2"
+      cellpadding="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;"><big>Key/button state<br>
@@ -2327,7 +2330,8 @@ Multimedia
       4.8.1.1 – Documentation was converted to HTML format.<br>
       4.8.2 – Source code was synced with Simple windows game framework 4.6.5.<br>
     </big><big>4.8.3 – Mouse input was improved.</big><br>
-    <big>4.8.4 – 4.8.5 – Small changes.<br>
-    </big>
+    <big>4.8.4 – 4.8.5 – Small changes.</big><br>
+    <big>4.8.6 – Background subsystem was improved.</big><br>
+    <big>4.8.7 – Small bug was fixed.</big>
   </body>
 </html>
