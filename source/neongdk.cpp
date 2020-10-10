@@ -1403,7 +1403,7 @@ Binary_File::~Binary_File()
 
 }
 
-void Binary_File::open(const char *name,const char *mode)
+void Binary_File::open_file(const char *name,const char *mode)
 {
  target=fopen(name,mode);
  if (target==NULL)
@@ -1421,29 +1421,6 @@ void Binary_File::close()
   target=NULL;
  }
 
-}
-
-void Binary_File::create_temp()
-{
- this->close();
- target=tmpfile();
- if (target==NULL)
- {
-  Halt("Can't create a temporary file");
- }
-
-}
-
-void Binary_File::open_read(const char *name)
-{
- this->close();
- this->open(name,"rb");
-}
-
-void Binary_File::open_write(const char *name)
-{
- this->close();
- this->open(name,"w+b");
 }
 
 void Binary_File::set_position(const long int offset)
@@ -1465,22 +1442,65 @@ long int Binary_File::get_length()
  return result;
 }
 
-void Binary_File::read(void *buffer,const size_t length)
-{
- fread(buffer,sizeof(char),length,target);
-}
-
-void Binary_File::write(void *buffer,const size_t length)
-{
- fwrite(buffer,sizeof(char),length,target);
-}
-
 bool Binary_File::check_error()
 {
  bool result;
  result=false;
  if (ferror(target)!=0) result=true;
  return result;
+}
+
+Input_File::Input_File()
+{
+
+}
+
+Input_File::~Input_File()
+{
+
+}
+
+void Input_File::open(const char *name)
+{
+ this->close();
+ this->open_file(name,"rb");
+}
+
+void Input_File::read(void *buffer,const size_t length)
+{
+ fread(buffer,sizeof(char),length,target);
+}
+
+Output_File::Output_File()
+{
+
+}
+
+Output_File::~Output_File()
+{
+
+}
+
+void Output_File::open(const char *name)
+{
+ this->close();
+ this->open_file(name,"wb");
+}
+
+void Output_File::create_temp()
+{
+ this->close();
+ target=tmpfile();
+ if (target==NULL)
+ {
+  Halt("Can't create a temporary file");
+ }
+
+}
+
+void Output_File::write(void *buffer,const size_t length)
+{
+ fwrite(buffer,sizeof(char),length,target);
 }
 
 Primitive::Primitive()
@@ -1608,7 +1628,7 @@ void Image::clear_buffer()
 
 void Image::load_tga(const char *name)
 {
- Binary_File target;
+ Input_File target;
  size_t index,position,amount,compressed_length,uncompressed_length;
  unsigned char *compressed;
  unsigned char *uncompressed;
@@ -1616,7 +1636,7 @@ void Image::load_tga(const char *name)
  TGA_map color_map;
  TGA_image image;
  this->clear_buffer();
- target.open_read(name);
+ target.open(name);
  compressed_length=static_cast<size_t>(target.get_length()-18);
  target.read(&head,3);
  target.read(&color_map,5);
@@ -1676,7 +1696,7 @@ void Image::load_tga(const char *name)
 
 void Image::load_pcx(const char *name)
 {
- Binary_File target;
+ Input_File target;
  unsigned long int x,y;
  size_t index,position,line,row,length,uncompressed_length;
  unsigned char repeat;
@@ -1684,7 +1704,7 @@ void Image::load_pcx(const char *name)
  unsigned char *uncompressed;
  PCX_head head;
  this->clear_buffer();
- target.open_read(name);
+ target.open(name);
  length=static_cast<size_t>(target.get_length()-128);
  target.read(&head,128);
  if ((head.color*head.planes!=24)&&(head.compress!=1))
