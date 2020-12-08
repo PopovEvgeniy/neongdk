@@ -1168,7 +1168,7 @@ wchar_t *Multimedia::get_memory(const size_t length)
  target=NULL;
  try
  {
-  target=new wchar_t[length];
+  target=new wchar_t[length+1];
  }
  catch (...)
  {
@@ -1179,8 +1179,9 @@ wchar_t *Multimedia::get_memory(const size_t length)
 
 void Multimedia::clear_buffer(wchar_t *target,const size_t length)
 {
- size_t index;
- for (index=0;index<length;++index)
+ size_t index,stop;
+ stop=length+1;
+ for (index=0;index<stop;++index)
  {
   target[index]=0;
  }
@@ -1765,7 +1766,7 @@ void Image::load_tga(const char *name)
    }
 
   }
-  free(compressed);
+  delete[] compressed;
  }
  target.close();
  data=uncompressed;
@@ -1818,7 +1819,7 @@ void Image::load_pcx(const char *name)
   }
 
  }
- free(original);
+ delete[] original;
  original=this->create_buffer(uncompressed_length);
  for (x=0;x<width;++x)
  {
@@ -1832,7 +1833,7 @@ void Image::load_pcx(const char *name)
   }
 
  }
- free(uncompressed);
+ delete[] uncompressed;
  data=original;
 }
 
