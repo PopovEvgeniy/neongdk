@@ -702,6 +702,10 @@ unsigned long int Display::get_height() const
 Render::Render()
 {
  memset(&setting,0,sizeof(BITMAPINFO));
+ setting.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
+ setting.bmiHeader.biPlanes=1;
+ setting.bmiHeader.biBitCount=CHAR_BIT*sizeof(unsigned int);
+ setting.bmiHeader.biCompression=BI_RGB;
 }
 
 Render::~Render()
@@ -711,12 +715,8 @@ Render::~Render()
 
 void Render::set_render_setting()
 {
- setting.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
  setting.bmiHeader.biWidth=this->get_frame_width();
  setting.bmiHeader.biHeight=static_cast<long int>(this->get_frame_height())*-1;
- setting.bmiHeader.biPlanes=1;
- setting.bmiHeader.biBitCount=CHAR_BIT*sizeof(unsigned int);
- setting.bmiHeader.biCompression=BI_RGB;
 }
 
 void Render::create_render()
