@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2016-2020 Popov Evgeniy Alekseyevich
+Copyright (C) 2016-2021 Popov Evgeniy Alekseyevich
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -1230,18 +1230,14 @@ void Multimedia::open(const wchar_t *target)
  video->put_FullScreenMode(OATRUE);
 }
 
-bool Multimedia::is_end()
+bool Multimedia::is_play()
 {
  bool result;
- long long current,stop;
+ long long current,total;
  result=false;
- if (controler->GetPositions(&current,&stop)==S_OK)
+ if (controler->GetPositions(&current,&total)==S_OK)
  {
-  if (current>=stop) result=true;
- }
- else
- {
-  Halt("Can't get the current and the end position");
+  if (current<total) result=true;
  }
  return result;
 }
@@ -1312,17 +1308,9 @@ bool Multimedia::check_playing()
  OAFilterState state;
  bool result;
  result=false;
- if (player->GetState(INFINITE,&state)==E_FAIL)
+ if (player->GetState(INFINITE,&state)!=E_FAIL)
  {
-  Halt("Can't get the multimedia state");
- }
- else
- {
-  if (state==State_Running)
-  {
-   if (this->is_end()==false) result=true;
-  }
-
+  if (state==State_Running) result=this->is_play();
  }
  return result;
 }
