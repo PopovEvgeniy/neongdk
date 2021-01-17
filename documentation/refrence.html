@@ -154,7 +154,7 @@
         license</a>. </big>
     <h2><a class="mozTocH2" name="mozTocId810132"></a><big>Chapter 3. License</big></h2>
     <big><br>
-      Copyright (C) 2016-2020 Popov Evgeniy Alekseyevich<br>
+      Copyright (C) 2016-2021 Popov Evgeniy Alekseyevich<br>
       <br>
       This software is provided 'as-is', without any express or implied<br>
       warranty. In no event will the authors be held liable for any damages<br>
@@ -822,10 +822,14 @@ C++
         const;</span> – Return amount of columns.<br>
       <span style="font-style: italic;">void Tileset::select_tile(const unsigned
         long int row,const unsigned long int column);</span> – Select target
-      tile.<br>
-      <span style="font-style: italic;">void Tileset::draw_tile(const unsigned
-        long int x,const unsigned long int y);</span> – Draw selected tile.<br>
-      <span style="font-style: italic;">void Tileset::load_tileset(Image
+      tile.</big><br>
+    <big> <span style="font-style: italic;">void Tileset::draw_tile(const
+        unsigned long int x,const unsigned long int y);</span> – Draw selected
+      tile at specific position.</big><br>
+    <big><i>void Tileset::draw_tile(const unsigned long int row,const unsigned
+        long int column,const unsigned long int x,const unsigned long int y);</i>
+      – Draw target tile at specific position.</big><br>
+    <big> <span style="font-style: italic;">void Tileset::load_tileset(Image
         &amp;buffer,const unsigned long int row_amount,const unsigned long int
         column_amount);</span> – Load a tile-set. </big>
     <h2><a class="mozTocH2" name="mozTocId67980"></a><big>Chapter 11. Loading
@@ -2005,6 +2009,7 @@ Multimedia
     <big>5.0.1 – Multimedia subsystem was improved.</big><br>
     <big>5.0.2 – Small changes.</big><br>
     <big>5.0.3 – Multimedia subsystem was improved.</big><br>
-    <big>5.0.4 – Small changes.</big>
+    <big>5.0.4 – Small changes.</big><br>
+    <big>5.0.5 – Tile-set subsystem was improved.</big>
   </body>
 </html>
