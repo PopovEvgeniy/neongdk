@@ -281,8 +281,8 @@ class Render:public Display, public Engine, public Frame
 {
  private:
  BITMAPINFO setting;
- protected:
  void set_render_setting();
+ protected:
  void create_render();
  void refresh();
  public:

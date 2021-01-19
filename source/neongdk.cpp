@@ -730,13 +730,10 @@ void Render::refresh()
 {
  HDC context;
  context=this->get_context();
- if (context==NULL)
- {
-  Halt("Can't get window context");
- }
- else
+ if (context!=NULL)
  {
   StretchDIBits(context,0,0,this->get_width(),this->get_height(),0,0,this->get_frame_width(),this->get_frame_height(),this->get_buffer(),&setting,DIB_RGB_COLORS,SRCCOPY);
+  GdiFlush();
   ReleaseDC(this->get_window(),context);
  }
 
