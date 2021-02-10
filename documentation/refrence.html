@@ -1012,11 +1012,20 @@ C++
       horizontal collision between two object is accepted.<br>
       <span style="font-style: italic;">bool
         Collision::check_vertical_collision() const;</span> – Return true if
-      vertical collision between two objects is accepted.<br>
-      <span style="font-style: italic;">bool Collision::check_collision() const;</span>
-      – Return true if horizontal or vertical collision between two objects is
-      accepted.<br>
-      <span style="font-style: italic;">Collision_Box
+      vertical collision between two objects is accepted.</big><br>
+    <big> <span style="font-style: italic;">bool Collision::check_collision()
+        const;</span> – Return true if horizontal or vertical collision between
+      two objects is accepted.</big><br>
+    <big><i>bool Collision::check_horizontal_collision(const Box_Collision
+        &amp;first_target,const Box_Collision &amp;second_target);</i> – Set
+      collision target and check horizontal collision.</big><br>
+    <big><i>bool Collision::check_vertical_collision(const Box_Collision
+        &amp;first_target,const Box_Collision &amp;second_target);</i> – Set
+      collision target and check vertical collision.</big><br>
+    <big><i>bool Collision::check_collision(const Box_Collision
+        &amp;first_target,const Box_Collision &amp;second_target);</i> – Set
+      collision target and check collision.</big><br>
+    <big> <span style="font-style: italic;">Collision_Box
         Collision::generate_box(const unsigned long int x,const unsigned long
         int y,const unsigned long int width,const unsigned long int height)
         const;</span> – Generate collision related information from the object
@@ -1494,7 +1503,6 @@ C++
     <big><br>
     </big>
     <table style="text-align: left; width: 372px; height: 94px;" cellspacing="2"
-
       cellpadding="2" border="1">
       <tbody>
         <tr>
@@ -2012,6 +2020,7 @@ Multimedia
     <big>5.0.3 – Multimedia subsystem was improved.</big><br>
     <big>5.0.4 – Small changes.</big><br>
     <big>5.0.5 – Tile-set subsystem was improved.</big><br>
-    <big>5.0.6 – 5.0.8 – Small changes.</big>
+    <big>5.0.6 – 5.0.8 – Small changes.</big><br>
+    <big>5.0.9 – Collision detection subsystem was improved.</big>
   </body>
 </html>
