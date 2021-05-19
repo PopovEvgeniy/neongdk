@@ -146,7 +146,7 @@ void Synchronization::wait_timer()
 Engine::Engine()
 {
  window_class.lpszClassName=TEXT("NEONGDK");
- window_class.style=CS_HREDRAW|CS_VREDRAW;
+ window_class.style=CS_HREDRAW|CS_VREDRAW|CS_OWNDC;
  window_class.cbSize=sizeof(WNDCLASSEX);
  window_class.lpfnWndProc=Process_Message;
  window_class.hInstance=NULL;
@@ -157,12 +157,23 @@ Engine::Engine()
  window_class.cbClsExtra=0;
  window_class.cbWndExtra=0;
  window=NULL;
+ context=NULL;
 }
 
 Engine::~Engine()
 {
- if (window!=NULL) CloseWindow(window);
- if (window_class.hbrBackground!=NULL) DeleteObject(window_class.hbrBackground);
+ if (window!=NULL)
+ {
+  CloseWindow(window);
+ }
+ if (context!=NULL)
+ {
+  ReleaseDC(window,context);
+ }
+ if (window_class.hbrBackground!=NULL)
+ {
+  DeleteObject(window_class.hbrBackground);
+ }
  UnregisterClass(window_class.lpszClassName,window_class.hInstance);
 }
 
@@ -214,14 +225,9 @@ void Engine::register_window_class()
 
 }
 
-HWND Engine::get_window()
-{
- return window;
-}
-
 HDC Engine::get_context()
 {
- return GetWindowDC(window);
+ return context;
 }
 
 void Engine::prepare_engine()
@@ -239,6 +245,21 @@ void Engine::destroy_window()
  {
   CloseWindow(window);
   window=NULL;
+ }
+ if (context!=NULL)
+ {
+  ReleaseDC(window,context);
+  context=NULL;
+ }
+
+}
+
+void Engine::take_context()
+{
+ context=GetWindowDC(window);
+ if (context==NULL)
+ {
+  Halt("Can't take render context");
  }
 
 }
@@ -722,21 +743,14 @@ void Render::set_render_setting()
 void Render::create_render()
 {
  this->create_window();
+ this->take_context();
  this->capture_mouse();
  this->set_render_setting();
 }
 
 void Render::refresh()
 {
- HDC context;
- context=this->get_context();
- if (context!=NULL)
- {
-  StretchDIBits(context,0,0,this->get_width(),this->get_height(),0,0,this->get_frame_width(),this->get_frame_height(),this->get_buffer(),&setting,DIB_RGB_COLORS,SRCCOPY);
-  GdiFlush();
-  ReleaseDC(this->get_window(),context);
- }
-
+ StretchDIBits(this->get_context(),0,0,this->get_width(),this->get_height(),0,0,this->get_frame_width(),this->get_frame_height(),this->get_buffer(),&setting,DIB_RGB_COLORS,SRCCOPY);
 }
 
 void Screen::initialize()
