@@ -162,13 +162,13 @@ Engine::Engine()
 
 Engine::~Engine()
 {
- if (window!=NULL)
- {
-  CloseWindow(window);
- }
  if (context!=NULL)
  {
   ReleaseDC(window,context);
+ }
+ if (window!=NULL)
+ {
+  CloseWindow(window);
  }
  if (window_class.hbrBackground!=NULL)
  {
@@ -241,15 +241,15 @@ void Engine::prepare_engine()
 
 void Engine::destroy_window()
 {
- if (window!=NULL)
- {
-  CloseWindow(window);
-  window=NULL;
- }
  if (context!=NULL)
  {
   ReleaseDC(window,context);
   context=NULL;
+ }
+ if (window!=NULL)
+ {
+  CloseWindow(window);
+  window=NULL;
  }
 
 }
