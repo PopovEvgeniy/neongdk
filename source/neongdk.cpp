@@ -753,6 +753,16 @@ void Render::refresh()
  StretchDIBits(this->get_context(),0,0,this->get_width(),this->get_height(),0,0,this->get_frame_width(),this->get_frame_height(),this->get_buffer(),&setting,DIB_RGB_COLORS,SRCCOPY);
 }
 
+Screen::Screen()
+{
+
+}
+
+Screen::~Screen()
+{
+
+}
+
 void Screen::initialize()
 {
  this->check_video_mode();
@@ -1590,9 +1600,9 @@ Primitive::~Primitive()
 
 }
 
-void Primitive::initialize(Screen *Screen)
+void Primitive::initialize(Screen *screen)
 {
- surface=Screen;
+ surface=screen;
 }
 
 void Primitive::set_color(const unsigned char red,const unsigned char green,const unsigned char blue)
