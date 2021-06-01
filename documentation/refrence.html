@@ -361,12 +361,15 @@ C++
       <span style="font-style: italic;">size_t Frame::get_pixels() const;</span>
       – Return amount of pixels in the buffer.<br>
       <span style="font-style: italic;">void Frame::clear_screen();</span> –
-      Clear the surface. Fill it by black color.<br>
-      <span style="font-style: italic;">void Frame::draw_pixel(const unsigned
-        long int x,const unsigned long int y, const unsigned char red,const
-        unsigned char green, const unsigned char blue);</span> – Draw a pixel to
-      the surface.<br>
-      <span style="font-style: italic;">unsigned long int
+      Clear the surface. Fill it by black color.</big><br>
+    <big> <span style="font-style: italic;">void Frame::draw_pixel(const
+        unsigned long int x,const unsigned long int y, const unsigned char
+        red,const unsigned char green, const unsigned char blue);</span> – Draw
+      a pixel to the surface.</big><br>
+    <big><i>bool Frame::put_pixel(const size_t offset,const unsigned int
+        red,const unsigned int green,const unsigned int blue);</i> – Put a pixel
+      to the surface buffer. Return false if operation was failed.</big><br>
+    <big> <span style="font-style: italic;">unsigned long int
         Frame::get_frame_width() const;</span> – Return frame width in pixels.<br>
       <span style="font-style: italic;">unsigned long int
         Frame::get_frame_height() const;</span> – Return frame height in pixels.<br>
@@ -1400,9 +1403,11 @@ C++
         MOUSE_BUTTON button);</span> – Return true if specific mouse button is
       pressed or holding.<br>
       <span style="font-style: italic;">bool Mouse::check_press(const </span></big><big><span
+
         style="font-style: italic;">MOUSE_BUTTON</span></big><big><span style="font-style: italic;">
         button);</span> – Return true if specific mouse button is pressed.<br>
       <span style="font-style: italic;">bool Mouse::check_release(const </span></big><big><span
+
         style="font-style: italic;">MOUSE_BUTTON</span></big><big><span style="font-style: italic;">
         button);</span> – Return true if specific mouse button is released.<br>
       <br>
@@ -2048,6 +2053,7 @@ Multimedia
     <big>5.2.1 – Small changes.</big><br>
     <big>5.2.2 – Small bug was fixed.</big><br>
     <big>5.2.3 – 5.2.4 – Small changes.</big><br>
-    <big>5.2.5 – Image loader was improved.</big>
+    <big>5.2.5 – Image loader was improved.</big><br>
+    <big>5.2.6 – Virtual surface subystem was improved.</big>
   </body>
 </html>
