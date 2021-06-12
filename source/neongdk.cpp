@@ -418,7 +418,7 @@ bool Frame::draw_pixel(const unsigned long int x,const unsigned long int y,const
  bool result;
  size_t offset;
  result=false;
- offset=this->get_offset(x,y);
+ offset=static_cast<size_t>(x)+static_cast<size_t>(y)*static_cast<size_t>(frame_width);
  if (offset<pixels)
  {
   buffer[offset]=blue+(green<<8)+(red<<16);
@@ -2023,7 +2023,6 @@ unsigned long int Surface::get_image_height() const
 void Surface::mirror_image(const MIRROR_TYPE kind)
 {
  unsigned long int x,y;
- size_t index,index2;
  IMG_Pixel *mirrored_image;
  mirrored_image=this->create_buffer(width,height);
  if (kind==MIRROR_HORIZONTAL)
@@ -2032,9 +2031,7 @@ void Surface::mirror_image(const MIRROR_TYPE kind)
   {
    for (y=0;y<height;++y)
    {
-    index=this->get_offset(0,x,y);
-    index2=this->get_offset(0,(width-x-1),y);
-    mirrored_image[index]=image[index2];
+    mirrored_image[this->get_offset(0,x,y)]=image[this->get_offset(0,(width-x-1),y)];
    }
 
   }
@@ -2046,9 +2043,7 @@ void Surface::mirror_image(const MIRROR_TYPE kind)
   {
    for (y=0;y<height;++y)
    {
-    index=this->get_offset(0,x,y);
-    index2=this->get_offset(0,x,(height-y-1));
-    mirrored_image[index]=image[index2];
+    mirrored_image[this->get_offset(0,x,y)]=image[this->get_offset(0,x,(height-y-1))];
    }
 
   }
@@ -2150,7 +2145,6 @@ Background::Background()
  background_height=0;
  maximum_width=0;
  maximum_height=0;
- current=0;
  current_kind=NORMAL_BACKGROUND;
 }
 
@@ -2175,24 +2169,6 @@ void Background::get_maximum_height()
  if (maximum_height>this->get_surface_height())
  {
   maximum_height=this->get_surface_height();
- }
-
-}
-
-void Background::slow_draw_background()
-{
- unsigned long int x,y,index;
- x=0;
- y=0;
- for (index=maximum_width*maximum_height;index>0;--index)
- {
-  this->draw_image_pixel(this->get_offset(start,x,y),x,y);
-  if (x==maximum_width)
-  {
-   x=0;
-   ++y;
-  }
-  ++x;
  }
 
 }
@@ -2258,15 +2234,18 @@ void Background::step()
 
 void Background::draw_background()
 {
- if (current!=this->get_frame())
+ unsigned long int x,y,index;
+ x=0;
+ y=0;
+ for (index=maximum_width*maximum_height;index>0;--index)
  {
-  this->slow_draw_background();
-  this->save();
-  current=this->get_frame();
- }
- else
- {
-  this->restore();
+  this->draw_image_pixel(this->get_offset(start,x,y),x,y);
+  if (x==maximum_width)
+  {
+   x=0;
+   ++y;
+  }
+  ++x;
  }
 
 }
