@@ -274,20 +274,6 @@ void Engine::create_window()
  SetFocus(window);
 }
 
-void Engine::capture_mouse()
-{
- RECT border;
- if (GetClientRect(window,&border)==FALSE)
- {
-  Halt("Can't capture window");
- }
- if (ClipCursor(&border)==FALSE)
- {
-  Halt("Can't capture cursor");
- }
-
-}
-
 bool Engine::process_message()
 {
  bool run;
@@ -549,7 +535,7 @@ Timer::~Timer()
 
 }
 
-void Timer::set_timer(const unsigned long int seconds)
+void Timer::set_timer(const double seconds)
 {
  interval=seconds;
  start=time(NULL);
@@ -569,7 +555,7 @@ bool Timer::check_timer()
 
 FPS::FPS()
 {
- timer.set_timer(1);
+ start=time(NULL);
  current=0;
  fps=0;
 }
@@ -582,10 +568,11 @@ FPS::~FPS()
 void FPS::update_counter()
 {
  ++current;
- if (timer.check_timer()==true)
+ if (difftime(time(NULL),start)>=1)
  {
   fps=current;
   current=0;
+  start=time(NULL);
  }
 
 }
@@ -744,7 +731,6 @@ void Render::create_render()
 {
  this->create_window();
  this->take_context();
- this->capture_mouse();
  this->set_render_setting();
 }
 
@@ -870,11 +856,8 @@ void Keyboard::initialize()
 
 bool Keyboard::check_hold(const unsigned char code)
 {
- bool result;
- result=false;
- if (Keys[code]==KEY_PRESS) result=true;
  preversion[code]=Keys[code];
- return result;
+ return Keys[code]==KEY_PRESS;
 }
 
 bool Keyboard::check_press(const unsigned char code)
@@ -955,14 +938,8 @@ unsigned long int Mouse::get_y()
 
 bool Mouse::check_hold(const MOUSE_BUTTON button)
 {
- bool result;
- result=false;
- if (Buttons[button]==KEY_PRESS)
- {
-  result=true;
- }
  preversion[button]=Buttons[button];
- return result;
+ return Buttons[button]==KEY_PRESS;
 }
 
 bool Mouse::check_press(const MOUSE_BUTTON button)
@@ -978,16 +955,12 @@ bool Mouse::check_release(const MOUSE_BUTTON button)
 Gamepad::Gamepad()
 {
  active=0;
- max_amount=16;
  memset(&configuration,0,sizeof(JOYCAPS));
  memset(&current,0,sizeof(JOYINFOEX));
- memset(&preversion,0,sizeof(JOYINFOEX));
  current.dwSize=sizeof(JOYINFOEX);
- preversion.dwSize=sizeof(JOYINFOEX);
  current.dwFlags=JOY_RETURNALL;
- preversion.dwFlags=JOY_RETURNALL;
  current.dwPOV=JOY_POVCENTERED;
- preversion.dwPOV=JOY_POVCENTERED;
+ preversion=current;
 }
 
 Gamepad::~Gamepad()
@@ -997,34 +970,22 @@ Gamepad::~Gamepad()
 
 bool Gamepad::read_configuration()
 {
- bool result;
- result=false;
- if (joyGetDevCaps(static_cast<size_t>(active),&configuration,sizeof(JOYCAPS))==JOYERR_NOERROR)
- {
-  result=true;
- }
- return result;
+ return joyGetDevCaps(static_cast<size_t>(active),&configuration,sizeof(JOYCAPS))==JOYERR_NOERROR;
 }
 
 bool Gamepad::read_state()
 {
- bool result;
- result=false;
- if (joyGetPosEx(active,&current)==JOYERR_NOERROR) result=true;
- return result;
+ return joyGetPosEx(active,&current)==JOYERR_NOERROR;
 }
 
 void Gamepad::clear_state()
 {
  memset(&configuration,0,sizeof(JOYCAPS));
  memset(&current,0,sizeof(JOYINFOEX));
- memset(&preversion,0,sizeof(JOYINFOEX));
  current.dwSize=sizeof(JOYINFOEX);
- preversion.dwSize=sizeof(JOYINFOEX);
  current.dwFlags=JOY_RETURNALL;
- preversion.dwFlags=JOY_RETURNALL;
  current.dwPOV=JOY_POVCENTERED;
- preversion.dwPOV=JOY_POVCENTERED;
+ preversion=current;
 }
 
 bool Gamepad::check_button(const GAMEPAD_BUTTONS button,const JOYINFOEX &target)
@@ -1073,23 +1034,14 @@ unsigned long int Gamepad::get_sticks_amount()
  result=0;
  if (this->read_configuration()==true)
  {
-  switch (configuration.wNumAxes)
-  {
-   case 2:
-   result=1;
-   break;
-   case 4:
-   result=2;
-   break;
-  }
-
+  if (configuration.wNumAxes>1) result=configuration.wNumAxes/2;
  }
  return result;
 }
 
 void Gamepad::set_active(const unsigned int gamepad)
 {
- if (active<max_amount)
+ if (gamepad<this->get_amount())
  {
   this->clear_state();
   active=gamepad;
@@ -1099,7 +1051,7 @@ void Gamepad::set_active(const unsigned int gamepad)
 
 unsigned int Gamepad::get_max_amount() const
 {
- return max_amount;
+ return 16;
 }
 
 unsigned int Gamepad::get_active() const
@@ -1204,24 +1156,12 @@ bool Gamepad::check_hold(const GAMEPAD_BUTTONS button)
 
 bool Gamepad::check_press(const GAMEPAD_BUTTONS button)
 {
- bool result;
- result=false;
- if (this->check_button(button,current)==true)
- {
-  if (this->check_button(button,preversion)==false) result=true;
- }
- return result;
+ return (this->check_button(button,current)==true) && (this->check_button(button,preversion)==false);
 }
 
 bool Gamepad::check_release(const GAMEPAD_BUTTONS button)
 {
- bool result;
- result=false;
- if (this->check_button(button,current)==false)
- {
-  if (this->check_button(button,preversion)==true) result=true;
- }
- return result;
+ return (this->check_button(button,current)==false) && (this->check_button(button,preversion)==true);
 }
 
 Multimedia::Multimedia()
@@ -1439,7 +1379,7 @@ void System::enable_logging(const char *name)
 
 Filesystem::Filesystem()
 {
- status=false;
+
 }
 
 Filesystem::~Filesystem()
@@ -1447,27 +1387,23 @@ Filesystem::~Filesystem()
 
 }
 
-void Filesystem::file_exist(const char *name)
+bool Filesystem::file_exist(const char *name)
 {
  FILE *target;
- status=false;
+ bool exist;
+ exist=false;
  target=fopen(name,"rb");
  if (target!=NULL)
  {
-  status=true;
+  exist=true;
   fclose(target);
  }
-
+ return exist;
 }
 
-void Filesystem::delete_file(const char *name)
+bool Filesystem::delete_file(const char *name)
 {
- status=(remove(name)==0);
-}
-
-bool Filesystem::get_status() const
-{
- return status;
+ return remove(name)==0;
 }
 
 Binary_File::Binary_File()
@@ -1923,15 +1859,6 @@ void Surface::clear_buffer()
 
 }
 
-void Surface::load_from_buffer(Image &buffer)
-{
- width=buffer.get_width();
- height=buffer.get_height();
- this->clear_buffer();
- image=this->create_buffer(width,height);
- memmove(image,buffer.get_data(),buffer.get_length());
-}
-
 void Surface::set_width(const unsigned long int image_width)
 {
  width=image_width;
@@ -2008,6 +1935,15 @@ size_t Surface::get_length() const
 IMG_Pixel *Surface::get_image()
 {
  return image;
+}
+
+void Surface::load_image(Image &buffer)
+{
+ width=buffer.get_width();
+ height=buffer.get_height();
+ this->clear_buffer();
+ image=this->create_buffer(width,height);
+ memmove(image,buffer.get_data(),buffer.get_length());
 }
 
 unsigned long int Surface::get_image_width() const
@@ -2096,19 +2032,19 @@ void Surface::vertical_mirror()
  this->mirror_image(MIRROR_VERTICAL);
 }
 
-Canvas::Canvas()
+Animation::Animation()
 {
  start=0;
  frame=1;
  frames=1;
 }
 
-Canvas::~Canvas()
+Animation::~Animation()
 {
 
 }
 
-void Canvas::set_frame(const unsigned long int target)
+void Animation::set_frame(const unsigned long int target)
 {
  if (target>0)
  {
@@ -2117,7 +2053,7 @@ void Canvas::set_frame(const unsigned long int target)
 
 }
 
-void Canvas::increase_frame()
+void Animation::increase_frame()
 {
  ++frame;
  if (frame>frames)
@@ -2127,24 +2063,19 @@ void Canvas::increase_frame()
 
 }
 
-void Canvas::set_frames(const unsigned long int amount)
+void Animation::set_frames(const unsigned long int amount)
 {
  if (amount>1) frames=amount;
 }
 
-unsigned long int Canvas::get_frames() const
+unsigned long int Animation::get_frames() const
 {
  return frames;
 }
 
-unsigned long int Canvas::get_frame() const
+unsigned long int Animation::get_frame() const
 {
  return frame;
-}
-
-void Canvas::load_image(Image &buffer)
-{
- this->load_from_buffer(buffer);
 }
 
 Background::Background()
@@ -2593,7 +2524,7 @@ void Tileset::load_tileset(Image &buffer,const unsigned long int row_amount,cons
 {
  if ((row_amount>0)&&(column_amount>0))
  {
-  this->load_from_buffer(buffer);
+  this->load_image(buffer);
   rows=row_amount;
   columns=column_amount;
   tile_width=this->get_image_width()/rows;
@@ -2654,7 +2585,7 @@ void Text::draw_text(const char *text)
   this->draw_character(text[index]);
   this->increase_position();
  }
- this->restore_position();
+
 }
 
 void Text::draw_character(const unsigned long int x,const unsigned long int y,const char target)
@@ -2716,10 +2647,7 @@ Collision::Collision()
  first.y=0;
  first.width=0;
  first.height=0;
- second.x=0;
- second.y=0;
- second.width=0;
- second.height=0;
+ second=first;
 }
 
 Collision::~Collision()

@@ -114,10 +114,10 @@ struct PCX_head
 
 struct Collision_Box
 {
- unsigned long int x:32;
- unsigned long int y:32;
- unsigned long int width:32;
- unsigned long int height:32;
+ unsigned long int x;
+ unsigned long int y;
+ unsigned long int width;
+ unsigned long int height;
 };
 
 LRESULT CALLBACK Process_Message(HWND window,UINT Message,WPARAM wParam,LPARAM lParam);
@@ -164,7 +164,6 @@ class Engine
  void destroy_window();
  void take_context();
  void create_window();
- void capture_mouse();
  bool process_message();
  public:
  Engine();
@@ -223,21 +222,21 @@ class Plane: public Frame
 class Timer
 {
  private:
- unsigned long int interval;
+ double interval;
  time_t start;
  public:
  Timer();
  ~Timer();
- void set_timer(const unsigned long int seconds);
+ void set_timer(const double seconds);
  bool check_timer();
 };
 
 class FPS
 {
  private:
- Timer timer;
+ time_t start;
  unsigned long int current;
- unsigned long int fps;
+ unsigned int long fps;
  protected:
  void update_counter();
  public:
@@ -347,7 +346,6 @@ class Gamepad
  JOYINFOEX preversion;
  JOYCAPS configuration;
  unsigned int active;
- unsigned int max_amount;
  bool read_configuration();
  bool read_state();
  void clear_state();
@@ -425,14 +423,11 @@ class System
 
 class Filesystem
 {
- private:
- bool status;
  public:
  Filesystem();
  ~Filesystem();
- void file_exist(const char *name);
- void delete_file(const char *name);
- bool get_status() const;
+ bool file_exist(const char *name);
+ bool delete_file(const char *name);
 };
 
 class Binary_File
@@ -517,7 +512,6 @@ class Surface
  void restore();
  void clear_buffer();
  IMG_Pixel *create_buffer(const unsigned long int image_width,const unsigned long int image_height);
- void load_from_buffer(Image &buffer);
  void set_width(const unsigned long int image_width);
  void set_height(const unsigned long int image_height);
  void set_buffer(IMG_Pixel *buffer);
@@ -533,6 +527,7 @@ class Surface
  void initialize(Screen *screen);
  size_t get_length() const;
  IMG_Pixel *get_image();
+ void load_image(Image &buffer);
  unsigned long int get_image_width() const;
  unsigned long int get_image_height() const;
  void mirror_image(const MIRROR_TYPE kind);
@@ -541,7 +536,7 @@ class Surface
  void vertical_mirror();
 };
 
-class Canvas:public Surface
+class Animation
 {
  private:
  unsigned long int frames;
@@ -551,15 +546,14 @@ class Canvas:public Surface
  void set_frame(const unsigned long int target);
  void increase_frame();
  public:
- Canvas();
- ~Canvas();
+ Animation();
+ ~Animation();
  void set_frames(const unsigned long int amount);
  unsigned long int get_frames() const;
  unsigned long int get_frame() const;
- void load_image(Image &buffer);
 };
 
-class Background:public Canvas
+class Background:public Surface,public Animation
 {
  private:
  unsigned long int background_width;
@@ -584,7 +578,7 @@ class Background:public Canvas
  void draw_background();
 };
 
-class Sprite:public Canvas
+class Sprite:public Surface,public Animation
 {
  private:
  bool transparent;
