@@ -236,7 +236,7 @@ class FPS
  private:
  time_t start;
  unsigned long int current;
- unsigned int long fps;
+ unsigned long int fps;
  protected:
  void update_counter();
  public:
