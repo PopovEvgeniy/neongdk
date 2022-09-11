@@ -1,97 +1,122 @@
-#include "neongdk.h"
+#include "NEONGDK.h"
 
 int main()
 {
  char perfomance[8];
- NEONGDK::Timer timer;
- NEONGDK::Screen screen;
- NEONGDK::System System;
- NEONGDK::Keyboard keyboard;
- NEONGDK::Gamepad gamepad;
- NEONGDK::Mouse mouse;
- NEONGDK::Multimedia media;
- NEONGDK::Image image;
- NEONGDK::Background space;
- NEONGDK::Sprite ship,font;
- NEONGDK::Text text;
- System.enable_logging("log.txt");
+ NEONGDK::Common::Timer timer;
+ NEONGDK::Input::Keyboard keyboard;
+ NEONGDK::Input::Gamepad gamepad;
+ NEONGDK::Input::Mouse mouse;
+ NEONGDK::Graphics::Screen screen;
+ NEONGDK::Graphics::Image image;
+ NEONGDK::Graphics::Background space;
+ NEONGDK::Graphics::Sprite ship;
+ NEONGDK::Graphics::Text text;
+ NEONGDK::Tools::enable_logging("log.txt");
  keyboard.initialize();
- space.initialize(screen.get_handle());
- ship.initialize(screen.get_handle());
- font.initialize(screen.get_handle());
+ screen.initialize();
  image.load_tga("space.tga");
- space.load_image(image);
+ space.load_background(image);
+ space.prepare(screen);
  image.load_tga("ship.tga");
- ship.load_sprite(image,HORIZONTAL_STRIP,2);
- ship.set_position(screen.get_frame_width()/2,screen.get_frame_height()/2);
+ ship.load_sprite(image,NEONGDK::HORIZONTAL_ANIMATED,2);
+ ship.set_position(screen.get_width()/2,screen.get_height()/2);
  image.load_tga("font.tga");
- font.load_image(image);
- text.load_font(font.get_handle());
- text.set_position(font.get_width(),font.get_width());
- screen.clear_screen();
- space.resize_image(screen.get_frame_width(),screen.get_frame_height());
- space.set_kind(NORMAL_BACKGROUND);
+ text.load_font(image);
+ text.set_position(text.get_font_width(),text.get_font_height());
  mouse.hide();
  timer.set_timer(1);
- media.initialize();
- media.load("space.mp3");
  memset(perfomance,0,8);
- screen.initialize();
+ MUSIC_PLAY("space.wav");
  while(screen.sync())
  {
   gamepad.update();
-  if (media.check_playing()==false) media.play();
-  if (mouse.check_press(MOUSE_LEFT)==true) break;
-  if (keyboard.check_hold(57)==true) break;
-  if (keyboard.check_hold(72)==true) ship.decrease_y(2);
-  if (keyboard.check_hold(80)==true) ship.increase_y(2);
-  if (keyboard.check_hold(75)==true) ship.decrease_x(2);
-  if (keyboard.check_hold(77)==true) ship.increase_x(2);
-  if (keyboard.check_press(71)==true) ship.horizontal_mirror();
-  if (keyboard.check_press(79)==true) ship.vertical_mirror();
-  if (gamepad.check_hold(GAMEPAD_BUTTON2)==true) break;
-  if (gamepad.check_press(GAMEPAD_BUTTON4)==true) ship.horizontal_mirror();
-  if (gamepad.check_press(GAMEPAD_BUTTON3)==true) ship.vertical_mirror();
+  if (mouse.check_press(NEONGDK::MOUSE_LEFT)==true)
+  {
+   break;
+  }
+  if (keyboard.check_hold(57)==true)
+  {
+   break;
+  }
+  if (keyboard.check_hold(72)==true)
+  {
+   ship.decrease_y(2);
+  }
+  if (keyboard.check_hold(80)==true)
+  {
+   ship.increase_y(2);
+  }
+  if (keyboard.check_hold(75)==true)
+  {
+   ship.decrease_x(2);
+  }
+  if (keyboard.check_hold(77)==true)
+  {
+   ship.increase_x(2);
+  }
+  if (gamepad.check_hold(NEONGDK::GAMEPAD_BUTTON2)==true)
+  {
+   break;
+  }
   switch (gamepad.get_dpad())
   {
-   case GAMEPAD_UP:
-   ship.decrease_y(1);
+   case NEONGDK::GAMEPAD_UP:
+   ship.decrease_y();
    break;
-   case GAMEPAD_DOWN:
-   ship.increase_y(1);
+   case NEONGDK::GAMEPAD_DOWN:
+   ship.increase_y();
    break;
-   case GAMEPAD_UPLEFT:
-   ship.decrease_y(1);
-   ship.decrease_x(1);
+   case NEONGDK::GAMEPAD_UPLEFT:
+   ship.decrease_y();
+   ship.decrease_x();
    break;
-   case GAMEPAD_UPRIGHT:
-   ship.decrease_y(1);
-   ship.increase_x(1);
+   case NEONGDK::GAMEPAD_UPRIGHT:
+   ship.decrease_y();
+   ship.increase_x();
    break;
-   case GAMEPAD_DOWNLEFT:
-   ship.increase_y(1);
-   ship.decrease_x(1);
+   case NEONGDK::GAMEPAD_DOWNLEFT:
+   ship.increase_y();
+   ship.decrease_x();
    break;
-   case GAMEPAD_DOWNRIGHT:
-   ship.increase_y(1);
-   ship.increase_x(1);
+   case NEONGDK::GAMEPAD_DOWNRIGHT:
+   ship.increase_y();
+   ship.increase_x();
    break;
-   case GAMEPAD_LEFT:
-   ship.decrease_x(1);
+   case NEONGDK::GAMEPAD_LEFT:
+   ship.decrease_x();
    break;
-   case GAMEPAD_RIGHT:
-   ship.increase_x(1);
+   case NEONGDK::GAMEPAD_RIGHT:
+   ship.increase_x();
    break;
-   case GAMEPAD_NONE:
+   default:
    ;
    break;
   }
-  if (gamepad.get_stick_x(GAMEPAD_LEFT_STICK)==GAMEPAD_NEGATIVE_DIRECTION) ship.decrease_x(1);
-  if (gamepad.get_stick_x(GAMEPAD_LEFT_STICK)==GAMEPAD_POSITIVE_DIRECTION) ship.increase_x(1);
-  if (gamepad.get_stick_y(GAMEPAD_LEFT_STICK)==GAMEPAD_NEGATIVE_DIRECTION) ship.decrease_y(1);
-  if (gamepad.get_stick_y(GAMEPAD_LEFT_STICK)==GAMEPAD_POSITIVE_DIRECTION) ship.increase_y(1);
-  if (ship.get_x()>screen.get_frame_width()) ship.set_x(screen.get_frame_width()/2);
-  if (ship.get_y()>screen.get_frame_height()) ship.set_y(screen.get_frame_height()/2);
+  if (gamepad.get_stick_x(NEONGDK::GAMEPAD_LEFT_STICK)==NEONGDK::GAMEPAD_NEGATIVE_DIRECTION)
+  {
+   ship.decrease_x();
+  }
+  if (gamepad.get_stick_x(NEONGDK::GAMEPAD_LEFT_STICK)==NEONGDK::GAMEPAD_POSITIVE_DIRECTION)
+  {
+   ship.increase_x();
+  }
+  if (gamepad.get_stick_y(NEONGDK::GAMEPAD_LEFT_STICK)==NEONGDK::GAMEPAD_NEGATIVE_DIRECTION)
+  {
+   ship.decrease_y();
+  }
+  if (gamepad.get_stick_y(NEONGDK::GAMEPAD_LEFT_STICK)==NEONGDK::GAMEPAD_POSITIVE_DIRECTION)
+  {
+   ship.increase_y();
+  }
+  if (ship.get_x()>screen.get_width())
+  {
+   ship.set_x(screen.get_width()/2);
+  }
+  if (ship.get_y()>screen.get_height())
+  {
+   ship.set_y(screen.get_height()/2);
+  }
   itoa(screen.get_fps(),perfomance,10);
   space.draw_background();
   text.draw_text(perfomance);
@@ -102,5 +127,6 @@ int main()
   }
 
  }
+ SOUND_STOP;
  return 0;
 }
