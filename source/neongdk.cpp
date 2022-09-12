@@ -102,6 +102,9 @@ namespace NEONGDK
   {
    switch (Message)
    {
+    case WM_CREATE:
+    ;
+    break;
     case WM_CLOSE:
     DestroyWindow(window);
     break;
@@ -342,7 +345,7 @@ namespace NEONGDK
 
   void Engine::register_window_class()
   {
-   if (!RegisterClassEx(&window_class))
+   if (RegisterClassEx(&window_class)==0)
    {
     NEONGDK::Halt("Can't register window class");
    }
