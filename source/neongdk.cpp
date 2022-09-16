@@ -949,6 +949,58 @@ namespace NEONGDK
 
  }
 
+ namespace Misc
+ {
+
+  Memory::Memory()
+  {
+   memory.dwLength=sizeof(MEMORYSTATUS);
+   memory.dwAvailPageFile=0;
+   memory.dwAvailPhys=0;
+   memory.dwAvailVirtual=0;
+   memory.dwMemoryLoad=0;
+   memory.dwTotalPageFile=0;
+   memory.dwTotalPhys=0;
+   memory.dwTotalVirtual=0;
+  }
+
+  Memory::~Memory()
+  {
+
+  }
+
+  unsigned long int Memory::get_total_physical()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwTotalPhys;
+  }
+
+  unsigned long int Memory::get_free_physical()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwAvailPhys;
+  }
+
+  unsigned long int Memory::get_total_virtual()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwTotalVirtual;
+  }
+
+  unsigned long int Memory::get_free_virtual()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwAvailVirtual;
+  }
+
+  unsigned long int Memory::get_usage()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwMemoryLoad;
+  }
+
+ }
+
  namespace Input
  {
 
