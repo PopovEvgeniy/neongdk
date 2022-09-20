@@ -242,8 +242,7 @@
         guide</big></h2>
     <big><br>
       You need <a href="https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads">Visual
-C++ Redistributable Packages</a> if you game code compiled under Visual C++.
-    </big>
+C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005 or higher. </big>
     <h2><a name="mozTocId491993" class="mozTocH2"></a><big>Chapter 6. Compilers</big></h2>
     <big> This engine successfully tested with these compilers: </big> <br>
     <ul>
@@ -251,9 +250,12 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++.
       <li><a href="http://mingw-w64.org"><big>MINGW–w64</big></a></li>
       <li><a href="http://openwatcom.org"><big>Open Watcom 1.9</big></a></li>
       <li><big><a href="https://open-watcom.github.io">Open Watcom V2 Fork</a></big></li>
-      <li><big><a href="https://www.digitalmars.com">Digital Mars C++</a><br>
+      <li><big><a href="https://www.digitalmars.com">Digital Mars C++</a></big></li>
+      <li><big><a href="https://edn.embarcadero.com/article/20633">Borland's C++
+            Compiler 5.5</a><br>
         </big></li>
       <li><big>Visual C++ 6</big></li>
+      <li><big>Visual C++ 2005</big></li>
       <li><big>Visual C++ 2008<br>
         </big></li>
       <li><big>Visual C++ 2010</big></li>
@@ -263,6 +265,16 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++.
       <li><big>Visual C++ 2017</big></li>
       <li><big>Visual C++ 2019</big></li>
       <li><big>Visual C++ 2022</big></li>
+      <li><big>Ñ++ Builder 5<br>
+        </big></li>
+      <li><big>Ñ++ Builder 6<br>
+        </big></li>
+      <li><big>Ñ++ Builder 2006<br>
+        </big></li>
+      <li><big>Ñ++ Builder 2007<br>
+        </big></li>
+      <li><big>Ñ++ Builder 2009<br>
+        </big></li>
       <li><big>C++ Builder 2010</big></li>
       <li><big>C++ Builder XE</big></li>
       <li><big>C++ Builder XE2</big></li>
@@ -283,20 +295,29 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++.
         specific notes</big></h2>
     <big><span style="text-decoration: underline;"> Old processor support</span><br>
       <br>
-      You need one of follow compilers need for old processors support:<br>
+      One of follow compilers need for old processors support:<br>
     </big>
     <ul>
       <li><big>Open Watcom 1.9</big></li>
       <li><big>Open Watcom V2 Fork</big></li>
       <li><big>Digital Mars C++</big></li>
-      <li><big>Visual C++ 6<br>
+      <li><big>Visual C++ 6</big></li>
+      <li><big>Borland's C++ Compiler 5.5</big></li>
+      <li><big>Ñ++ Builder 5<br>
         </big></li>
     </ul>
     <big> <br style="text-decoration: underline;">
       <span style="text-decoration: underline;">Windows 95 support</span><br>
       <br>
-    </big><big>You need Digital Mars C++ or Visual C++ 6 for Windows 95 support.<br>
-    </big><big><br style="text-decoration: underline;">
+    </big><big>One of follow compilers need for Windows 95 support:<br>
+    </big>
+    <ul>
+      <li><big>Digital Mars C++</big></li>
+      <li><big>Visual C++ 6</big></li>
+      <li><big>Borland's C++ Compiler 5.5</big></li>
+      <li><big>Ñ++ Builder 5</big></li>
+    </ul>
+    <big> </big><big><br style="text-decoration: underline;">
       <span style="text-decoration: underline;"> Windows XP support</span><br>
       <br>
       TDM–GCC or Visual C++ 2008 need for Windows XP support.<br>
@@ -312,7 +333,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++.
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
-
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -325,7 +345,11 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++.
       <li><big> Set «Precomiled Header» option to «Not Using Precompiled
           Headers»</big></li>
     </ul>
-    <big> <br>
+    <big> <span style="text-decoration: underline;">Windows SDK</span><br>
+      <br>
+      You need <a href="https://www.microsoft.com/en-us/download/details.aspx?id=15656">Windows
+        Server 2003 SP1 Platform SDK</a> if you using Visual C++ 2005.<br>
+      <br>
       <span style="text-decoration: underline;"> Note for MINGW–w64 and TDM–GCC
         users</span><br>
       <br>
@@ -590,14 +614,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++.
       <br>
       A sprite is a transparent image. It is useful for many things: enemies,
       bonuses, etc&amp;<br>
-      <br>
-    </big><big><span style="text-decoration: underline;">Some words about sprite
-        transparency</span><br>
-      <br>
-      Some pixel will be ignored. Ignored pixels have a transparent color. How
-      to determinate it? The transparent color is&nbsp; the color of the first
-      pixel. A transparent mode enabled by default.<br>
-      <br>
+    </big><big><span style="text-decoration: underline;"></span><br>
       <span style="text-decoration: underline;"> Work with base sprite subsystem</span><br>
       <br>
       <span style="font-style: italic;"> Billboard</span> class provide simple
@@ -606,7 +623,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++.
     </big><big><br>
     </big><big><span style="font-style: italic;"> void
         Billboard::set_transparent(const bool enabled);</span> – Enable or
-      disable transparent mode.<br>
+      disable the transparent mode.<br>
       <span style="font-style: italic;"> bool Billboard::get_transparent()
         const;</span> – Return true if transparent mode is enabled.<br>
     </big><big><span style="font-style: italic;">void
@@ -1772,6 +1789,8 @@ Multimedia API</a>.<br>
       5.8.1 – Small changes.<br>
       5.8.2 – Memory subsystem back-ported from Gray game development kit 2.0.8.<br>
       5.8.3 – 5.8.4 – Small changes.<br>
+      5.8.4 – Documentation updated.<br>
+      5.8.5 – Visual C++ 2005 support added.<br>
     </big> <big> </big>
     <p></p>
   </body>
