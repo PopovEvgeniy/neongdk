@@ -163,66 +163,59 @@ namespace NEONGDK
 
   Synchronization::Synchronization()
   {
-   resolution.wPeriodMin=0;
-   resolution.wPeriodMax=0;
-   start=0;
-   delay=0;
+   event=NULL;
+   timer=0;
   }
 
   Synchronization::~Synchronization()
   {
-
-  }
-
-  void Synchronization::set_timer_resolution()
-  {
-   if (timeBeginPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
+   if (timer!=0)
    {
-    NEONGDK::Halt("Can't set timer resolution");
+    timeKillEvent(timer);
+    timer=0;
+   }
+   if (event!=NULL)
+   {
+    CloseHandle(event);
+    event=NULL;
    }
 
   }
 
-  void Synchronization::reset_timer_resolution()
+  void Synchronization::create_event()
   {
-   if (timeEndPeriod(resolution.wPeriodMin)!=TIMERR_NOERROR)
+   event=CreateEvent(NULL,TRUE,FALSE,NULL);
+   if (event==NULL)
    {
-    NEONGDK::Halt("Can't reset timer resolution");
+    NEONGDK::Halt("Can't create synchronization event");
    }
 
   }
 
-  void Synchronization::pause()
+  void Synchronization::timer_setup(const unsigned int delay)
   {
-   unsigned long int interval;
-   interval=timeGetTime()-start;
-   if(interval<delay)
+   timer=timeSetEvent(delay,0,reinterpret_cast<LPTIMECALLBACK>(event),0,TIME_PERIODIC|TIME_CALLBACK_EVENT_SET);
+   if (timer==0)
    {
-    Sleep(delay-interval);
-   }
-   start=timeGetTime();
-  }
-
-  void Synchronization::create_timer()
-  {
-   if(timeGetDevCaps(&resolution,sizeof(TIMECAPS))!=MMSYSERR_NOERROR)
-   {
-    NEONGDK::Halt("Can't get timer resolution");
+    NEONGDK::Halt("Can't set timer setting");
    }
 
   }
 
-  void Synchronization::set_timer(const unsigned long int interval)
+  void Synchronization::create_timer(const unsigned int delay)
   {
-   delay=interval;
-   start=timeGetTime();
+   this->create_event();
+   this->timer_setup(delay);
   }
 
   void Synchronization::wait_timer()
   {
-   this->set_timer_resolution();
-   this->pause();
-   this->reset_timer_resolution();
+   if (event!=NULL)
+   {
+    WaitForSingleObject(event,INFINITE);
+    ResetEvent(event);
+   }
+
   }
 
   Display::Display()
@@ -1617,8 +1610,7 @@ namespace NEONGDK
    this->prepare_engine();
    this->set_render(this->get_context(),this->get_depth());
    this->start_render(this->get_display_width(),this->get_display_height());
-   this->create_timer();
-   this->set_timer(17);
+   this->create_timer(17);
   }
 
   void Screen::clear_screen()
