@@ -212,7 +212,7 @@ namespace NEONGDK
   {
    if (event!=NULL)
    {
-    WaitForSingleObject(event,INFINITE);
+    WaitForSingleObjectEx(event,INFINITE,TRUE);
     ResetEvent(event);
    }
 
