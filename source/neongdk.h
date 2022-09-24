@@ -491,25 +491,6 @@ typedef enum
 
  }
 
- namespace Misc
- {
-
-  class Memory
-  {
-   private:
-   MEMORYSTATUS memory;
-   public:
-   Memory();
-   ~Memory();
-   unsigned long int get_total_physical();
-   unsigned long int get_free_physical();
-   unsigned long int get_total_virtual();
-   unsigned long int get_free_virtual();
-   unsigned long int get_usage();
-  };
-
- }
-
  namespace Input
  {
 

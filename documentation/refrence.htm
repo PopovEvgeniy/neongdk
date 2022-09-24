@@ -53,15 +53,10 @@
           <li><a href="#mozTocId853711">Chapter 2. Abnormal program termination</a></li>
           <li><a href="#mozTocId656377">Chapter 3. Timer</a></li>
           <li><a href="#mozTocId381935">Chapter 4. Collision</a></li>
+          <li><a href="#mozTocId375654">Chapter 5. Sound</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId511082">Part 5. Other important things</a>
-        <ul>
-          <li><a href="#mozTocId865953">Chapter 1. Memory</a></li>
-          <li><a href="#mozTocId554726">Chapter 2. Sound</a></li>
-        </ul>
-      </li>
-      <li><a href="#mozTocId209024">Part 6. Misc</a>
+      <li><a href="#mozTocId209024">Part 5. Misc</a>
         <ul>
           <li><a href="#mozTocId608755">Chapter 1. File system</a></li>
           <li><a href="#mozTocId59386">Chapter 2. Interaction with operating
@@ -69,7 +64,7 @@
           <li><a href="#mozTocId573582">Chapter 3. Resource manager</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId590919"> Part 7. Binary files</a>
+      <li><a href="#mozTocId590919"> Part 6. Binary files</a>
         <ul>
           <li><a href="#mozTocId200879">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId961921"> Chapter 2. Base binary file subsystem</a></li>
@@ -77,7 +72,7 @@
           <li><a href="#mozTocId511135"> Chapter 4. File writer</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId291572">Part 8. Input</a>
+      <li><a href="#mozTocId291572">Part 7. Input</a>
         <ul>
           <li><a href="#mozTocId783369">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId685403">Chapter 2. Keyboard</a></li>
@@ -85,7 +80,7 @@
           <li><a href="#mozTocId861609">Chapter 4. Game–pad</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId309127">Part 9. Internal details of the engine
+      <li><a href="#mozTocId309127">Part 8. Internal details of the engine
           subsystems</a>
         <ul>
           <li><a href="#mozTocId383177">Chapter 1. A few words for a curious
@@ -333,6 +328,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
+
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -934,8 +930,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       Return true and reinitialize start point if interval between stop and
       start points large or equal than specific seconds.</big><br>
     <h2><a name="mozTocId381935" class="mozTocH2"></a><big>Chapter 4. Collision</big></h2>
-    <big><br>
-      <span style="text-decoration: underline;"> An important thing for any game</span><br>
+    <big> <span style="text-decoration: underline;"> An important thing for any
+        game</span><br>
       <br>
       What is an important thing for a video games? A collision.<br>
       <br>
@@ -971,39 +967,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       <span style="font-style: italic;"> NEONGDK::BOX
         Collision::generate_box(const unsigned int x,const unsigned int y,const
         unsigned int width,const unsigned int height) const;</span> – Generate
-      collision related information from the object properties.</big><big><span
-        style="text-decoration: underline;"></span><br>
+      collision related information from the object properties.</big><big><br>
     </big>
-    <h1><a class="mozTocH1" name="mozTocId511082"></a><big>Part 5. Other
-        important things</big></h1>
-    <big></big>
-    <h2><a class="mozTocH2" name="mozTocId865953"></a><big>Chapter 1. Memory</big></h2>
-    <big><br>
-      Just use <span style="font-style: italic;">Memory</span> class to get
-      total memory size and free memory size. This class declared in <span style="font-style: italic;">Misc</span>
-      sub-namespace. Let's look at public methods.<br>
-      <br>
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_total_physical();</span> – Return total physical memory size
-      in bytes.<br>
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_free_physical();</span> – Return free physical memory size
-      in bytes.<br>
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_total_virtual();</span> – Return total <a href="https://en.wikipedia.org/wiki/Virtual_memory">virtual
-        memory</a> size in bytes.<br>
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_free_virtual(); </span>– Return free <a href="https://en.wikipedia.org/wiki/Virtual_memory">virtual
-        memory</a> size in bytes.<br>
-      <span style="font-style: italic;">unsigned long int Memory::get_usage();</span>
-      – Return percentage of physical memory usage.<br>
-      <br>
-      <span style="text-decoration: underline;">Important notice</span><br>
-      <br>
-      Memory subsystem will give incorrect information if you game compiled as
-      64–bit software.<br>
-    </big>
-    <h2><a class="mozTocH2" name="mozTocId554726"></a><big>Chapter 2. Sound</big></h2>
+    <h2><a class="mozTocH2" name="mozTocId375654"></a><big>Chapter 5. Sound</big></h2>
     <big><br>
       <span style="text-decoration: underline;">Improve you game</span><br>
       <br>
@@ -1016,19 +982,19 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       <br>
       <span style="font-style: italic;">SOUND_STOP</span> stop playing all
       sounds. It didn't take arguments.<br>
-      <br>
+      <br style="font-style: italic;">
       <span style="font-style: italic;">SOUND_PLAY</span> play a sound once. It
       takes string literal as argument.<br>
       <br>
       <span style="font-style: italic;">MUSIC_PLAY</span> play a sound in loop.
       It takes string literal as argument.<br>
-      <br>
+      <br style="text-decoration: underline;">
       <span style="text-decoration: underline;">Supported format</span><br>
       <br>
       Only <a href="https://en.wikipedia.org/wiki/Wav">Waveform Audio File
-        Format</a> supported.<br>
+        Format</a> supported.</big><big><br>
     </big> <big> </big>
-    <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 6. Misc</big></h1>
+    <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 5. Misc</big></h1>
     <h2><a name="mozTocId608755" class="mozTocH2"></a><big>Chapter 1. File
         system</big></h2>
     <big><br>
@@ -1090,7 +1056,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       delete resource array if it already exists. This function takes resource
       array handle as argument.<br>
     </big>
-    <h1><a name="mozTocId590919" class="mozTocH1"></a><big> Part 7. Binary files</big></h1>
+    <h1><a name="mozTocId590919" class="mozTocH1"></a><big> Part 6. Binary files</big></h1>
     <h2><a name="mozTocId200879" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
     <big>All subsystems in this section declared in <span style="font-style: italic;">File</span>
@@ -1143,7 +1109,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
     <big><i>void Output_File::flush();</i> – Force writing internal buffer data
       to the file.</big><br>
     <big> </big>
-    <h1><a name="mozTocId291572" class="mozTocH1"></a><big>Part 8. Input</big></h1>
+    <h1><a name="mozTocId291572" class="mozTocH1"></a><big>Part 7. Input</big></h1>
     <h2><a name="mozTocId783369" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
     <big>All subsystems in this section declared in <span style="font-style: italic;">Input</span>
@@ -1652,7 +1618,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
         Gamepad::get_right_stick_y();</span> – Return y–direction of right
       stick.<br>
     </big>
-    <h1><a name="mozTocId309127" class="mozTocH1"></a><big>Part 9. Internal
+    <h1><a name="mozTocId309127" class="mozTocH1"></a><big>Part 8. Internal
         details of the engine subsystems</big></h1>
     <big></big> <big> </big>
     <h2><a name="mozTocId383177" class="mozTocH2"></a><big>Chapter 1. A few
@@ -1737,8 +1703,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       sub–namespace.</big><br>
     <big> </big>
     <h2><a name="mozTocId472209" class="mozTocH2"></a><big>Chapter 4. Game–pad</big></h2>
-    <big><br>
-      Game–pad subsystem working over <a href="https://msdn.microsoft.com/ru-ru/library/windows/desktop/dd757116%28v=vs.85%29.aspx">Joystick
+    <big> Game–pad subsystem working over <a href="https://msdn.microsoft.com/ru-ru/library/windows/desktop/dd757116%28v=vs.85%29.aspx">Joystick
 Multimedia API</a>.<br>
     </big>
     <h2><a class="mozTocH2" name="mozTocId213518"></a><big>Chapter 6. Sound</big></h2>
@@ -1792,6 +1757,7 @@ Multimedia API</a>.<br>
       5.8.5 – Visual C++ 2005 support added.<br>
       5.8.6 – Synchronization timer rewritten.<br>
       5.8.7 – 5.8.8 – Synchronization timer improved.<br>
+      5.8.9 – Memory subsystem removed.<br>
     </big> <big> </big>
     <p></p>
   </body>
