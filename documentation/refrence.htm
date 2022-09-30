@@ -332,7 +332,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
-
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -569,17 +568,22 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       <span style="font-style: italic;"> void Background::set_setting(const
         NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span> – Set
       background setting. Last argument will ignore if background is not
-      scrollable.<br>
-      <span style="font-style: italic;"> void Background::load_background(Image
+      scrollable.<span style="font-style: italic;"></span><br>
+      <span style="font-style: italic;">void Background::load_background(Image
         *background,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
-      – Load background and set it setting.<br>
-      <span style="font-style: italic;"> void Background::load_background(Image
+      – Load background from the buffer and set it setting.<br>
+      <span style="font-style: italic;">void Background::load_background(Image
         &amp;background,const NEONGDK::IMAGE_KIND kind,const unsigned int
-        frames);</span> – Load background and set it setting.<br>
-      <span style="font-style: italic;"> void Background::load_background(Image
-        *background);</span> – Load normal background.<br>
-      <span style="font-style: italic;"> void Background::load_background(Image
-        &amp;background);</span> – Load normal background.<br>
+        frames);</span> – Load background from the buffer and set it setting.<br>
+      <span style="font-style: italic;">void Background::load_background(Image
+        *background);</span> – Load normal background from the buffer.<br>
+      <span style="font-style: italic;">void Background::load_background(Image
+        &amp;background);</span> – Load normal background from the buffer.<br>
+      <span style="font-style: italic;">void Background::load_background(const
+        char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
+      – Load background from target file and set it setting.<br>
+      <span style="font-style: italic;">void Background::load_background(const
+        char *name);</span> – Load normal background from target file.<br>
       <span style="font-style: italic;"> void Background::draw_background();</span>
       – Draw a background.<br>
       <span style="font-style: italic;"> void Background::destroy_image();</span>
@@ -708,14 +712,19 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       setting. Last argument will ignore if sprite not animated.<br>
       <span style="font-style: italic;"> void Sprite::load_sprite(Image
         *buffer,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
-      – Load a sprite and set it setting.<br>
-      <span style="font-style: italic;"> void Sprite::load_sprite(Image
-        *buffer);</span> – Load a normal sprite.<br>
-      <span style="font-style: italic;"> void Sprite::load_sprite(Image
+      – Load a sprite from the buffer and set it setting.<br>
+      <span style="font-style: italic;">void Sprite::load_sprite(Image *buffer);</span>
+      – Load a normal sprite from the buffer.<br>
+      <span style="font-style: italic;">void Sprite::load_sprite(Image
         &amp;buffer,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
-      – Load a sprite and set it setting.<br>
-      <span style="font-style: italic;"> void Sprite::load_sprite(Image
-        &amp;buffer);</span> – Load a normal sprite.<br>
+      – Load a sprite from the buffer and set it setting.<br>
+      <span style="font-style: italic;">void Sprite::load_sprite(Image
+        &amp;buffer);</span> – Load a normal sprite from the buffer.<br>
+      <span style="font-style: italic;">void Sprite::load_sprite(const char
+        *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
+      – Load a sprite from target file and set it setting.<br>
+      <span style="font-style: italic;">void Sprite::load_sprite(const char
+        *name);</span> – Load a normal sprite from target file.<br>
       <span style="font-style: italic;"> void Sprite::set_target(const unsigned
         int target);</span> – Set target frame in strip.<br>
       <span style="font-style: italic;"> void Sprite::step();</span> – Increase
@@ -786,12 +795,15 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
     </big><big><span style="font-style: italic;">void Sheet::step();</span> –
       Increase number of target frame. Set it to 1 if number of target frame
       more than frame amount.</big><br>
-    <big><span style="font-style: italic;"> void Sheet::load_tileset(Image
-        *sheet,const unsigned int row_amount,const unsigned int column_amount);</span>
-      – Load a sprite sheet.<br>
-      <span style="font-style: italic;"> void Sheet::load_tileset(Image
+    <big><span style="font-style: italic;">void Sheet::load_tileset(Image
+        *sheet,const unsigned int row_amount,const unsigned int column_amount);</span>&nbsp;
+      – Load a sprite sheet from the buffer.<br>
+      <span style="font-style: italic;">void Sheet::load_tileset(Image
         &amp;sheet,const unsigned int row_amount,const unsigned int
-        column_amount);</span> – Load a sprite sheet.<br>
+        column_amount);</span> – Load a sprite sheet from the buffer.<br>
+      <span style="font-style: italic;">void Sheet::load_tileset(const char
+        *name,const unsigned int row_amount,const unsigned int column_amount);</span>
+      – Load a sprite sheet from tagret file.<br>
       <br>
       <span style="text-decoration: underline;"> Sprite sheet texture</span><br>
       <br>
@@ -1763,6 +1775,7 @@ Multimedia API</a>.<br>
       5.8.7 – 5.8.8 – Synchronization timer improved.<br>
       5.8.9 – Memory subsystem removed.<br>
       5.8.9.1 – 5.8.9.2 – Documentation updated.<br>
+      5.9 – Source code synced with Eugene game development kit 6.3.8.<br>
     </big> <big> </big>
     <p></p>
   </body>

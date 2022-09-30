@@ -755,6 +755,8 @@ typedef enum
    void load_sprite(Image *buffer);
    void load_sprite(Image &buffer,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
    void load_sprite(Image &buffer);
+   void load_sprite(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
+   void load_sprite(const char *name);
    void set_target(const unsigned int target);
    void step();
    void clone(Sprite *target);
@@ -783,6 +785,7 @@ typedef enum
    void step();
    void load_sheet(Image *sheet,const unsigned int row_amount,const unsigned int column_amount);
    void load_sheet(Image &sheet,const unsigned int row_amount,const unsigned int column_amount);
+   void load_sheet(const char *name,const unsigned int row_amount,const unsigned int column_amount);
   };
 
   class Background
@@ -800,6 +803,8 @@ typedef enum
    void load_background(Image *background);
    void load_background(Image &background,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
    void load_background(Image &background);
+   void load_background(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
+   void load_background(const char *name);
    void set_target(const unsigned int target);
    void step();
    void draw_background();

@@ -2274,6 +2274,19 @@ namespace NEONGDK
    this->load_sprite(buffer.get_handle());
   }
 
+  void Sprite::load_sprite(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames)
+  {
+   Image picture;
+   picture.load_tga(name);
+   this->load_sprite(picture,kind,frames);
+   picture.destroy_image();
+  }
+
+  void Sprite::load_sprite(const char *name)
+  {
+   this->load_sprite(name,NEONGDK::STATIC_IMAGE,1);
+  }
+
   void Sprite::set_target(const unsigned int target)
   {
    this->set_frame(target);
@@ -2461,6 +2474,14 @@ namespace NEONGDK
    this->load_sheet(sheet.get_handle(),row_amount,column_amount);
   }
 
+  void Sheet::load_sheet(const char *name,const unsigned int row_amount,const unsigned int column_amount)
+  {
+   Image picture;
+   picture.load_tga(name);
+   this->load_sheet(picture,row_amount,column_amount);
+   picture.destroy_image();
+  }
+
   Background::Background()
   {
    stage.set_position(0,0);
@@ -2513,6 +2534,16 @@ namespace NEONGDK
   void Background::load_background(Image &background)
   {
    this->load_background(background.get_handle());
+  }
+
+  void Background::load_background(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames)
+  {
+   stage.load_sprite(name,kind,frames);
+  }
+
+  void Background::load_background(const char *name)
+  {
+   stage.load_sprite(name);
   }
 
   void Background::set_target(const unsigned int target)
