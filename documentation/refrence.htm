@@ -332,6 +332,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
+
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -864,10 +865,12 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
         int x,const unsigned int y);</span> – Set output position.<br>
       <span style="font-style: italic;"> void Text::set_size(const unsigned int
         width,const unsigned int height);</span> – Change the font size.<br>
-      <span style="font-style: italic;"> void Text::load_font(Image *font);</span>
-      – Load a font.<br>
-      <span style="font-style: italic;"> void Text::load_font(Image &amp;font);</span>
-      – Load a font.<br>
+      <span style="font-style: italic;">void Text::load_font(Image *font);</span>
+      – Load a font from the buffer.<br>
+      <span style="font-style: italic;">void Text::load_font(Image &amp;font);</span>
+      – Load a font from the buffer.<br>
+      <span style="font-style: italic;">void Text::load_font(const char *name);</span>
+      – Load a font from target file.<br>
       <span style="font-style: italic;"> void Text::draw_character(const char
         target);</span> – Draw single character at current position.<br>
       <span style="font-style: italic;"> void Text::draw_text(const char
@@ -1776,6 +1779,7 @@ Multimedia API</a>.<br>
       5.8.9 – Memory subsystem removed.<br>
       5.8.9.1 – 5.8.9.2 – Documentation updated.<br>
       5.9 – Source code synced with Eugene game development kit 6.3.8.<br>
+      5.9.1 – Source code synced with Eugene game development kit 6.3.9.<br>
     </big> <big> </big>
     <p></p>
   </body>
