@@ -2609,11 +2609,6 @@ namespace NEONGDK
    text.destroy_sheet();
   }
 
-  void Text::reset_orientation()
-  {
-   orientation=NEONGDK::HORIZONTAL_TEXT;
-  }
-
   void Text::increase_position()
   {
    if (orientation==NEONGDK::HORIZONTAL_TEXT)
@@ -2667,7 +2662,6 @@ namespace NEONGDK
   void Text::load_font(Image *font)
   {
    text.load_sheet(font,16,16);
-   this->reset_orientation();
   }
 
   void Text::load_font(Image &font)
@@ -2719,7 +2713,6 @@ namespace NEONGDK
   void Text::destroy_font()
   {
    text.destroy_sheet();
-   this->reset_orientation();
   }
 
  }
