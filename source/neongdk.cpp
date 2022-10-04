@@ -2789,16 +2789,6 @@ namespace NEONGDK
    return this->check_collision();
   }
 
-  NEONGDK::BOX Collision::generate_box(const unsigned int x,const unsigned int y,const unsigned int width,const unsigned int height) const
-  {
-   NEONGDK::BOX collision;
-   collision.x=x;
-   collision.y=y;
-   collision.width=width;
-   collision.height=height;
-   return collision;
-  }
-
  }
 
  namespace Filesystem
@@ -2827,6 +2817,16 @@ namespace NEONGDK
 
  namespace Tools
  {
+
+  NEONGDK::BOX generate_box(const unsigned int x,const unsigned int y,const unsigned int width,const unsigned int height)
+  {
+   NEONGDK::BOX collision;
+   collision.x=x;
+   collision.y=y;
+   collision.width=width;
+   collision.height=height;
+   return collision;
+  }
 
   void quit()
   {

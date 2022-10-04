@@ -876,7 +876,6 @@ typedef enum
    void set_target(const NEONGDK::BOX &first_target,const NEONGDK::BOX &second_target);
    bool check_collision() const;
    bool check_collision(const NEONGDK::BOX &first_target,const NEONGDK::BOX &second_target);
-   NEONGDK::BOX generate_box(const unsigned int x,const unsigned int y,const unsigned int width,const unsigned int height) const;
   };
 
  }
@@ -889,6 +888,7 @@ typedef enum
 
  namespace Tools
  {
+  NEONGDK::BOX generate_box(const unsigned int x,const unsigned int y,const unsigned int width,const unsigned int height);
   void quit();
   bool enable_logging(const char *name);
   void randomize();
