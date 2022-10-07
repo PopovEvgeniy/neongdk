@@ -14,9 +14,9 @@ int main()
  NEONGDK::Tools::enable_logging("log.txt");
  keyboard.initialize();
  screen.initialize();
- space.load_background("space.tga");
+ space.load("space.tga");
  space.prepare(screen);
- ship.load_sprite("ship.tga",NEONGDK::HORIZONTAL_ANIMATED,2);
+ ship.load("ship.tga",NEONGDK::HORIZONTAL_ANIMATED,2);
  ship.set_position(screen.get_width()/2,screen.get_height()/2);
  text.load_font("font.tga");
  text.set_position(text.get_font_width(),text.get_font_height());
@@ -114,9 +114,9 @@ int main()
    ship.set_y(screen.get_height()/2);
   }
   itoa(screen.get_fps(),perfomance,10);
-  space.draw_background();
-  text.draw_text(perfomance);
-  ship.draw_sprite();
+  space.draw();
+  text.print(perfomance);
+  ship.draw();
   if (timer.check_timer()==true)
   {
    ship.step();

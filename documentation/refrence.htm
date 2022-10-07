@@ -592,29 +592,29 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
         NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span> – Set
       setting. Last argument will ignore if background is not scrollable.<br>
       <span style="font-style: italic;"></span><br>
-      <span style="font-style: italic;">void Background::load_background(Image
+      <span style="font-style: italic;">void Background::load(Image
         *background,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
       – Load background from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Background::load_background(Image
+      <span style="font-style: italic;">void Background::load(Image
         &amp;background,const NEONGDK::IMAGE_KIND kind,const unsigned int
         frames);</span> – Load background from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Background::load_background(Image
+      <span style="font-style: italic;">void Background::load(Image
         *background);</span> – Load normal background from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Background::load_background(Image
+      <span style="font-style: italic;">void Background::load(Image
         &amp;background);</span> – Load normal background from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Background::load_background(const
-        char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
+      <span style="font-style: italic;">void Background::load(const char
+        *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
       – Load background from target file.<br>
       <br>
-      <span style="font-style: italic;">void Background::load_background(const
-        char *name);</span> – Load normal background from target file.<br>
+      <span style="font-style: italic;">void Background::load(const char *name);</span>
+      – Load normal background from target file.<br>
       <br>
-      <span style="font-style: italic;"> void Background::draw_background();</span>
-      – Draw a background.<br>
+      <span style="font-style: italic;"> void Background::draw();</span> – Draw
+      a background.<br>
       <br>
       <span style="font-style: italic;"> void Background::destroy_image();</span>
       – Destroy a background image.<br>
@@ -734,18 +734,18 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       information.<br>
       <br>
     </big><big> </big><big><span style="font-style: italic;">void
-        Billboard::draw_sprite();</span> – Draw a sprite.<br>
+        Billboard::draw();</span> – Draw a sprite.<br>
       <br>
-    </big> <big><span style="font-style: italic;"> void
-        Billboard::draw_sprite(const unsigned int x, const unsigned int y);</span>
-      – Set sprite position and draw it.<br>
+    </big> <big><span style="font-style: italic;"> void Billboard::draw(const
+        unsigned int x, const unsigned int y);</span> – Set sprite position and
+      draw it.<br>
       <br>
-    </big> <big><i>void Billboard::draw_sprite(const bool transparency);</i> –
-      Set transparent mode and draw a sprite.<br>
+    </big> <big><i>void Billboard::draw(const bool transparency);</i> – Set
+      transparent mode and draw a sprite.<br>
       <br>
-    </big> <big><i>void Billboard::draw_sprite(const bool transparency,const
-        unsigned int x, const unsigned int y);</i> – Set transparent mode and
-      draw a sprite at target position.</big><br>
+    </big> <big><i>void Billboard::draw(const bool transparency,const unsigned
+        int x, const unsigned int y);</i> – Set transparent mode and draw a
+      sprite at target position.</big><br>
     <big> </big>
     <h2><a name="mozTocId662651" class="mozTocH2"></a><big> Chapter 8. Ordinary
         sprites</big></h2>
@@ -772,26 +772,26 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
         NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span> – Set sprite
       setting. Last argument will ignore if sprite not animated.<br>
       <br>
-      <span style="font-style: italic;"> void Sprite::load_sprite(Image
-        *buffer,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
-      – Load a sprite from the buffer and set it setting.<br>
+      <span style="font-style: italic;"> void Sprite::load(Image *buffer,const
+        NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span> – Load a
+      sprite from the buffer and set it setting.<br>
       <br>
-      <span style="font-style: italic;">void Sprite::load_sprite(Image *buffer);</span>
+      <span style="font-style: italic;">void Sprite::load(Image *buffer);</span>
       – Load a normal sprite from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Sprite::load_sprite(Image
+      <span style="font-style: italic;">void Sprite::load(Image
         &amp;buffer,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
       – Load a sprite from the buffer and set it setting.<br>
       <br>
-      <span style="font-style: italic;">void Sprite::load_sprite(Image
-        &amp;buffer);</span> – Load a normal sprite from the buffer.<br>
+      <span style="font-style: italic;">void Sprite::load(Image &amp;buffer);</span>
+      – Load a normal sprite from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Sprite::load_sprite(const char
-        *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span>
-      – Load a sprite from target file and set it setting.<br>
+      <span style="font-style: italic;">void Sprite::load(const char *name,const
+        NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span> – Load a
+      sprite from target file and set it setting.<br>
       <br>
-      <span style="font-style: italic;">void Sprite::load_sprite(const char
-        *name);</span> – Load a normal sprite from target file.<br>
+      <span style="font-style: italic;">void Sprite::load(const char *name);</span>
+      – Load a normal sprite from target file.<br>
       <br>
       <span style="font-style: italic;"> void Sprite::set_target(const unsigned
         int target);</span> – Set target frame in strip.<br>
@@ -878,18 +878,17 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       Increase number of target frame. Set it to 1 if number of target frame
       more than frame amount.<br>
       <br>
-    </big> <big><span style="font-style: italic;">void
-        Sheet::load_tileset(Image *sheet,const unsigned int row_amount,const
-        unsigned int column_amount);</span>&nbsp; – Load a sprite sheet from the
-      buffer.<br>
+    </big> <big><span style="font-style: italic;">void Sheet::load(Image
+        *sheet,const unsigned int row_amount,const unsigned int column_amount);</span>&nbsp;
+      – Load a sprite sheet from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Sheet::load_tileset(Image
-        &amp;sheet,const unsigned int row_amount,const unsigned int
-        column_amount);</span> – Load a sprite sheet from the buffer.<br>
+      <span style="font-style: italic;">void Sheet::load(Image &amp;sheet,const
+        unsigned int row_amount,const unsigned int column_amount);</span> – Load
+      a sprite sheet from the buffer.<br>
       <br>
-      <span style="font-style: italic;">void Sheet::load_tileset(const char
-        *name,const unsigned int row_amount,const unsigned int column_amount);</span>
-      – Load a sprite sheet from tagret file.<br>
+      <span style="font-style: italic;">void Sheet::load(const char *name,const
+        unsigned int row_amount,const unsigned int column_amount);</span> – Load
+      a sprite sheet from tagret file.<br>
       <br>
       <span style="text-decoration: underline;"> Sprite sheet texture</span><br>
       <br>
@@ -965,17 +964,17 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       <span style="font-style: italic;">void Text::load_font(const char *name);</span>
       – Load a font from target file.<br>
       <br>
-      <span style="font-style: italic;"> void Text::draw_character(const char
-        target);</span> – Draw single character at current position.<br>
+      <span style="font-style: italic;"> void Text::print(const char target);</span>
+      – Draw single character at current position.<br>
       <br>
-      <span style="font-style: italic;"> void Text::draw_text(const char
-        *target);</span> – Draw text at current position.<br>
+      <span style="font-style: italic;"> void Text::print(const char *target);</span>
+      – Draw text at current position.<br>
       <br>
-      <span style="font-style: italic;"> void Text::draw_character(const
-        unsigned int x,const unsigned int y,const char target);</span> – Draw
-      single character at specific position.<br>
+      <span style="font-style: italic;"> void Text::print(const unsigned int
+        x,const unsigned int y,const char target);</span> – Draw single
+      character at specific position.<br>
       <br>
-      <span style="font-style: italic;"> void Text::draw_text(const unsigned int
+      <span style="font-style: italic;"> void Text::print(const unsigned int
         x,const unsigned int y,const char *target);</span> – Draw text at
       specific position.<br>
       <br>
@@ -1926,6 +1925,7 @@ Multimedia API</a>.<br>
       5.9.3 – Source code synced with Eugene game development kit 6.4.1.<br>
       5.9.3.1 – Documentation updated.<br>
       5.9.4 – Source code synced with Eugene game development kit 6.4.2.<br>
+      5.9.5 – Source code synced with Eugene game development kit 6.4.9.<br>
     </big> <big> </big>
     <p></p>
   </body>
