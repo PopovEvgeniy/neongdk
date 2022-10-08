@@ -99,8 +99,7 @@
     <big> </big>
     <h2><a name="mozTocId471990" class="mozTocH2"></a><big>Chapter 1.
         Introduction</big></h2>
-    <big><br style="text-decoration: underline;">
-      <span style="text-decoration: underline;"> Introduction</span><br>
+    <big> <span style="text-decoration: underline;"> Introduction</span><br>
       <br>
       Hello from Russia. My name is Popov Evgeniy Alekseyevich. I am the
       individual programmer. I enjoy creating software. I also like old–school
@@ -156,8 +155,7 @@
       Also thanks to PVS–Studio team for <a href="https://www.viva64.com/en/b/0614/">free
         license</a>. </big>
     <h2><a name="mozTocId810132" class="mozTocH2"></a><big>Chapter 3. License</big></h2>
-    <big><br>
-      <span style="text-decoration: underline;"> Neon game development kit
+    <big> <span style="text-decoration: underline;"> Neon game development kit
         license</span><br>
       <br>
       Copyright (C) 2017 – 2022 Popov Evgeniy Alekseyevich<br>
@@ -234,8 +232,7 @@
     <big> </big>
     <h2><a name="mozTocId928115" class="mozTocH2"></a><big>Chapter 5. Trouble
         guide</big></h2>
-    <big><br>
-      You need <a href="https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads">Visual
+    <big> You need <a href="https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads">Visual
 C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005 or higher. </big>
     <h2><a name="mozTocId491993" class="mozTocH2"></a><big>Chapter 6. Compilers</big></h2>
     <big> This engine successfully tested with these compilers: </big> <br>
@@ -398,8 +395,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
     <big> </big>
     <h2><a name="mozTocId552078" class="mozTocH2"></a><big>Chapter 2. Base
         graphics subsystem</big></h2>
-    <big><br>
-      <span style="text-decoration: underline;"> Introduce to base graphics
+    <big> <span style="text-decoration: underline;"> Introduce to base graphics
         subsystem</span><br>
       <br>
       Base graphics subsystem do rendering game scene. This subsystem using <a
@@ -771,7 +767,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       <br>
       <span style="font-style: italic;"> void Sprite::set_setting(const
         NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span> – Set sprite
-      setting. Last argument will ignore if sprite not animated.<br>
+      settings. Last argument will ignore if sprite not animated.<br>
       <br>
       <span style="font-style: italic;"> void Sprite::load(Image *buffer,const
         NEONGDK::IMAGE_KIND kind,const unsigned int frames);</span> – Load a
@@ -937,12 +933,11 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       <span style="font-style: italic;"> Text</span> class provide a simple
       interface to text subsystem. Let's look at public methods.<br>
       <br>
-      <span style="font-style: italic;"> NEONGDK::TEXT_ORIENTATION
+      <span style="font-style: italic;"> NEONGDK::TEXT_KIND
         Text::get_orientation() const;</span> – Get current text orientation.<br>
       <br>
       <span style="font-style: italic;"> void Text::set_orientation(const
-        NEONGDK::TEXT_ORIENTATION target);</span> – Set current text
-      orientation.<br>
+        NEONGDK::TEXT_KIND target);</span> – Set current text orientation.<br>
       <br>
       <span style="font-style: italic;"> unsigned int Text::get_font_width()
         const;</span> – Get current font width in pixels.<br>
@@ -955,6 +950,10 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++ 2005
       <br>
       <span style="font-style: italic;"> void Text::set_size(const unsigned int
         width,const unsigned int height);</span> – Change the font size.<br>
+      <br>
+      <span style="font-style: italic;">void Text::set_setting(const unsigned
+        int width,const unsigned int height,const NEONGDK::TEXT_KIND kind);</span>
+      – Set text output settings.<br>
       <br>
       <span style="font-style: italic;">void Text::load_font(Image *font);</span>
       – Load a font from the buffer.<br>
@@ -1928,6 +1927,7 @@ Multimedia API</a>.<br>
       5.9.4 – Source code synced with Eugene game development kit 6.4.2.<br>
       5.9.5 – Source code synced with Eugene game development kit 6.4.9.<br>
       5.9.6 – Source code synced with Eugene game development kit 6.5.2.<br>
+      5.9.7 – Source code synced with Eugene game development kit 6.5.4.<br>
     </big> <big> </big>
     <p></p>
   </body>

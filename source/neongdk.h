@@ -84,7 +84,7 @@ namespace NEONGDK
  {
   HORIZONTAL_TEXT=0,
   VERTICAL_TEXT=1
- } TEXT_ORIENTATION;
+ } TEXT_KIND;
 
  typedef enum
  {
@@ -821,7 +821,7 @@ typedef enum
   {
    private:
    Graphics::Sheet text;
-   NEONGDK::TEXT_ORIENTATION orientation;
+   NEONGDK::TEXT_KIND orientation;
    unsigned int current_x;
    unsigned int current_y;
    void increase_position();
@@ -829,12 +829,13 @@ typedef enum
    public:
    Text();
    ~Text();
-   NEONGDK::TEXT_ORIENTATION get_orientation() const;
-   void set_orientation(const NEONGDK::TEXT_ORIENTATION target);
+   NEONGDK::TEXT_KIND get_orientation() const;
+   void set_orientation(const NEONGDK::TEXT_KIND target);
    unsigned int get_font_width() const;
    unsigned int get_font_height() const;
    void set_position(const unsigned int x,const unsigned int y);
    void set_size(const unsigned int width,const unsigned int height);
+   void set_setting(const unsigned int width,const unsigned int height,const NEONGDK::TEXT_KIND kind);
    void load_font(Image *font);
    void load_font(Image &font);
    void load_font(const char *name);
