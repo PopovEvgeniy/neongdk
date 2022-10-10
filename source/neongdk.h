@@ -253,7 +253,7 @@ typedef enum
  {
 
   template <class RESOURCE>
-  RESOURCE *create_resource()
+  RESOURCE *create()
   {
    RESOURCE *target=NULL;
    try
@@ -268,7 +268,7 @@ typedef enum
   }
 
   template <class RESOURCE>
-  RESOURCE *create_resource_array(const size_t amount)
+  RESOURCE *create_array(const size_t amount)
   {
    RESOURCE *target=NULL;
    try
@@ -283,7 +283,7 @@ typedef enum
   }
 
   template <class RESOURCE>
-  void delete_resource(RESOURCE *target)
+  void destroy(RESOURCE *target)
   {
    if (target!=NULL)
    {
@@ -293,7 +293,7 @@ typedef enum
   }
 
   template <class RESOURCE>
-  void delete_resource_array(RESOURCE *target)
+  void destroy_array(RESOURCE *target)
   {
    if (target!=NULL)
    {
@@ -338,7 +338,7 @@ typedef enum
 
   ~Buffer()
   {
-   Resource::delete_resource_array(buffer);
+   Resource::destroy_array(buffer);
    buffer=NULL;
    length=0;
   }
@@ -350,7 +350,7 @@ typedef enum
 
   void destroy_buffer()
   {
-   Resource::delete_resource_array(buffer);
+   Resource::destroy_array(buffer);
    buffer=NULL;
    length=0;
   }
@@ -367,7 +367,7 @@ typedef enum
 
   void create_buffer()
   {
-   buffer=Resource::create_resource_array<DATA_TYPE>(length);
+   buffer=Resource::create_array<DATA_TYPE>(length);
   }
 
   size_t get_length() const
