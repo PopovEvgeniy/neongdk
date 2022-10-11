@@ -124,6 +124,9 @@ namespace NEONGDK
     case WM_CREATE:
     ;
     break;
+    case WM_PAINT:
+    ValidateRect(window,NULL);
+    break;
     case WM_CLOSE:
     DestroyWindow(window);
     break;
