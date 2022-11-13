@@ -1221,7 +1221,7 @@ namespace NEONGDK
     dpad=NEONGDK::GAMEPAD_LEFT;
     break;
     case JOY_POVRIGHT:
-    dpad=GAMEPAD_RIGHT;
+    dpad=NEONGDK::GAMEPAD_RIGHT;
     break;
     case JOYSTICK_UPLEFT:
     dpad=NEONGDK::GAMEPAD_UPLEFT;
@@ -1254,11 +1254,11 @@ namespace NEONGDK
      control=(configuration.wXmax-configuration.wXmin)/2;
      if (current.dwXpos<control)
      {
-      directional=GAMEPAD_NEGATIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
      if (current.dwXpos>control)
      {
-      directional=GAMEPAD_POSITIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
 
     }
@@ -1271,11 +1271,11 @@ namespace NEONGDK
      control=(configuration.wZmax-configuration.wZmin)/2;
      if (current.dwZpos<control)
      {
-      directional=GAMEPAD_NEGATIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
      if (current.dwZpos>control)
      {
-      directional=GAMEPAD_POSITIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
 
     }
@@ -1296,11 +1296,11 @@ namespace NEONGDK
      control=(configuration.wYmax-configuration.wYmin)/2;
      if (current.dwYpos<control)
      {
-      directional=GAMEPAD_NEGATIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
      if (current.dwYpos>control)
      {
-      directional=GAMEPAD_POSITIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
 
     }
@@ -1313,11 +1313,11 @@ namespace NEONGDK
      control=(configuration.wRmax-configuration.wRmin)/2;
      if (current.dwRpos<control)
      {
-      directional=GAMEPAD_NEGATIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
      if (current.dwRpos>control)
      {
-      directional=GAMEPAD_POSITIVE_DIRECTION;
+      directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
 
     }
