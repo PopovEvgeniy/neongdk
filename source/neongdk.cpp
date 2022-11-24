@@ -1245,18 +1245,16 @@ namespace NEONGDK
   NEONGDK::GAMEPAD_DIRECTION Gamepad::get_stick_x(const NEONGDK::GAMEPAD_STICKS stick)
   {
    NEONGDK::GAMEPAD_DIRECTION directional;
-   unsigned long int control;
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
    if (stick==NEONGDK::GAMEPAD_LEFT_STICK)
    {
     if (this->get_sticks_amount()>0)
     {
-     control=(configuration.wXmax-configuration.wXmin)/2;
-     if (current.dwXpos<control)
+     if (current.dwXpos<=configuration.wXmin)
      {
       directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
-     if (current.dwXpos>control)
+     if (current.dwXpos>=configuration.wXmax)
      {
       directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
@@ -1268,12 +1266,11 @@ namespace NEONGDK
    {
     if (this->get_sticks_amount()>1)
     {
-     control=(configuration.wZmax-configuration.wZmin)/2;
-     if (current.dwZpos<control)
+     if (current.dwZpos<=configuration.wZmin)
      {
       directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
-     if (current.dwZpos>control)
+     if (current.dwZpos>=configuration.wZmax)
      {
       directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
@@ -1287,18 +1284,16 @@ namespace NEONGDK
   NEONGDK::GAMEPAD_DIRECTION Gamepad::get_stick_y(const NEONGDK::GAMEPAD_STICKS stick)
   {
    NEONGDK::GAMEPAD_DIRECTION directional;
-   unsigned long int control;
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
    if (stick==NEONGDK::GAMEPAD_LEFT_STICK)
    {
     if (this->get_sticks_amount()>0)
     {
-     control=(configuration.wYmax-configuration.wYmin)/2;
-     if (current.dwYpos<control)
+     if (current.dwYpos<=configuration.wYmin)
      {
       directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
-     if (current.dwYpos>control)
+     if (current.dwYpos>=configuration.wYmax)
      {
       directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
@@ -1310,12 +1305,11 @@ namespace NEONGDK
    {
     if (this->get_sticks_amount()>1)
     {
-     control=(configuration.wRmax-configuration.wRmin)/2;
-     if (current.dwRpos<control)
+     if (current.dwRpos<=configuration.wRmin)
      {
       directional=NEONGDK::GAMEPAD_NEGATIVE_DIRECTION;
      }
-     if (current.dwRpos>control)
+     if (current.dwRpos>=configuration.wRmax)
      {
       directional=NEONGDK::GAMEPAD_POSITIVE_DIRECTION;
      }
