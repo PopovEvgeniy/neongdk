@@ -158,7 +158,7 @@
     <big> <span style="text-decoration: underline;"> Neon game development kit
         license</span><br>
       <br>
-      Copyright (C) 2017 – 2022 Popov Evgeniy Alekseyevich<br>
+      Copyright (C) 2017 – 2023 Popov Evgeniy Alekseyevich<br>
       <br>
       This software is provided 'as–is', without any express or implied<br>
       warranty. In no event will the authors be held liable for any damages<br>
@@ -1057,6 +1057,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;"> void Timer::set_timer(const double
         seconds); </span>– Set timer interval and initialize start point.<br>
       <br>
+      <span style="font-style: italic;">double Timer::get_interval() const;</span>
+      – Return current timer interval.<br>
+      <br>
       <span style="font-style: italic;"> bool Timer::check_timer();</span> –
       Return true and reinitialize start point if interval between stop and
       start points large or equal than specific seconds.</big><br>
@@ -1074,10 +1077,11 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;"> typedef struct</span><br style="font-style: italic;">
       <span style="font-style: italic;"> {</span><br style="font-style: italic;">
-      <span style="font-style: italic;"> unsigned int x;</span><br style="font-style: italic;">
-      <span style="font-style: italic;"> unsigned int y;</span><br style="font-style: italic;">
-      <span style="font-style: italic;"> unsigned int width;</span><br style="font-style: italic;">
-      <span style="font-style: italic;"> unsigned int height;</span><br style="font-style: italic;">
+      &nbsp; <span style="font-style: italic;"> unsigned int x;</span><br style="font-style: italic;">
+      &nbsp; <span style="font-style: italic;"> unsigned int y;</span><br style="font-style: italic;">
+      &nbsp; <span style="font-style: italic;"> unsigned int width;</span><br style="font-style: italic;">
+      &nbsp; <span style="font-style: italic;"> unsigned int height;</span><br
+        style="font-style: italic;">
       <span style="font-style: italic;"> } BOX;</span><br>
       <br>
       <span style="text-decoration: underline;"> Work with collision detector</span><br>
@@ -1859,8 +1863,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     <big> </big><br>
     <big style="font-style: italic;"> typedef struct Vertex</big><br style="font-style: italic;">
     <big style="font-style: italic;"> {</big><br style="font-style: italic;">
-    <big style="font-style: italic;"> int x;</big><br style="font-style: italic;">
-    <big style="font-style: italic;"> int y;</big><br style="font-style: italic;">
+    &nbsp; <big style="font-style: italic;">int x;</big><br style="font-style: italic;">
+    &nbsp; <big style="font-style: italic;"> int y;</big><br style="font-style: italic;">
     <big style="font-style: italic;"> };</big><br>
     <big> </big><br>
     <big> </big><big>Single texture coordinate represent by follow custom data
@@ -1868,8 +1872,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     <big> </big><br>
     <big style="font-style: italic;"> typedef struct</big><br style="font-style: italic;">
     <big style="font-style: italic;"> {</big><br style="font-style: italic;">
-    <big style="font-style: italic;"> double u;</big><br style="font-style: italic;">
-    <big style="font-style: italic;"> double v;</big><br style="font-style: italic;">
+    &nbsp; <big style="font-style: italic;">double u;</big><br style="font-style: italic;">
+    &nbsp; <big style="font-style: italic;"> double v;</big><br style="font-style: italic;">
     <big style="font-style: italic;"> } Point;</big><br>
     <big> </big> <br>
     <big>All these custom types declared in <span style="font-style: italic;">Core</span>
@@ -1948,6 +1952,7 @@ Multimedia API</a>.<br>
       6.0.1 – Source code synced with Eugene game development kit 6.5.8.<br>
       6.0.2 – Source code synced with Eugene game development kit 6.5.9.<br>
       6.0.3 – Source code synced with Eugene game development kit 6.6.1.<br>
+      6.0.4 – Source code synced with Eugene game development kit 6.7.1.<br>
     </big> <big> </big>
     <p></p>
   </body>
