@@ -7,6 +7,7 @@ int main()
  NEONGDK::Input::Keyboard keyboard;
  NEONGDK::Input::Gamepad gamepad;
  NEONGDK::Input::Mouse mouse;
+ NEONGDK::Misc::Multimedia media;
  NEONGDK::Graphics::Screen screen;
  NEONGDK::Graphics::Background space;
  NEONGDK::Graphics::Sprite ship;
@@ -22,11 +23,12 @@ int main()
  text.set_position(text.get_font_width(),text.get_font_height());
  mouse.hide();
  timer.set_timer(1);
+ media.load("space.mp3");
  memset(perfomance,0,8);
- MUSIC_PLAY("space.wav");
  while(screen.sync())
  {
   gamepad.update();
+  media.play_loop();
   if (mouse.check_press(NEONGDK::MOUSE_LEFT)==true)
   {
    break;
@@ -139,6 +141,5 @@ int main()
   }
 
  }
- SOUND_STOP;
  return 0;
 }

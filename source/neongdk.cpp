@@ -997,6 +997,174 @@ namespace NEONGDK
 
  }
 
+ namespace Misc
+ {
+
+  Multimedia::Multimedia()
+  {
+   target=0;
+  }
+
+  Multimedia::~Multimedia()
+  {
+   if (target!=0)
+   {
+    mciSendCommand(target,MCI_STOP,MCI_WAIT,0);
+    mciSendCommand(target,MCI_CLOSE,MCI_WAIT,0);
+   }
+
+  }
+
+  void Multimedia::open(const char *name)
+  {
+   MCI_OPEN_PARMSA setting;
+   setting.dwCallback=0;
+   setting.wDeviceID=0;
+   setting.lpstrDeviceType=NULL;
+   setting.lpstrAlias=NULL;
+   setting.lpstrElementName=name;
+   if (mciSendCommandA(target,MCI_OPEN,MCI_OPEN_ELEMENT|MCI_WAIT,reinterpret_cast<DWORD_PTR>(&setting))==0)
+   {
+    target=setting.wDeviceID;
+   }
+
+  }
+
+  void Multimedia::close()
+  {
+   if (target!=0)
+   {
+    mciSendCommand(target,MCI_CLOSE,MCI_WAIT,0);
+    target=0;
+   }
+
+  }
+
+  void Multimedia::play_content()
+  {
+   MCI_PLAY_PARMS setting;
+   setting.dwCallback=0;
+   setting.dwFrom=0;
+   setting.dwTo=0;
+   if (target!=0)
+   {
+    mciSendCommand(target,MCI_PLAY,MCI_FROM,reinterpret_cast<DWORD_PTR>(&setting));
+   }
+
+  }
+
+  void Multimedia::disable_video()
+  {
+   MCI_OVLY_WINDOW_PARMS setting;
+   setting.dwCallback=0;
+   setting.hWnd=NULL;
+   setting.lpstrText=NULL;
+   setting.nCmdShow=SW_HIDE;
+   if (target!=NULL)
+   {
+    mciSendCommand(target,MCI_WINDOW,MCI_OVLY_WINDOW_STATE,reinterpret_cast<DWORD_PTR>(&setting));
+   }
+
+  }
+
+  bool Multimedia::check_playing()
+  {
+   MCI_STATUS_PARMS status;
+   status.dwCallback=0;
+   status.dwTrack=0;
+   status.dwItem=MCI_STATUS_MODE;
+   status.dwReturn=MCI_MODE_STOP;
+   if (target!=0)
+   {
+    if (mciSendCommand(target,MCI_STATUS,MCI_STATUS_ITEM|MCI_WAIT,reinterpret_cast<DWORD_PTR>(&status))!=0)
+    {
+     status.dwReturn=MCI_MODE_STOP;
+    }
+
+   }
+   return status.dwReturn==MCI_MODE_PLAY;
+  }
+
+  void Multimedia::stop()
+  {
+   if (target!=0)
+   {
+    mciSendCommand(target,MCI_STOP,MCI_WAIT,0);
+   }
+
+  }
+
+  void Multimedia::play()
+  {
+   this->play_content();
+   this->disable_video();
+  }
+
+  void Multimedia::play_loop()
+  {
+   if (this->check_playing()==false)
+   {
+    this->play();
+   }
+
+  }
+
+  void Multimedia::load(const char *name)
+  {
+   this->stop();
+   this->close();
+   this->open(name);
+  }
+
+  Memory::Memory()
+  {
+   memory.dwLength=sizeof(MEMORYSTATUS);
+   memory.dwAvailPageFile=0;
+   memory.dwAvailPhys=0;
+   memory.dwAvailVirtual=0;
+   memory.dwMemoryLoad=0;
+   memory.dwTotalPageFile=0;
+   memory.dwTotalPhys=0;
+   memory.dwTotalVirtual=0;
+  }
+
+  Memory::~Memory()
+  {
+
+  }
+
+  unsigned long int Memory::get_total_physical()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwTotalPhys;
+  }
+
+  unsigned long int Memory::get_free_physical()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwAvailPhys;
+  }
+
+  unsigned long int Memory::get_total_virtual()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwTotalVirtual;
+  }
+
+  unsigned long int Memory::get_free_virtual()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwAvailVirtual;
+  }
+
+  unsigned long int Memory::get_usage()
+  {
+   GlobalMemoryStatus(&memory);
+   return memory.dwMemoryLoad;
+  }
+
+ }
+
  namespace Input
  {
 

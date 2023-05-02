@@ -66,10 +66,6 @@ THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMP
 #include <mmsystem.h>
 #include <GL\gl.h>
 
-#define SOUND_STOP PlaySound(NULL,NULL,SND_ASYNC)
-#define SOUND_PLAY(sound) PlaySound(TEXT(sound),NULL,SND_FILENAME|SND_NODEFAULT|SND_ASYNC)
-#define MUSIC_PLAY(music) PlaySound(TEXT(music),NULL,SND_FILENAME|SND_NODEFAULT|SND_ASYNC|SND_LOOP)
-
 namespace NEONGDK
 {
 
@@ -495,6 +491,43 @@ typedef enum
    public:
    Render();
    ~Render();
+  };
+
+ }
+
+ namespace Misc
+ {
+
+  class Multimedia
+  {
+   private:
+   unsigned int target;
+   void open(const char *name);
+   void close();
+   void play_content();
+   void disable_video();
+   public:
+   Multimedia();
+   ~Multimedia();
+   bool check_playing();
+   void stop();
+   void play();
+   void play_loop();
+   void load(const char *name);
+  };
+
+  class Memory
+  {
+   private:
+   MEMORYSTATUS memory;
+   public:
+   Memory();
+   ~Memory();
+   unsigned long int get_total_physical();
+   unsigned long int get_free_physical();
+   unsigned long int get_total_virtual();
+   unsigned long int get_free_virtual();
+   unsigned long int get_usage();
   };
 
  }

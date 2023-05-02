@@ -12,7 +12,7 @@ Features
  Don’t need to the link main program with the engine binary file. The engine is just source code files with all engine codes.
  Wide range of supported compilers.
  Two render back-end: hardware accelerated OPENGL and software emulated OPENGL.
- Easy to use object-orientated API
+ Easy to use object-orientated API.
  Animated and static sprites.
  Scrollable and static backgrounds.
  Sprite-sheets.
@@ -23,4 +23,4 @@ Features
  Collision detector.
  Integrated fps counter.
  Powerful input subsystem: keyboard, mouse, game-pad.
- Simple sound subsystem.
+ Simple multimedia subsystem for playing music and sound.
