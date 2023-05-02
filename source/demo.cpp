@@ -23,7 +23,7 @@ int main()
  text.set_position(text.get_font_width(),text.get_font_height());
  mouse.hide();
  timer.set_timer(1);
- media.load("space.mp3");
+ media.load("space.wav");
  memset(perfomance,0,8);
  while(screen.sync())
  {

@@ -1020,7 +1020,7 @@ namespace NEONGDK
    MCI_OPEN_PARMSA setting;
    setting.dwCallback=0;
    setting.wDeviceID=0;
-   setting.lpstrDeviceType=NULL;
+   setting.lpstrDeviceType="waveaudio";
    setting.lpstrAlias=NULL;
    setting.lpstrElementName=name;
    if (mciSendCommandA(target,MCI_OPEN,MCI_OPEN_ELEMENT|MCI_WAIT,reinterpret_cast<DWORD_PTR>(&setting))==0)
@@ -1036,33 +1036,6 @@ namespace NEONGDK
    {
     mciSendCommand(target,MCI_CLOSE,MCI_WAIT,0);
     target=0;
-   }
-
-  }
-
-  void Multimedia::play_content()
-  {
-   MCI_PLAY_PARMS setting;
-   setting.dwCallback=0;
-   setting.dwFrom=0;
-   setting.dwTo=0;
-   if (target!=0)
-   {
-    mciSendCommand(target,MCI_PLAY,MCI_FROM,reinterpret_cast<DWORD_PTR>(&setting));
-   }
-
-  }
-
-  void Multimedia::disable_video()
-  {
-   MCI_OVLY_WINDOW_PARMS setting;
-   setting.dwCallback=0;
-   setting.hWnd=NULL;
-   setting.lpstrText=NULL;
-   setting.nCmdShow=SW_HIDE;
-   if (target!=NULL)
-   {
-    mciSendCommand(target,MCI_WINDOW,MCI_OVLY_WINDOW_STATE,reinterpret_cast<DWORD_PTR>(&setting));
    }
 
   }
@@ -1096,8 +1069,15 @@ namespace NEONGDK
 
   void Multimedia::play()
   {
-   this->play_content();
-   this->disable_video();
+   MCI_PLAY_PARMS setting;
+   setting.dwCallback=0;
+   setting.dwFrom=0;
+   setting.dwTo=0;
+   if (target!=0)
+   {
+    mciSendCommand(target,MCI_PLAY,MCI_FROM,reinterpret_cast<DWORD_PTR>(&setting));
+   }
+
   }
 
   void Multimedia::play_loop()
