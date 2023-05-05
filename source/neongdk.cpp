@@ -952,10 +952,15 @@ namespace NEONGDK
 
   void Render::set_common_setting()
   {
-   glDepthMask(GL_TRUE);
    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
    glAlphaFunc(GL_GREATER,0.1f);
    glClearColor(0.0,0.0,0.0,0.0);
+  }
+
+  void Render::disable_depth_buffer()
+  {
+   glClear(GL_DEPTH_BUFFER_BIT);
+   glDepthMask(GL_FALSE);
   }
 
  void Render::set_matrix_setting()
@@ -981,6 +986,7 @@ namespace NEONGDK
    this->set_common_setting();
    this->set_perspective(width,height);
    this->set_matrix_setting();
+   this->disable_depth_buffer();
    MAXIMUM_TEXTURE_SIZE=this->get_maximum_texture_size();
   }
 
