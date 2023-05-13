@@ -7,7 +7,7 @@ int main()
  NEONGDK::Input::Keyboard keyboard;
  NEONGDK::Input::Gamepad gamepad;
  NEONGDK::Input::Mouse mouse;
- NEONGDK::Misc::Multimedia media;
+ NEONGDK::Misc::Audio media;
  NEONGDK::Graphics::Screen screen;
  NEONGDK::Graphics::Background space;
  NEONGDK::Graphics::Sprite ship;

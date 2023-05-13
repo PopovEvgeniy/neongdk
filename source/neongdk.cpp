@@ -1006,12 +1006,12 @@ namespace NEONGDK
  namespace Misc
  {
 
-  Multimedia::Multimedia()
+  Audio::Audio()
   {
    target=0;
   }
 
-  Multimedia::~Multimedia()
+  Audio::~Audio()
   {
    if (target!=0)
    {
@@ -1021,7 +1021,7 @@ namespace NEONGDK
 
   }
 
-  void Multimedia::open(const char *name)
+  void Audio::open(const char *name)
   {
    MCI_OPEN_PARMSA setting;
    setting.dwCallback=0;
@@ -1036,7 +1036,7 @@ namespace NEONGDK
 
   }
 
-  void Multimedia::close()
+  void Audio::close()
   {
    if (target!=0)
    {
@@ -1046,7 +1046,7 @@ namespace NEONGDK
 
   }
 
-  bool Multimedia::check_playing()
+  bool Audio::check_playing()
   {
    MCI_STATUS_PARMS status;
    status.dwCallback=0;
@@ -1064,7 +1064,7 @@ namespace NEONGDK
    return status.dwReturn==MCI_MODE_PLAY;
   }
 
-  void Multimedia::stop()
+  void Audio::stop()
   {
    if (target!=0)
    {
@@ -1073,7 +1073,7 @@ namespace NEONGDK
 
   }
 
-  void Multimedia::play()
+  void Audio::play()
   {
    MCI_PLAY_PARMS setting;
    setting.dwCallback=0;
@@ -1086,7 +1086,7 @@ namespace NEONGDK
 
   }
 
-  void Multimedia::play_loop()
+  void Audio::play_loop()
   {
    if (this->check_playing()==false)
    {
@@ -1095,7 +1095,7 @@ namespace NEONGDK
 
   }
 
-  void Multimedia::load(const char *name)
+  void Audio::load(const char *name)
   {
    this->stop();
    this->close();
@@ -2018,11 +2018,11 @@ namespace NEONGDK
 
   void Picture::load_image(Image *buffer)
   {
-   this->destroy_image();
    if (buffer!=NULL)
    {
     if (buffer->get_length()>0)
     {
+     this->destroy_image();
      this->set_image_size(buffer->get_width(),buffer->get_height());
      this->create_storage();
      memcpy(image.get_buffer(),buffer->get_data(),buffer->get_length());

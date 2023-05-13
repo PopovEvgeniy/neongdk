@@ -23,4 +23,4 @@ Features
  Collision detector.
  Integrated fps counter.
  Powerful input subsystem: keyboard, mouse, game-pad.
- Simple multimedia subsystem for playing music and sound.
+ Simple audio subsystem for playing music and sound.

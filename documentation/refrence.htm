@@ -59,7 +59,7 @@
         <ul>
           <li><a href="#mozTocId76865">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId194608">Chapter 2. Memory</a></li>
-          <li><a href="#mozTocId692799">Chapter 3. Multimedia</a></li>
+          <li><a href="#mozTocId692799">Chapter 3. Audio</a></li>
         </ul>
       </li>
       <li><a href="#mozTocId209024">Part 6. Misc</a>
@@ -93,7 +93,7 @@
           <li><a href="#mozTocId318160">Chapter 2. Internal classes</a></li>
           <li><a href="#mozTocId293644">Chapter 3. Base graphics subsystem</a></li>
           <li><a href="#mozTocId472209">Chapter 4. Game–pad</a></li>
-          <li><a href="#mozTocId213518">Chapter 5. Multimedia</a></li>
+          <li><a href="#mozTocId213518">Chapter 5. Audio</a></li>
           <li><a href="#mozTocId804583">Chapter 6. Input</a></li>
         </ul>
       </li>
@@ -1122,7 +1122,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       &nbsp; <span style="font-style: italic;"> unsigned int y;</span><br style="font-style: italic;">
       &nbsp; <span style="font-style: italic;"> unsigned int width;</span><br style="font-style: italic;">
       &nbsp; <span style="font-style: italic;"> unsigned int height;</span><br
-
         style="font-style: italic;">
       <span style="font-style: italic;"> } BOX;</span><br>
       <br>
@@ -1185,32 +1184,32 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       This subsystem can give incorrect information under modern system with big
       RAM.<br>
     </big>
-    <h2><a class="mozTocH2" name="mozTocId692799"></a><big>Chapter 3. Multimedia</big></h2>
-    <big><span style="text-decoration: underline;">A few words about multimedia
+    <h2><a class="mozTocH2" name="mozTocId692799"></a><big>Chapter 3. Audio</big></h2>
+    <big><span style="text-decoration: underline;">A few words about sound
         subsystem</span><br>
       <br>
-      Multimedia subsystem intend for playing music and sounds. Only <a href="https://en.wikipedia.org/wiki/WAV">Waveform
+      Audio subsystem intend for playing music and sounds. Only <a href="https://en.wikipedia.org/wiki/WAV">Waveform
 Audio File Format</a> are supported.<br>
       <span style="text-decoration: underline;"></span><br>
-      <span style="text-decoration: underline;">Working with multimedia</span><br>
+      <span style="text-decoration: underline;">Working with sound</span><br>
       <br>
-      Just use <span style="font-style: italic;">Multimedia</span> class to
-      work with multimedia. Let's look at public methods.<br>
+      Just use <span style="font-style: italic;">Audio</span> class to work
+      with sound. Let's look at public methods.<br>
       <br>
-      <span style="font-style: italic;">void Multimedia::load(const char
-        *target);</span> – Load a multimedia file.<br>
+      <span style="font-style: italic;">void Audio::load(const char *target);</span>
+      – Load a sound file.<br>
       <br>
-      <span style="font-style: italic;">void Multimedia::play();</span> – Play a
+      <span style="font-style: italic;">void Audio::play();</span> – Play a
       content of the target file.<br>
       <br>
-      <span style="font-style: italic;">void Multimedia::play_loop();</span> –
+      <span style="font-style: italic;">void Audio::play_loop();</span> –
       Checking play status and restart play if needed.<br>
       <br>
-      <span style="font-style: italic;">void Multimedia::stop();</span> – Stop
+      <span style="font-style: italic;">void Audio::stop();</span> – Stop
       playing a content of the target file.<br>
       <br>
-      <span style="font-style: italic;">bool Multimedia::check_playing();</span>
-      – Return true if the multimedia resource is playing.<br>
+      <span style="font-style: italic;">bool Audio::check_playing();</span> –
+      Return true if the sound resource is playing.<br>
     </big><big> </big> <big> </big>
     <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 6. Misc</big></h1>
     <h2><a name="mozTocId608755" class="mozTocH2"></a><big>Chapter 1. File
@@ -1964,11 +1963,11 @@ Audio File Format</a> are supported.<br>
     <big> </big>
     <h2><a name="mozTocId472209" class="mozTocH2"></a><big>Chapter 4. Game–pad</big></h2>
     <big> Game–pad subsystem working over <a href="https://msdn.microsoft.com/ru-ru/library/windows/desktop/dd757116%28v=vs.85%29.aspx">Joystick
-Multimedia API</a>.<br>
+        Audio API</a>.<br>
     </big>
-    <h2><a class="mozTocH2" name="mozTocId213518"></a><big>Chapter 5. Multimedia</big></h2>
-    <big>Multimedia subsystem working over <a href="https://msdn.microsoft.com/ru-ru/library/windows/desktop/dd743606%28v=vs.85%29.aspx">Windows
-        Multimedia</a>.<br>
+    <h2><a class="mozTocH2" name="mozTocId213518"></a><big>Chapter 5. Audio</big></h2>
+    <big>Audio subsystem working over <a href="https://msdn.microsoft.com/ru-ru/library/windows/desktop/dd743606%28v=vs.85%29.aspx">Windows
+        Audio</a>.<br>
     </big>
     <h2><a name="mozTocId804583" class="mozTocH2"></a><big>Chapter 6. Input</big></h2>
     <big> <span style="text-decoration: underline;"> Input back–end</span><br>
@@ -2035,16 +2034,18 @@ Multimedia API</a>.<br>
       6.0.3 – Source code synced with Eugene game development kit 6.6.1.<br>
       6.0.4 – Source code synced with Eugene game development kit 6.7.1.<br>
       6.0.5 – Source code synced with Eugene game development kit 6.7.6.<br>
-      6.0.6 – Multimedia subsystem back-ported from Simple windows game framework 6.4.9.<br>
-      6.0.7 – 6.0.8 – Multimedia subsystem improved.<br>
+      6.0.6 – Audio subsystem back-ported from Simple windows game framework
+      6.4.9.<br>
+      6.0.7 – 6.0.8 – Audio subsystem improved.<br>
       6.0.9 – Simple sound subsystem removed.<br>
       6.1 – Memory subsystem back-ported from Gray game development kit 2.0.8.<br>
-      6.1.1 – Multimedia subsystem improved.<br>
+      6.1.1 – Audio subsystem improved.<br>
       6.1.2 – Source code synced with Eugene game development kit 6.7.7.<br>
       6.1.3 – Source code synced with Eugene game development kit 6.7.8.<br>
       6.1.4 – Source code synced with Eugene game development kit 6.7.9.<br>
       6.1.5 – Source code synced with Eugene game development kit 6.8.<br>
       6.1.6 – Source code synced with Eugene game development kit 6.8.2.<br>
+      6.1.7 – Source code synced with Eugene game development kit 6.8.4.<br>
     </big> <big> </big>
     <p></p>
   </body>

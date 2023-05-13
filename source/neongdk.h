@@ -499,15 +499,15 @@ typedef enum
  namespace Misc
  {
 
-  class Multimedia
+  class Audio
   {
    private:
    unsigned int target;
    void open(const char *name);
    void close();
    public:
-   Multimedia();
-   ~Multimedia();
+   Audio();
+   ~Audio();
    bool check_playing();
    void stop();
    void play();
