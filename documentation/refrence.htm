@@ -221,10 +221,6 @@
           </td>
         </tr>
         <tr>
-          <td><big>System type </big></td>
-          <td><big>32 or 64 bits </big></td>
-        </tr>
-        <tr>
           <td><big>Minimum color depth </big></td>
           <td><big>16 bits </big></td>
         </tr>
@@ -1194,8 +1190,13 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     <big><span style="text-decoration: underline;">A few words about sound
         subsystem</span><br>
       <br>
-      Audio subsystem intend for playing music and sounds. Only <a href="https://en.wikipedia.org/wiki/WAV">Waveform
-Audio File Format</a> are supported.<br>
+      Audio subsystem intend for playing music and sounds. <a href="https://en.wikipedia.org/wiki/MP3">MPEG
+        Audio Layer 3</a> and <a href="https://en.wikipedia.org/wiki/Windows_Media_Audio">Waveform
+        Audio File Format</a> are supported.<br>
+      <br>
+      <span style="text-decoration: underline;">Additional formats</span><br>
+      <br>
+      You can use an additional format if you install third–party codecs.<br>
       <span style="text-decoration: underline;"></span><br>
       <span style="text-decoration: underline;">Working with sound</span><br>
       <br>
@@ -1866,18 +1867,20 @@ Audio File Format</a> are supported.<br>
       game–pad sticks.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_stick_x(const NEONGDK::GAMEPAD_STICKS stick) const;</span> –
-      Return x–direction of specific stick.<br>
+        Gamepad::get_stick_x(const NEONGDK::GAMEPAD_STICKS stick) const;</span>
+      – Return x–direction of specific stick.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_stick_y(const NEONGDK::GAMEPAD_STICKS stick) const;</span> –
-      Return y–direction of specific stick.<br>
+        Gamepad::get_stick_y(const NEONGDK::GAMEPAD_STICKS stick) const;</span>
+      – Return y–direction of specific stick.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_left_stick_x() const;</span> – Return x–direction of left stick.<br>
+        Gamepad::get_left_stick_x() const;</span> – Return x–direction of left
+      stick.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_left_stick_y() const;</span> – Return y–direction of left stick.<br>
+        Gamepad::get_left_stick_y() const;</span> – Return y–direction of left
+      stick.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
         Gamepad::get_right_stick_x() const;</span> – Return x–direction of right
@@ -2062,7 +2065,9 @@ Audio File Format</a> are supported.<br>
       6.2.1 – Source code synced with Eugene game development kit 6.9.<br>
       6.2.2 – Source code synced with Eugene game development kit 6.9.1.<br>
       6.2.3 – Source code synced with Eugene game development kit 6.9.2.<br>
-    <big> </big>
+      6.2.4 – Audio subsystem improved.<br>
+      <big> </big> </big>
     <p></p>
+    <big> </big>
   </body>
 </html>

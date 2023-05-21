@@ -505,6 +505,8 @@ typedef enum
    unsigned int target;
    void open(const char *name);
    void close();
+   void play_content();
+   void disable_video();
    public:
    Audio();
    ~Audio();
