@@ -1054,6 +1054,7 @@ namespace NEONGDK
    setting.lpstrDeviceType=NULL;
    setting.lpstrAlias=NULL;
    setting.lpstrElementName=name;
+   target=0;
    if (mciSendCommandA(target,MCI_OPEN,MCI_OPEN_ELEMENT|MCI_WAIT,reinterpret_cast<DWORD_PTR>(&setting))==0)
    {
     target=setting.wDeviceID;
@@ -1091,7 +1092,7 @@ namespace NEONGDK
    setting.hWnd=NULL;
    setting.lpstrText=NULL;
    setting.nCmdShow=SW_HIDE;
-   if (target!=NULL)
+   if (target!=0)
    {
     mciSendCommand(target,MCI_WINDOW,MCI_OVLY_WINDOW_STATE,reinterpret_cast<DWORD_PTR>(&setting));
    }
