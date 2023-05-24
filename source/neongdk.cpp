@@ -190,7 +190,7 @@ namespace NEONGDK
    interval=timeGetTime()-start;
    if(interval<delay)
    {
-    SleepEx(delay-interval,TRUE);
+    SleepEx(delay-interval,FALSE);
    }
    start=timeGetTime();
   }
