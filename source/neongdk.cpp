@@ -163,59 +163,59 @@ namespace NEONGDK
 
   Synchronization::Synchronization()
   {
-   start=0;
-   delay=0;
-   resolution.wPeriodMin=1;
-   resolution.wPeriodMax=0;
+   event=NULL;
+   timer=0;
   }
 
   Synchronization::~Synchronization()
   {
-
-  }
-
-  void Synchronization::set_timer_resolution()
-  {
-   timeBeginPeriod(resolution.wPeriodMin);
-  }
-
-  void Synchronization::reset_timer_resolution()
-  {
-   timeEndPeriod(resolution.wPeriodMin);
-  }
-
-  void Synchronization::pause()
-  {
-   unsigned long int interval;
-   interval=timeGetTime()-start;
-   if(interval<delay)
+   if (timer!=0)
    {
-    SleepEx(delay-interval,FALSE);
+    timeKillEvent(timer);
+    timer=0;
    }
-   start=timeGetTime();
-  }
-
-  void Synchronization::create_timer()
-  {
-   if(timeGetDevCaps(&resolution,sizeof(TIMECAPS))!=MMSYSERR_NOERROR)
+   if (event!=NULL)
    {
-    resolution.wPeriodMin=1;
-    resolution.wPeriodMax=0;
+    CloseHandle(event);
+    event=NULL;
    }
 
   }
 
-  void Synchronization::set_timer(const unsigned long int interval)
+  void Synchronization::create_event()
   {
-   delay=interval;
-   start=timeGetTime();
+   event=CreateEvent(NULL,TRUE,FALSE,NULL);
+   if (event==NULL)
+   {
+    NEONGDK::Halt("Can't create synchronization event");
+   }
+
+  }
+
+  void Synchronization::timer_setup(const unsigned int delay)
+  {
+   timer=timeSetEvent(delay,0,reinterpret_cast<LPTIMECALLBACK>(event),0,TIME_PERIODIC|TIME_CALLBACK_EVENT_SET);
+   if (timer==0)
+   {
+    NEONGDK::Halt("Can't set timer setting");
+   }
+
+  }
+
+  void Synchronization::create_timer(const unsigned int delay)
+  {
+   this->create_event();
+   this->timer_setup(delay);
   }
 
   void Synchronization::wait_timer()
   {
-   this->set_timer_resolution();
-   this->pause();
-   this->reset_timer_resolution();
+   if (event!=NULL)
+   {
+    WaitForSingleObjectEx(event,INFINITE,TRUE);
+    ResetEvent(event);
+   }
+
   }
 
   Display::Display()
@@ -1062,16 +1062,6 @@ namespace NEONGDK
 
   }
 
-  void Audio::close()
-  {
-   if (target!=0)
-   {
-    mciSendCommand(target,MCI_CLOSE,MCI_WAIT,0);
-    target=0;
-   }
-
-  }
-
   void Audio::play_content()
   {
    MCI_PLAY_PARMS setting;
@@ -1117,6 +1107,17 @@ namespace NEONGDK
    return status.dwReturn==MCI_MODE_PLAY;
   }
 
+  void Audio::close()
+  {
+   if (target!=0)
+   {
+    mciSendCommand(target,MCI_STOP,MCI_WAIT,0);
+    mciSendCommand(target,MCI_CLOSE,MCI_WAIT,0);
+    target=0;
+   }
+
+  }
+
   void Audio::stop()
   {
    if (target!=0)
@@ -1143,7 +1144,6 @@ namespace NEONGDK
 
   void Audio::load(const char *name)
   {
-   this->stop();
    this->close();
    this->open(name);
   }
@@ -1787,8 +1787,7 @@ namespace NEONGDK
    this->prepare_engine();
    this->set_render(this->get_context(),this->get_depth());
    this->start_render(this->get_display_width(),this->get_display_height());
-   this->create_timer();
-   this->set_timer(17);
+   this->create_timer(17);
   }
 
   void Screen::clear_screen()

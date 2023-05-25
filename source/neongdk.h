@@ -171,15 +171,12 @@ typedef enum
   class Synchronization
   {
    private:
-   TIMECAPS resolution;
-   unsigned long int start;
-   unsigned long int delay;
-   void set_timer_resolution();
-   void reset_timer_resolution();
-   void pause();
+   HANDLE event;
+   MMRESULT timer;
+   void create_event();
+   void timer_setup(const unsigned int delay);
    protected:
-   void create_timer();
-   void set_timer(const unsigned long int interval);
+   void create_timer(const unsigned int delay);
    void wait_timer();
    public:
    Synchronization();
@@ -507,13 +504,13 @@ typedef enum
    private:
    unsigned int target;
    void open(const char *name);
-   void close();
    void play_content();
    void disable_video();
    public:
    Audio();
    ~Audio();
    bool check_playing();
+   void close();
    void stop();
    void play();
    void play_loop();

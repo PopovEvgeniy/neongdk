@@ -1207,13 +1207,16 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       – Load a sound file.<br>
       <br>
       <span style="font-style: italic;">void Audio::play();</span> – Play a
-      content of the target file.<br>
+      sound.<br>
       <br>
       <span style="font-style: italic;">void Audio::play_loop();</span> –
       Checking play status and restart play if needed.<br>
       <br>
+      <span style="font-style: italic;">void Audio::close();</span> – Stop
+      playing if needed and close a sound file if it already loaded.<br>
+      <br>
       <span style="font-style: italic;">void Audio::stop();</span> – Stop
-      playing a content of the target file.<br>
+      playing a sound.<br>
       <br>
       <span style="font-style: italic;">bool Audio::check_playing();</span> –
       Return true if the sound resource is playing.<br>
@@ -2068,6 +2071,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.2.5 – 6.2.6 – Small bug fixed.<br>
       6.2.7 – Synchronization timer back-ported from Neon game development kit 5.8.5.<br>
       6.2.8 – 6.3.1 – Synchronization timer improved.<br>
+      6.3.2 – Audio subsystem improved.<br>
       <big> </big> </big>
     <p></p>
     <big> </big>
