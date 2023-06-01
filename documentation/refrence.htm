@@ -336,6 +336,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
+
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -917,6 +918,17 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;">void Sheet::load(const char *name,const
         unsigned int row_amount,const unsigned int column_amount);</span> – Load
       a sprite sheet from tagret file.<br>
+      <br>
+      <span style="font-style: italic;">Sheet* Sheet::get_handle();</span> –
+      Return the handle to sprite sheet.<br>
+      <br>
+      <span style="font-style: italic;">void Sheet::clone(Sheet *target);</span>
+      – Create copy of the sprite sheet if the image storage of target sprite
+      sheet is not empty.<br>
+      <br>
+      <span style="font-style: italic;">void Sheet::clone(Sheet &amp;target);</span>
+      – Create copy of the sprite sheet if the image storage of target sprite
+      sheet is not empty.<br>
       <br>
       <span style="text-decoration: underline;"> Sprite sheet texture</span><br>
       <br>
@@ -2072,6 +2084,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.2.7 – Synchronization timer back-ported from Neon game development kit 5.8.5.<br>
       6.2.8 – 6.3.1 – Synchronization timer improved.<br>
       6.3.2 – Audio subsystem improved.<br>
+      6.3.3 – Source code synced with Eugene game development kit 6.9.4.<br>
       <big> </big> </big>
     <p></p>
     <big> </big>
