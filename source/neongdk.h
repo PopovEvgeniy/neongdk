@@ -514,6 +514,8 @@ typedef enum
    void stop();
    void play();
    void play_loop();
+   void play(const bool loop);
+   bool is_load() const;
    void load(const char *name);
   };
 
@@ -805,9 +807,9 @@ typedef enum
    void load(const char *name);
    void set_target(const unsigned int target);
    void step();
+   void destroy();
    void clone(Sprite *target);
    void clone(Sprite &target);
-   void destroy();
   };
 
   class Sheet:public Billboard,public Picture,public Animation
@@ -826,9 +828,9 @@ typedef enum
    unsigned int calculate(const unsigned int row,const unsigned int column) const;
    unsigned int get_rows() const;
    unsigned int get_columns() const;
+   void destroy();
    void clone(Sheet *target);
    void clone(Sheet &target);
-   void destroy();
    void select(const unsigned int row,const unsigned int column);
    void select(const unsigned int target);
    void step();

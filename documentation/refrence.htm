@@ -336,7 +336,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
-
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -1224,6 +1223,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;">void Audio::play_loop();</span> –
       Checking play status and restart play if needed.<br>
       <br>
+      <span style="font-style: italic;">void Audio::play(const bool loop);</span>
+      – Play a sound. You can set loop flag as true for loop playing mode.<br>
+      <br>
       <span style="font-style: italic;">void Audio::close();</span> – Stop
       playing if needed and close a sound file if it already loaded.<br>
       <br>
@@ -1232,6 +1234,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;">bool Audio::check_playing();</span> –
       Return true if the sound resource is playing.<br>
+      <br>
+      <span style="font-style: italic;">bool Audio::is_load() const;</span> –
+      Return true if the sound is already loaded.<br>
     </big><big> </big> <big> </big>
     <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 6. Misc</big></h1>
     <h2><a name="mozTocId608755" class="mozTocH2"></a><big>Chapter 1. File
@@ -2085,6 +2090,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.2.8 – 6.3.1 – Synchronization timer improved.<br>
       6.3.2 – Audio subsystem improved.<br>
       6.3.3 – Source code synced with Eugene game development kit 6.9.4.<br>
+      6.3.4 – Audio subsystem improved.<br>
       <big> </big> </big>
     <p></p>
     <big> </big>
