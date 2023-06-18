@@ -549,6 +549,8 @@ namespace NEONGDK
    size_limit=0;
    source_width=0;
    source_height=0;
+   x_ratio=0;
+   y_ratio=0;
    target_width=1;
    target_height=1;
   }
@@ -563,17 +565,25 @@ namespace NEONGDK
    return static_cast<size_t>(x)+static_cast<size_t>(y)*static_cast<size_t>(source_width);
   }
 
+  unsigned int Resizer::get_source_x(const unsigned int target_x) const
+  {
+   return (target_x*x_ratio)/UCHAR_MAX;
+  }
+
+  unsigned int Resizer::get_source_y(const unsigned int target_y) const
+  {
+   return (target_y*y_ratio)/UCHAR_MAX;
+  }
+
   void Resizer::resize_image(const unsigned int *target)
   {
    size_t index;
-   unsigned int x,y,x_ratio,y_ratio;
+   unsigned int x,y;
    x=0;
    y=0;
-   x_ratio=(source_width*UCHAR_MAX)/target_width;
-   y_ratio=(source_height*UCHAR_MAX)/target_height;
    for (index=0;index<image.get_length();++index)
    {
-    image[index]=target[this->get_source_offset((x*x_ratio)/UCHAR_MAX,(y*y_ratio)/UCHAR_MAX)];
+    image[index]=target[this->get_source_offset(this->get_source_x(x),this->get_source_y(y))];
     ++x;
     if (x==target_width)
     {
@@ -590,6 +600,12 @@ namespace NEONGDK
    source_width=width;
    source_height=height;
    size_limit=limit;
+  }
+
+  void Resizer::calculate_scale_ratio()
+  {
+   x_ratio=(source_width*UCHAR_MAX)/target_width;
+   y_ratio=(source_height*UCHAR_MAX)/target_height;
   }
 
   void Resizer::calculate_size()
@@ -630,6 +646,7 @@ namespace NEONGDK
   {
    this->set_setting(width,height,limit);
    this->calculate_size();
+   this->calculate_scale_ratio();
    this->correct_size();
    this->create_texture();
    this->resize_image(target);
