@@ -646,8 +646,8 @@ namespace NEONGDK
   {
    this->set_setting(width,height,limit);
    this->calculate_size();
-   this->calculate_scale_ratio();
    this->correct_size();
+   this->calculate_scale_ratio();
    this->create_texture();
    this->resize_image(target);
   }
