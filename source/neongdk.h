@@ -595,6 +595,7 @@ typedef enum
    void update();
    unsigned int get_amount();
    unsigned int get_button_amount() const;
+   unsigned int get_stick_amount();
    void set_active(const unsigned int gamepad);
    NEONGDK::GAMEPAD_DPAD get_dpad() const;
    NEONGDK::GAMEPAD_DIRECTION get_stick_x(const NEONGDK::GAMEPAD_STICKS stick) const;
