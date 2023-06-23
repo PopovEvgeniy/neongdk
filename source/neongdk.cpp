@@ -546,7 +546,6 @@ namespace NEONGDK
   Resizer::Resizer()
   {
    image.set_length(0);
-   size_limit=0;
    source_width=0;
    source_height=0;
    x_ratio=0;
@@ -618,11 +617,23 @@ namespace NEONGDK
 
   }
 
-  void Resizer::set_setting(const unsigned int width,const unsigned int height,const unsigned int limit)
+  void Resizer::set_setting(const unsigned int width,const unsigned int height)
   {
    source_width=width;
    source_height=height;
-   size_limit=limit;
+  }
+
+  void Resizer::correct_size(const unsigned int limit)
+  {
+   if (target_width>limit)
+   {
+    target_width=limit;
+   }
+   if (target_height>limit)
+   {
+    target_height=limit;
+   }
+
   }
 
   void Resizer::calculate_scale_ratio()
@@ -644,19 +655,6 @@ namespace NEONGDK
 
   }
 
-  void Resizer::correct_size()
-  {
-   if (target_width>size_limit)
-   {
-    target_width=size_limit;
-   }
-   if (target_height>size_limit)
-   {
-    target_height=size_limit;
-   }
-
-  }
-
   void Resizer::create_texture()
   {
    size_t length;
@@ -667,9 +665,9 @@ namespace NEONGDK
 
   void Resizer::make_texture(const unsigned int *target,const unsigned int width,const unsigned int height,const unsigned int limit)
   {
-   this->set_setting(width,height,limit);
+   this->set_setting(width,height);
    this->calculate_size();
-   this->correct_size();
+   this->correct_size(limit);
    this->calculate_scale_ratio();
    this->create_texture();
    this->resize_image(target);
