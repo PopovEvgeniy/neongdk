@@ -325,6 +325,9 @@ typedef enum
 
  double get_start_offset(const double current,const double total);
  double get_end_offset(const double current,const double total);
+ NEONGDK::GAMEPAD_DIRECTION get_horizontal_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum);
+ NEONGDK::GAMEPAD_DIRECTION get_inverted_direction(const NEONGDK::GAMEPAD_DIRECTION target);
+ NEONGDK::GAMEPAD_DIRECTION get_vertical_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum);
 
  template <class DATA_TYPE>
  class Buffer
@@ -587,8 +590,8 @@ typedef enum
    JOYCAPS configuration;
    unsigned int active;
    void clear_state();
-   bool check_current_state(const unsigned long int button) const;
-   bool check_preversion_state(const unsigned long int button) const;
+   bool check_current_state(const NEONGDK::GAMEPAD_BUTTONS button) const;
+   bool check_preversion_state(const NEONGDK::GAMEPAD_BUTTONS button) const;
    public:
    Gamepad();
    ~Gamepad();
@@ -598,12 +601,12 @@ typedef enum
    unsigned int get_stick_amount();
    void set_active(const unsigned int gamepad);
    NEONGDK::GAMEPAD_DPAD get_dpad() const;
-   NEONGDK::GAMEPAD_DIRECTION get_stick_x(const NEONGDK::GAMEPAD_STICKS stick) const;
-   NEONGDK::GAMEPAD_DIRECTION get_stick_y(const NEONGDK::GAMEPAD_STICKS stick) const;
-   NEONGDK::GAMEPAD_DIRECTION get_left_stick_x() const;
-   NEONGDK::GAMEPAD_DIRECTION get_left_stick_y() const;
-   NEONGDK::GAMEPAD_DIRECTION get_right_stick_x() const;
-   NEONGDK::GAMEPAD_DIRECTION get_right_stick_y() const;
+   NEONGDK::GAMEPAD_DIRECTION get_stick_x(const NEONGDK::GAMEPAD_STICKS stick);
+   NEONGDK::GAMEPAD_DIRECTION get_stick_y(const NEONGDK::GAMEPAD_STICKS stick);
+   NEONGDK::GAMEPAD_DIRECTION get_left_stick_x();
+   NEONGDK::GAMEPAD_DIRECTION get_left_stick_y();
+   NEONGDK::GAMEPAD_DIRECTION get_right_stick_x();
+   NEONGDK::GAMEPAD_DIRECTION get_right_stick_y();
    bool check_left_trigger() const;
    bool check_right_trigger() const;
    bool check_hold(const NEONGDK::GAMEPAD_BUTTONS button) const;
