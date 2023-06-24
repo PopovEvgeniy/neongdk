@@ -1640,16 +1640,6 @@ namespace NEONGDK
    return this->get_stick_y(NEONGDK::GAMEPAD_RIGHT_STICK);
   }
 
-  bool Gamepad::check_left_trigger() const
-  {
-   return current.dwZpos>(configuration.wZmax/2);
-  }
-
-  bool Gamepad::check_right_trigger() const
-  {
-   return current.dwZpos<(configuration.wZmax/2);
-  }
-
   bool Gamepad::check_hold(const NEONGDK::GAMEPAD_BUTTONS button) const
   {
    return this->check_current_state(button);

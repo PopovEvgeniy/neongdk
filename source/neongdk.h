@@ -607,8 +607,6 @@ typedef enum
    NEONGDK::GAMEPAD_DIRECTION get_left_stick_y();
    NEONGDK::GAMEPAD_DIRECTION get_right_stick_x();
    NEONGDK::GAMEPAD_DIRECTION get_right_stick_y();
-   bool check_left_trigger() const;
-   bool check_right_trigger() const;
    bool check_hold(const NEONGDK::GAMEPAD_BUTTONS button) const;
    bool check_press(const NEONGDK::GAMEPAD_BUTTONS button) const;
    bool check_release(const NEONGDK::GAMEPAD_BUTTONS button) const;
