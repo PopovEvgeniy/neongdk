@@ -1848,6 +1848,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         Gamepad::get_button_amount();</span> – Return amount of the game–pad
       buttons.<br>
       <br>
+      <span style="font-style: italic;">unsigned int Gamepad::get_stick_amount()
+        const;</span> – Return amount of the game–pad sticks.<br>
+      <br>
       <span style="font-style: italic;"> void Gamepad::update();</span> – Update
       internal game–pad state. Always call it before call another methods.<br>
       <br>
@@ -1857,13 +1860,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DPAD
         Gamepad::get_dpad() const;</span> – Return code of current pressed or
       holding D–pad button.<br>
-      <br>
-      <span style="font-style: italic;">bool Gamepad::check_left_trigger()
-        const;</span> – Return true if the left trigger is press or holding.<br>
-      <br>
-      <span style="font-style: italic;">bool Gamepad::check_right_trigger()
-        const;</span> – Return true if the right trigger is press or holding.<br>
-      <br>
+      <span style="font-style: italic;"></span><br>
       <span style="font-style: italic;"> bool Gamepad::check_hold(const
         NEONGDK::GAMEPAD_BUTTONS button) const;</span> – Return true if the
       button is press or holding.<br>
@@ -1877,25 +1874,27 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       button was release.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_stick_x(const NEONGDK::GAMEPAD_STICKS stick);</span> –
-      Return x–direction of specific stick.<br>
+        Gamepad::get_stick_x(const NEONGDK::GAMEPAD_STICKS stick) const;</span>
+      – Return x–direction of specific stick.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_stick_y(const NEONGDK::GAMEPAD_STICKS stick);</span> –
-      Return y–direction of specific stick.<br>
+        Gamepad::get_stick_y(const NEONGDK::GAMEPAD_STICKS stick) const;</span>
+      – Return y–direction of specific stick.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_left_stick_x();</span> – Return x–direction of left stick.<br>
-      <br>
-      <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_left_stick_y();</span> – Return y–direction of left stick.<br>
-      <br>
-      <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_right_stick_x();</span> – Return x–direction of right
+        Gamepad::get_left_stick_x() const;</span> – Return x–direction of left
       stick.<br>
       <br>
       <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
-        Gamepad::get_right_stick_y();</span> – Return y–direction of right
+        Gamepad::get_left_stick_y() const;</span> – Return y–direction of left
+      stick.<br>
+      <br>
+      <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
+        Gamepad::get_right_stick_x() const;</span> – Return x–direction of right
+      stick.<br>
+      <br>
+      <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
+        Gamepad::get_right_stick_y() const;</span> – Return y–direction of right
       stick.<br>
     </big>
     <h1><a name="mozTocId309127" class="mozTocH1"></a><big>Part 9. Internal
@@ -2092,6 +2091,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.4.5 – Source code synced with Eugene game development kit 7.1.4.<br>
       6.4.6 – Source code synced with Eugene game development kit 7.1.5.<br>
       6.4.7 – Source code synced with Eugene game development kit 7.1.6.<br>
+      6.4.8 – Source code synced with Eugene game development kit 7.1.7.<br>
       <big> </big> </big>
     <p></p>
     <big> </big>

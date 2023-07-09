@@ -1556,13 +1556,9 @@ namespace NEONGDK
    return configuration.wNumButtons;
   }
 
-  unsigned int Gamepad::get_stick_amount()
+  unsigned int Gamepad::get_stick_amount() const
   {
-   if (configuration.wNumAxes==0)
-   {
-    configuration.wNumAxes=1;
-   }
-   return configuration.wNumAxes/2;
+   return (configuration.wNumAxes==0) ? 0:(configuration.wNumAxes/2);
   }
 
   void Gamepad::set_active(const unsigned int gamepad)
@@ -1612,7 +1608,7 @@ namespace NEONGDK
    return dpad;
   }
 
-  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_stick_x(const NEONGDK::GAMEPAD_STICKS stick)
+  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_stick_x(const NEONGDK::GAMEPAD_STICKS stick) const
   {
    NEONGDK::GAMEPAD_DIRECTION directional;
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
@@ -1635,7 +1631,7 @@ namespace NEONGDK
    return directional;
   }
 
-  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_stick_y(const NEONGDK::GAMEPAD_STICKS stick)
+  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_stick_y(const NEONGDK::GAMEPAD_STICKS stick) const
   {
    NEONGDK::GAMEPAD_DIRECTION directional;
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
@@ -1658,22 +1654,22 @@ namespace NEONGDK
    return directional;
   }
 
-  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_left_stick_x()
+  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_left_stick_x() const
   {
    return this->get_stick_x(NEONGDK::GAMEPAD_LEFT_STICK);
   }
 
-  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_left_stick_y()
+  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_left_stick_y() const
   {
    return this->get_stick_y(NEONGDK::GAMEPAD_LEFT_STICK);
   }
 
-  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_right_stick_x()
+  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_right_stick_x() const
   {
    return this->get_stick_x(NEONGDK::GAMEPAD_RIGHT_STICK);
   }
 
-  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_right_stick_y()
+  NEONGDK::GAMEPAD_DIRECTION Gamepad::get_right_stick_y() const
   {
    return this->get_stick_y(NEONGDK::GAMEPAD_RIGHT_STICK);
   }
