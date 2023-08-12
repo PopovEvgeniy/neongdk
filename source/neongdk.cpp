@@ -2224,15 +2224,6 @@ namespace NEONGDK
 
   }
 
-  void Animation::correct_frame()
-  {
-   if (frame>frames)
-   {
-    frame=1;
-   }
-
-  }
-
   void Animation::reset_animation_setting()
   {
    frame=1;
@@ -2242,16 +2233,24 @@ namespace NEONGDK
   void Animation::increase_frame()
   {
    ++frame;
-   this->correct_frame();
+   if (frame>frames)
+   {
+    frame=1;
+   }
+
   }
 
   void Animation::set_frame(const unsigned int target)
   {
    if (target>0)
    {
-    frame=target;
+    if (target<=frames)
+    {
+     frame=target;
+    }
+
    }
-   this->correct_frame();
+
   }
 
   void Animation::set_frames(const unsigned int amount)
