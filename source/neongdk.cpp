@@ -2995,6 +2995,12 @@ namespace NEONGDK
    stage.draw(false);
   }
 
+  void Background::draw(const unsigned int target)
+  {
+   stage.set_target(target);
+   stage.draw(false);
+  }
+
   void Background::destroy_image()
   {
    stage.destroy_image();
