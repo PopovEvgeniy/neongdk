@@ -864,9 +864,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <img src="sheet.png"><br>
       <br>
-      <span style="text-decoration: underline;"> Row and column</span><br>
+      <span style="text-decoration: underline;"> Rows and columns</span><br>
       <br>
-      First row is 1. First column is 1.<br>
+      First row index is 1. First column index is 1.<br>
     </big><big><br>
     </big><big><span style="text-decoration: underline;"> Work with sprite sheet
         subsystem</span><br>
@@ -1139,7 +1139,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       &nbsp; <span style="font-style: italic;"> unsigned int y;</span><br style="font-style: italic;">
       &nbsp; <span style="font-style: italic;"> unsigned int width;</span><br style="font-style: italic;">
       &nbsp; <span style="font-style: italic;"> unsigned int height;</span><br
-
         style="font-style: italic;">
       <span style="font-style: italic;"> } BOX;</span><br>
       <br>
@@ -1159,8 +1158,59 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;"> bool Collision::check_collision(const
         NEONGDK::BOX &amp;first_target,const NEONGDK::BOX &amp;second_target);</span>
-      – Set collision targets and check collision between it.</big><big><br>
+      – Set collision targets and check collision between it.<br>
     </big>
+    <h2><big>Chapter 5. Tile–map</big></h2>
+    <big><span style="text-decoration: underline;">A few words about tile-map</span><br>
+      <br>
+      The tile–map is tile matrix. A tile is a small non–transparent sprite. A
+      tile–map is very useful thing for level background.<br>
+      <br>
+      <span style="text-decoration: underline;">Rows and columns</span><br>
+      <br>
+      First row index is 0. First column index is 0.<br>
+      <br style="text-decoration: underline;">
+      <span style="text-decoration: underline;">Work with tile-map</span><br>
+      <br>
+      <span style="font-style: italic;">Tilemap</span> class provide easy access
+      to the tile–map. It is a simple class with few methods. Let's look at
+      public methods.<br>
+      <br>
+      <span style="font-style: italic;">void Tilemap::initialize(const unsigned
+        int tile_width,const unsigned int tile_height);</span> – Initialize the
+      subsystem.<br>
+      <br>
+      <span style="font-style: italic;">unsigned int Tilemap::get_tile_width()
+        const;</span> – Return the tile width in pixels.<br>
+      <br>
+      <span style="font-style: italic;">unsigned int Tilemap::get_tile_height()
+        const;</span> – Return the tile height in pixels.<br>
+      <br>
+      <span style="font-style: italic;">unsigned int Tilemap::get_x(const
+        unsigned int row) const;</span> – Get x-coordinate from target row.<br>
+      <br>
+      <span style="font-style: italic;">unsigned int Tilemap::get_y(const
+        unsigned int column) const;</span> – Get y-coordinate from target
+      column.<br>
+      <br>
+      <span style="font-style: italic;">unsigned int Tilemap::get_row(const
+        unsigned int x) const;</span> – Get the row from x-coordinate.<br>
+      <br>
+      <span style="font-style: italic;">unsigned int Tilemap::get_column(const
+        unsigned int y) const;</span> – Get the column from y-coordinate.<br>
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">unsigned int
+        Tilemap::get_row_amount(const unsigned int viewport_width) const;</span>
+      – Get amount of maximum visible rows.<br>
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">unsigned int
+        Tilemap::get_column_amount(const unsigned int viewport_width) const;</span>
+      – Get amount of maximum visible columns.<br>
+      <br>
+      <span style="font-style: italic;">NEONGDK::BOX Tilemap::get_box(const
+        unsigned int row,const unsigned int column) const;</span> – Return
+      collision related information.<br>
+    </big><big> </big>
     <h1><a class="mozTocH1" name="mozTocId203140"></a><big>Part 5. Other
         important things</big></h1>
     <big></big>
@@ -2115,6 +2165,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.6.4 – Source code synced with Eugene game development kit 7.3.5.<br>
       6.6.5 – Source code synced with Simple windows framework 7.3.5.<br>
       6.6.6 – Source code synced with Eugene game development kit 7.3.7.<br>
+      6.6.7 – Source code synced with Eugene game development kit 7.4.4.<br>
       <big> </big> </big>
     <p></p>
     <big> </big>
