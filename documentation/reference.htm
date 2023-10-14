@@ -41,43 +41,51 @@
           <li><a href="#mozTocId904725">Chapter 5. Image kind</a></li>
           <li><a href="#mozTocId738557">Chapter 6. Background</a></li>
           <li><a href="#mozTocId309905">Chapter 7. Base sprite subsystem</a></li>
-          <li><a href="#mozTocId662651"> Chapter 8. Ordinary sprites</a></li>
+          <li><a href="#mozTocId662651">Chapter 8. Ordinary sprites</a></li>
           <li><a href="#mozTocId146800">Chapter 9. Sprite sheet</a></li>
           <li><a href="#mozTocId752257">Chapter 10. Text</a></li>
           <li><a href="#mozTocId67980">Chapter 11. Loading images</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId64443">Part 4. Common things</a>
+      <li><a href="#mozTocId668589">Part 4. Transformation</a>
+        <ul>
+          <li><a href="#mozTocId787510">Chapter 1. The sub–namespace</a></li>
+          <li><a href="#mozTocId325702">Chapter 2. Cartesian coordinates and
+              screen coordinates.</a></li>
+        </ul>
+      </li>
+      <li><a href="#mozTocId64443">Part 5. Common things</a>
         <ul>
           <li><a href="#mozTocId597525">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId853711">Chapter 2. Abnormal program termination</a></li>
           <li><a href="#mozTocId656377">Chapter 3. Timer</a></li>
           <li><a href="#mozTocId381935">Chapter 4. Collision</a></li>
+          <li><a href="#mozTocId319275">Chapter 5. Tile–map</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId203140">Part 5. Other important things</a>
+      <li><a href="#mozTocId203140">Part 6. Other important things</a>
         <ul>
           <li><a href="#mozTocId76865">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId194608">Chapter 2. Memory</a></li>
           <li><a href="#mozTocId692799">Chapter 3. Audio</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId209024">Part 6. Misc</a>
+      <li><a href="#mozTocId209024">Part 7. Misc</a>
         <ul>
           <li><a href="#mozTocId608755">Chapter 1. File system</a></li>
           <li><a href="#mozTocId59386">Chapter 2. Tools</a></li>
           <li><a href="#mozTocId573582">Chapter 3. Resource manager</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId590919"> Part 7. Binary files</a>
+      <li><a href="#mozTocId590919">Part 8. Binary files</a>
         <ul>
           <li><a href="#mozTocId200879">Chapter 1. The sub–namespace</a></li>
-          <li><a href="#mozTocId961921"> Chapter 2. Base binary file subsystem</a></li>
-          <li><a href="#mozTocId424835"> Chapter 3. File reader</a></li>
-          <li><a href="#mozTocId511135"> Chapter 4. File writer</a></li>
+          <li><a href="#mozTocId961921">Chapter 2. Base binary file subsystem</a></li>
+          <li><a href="#mozTocId424835">Chapter 3. File reader</a></li>
+          <li><a href="#mozTocId511135">Chapter 4. File writer</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId291572">Part 8. Input</a>
+      <li><a href="#mozTocId291572">Part 9. Input</a>
         <ul>
           <li><a href="#mozTocId783369">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId685403">Chapter 2. Keyboard</a></li>
@@ -85,7 +93,7 @@
           <li><a href="#mozTocId861609">Chapter 4. Game–pad</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId309127">Part 9. Internal details of the engine
+      <li><a href="#mozTocId309127">Part 10. Internal details of the engine
           subsystems</a>
         <ul>
           <li><a href="#mozTocId383177">Chapter 1. A few words for a curious
@@ -1080,7 +1088,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="text-decoration: underline;"> Important remark</span><br>
       <br>
-      A new will image replace current image if current image already exist.
+      A new image will replace current image if current image already exist.
       Incorrect images will ignore and don't load.<br>
       <br>
       <span style="text-decoration: underline;"> Supported format</span><br>
@@ -1093,8 +1101,54 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       You can use a wide range of graphics software to convert your images to
       the correct format. I recommend use <a href="https://www.gimp.org">GIMP</a>
       for doing it. It is a powerful image editor.<br>
+    </big>
+    <h1><a id="mozTocId668589" class="mozTocH1"></a><big>Part 4. Transformation</big></h1>
+    <big></big>
+    <h2><a id="mozTocId787510" class="mozTocH2"></a><big>Chapter 1. The
+        sub–namespace</big></h2>
+    <big>
+      All subsystems in this section declared in Transformation sub–namespace.<br>
+    </big>
+    <h2><a id="mozTocId325702" class="mozTocH2"></a><big>Chapter 2. Cartesian
+        coordinates and screen coordinates.</big></h2>
+    <big><span style="text-decoration: underline;">
+        Cartesian coordinates</span><br>
+      <br>
+      Cartesian coordinates start at center of the screen. Look to this picture
+      to understand it.<br>
+      <br>
+      <img style="width: 107px; height: 111px;" alt="" src="cartesian_system.png"><br>
+      <br>
+      <span style="text-decoration: underline;">
+        Convert cartesian coordinates to screen coordinates and convert screen
+        coordinates to cartsian coordinates.</span><br>
+      <br>
+      You can convert cartesian coordinates to screen coordinates. You can also
+      convert screen coordinates to cartesian coordinates.<br>
+      Just use <span style="font-style: italic;">Coordinates</span> for doing
+      it. Let's look at public methods.<br>
+      <br>
+      <span style="font-style: italic;">
+        void Coordinates::initialize(const int viewport_width,const int
+        viewport_height);</span> – Initialize the subsystem.<br>
+      <br>
+      <span style="font-style: italic;">
+        int Coordinates::get_screen_x(const int x) const; </span>– Convert
+      cartesian x-coordinate to screen x-coordinate.<br>
+      <br>
+      <span style="font-style: italic;">
+        int Coordinates::get_screen_y(const int x) const;</span> – Convert
+      cartesian y-coordinate to screen y-coordinate.<br>
+      <br>
+      <span style="font-style: italic;">
+        int Coordinates::get_cartesian_x(const int x) const;</span> – Convert
+      screen x-coordinate to cartesian x-coordinate.<br>
+      <br>
+      <span style="font-style: italic;">
+        int Coordinates::get_cartesian_y(const int x) const;</span> – Convert
+      screen y-coordinate to cartesian y-coordinate.<br>
     </big> <big> </big>
-    <h1><a name="mozTocId64443" class="mozTocH1"></a><big>Part 4. Common things</big></h1>
+    <h1><a name="mozTocId64443" class="mozTocH1"></a><big>Part 5. Common things</big></h1>
     <h2><a name="mozTocId597525" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
     <big>Almost all subsystems in this section declared in <span style="font-style: italic;">Common</span>
@@ -1160,7 +1214,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         NEONGDK::BOX &amp;first_target,const NEONGDK::BOX &amp;second_target);</span>
       – Set collision targets and check collision between it.<br>
     </big>
-    <h2><big>Chapter 5. Tile–map</big></h2>
+    <h2><a id="mozTocId319275" class="mozTocH2"></a><big>Chapter 5. Tile–map</big></h2>
     <big><span style="text-decoration: underline;">A few words about tile-map</span><br>
       <br>
       The tile–map is tile matrix. A tile is a small non–transparent sprite. A
@@ -1211,7 +1265,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         unsigned int row,const unsigned int column) const;</span> – Return
       collision related information.<br>
     </big><big> </big>
-    <h1><a class="mozTocH1" name="mozTocId203140"></a><big>Part 5. Other
+    <h1><a class="mozTocH1" name="mozTocId203140"></a><big>Part 6. Other
         important things</big></h1>
     <big></big>
     <h2><a class="mozTocH2" name="mozTocId76865"></a><big>Chapter 1. The
@@ -1293,7 +1347,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;">bool Audio::is_load() const;</span> –
       Return true if the sound is already loaded.<br>
     </big><big> </big> <big> </big>
-    <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 6. Misc</big></h1>
+    <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 7. Misc</big></h1>
     <h2><a name="mozTocId608755" class="mozTocH2"></a><big>Chapter 1. File
         system</big></h2>
     <big><br>
@@ -1357,7 +1411,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       resource array if it already exists. This function takes resource array
       handle as argument.<br>
     </big>
-    <h1><a name="mozTocId590919" class="mozTocH1"></a><big> Part 7. Binary files</big></h1>
+    <h1><a name="mozTocId590919" class="mozTocH1"></a><big> Part 8. Binary files</big></h1>
     <h2><a name="mozTocId200879" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
     <big>All subsystems in this section declared in <span style="font-style: italic;">File</span>
@@ -1419,7 +1473,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     </big> <big><i>void Output_File::flush();</i> – Force writing internal
       buffer data to the file.</big><br>
     <big> </big>
-    <h1><a name="mozTocId291572" class="mozTocH1"></a><big>Part 8. Input</big></h1>
+    <h1><a name="mozTocId291572" class="mozTocH1"></a><big>Part 9. Input</big></h1>
     <h2><a name="mozTocId783369" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
     <big>All subsystems in this section declared in <span style="font-style: italic;">Input</span>
@@ -1952,7 +2006,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         Gamepad::get_right_stick_y() const;</span> – Return y–direction of right
       stick.<br>
     </big>
-    <h1><a name="mozTocId309127" class="mozTocH1"></a><big>Part 9. Internal
+    <h1><a name="mozTocId309127" class="mozTocH1"></a><big>Part 10. Internal
         details of the engine subsystems</big></h1>
     <big></big> <big> </big>
     <h2><a name="mozTocId383177" class="mozTocH2"></a><big>Chapter 1. A few
@@ -2168,6 +2222,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.6.7 – Source code synced with Eugene game development kit 7.4.4.<br>
       6.6.8 – Source code synced with Eugene game development kit 7.4.5.<br>
       6.6.9 – Source code synced with Eugene game development kit 7.5.<br>
+      6.7 – Source code synced with Eugene game development kit 7.5.3.<br>
       <big> </big> </big>
     <p></p>
     <big> </big>
