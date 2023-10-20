@@ -50,8 +50,8 @@
       <li><a href="#mozTocId668589">Part 4. Transformation</a>
         <ul>
           <li><a href="#mozTocId787510">Chapter 1. The sub–namespace</a></li>
-          <li><a href="#mozTocId325702">Chapter 2. Cartesian coordinates and
-              screen coordinates.</a></li>
+          <li><a href="#mozTocId800042">Chapter 2. Cartesian coordinates and
+              screen coordinates</a></li>
         </ul>
       </li>
       <li><a href="#mozTocId64443">Part 5. Common things</a>
@@ -344,7 +344,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
-
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -391,8 +390,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     <h2><a name="mozTocId312970" class="mozTocH2"></a><big>Chapter 1. Coordinate
         system</big></h2>
     <big><br>
-      The engine uses standard coordinate system. Coordinates start at top–left
-      corner. Look to this picture to understand it.<br>
+      The engine uses standard coordinate system by default. Coordinates start
+      at top–left corner. Look to this picture to understand it.<br>
       <br>
       <img style="width: 107px; height: 111px;" alt="" src="coordinate_system.png">
     </big>
@@ -1110,8 +1109,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     <big> All subsystems in this section declared in <span style="font-style: italic;">Transformation</span>
       sub–namespace.<br>
     </big>
-    <h2><a id="mozTocId325702" class="mozTocH2"></a><big>Chapter 2. Cartesian
-        coordinates and screen coordinates.</big></h2>
+    <h2><a id="mozTocId800042" class="mozTocH2"></a><big>Chapter 2. Cartesian
+        coordinates and screen coordinates</big></h2>
     <big><span style="text-decoration: underline;"> Cartesian coordinates</span><br>
       <br>
       Cartesian coordinates start at center of the screen. Look to this picture
@@ -1148,12 +1147,20 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         Coordinates::get_highest_cartesian_y() const;</span> – Return highest
       allowable cartesian y-coordinate.<br>
       <br>
+      <span style="font-style: italic;">bool
+        Coordinates::check_cartesian_x(const int x) const;</span> – Return true
+      if the cartesian x-coordinate is valid.<br>
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">bool
+        Coordinates::check_cartesian_y(const int y) const;</span> – Return true
+      if the cartesian y-coordinate is valid.<br>
+      <br>
       <span style="font-style: italic;"> int Coordinates::get_screen_x(const int
         x) const; </span>– Convert cartesian x-coordinate to screen
       x-coordinate.<br>
       <br>
       <span style="font-style: italic;"> int Coordinates::get_screen_y(const int
-        x) const;</span> – Convert cartesian y-coordinate to screen
+        y) const;</span> – Convert cartesian y-coordinate to screen
       y-coordinate.<br>
       <br>
       <span style="font-style: italic;"> int Coordinates::get_cartesian_x(const
@@ -1161,7 +1168,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       x-coordinate.<br>
       <br>
       <span style="font-style: italic;"> int Coordinates::get_cartesian_y(const
-        int x) const;</span> – Convert screen y-coordinate to cartesian
+        int y) const;</span> – Convert screen y-coordinate to cartesian
       y-coordinate.<br>
     </big> <big> </big>
     <h1><a name="mozTocId64443" class="mozTocH1"></a><big>Part 5. Common things</big></h1>
@@ -2198,8 +2205,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.2.3 – Source code synced with Eugene game development kit 6.9.2.<br>
       6.2.4 – Audio subsystem improved.<br>
       6.2.5 – 6.2.6 – Small bug fixed.<br>
-      6.2.7 – Synchronization timer back-ported from Neon game development kit
-      5.8.5.<br>
+      6.2.7 – Synchronization timer back-ported from Neon game development kit 5.8.5.<br>
       6.2.8 – 6.3.1 – Synchronization timer improved.<br>
       6.3.2 – Audio subsystem improved.<br>
       6.3.3 – Source code synced with Eugene game development kit 6.9.4.<br>
@@ -2241,6 +2247,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.6.9 – Source code synced with Eugene game development kit 7.5.<br>
       6.7 – Source code synced with Eugene game development kit 7.5.3.<br>
       6.7.1 – Source code synced with Eugene game development kit 7.5.4.<br>
+      6.7.2 – Source code synced with Eugene game development kit 7.5.8.<br>
       <big> </big> </big>
     <p></p>
     <big> </big>
