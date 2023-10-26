@@ -345,7 +345,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
-
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -477,6 +476,12 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;"> unsigned int Screen::get_height()
         const;</span> – Return screen height in pixels.<br>
+      <br>
+      <span style="font-style: italic;">bool Screen::check_x(const unsigned int
+        x) const;</span> – Return true if x-coordinate is valid.<br>
+      <br>
+      <span style="font-style: italic;">bool Screen::check_y(const unsigned int
+        y) const;</span> – Return true if y-coordinate is valid.<br>
       <br>
       <span style="font-style: italic;"> Screen* Screen::get_handle();</span> –
       Return the handle to base graphics subsystem object. </big>
@@ -888,10 +893,12 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       public methods.<br>
       <br>
     </big><big style="font-style: italic;"> unsigned int Sheet::get_row(</big><big
+
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return row of target frame.<br>
       <br>
       <span style="font-style: italic;"> unsigned int Sheet::get_column(</span></big><big
+
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return</big><big> column</big><big> </big><big>of
       target frame</big><big>.<br>
@@ -2272,7 +2279,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.7.3 – Source code synced with Eugene game development kit 7.6.3.<br>
       6.7.4 – Source code synced with Eugene game development kit 7.6.4.<br>
       6.7.5 – Source code synced with Eugene game development kit 7.6.5.<br>
-      <big> </big> </big>
+    </big><big> 6.7.6 – Source code synced with Eugene game development kit 7.6.6.</big><br>
     <p></p>
     <big> </big>
   </body>
