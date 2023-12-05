@@ -658,7 +658,7 @@ namespace NEONGDK
    return next_y;
   }
 
-  void Resizer::upscale_image(const unsigned int *target)
+  void Resizer::scale_image(const unsigned int *target)
   {
    size_t index;
    unsigned int x,y,source_x,source_y,next_x,next_y,first,second,third,last,red,green,blue,alpha,x_difference,y_difference,x_weigh,y_weigh;
@@ -691,23 +691,6 @@ namespace NEONGDK
 
   }
 
-  void Resizer::downscale_image(const unsigned int *target)
-  {
-   size_t index;
-   unsigned int x,y;
-   index=0;
-   for (y=0;y<target_height;++y)
-   {
-    for (x=0;x<target_width;++x)
-    {
-     image[index]=target[this->get_source_offset(this->get_source_x(x),this->get_source_y(y))];
-     ++index;
-    }
-
-   }
-
-  }
-
   void Resizer::load_image(const unsigned int *target)
   {
    size_t index;
@@ -727,15 +710,7 @@ namespace NEONGDK
    }
    else
    {
-    if ((target_width*target_height)>(source_width*source_height))
-    {
-     this->upscale_image(target);
-    }
-    else
-    {
-     this->downscale_image(target);
-    }
-
+    this->scale_image(target);
    }
 
   }
