@@ -348,6 +348,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
+
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -1208,21 +1209,38 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         Isometric::set_target(const int x,const int y);</span> – Set target
       point.<br>
       <br>
-    </big><big><span style="font-style: italic;">int
-        Isometric::get_isometric_x() const;</span> – Convert x-coordinate of
-      target point from cartesian system to isometric system.<br>
-      <br style="font-style: italic;">
+      <span style="font-style: italic;">int Isometric::get_isometric_x() const;</span>
+      – Convert x-coordinate of target point from cartesian system to isometric
+      system.<br>
+      <br>
       <span style="font-style: italic;">int Isometric::get_isometric_y() const;</span>
-      – </big><big>Convert y-coordinate of target point from cartesian system
-      to isometric system.</big><br>
-    <big> <br>
+      – Convert y-coordinate of target point from cartesian system to isometric
+      system.<br>
+      <br>
+      <span style="font-style: italic;">int Isometric::get_cartesian_x() const;</span>
+      – Convert x-coordinate of target point from isometric system to cartesian
+      system.<br>
+      <br>
+      <span style="font-style: italic;">int Isometric::get_cartesian_y() const;</span>
+      – Convert y-coordinate of target point from isometric system to cartesian
+      system.<br>
+      <br>
+      <span style="font-style: italic;">int Isometric::get_isometric_x(const int
+        x,const int y);</span> – Set target point and convert x-coordinate from
+      cartesian system to isometric system.<br>
+      <br>
+      <span style="font-style: italic;">int Isometric::get_isometric_y(const int
+        x,const int y);</span> – Set target point and convert y-coordinatefrom
+      cartesian system to isometric system.<br>
+      <br>
       <span style="font-style: italic;">int Isometric::get_cartesian_x(const int
-        x) const;</span> – </big><big>Convert x-coordinate of target point from
-      isometric system to cartesian system.</big><br>
-    <big> <br style="font-style: italic;">
+        x,const int y);</span> – Set target point and convert x-coordinatefrom
+      isometric system to cartesian system.<br>
+      <br>
       <span style="font-style: italic;">int Isometric::get_cartesian_y(const int
-        y) const;</span> – </big><big>Convert y-coordinate of target point from
-      isometric system to cartesian system.</big>
+        x,const int y);</span> – Set target point and convert y-coordinate from
+      isometric system to cartesian system.<br>
+    </big>
     <h2><a class="mozTocH2" name="mozTocId143616"></a><big>Chapter 4. Isometric
         level<br>
       </big></h2>
@@ -2357,6 +2375,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.8.3 – Source code synced with Eugene game development kit 7.7.5.<br>
       6.8.4 – Source code synced with Eugene game development kit 7.7.6.<br>
       6.8.5 – Source code synced with Eugene game development kit 7.8.<br>
+      6.8.6 – Source code synced with Eugene game development kit 7.8.<br>
     </big>
     <p></p>
     <big> <big> </big> </big>
