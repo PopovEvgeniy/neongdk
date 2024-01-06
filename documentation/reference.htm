@@ -710,6 +710,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;"> bool Billboard::get_transparent()
         const;</span> – Return true if transparent mode is enable.<br>
       <br>
+      <span style="font-style: italic;">void Billboard::set_start(const unsigned
+        int x, const unsigned int y);</span> – Set start position of the sprite.<br>
+      <br>
     </big><big><span style="font-style: italic;">void
         Billboard::set_position(const unsigned int x, const unsigned int y);</span>
       – Set sprite position.<br>
@@ -786,6 +789,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;">void Billboard::complex_mirror();</span>
       – Set both horizontal and vertical sprite mirroring mode.<br>
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">void Billboard::go_start();</span> – Set
+      sprite position to start position.<br>
       <br>
     </big><big> </big><big><span style="font-style: italic;">void
         Billboard::draw();</span> – Draw a sprite.<br>
@@ -1255,6 +1261,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       </big></h2>
     <big><span style="text-decoration: underline;"></span> Isometric level
       subsystem intend for help you to create an isometric levels. Just use <span
+
         style="font-style: italic;">World</span> class for doing it. Let's look
       at public methods.<br>
       <br>
@@ -1268,7 +1275,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       column.<br>
       <br>
       <span style="font-style: italic;">int World::get_target_y(const int row</span></big><big
-
       style="font-style: italic;">,</big><big style="font-style: italic;">const
       int column</big><big><span style="font-style: italic;">) const;</span> –
       Get target cartesian y-coordinate </big><big>from the row and column.<br>
@@ -2400,6 +2406,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.8.9 – Source code synced with Eugene game development kit 7.8.5.<br>
       6.9 – Source code synced with Eugene game development kit 7.8.6.<br>
       6.9.1 – Source code synced with Eugene game development kit 7.8.8.<br>
+      6.9.2 – Source code synced with Eugene game development kit 7.8.9.<br>
     </big>
     <p></p>
     <big> <big> <big> </big> </big> </big>
