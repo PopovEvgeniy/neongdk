@@ -595,6 +595,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       Just use <span style="font-style: italic;">Background</span> class to
       work with background. Let's look at public methods.<br>
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">Background* Background::get_handle();</span>
+      – Return the handle to background object.<br>
     </big><big></big><big><br style="font-style: italic;">
       <span style="font-style: italic;"> void Background::prepare(const Screen
         *screen);</span> – Prepare for drawing.<br>
@@ -661,6 +664,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;"> void Background::destroy();</span> –
       Destroy a background image and destroy a background texture.<br>
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">bool Background::is_last_frame() const;</span>
+      – Return true if current frame of scrollable background is last frame.<br>
       <br>
       <span style="font-style: italic;"> unsigned int Background::get_frame()
         const;</span> – Return current frame in scrollable background.<br>
@@ -2413,6 +2419,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.9.2 – Source code synced with Eugene game development kit 7.8.9.<br>
       6.9.3 – Source code synced with Eugene game development kit 7.9.<br>
       6.9.4 – Source code synced with Eugene game development kit 7.9.1.<br>
+      6.9.5 – Source code synced with Eugene game development kit 7.9.2.<br>
     </big>
     <p></p>
     <big> <big> <big> </big> </big> </big>
