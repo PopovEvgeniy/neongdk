@@ -4,7 +4,7 @@ int main()
 {
  int x,y,row,column;
  NEONGDK::Graphics::Screen screen;
- NEONGDK::Graphics::Background sky;
+ NEONGDK::Graphics::Scene sky;
  NEONGDK::Graphics::Sprite ground;
  NEONGDK::Graphics::Text text;
  NEONGDK::Transformation::Coordinates cartesian;

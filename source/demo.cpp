@@ -9,7 +9,7 @@ int main()
  NEONGDK::Input::Mouse mouse;
  NEONGDK::Misc::Audio media;
  NEONGDK::Graphics::Screen screen;
- NEONGDK::Graphics::Background space;
+ NEONGDK::Graphics::Scene space;
  NEONGDK::Graphics::Sprite ship;
  NEONGDK::Graphics::Text text;
  NEONGDK::Tools::enable_logging("log.txt");
