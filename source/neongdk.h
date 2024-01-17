@@ -960,6 +960,7 @@ typedef enum
    public:
    Text();
    ~Text();
+   Text* get_handle();
    NEONGDK::TEXT_KIND get_orientation() const;
    void set_orientation(const NEONGDK::TEXT_KIND target);
    unsigned int get_font_width() const;
@@ -997,6 +998,7 @@ typedef enum
    public:
    Coordinates();
    ~Coordinates();
+   Coordinates* get_handle();
    void initialize(const int viewport_width,const int viewport_height);
    int get_viewport_width() const;
    int get_viewport_height() const;
@@ -1020,6 +1022,7 @@ typedef enum
    public:
    Isometric();
    ~Isometric();
+   Isometric* get_handle();
    void set_target(const int x,const int y);
    int get_isometric_x() const;
    int get_isometric_y() const;
@@ -1041,6 +1044,7 @@ typedef enum
    public:
    World();
    ~World();
+   World* get_handle();
    void initialize(const int tile_width,const int tile_height,const int screen_width,const int screen_height);
    int get_target_x(const int row,const int column) const;
    int get_target_y(const int row,const int column) const;
@@ -1064,6 +1068,7 @@ typedef enum
    public:
    Timer();
    ~Timer();
+   Timer* get_handle();
    void set_timer(const double seconds);
    double get_interval() const;
    bool check_timer();
@@ -1079,6 +1084,7 @@ typedef enum
    public:
    Collision();
    ~Collision();
+   Collision* get_handle();
    void set_target(const NEONGDK::BOX &first_target,const NEONGDK::BOX &second_target);
    bool check_collision() const;
    bool check_collision(const NEONGDK::BOX &first_target,const NEONGDK::BOX &second_target);
@@ -1092,6 +1098,7 @@ typedef enum
    public:
    Tilemap();
    ~Tilemap();
+   Tilemap* get_handle();
    void initialize(const unsigned int tile_width,const unsigned int tile_height);
    unsigned int get_tile_width() const;
    unsigned int get_tile_height() const;
