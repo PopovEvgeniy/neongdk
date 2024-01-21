@@ -1868,6 +1868,11 @@ namespace NEONGDK
 
   }
 
+  Input_File* Input_File::get_handle()
+  {
+   return this;
+  }
+
   void Input_File::open(const char *name)
   {
    this->close();
@@ -1895,6 +1900,11 @@ namespace NEONGDK
   Output_File::~Output_File()
   {
 
+  }
+
+  Output_File* Output_File::get_handle()
+  {
+   return this;
   }
 
   void Output_File::open(const char *name)

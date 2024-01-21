@@ -1043,12 +1043,10 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         int target) const;</span> – Return true if target column is valid.<br>
       <br>
     </big><big style="font-style: italic;"> unsigned int Sheet::get_row(</big><big
-
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return row of target frame.<br>
       <br>
       <span style="font-style: italic;"> unsigned int Sheet::get_column(</span></big><big
-
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return</big><big> column</big><big> </big><big>of
       target frame</big><big>.<br>
@@ -1768,6 +1766,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       class provide access to file reader. It is derived from <i>Binary_File</i>
       class. Let's look at public methods.<br>
       <br>
+      <span style="font-style: italic;">Input_File* Input_File::get_handle();</span>
+      – Return the handle to file reader.<br>
+      <br>
       <i> void Input_File::open(const char *name);</i> – Open a file for read.<br>
       <br>
       <i> void Input_File::read(void *buffer,const size_t length);</i> – Read
@@ -1778,6 +1779,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       File writer is intending to write data to binary files. <i>Output_File</i>
       class provide access to file writer. It is derived from <i>Binary_File</i>
       class. Let's look at public methods.<br>
+      <br>
+      <span style="font-style: italic;">Output_File* Output_File::get_handle();</span>
+      – Return the handle to file writer.<br>
       <br>
       <i> void Output_File::open(const char *name);</i> – Open a file for write.<br>
       <br>
@@ -2568,6 +2572,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       6.9.6 – Source code synced with Eugene game development kit 7.9.3.<br>
       6.9.7 – Source code synced with Eugene game development kit 7.9.4.<br>
       6.9.8 – Source code synced with Eugene game development kit 7.9.5.<br>
+      6.9.9 – Source code synced with Eugene game development kit 7.9.6.<br>
     </big>
     <p></p>
     <big> <big> <big> <big> </big> </big> </big> </big>
