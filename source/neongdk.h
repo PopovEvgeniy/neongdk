@@ -482,7 +482,7 @@ typedef enum
   {
    private:
    unsigned int texture;
-   void load_texture(const unsigned int width,const unsigned int height,const unsigned int *buffer);
+   void load_texture(const unsigned int width,const unsigned int height,const void *buffer);
    void create_texture(const unsigned int *buffer);
    void delete_texture();
    void check_texture();
@@ -680,7 +680,7 @@ typedef enum
  {
 
   class Screen:public Core::FPS, public Core::Render, public Internal::Display, public Internal::Engine, public Internal::WINGL, public Internal::Synchronization
- {
+  {
    private:
    void check_video_mode();
    void set_resolution(const unsigned long int width,const unsigned long int height);
@@ -705,7 +705,7 @@ typedef enum
    Screen* get_handle();
   };
 
-   class Image
+  class Image
   {
    private:
    Core::Buffer<unsigned char> data;
