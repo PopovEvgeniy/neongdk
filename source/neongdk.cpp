@@ -1,5 +1,5 @@
 /*
-Eugene game development kit made by Popov Evgeniy Alekseyevich
+Neon game development kit made by Popov Evgeniy Alekseyevich
 Some code taken from wglext.h(https://www.khronos.org/registry/OpenGL/api/GL/wglext.h) by The Khronos Group Inc
 
 Neon game development kit license
@@ -3009,7 +3009,7 @@ namespace NEONGDK
    {
     if (this->check_column(column)==true)
     {
-     target+=(row-1)+(column-1)*rows;
+     target=row+column*rows;
     }
 
    }
