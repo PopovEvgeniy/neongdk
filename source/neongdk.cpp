@@ -130,6 +130,9 @@ namespace NEONGDK
     case WM_DESTROY:
     PostQuitMessage(0);
     break;
+    case WM_ACTIVATE:
+    if (LOWORD(lParam)!=WA_INACTIVE) SetFocus(window);
+    break;
     case WM_LBUTTONDOWN:
     Buttons[NEONGDK::MOUSE_LEFT]=KEY_PRESS;
     break;
@@ -376,7 +379,7 @@ namespace NEONGDK
 
   void Engine::create_window()
   {
-   window=CreateWindowEx(WS_EX_TOPMOST,window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
+   window=CreateWindowEx(WS_EX_APPWINDOW,window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
    if (window==NULL)
    {
     NEONGDK::Halt("Can't create window");
