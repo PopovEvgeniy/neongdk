@@ -2694,7 +2694,7 @@ namespace NEONGDK
 
   Sprite::Sprite()
   {
-   current_kind=NEONGDK::STATIC_IMAGE;
+   current_kind=NEONGDK::HORIZONTAL_ANIMATED;
   }
 
   Sprite::~Sprite()
@@ -2704,22 +2704,18 @@ namespace NEONGDK
 
   void Sprite::reset_sprite_setting()
   {
-   current_kind=NEONGDK::STATIC_IMAGE;
+   current_kind=NEONGDK::HORIZONTAL_ANIMATED;
   }
 
   void Sprite::set_sprite_setting()
   {
-   switch (current_kind)
+   if (current_kind==NEONGDK::HORIZONTAL_ANIMATED)
    {
-    case NEONGDK::HORIZONTAL_ANIMATED:
     this->set_size(this->get_image_width()/this->get_frames(),this->get_image_height());
-    break;
-    case NEONGDK::VERTICAL_ANIMATED:
+   }
+   else
+   {
     this->set_size(this->get_image_width(),this->get_image_height()/this->get_frames());
-    break;
-    default:
-    this->set_size(this->get_image_width(),this->get_image_height());
-    break;
    }
 
   }
@@ -2735,17 +2731,13 @@ namespace NEONGDK
 
   void Sprite::set_sprite_frame()
   {
-   switch(current_kind)
+   if (current_kind==NEONGDK::HORIZONTAL_ANIMATED)
    {
-    case NEONGDK::HORIZONTAL_ANIMATED:
     billboard.set_horizontal_offset(static_cast<double>(this->get_frame()),static_cast<double>(this->get_frames()));
-    break;
-    case NEONGDK::VERTICAL_ANIMATED:
+   }
+   else
+   {
     billboard.set_vertical_offset(static_cast<double>(this->get_frame()),static_cast<double>(this->get_frames()));
-    break;
-    default:
-    billboard.set_horizontal_offset(1.0,1.0);
-    break;
    }
 
   }
@@ -2770,10 +2762,7 @@ namespace NEONGDK
   void Sprite::set_setting(const NEONGDK::IMAGE_KIND kind,const unsigned int frames)
   {
    this->reset_animation_setting();
-   if (kind!=NEONGDK::STATIC_IMAGE)
-   {
-    this->set_frames(frames);
-   }
+   this->set_frames(frames);
    this->set_kind(kind);
   }
 
@@ -2788,19 +2777,9 @@ namespace NEONGDK
 
   }
 
-  void Sprite::load(Image *buffer)
-  {
-   this->load(buffer,NEONGDK::STATIC_IMAGE,1);
-  }
-
   void Sprite::load(Image &buffer,const NEONGDK::IMAGE_KIND kind,const unsigned int frames)
   {
    this->load(buffer.get_handle(),kind,frames);
-  }
-
-  void Sprite::load(Image &buffer)
-  {
-   this->load(buffer.get_handle());
   }
 
   void Sprite::load(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames)
@@ -2809,11 +2788,6 @@ namespace NEONGDK
    picture.load_tga(name);
    this->load(picture,kind,frames);
    picture.destroy_image();
-  }
-
-  void Sprite::load(const char *name)
-  {
-   this->load(name,NEONGDK::STATIC_IMAGE,1);
   }
 
   void Sprite::set_target(const unsigned int target)
@@ -3172,29 +3146,14 @@ namespace NEONGDK
    stage.load(background,kind,frames);
   }
 
-  void Background::load(Image *background)
-  {
-   this->load(background,NEONGDK::STATIC_IMAGE,1);
-  }
-
   void Background::load(Image &background,const NEONGDK::IMAGE_KIND kind,const unsigned int frames)
   {
    this->load(background.get_handle(),kind,frames);
   }
 
-  void Background::load(Image &background)
-  {
-   this->load(background.get_handle());
-  }
-
   void Background::load(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames)
   {
    stage.load(name,kind,frames);
-  }
-
-  void Background::load(const char *name)
-  {
-   stage.load(name);
   }
 
   void Background::disable_mirror()
