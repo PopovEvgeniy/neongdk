@@ -441,7 +441,6 @@ namespace NEONGDK
    setting.cAuxBuffers=0;
    setting.cBlueBits=0;
    setting.cBlueShift=0;
-   setting.cColorBits=0;
    setting.cDepthBits=0;
    setting.cGreenBits=0;
    setting.cGreenShift=0;
@@ -451,6 +450,7 @@ namespace NEONGDK
    setting.dwDamageMask=0;
    setting.dwLayerMask=0;
    setting.dwVisibleMask=0;
+   setting.cColorBits=24;
    setting.nSize=sizeof(PIXELFORMATDESCRIPTOR);
    setting.nVersion=1;
    setting.dwFlags=PFD_DRAW_TO_WINDOW|PFD_SUPPORT_OPENGL|PFD_DOUBLEBUFFER;
@@ -474,10 +474,9 @@ namespace NEONGDK
    return (setting.dwFlags&flag)!=0;
   }
 
-  int WINGL::get_pixel_format(HDC target,const unsigned long int color)
+  int WINGL::get_pixel_format(HDC target)
   {
    device=target;
-   setting.cColorBits=color;
    return ChoosePixelFormat(device,&setting);
   }
 
@@ -515,9 +514,9 @@ namespace NEONGDK
 
   }
 
-  void WINGL::set_render(HDC target,const unsigned long int color)
+  void WINGL::set_render(HDC target)
   {
-   this->set_pixel_format(this->get_pixel_format(target,color));
+   this->set_pixel_format(this->get_pixel_format(target));
    this->create_render_context();
    this->disable_vsync();
   }
@@ -1975,7 +1974,7 @@ namespace NEONGDK
   void Screen::screen_setup()
   {
    this->prepare_engine();
-   this->set_render(this->get_context(),this->get_depth());
+   this->set_render(this->get_context());
    this->start_render(this->get_display_width(),this->get_display_height());
    this->create_timer(17);
   }
