@@ -1,6 +1,6 @@
 Project Description
 
-Neon game development kit is an ultra-fast 2D game engine for Windows 95 or higher. It uses OPENGL for render.
+Neon game development kit is an ultra-fast 2D game engine for Windows 95 and Windows NT 4.0. It uses OPENGL for render.
 
 License
 

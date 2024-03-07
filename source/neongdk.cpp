@@ -441,7 +441,6 @@ namespace NEONGDK
    setting.cAuxBuffers=0;
    setting.cBlueBits=0;
    setting.cBlueShift=0;
-   setting.cDepthBits=0;
    setting.cGreenBits=0;
    setting.cGreenShift=0;
    setting.cRedBits=0;
@@ -451,6 +450,7 @@ namespace NEONGDK
    setting.dwLayerMask=0;
    setting.dwVisibleMask=0;
    setting.cColorBits=24;
+   setting.cDepthBits=16;
    setting.nSize=sizeof(PIXELFORMATDESCRIPTOR);
    setting.nVersion=1;
    setting.dwFlags=PFD_DRAW_TO_WINDOW|PFD_SUPPORT_OPENGL|PFD_DOUBLEBUFFER;
@@ -524,7 +524,11 @@ namespace NEONGDK
 
   void WINGL::Swap()
   {
-   SwapBuffers(device);
+   if (device!=NULL)
+   {
+    SwapBuffers(device);
+   }
+
   }
 
   bool WINGL::is_software_render() const
