@@ -520,45 +520,6 @@ typedef enum
 
  }
 
- namespace Misc
- {
-
-  class Audio
-  {
-   private:
-   unsigned int target;
-   void open(const char *name);
-   void play_content();
-   void disable_video();
-   public:
-   Audio();
-   ~Audio();
-   bool check_playing();
-   void close();
-   void stop();
-   void play();
-   void play_loop();
-   void play(const bool loop);
-   bool is_load() const;
-   void load(const char *name);
-  };
-
-  class Memory
-  {
-   private:
-   MEMORYSTATUS memory;
-   public:
-   Memory();
-   ~Memory();
-   unsigned long int get_total_physical();
-   unsigned long int get_free_physical();
-   unsigned long int get_total_virtual();
-   unsigned long int get_free_virtual();
-   unsigned long int get_usage();
-  };
-
- }
-
  namespace Input
  {
 
@@ -1060,6 +1021,26 @@ typedef enum
 
  namespace Common
  {
+
+  class Audio
+  {
+   private:
+   unsigned int target;
+   void open(const char *name);
+   void play_content();
+   void disable_video();
+   public:
+   Audio();
+   ~Audio();
+   bool check_playing();
+   void close();
+   void stop();
+   void play();
+   void play_loop();
+   void play(const bool loop);
+   bool is_load() const;
+   void load(const char *name);
+  };
 
   class Timer
   {

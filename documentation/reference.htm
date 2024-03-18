@@ -5,6 +5,7 @@
   </head>
   <body>
     <p> </p>
+    <p> </p>
     <p> <big> </big> </p>
     <div>
       <div style="text-align: center;"><big>Neon game development kit:
@@ -64,26 +65,20 @@
         <ul>
           <li><a href="#mozTocId597525">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId853711">Chapter 2. Abnormal program termination</a></li>
-          <li><a href="#mozTocId656377">Chapter 3. Timer</a></li>
-          <li><a href="#mozTocId381935">Chapter 4. Collision</a></li>
-          <li><a href="#mozTocId949634">Chapter 5. Tile–map</a></li>
+          <li><a href="#mozTocId635248">Chapter 3. Audio</a></li>
+          <li><a href="#mozTocId656377">Chapter 4. Timer</a></li>
+          <li><a href="#mozTocId381935">Chapter 5. Collision</a></li>
+          <li><a href="#mozTocId949634">Chapter 6. Tile–map</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId203140">Part 6. Other important things</a>
-        <ul>
-          <li><a href="#mozTocId76865">Chapter 1. The sub–namespace</a></li>
-          <li><a href="#mozTocId194608">Chapter 2. Memory</a></li>
-          <li><a href="#mozTocId692799">Chapter 3. Audio</a></li>
-        </ul>
-      </li>
-      <li><a href="#mozTocId209024">Part 7. Misc</a>
+      <li><a href="#mozTocId209024">Part 6. Misc</a>
         <ul>
           <li><a href="#mozTocId608755">Chapter 1. File system</a></li>
           <li><a href="#mozTocId59386">Chapter 2. Tools</a></li>
           <li><a href="#mozTocId573582">Chapter 3. Resource manager</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId590919">Part 8. Binary files</a>
+      <li><a href="#mozTocId590919">Part 7. Binary files</a>
         <ul>
           <li><a href="#mozTocId200879">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId961921">Chapter 2. Base binary file subsystem</a></li>
@@ -91,7 +86,7 @@
           <li><a href="#mozTocId511135">Chapter 4. File writer</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId291572">Part 9. Input</a>
+      <li><a href="#mozTocId291572">Part 8. Input</a>
         <ul>
           <li><a href="#mozTocId783369">Chapter 1. The sub–namespace</a></li>
           <li><a href="#mozTocId685403">Chapter 2. Keyboard</a></li>
@@ -99,7 +94,7 @@
           <li><a href="#mozTocId861609">Chapter 4. Game–pad</a></li>
         </ul>
       </li>
-      <li><a href="#mozTocId309127">Part 10. Internal details of the engine
+      <li><a href="#mozTocId309127">Part 9. Internal details of the engine
           subsystems</a>
         <ul>
           <li><a href="#mozTocId383177">Chapter 1. A few words for a curious
@@ -227,7 +222,7 @@
       <tbody>
         <tr>
           <td colspan="1" rowspan="2"><big>Operating system </big></td>
-          <td><big>Windows 95 or higher<br>
+          <td><big>Windows 98 or higher<br>
             </big></td>
         </tr>
         <tr>
@@ -328,8 +323,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="text-decoration: underline;">Windows 95 and Windows NT
         support</span><br>
       <br>
-    </big><big>One of follow compilers need for <a href="https://en.wikipedia.org/wiki/Windows_95">Windows
-        95</a> or <a href="https://en.wikipedia.org/wiki/Windows_NT">Windows NT</a>
+    </big><big>One of follow compilers need for <a href="https://en.wikipedia.org/wiki/Windows_98">Windows
+        98</a> or <a href="https://en.wikipedia.org/wiki/Windows_NT">Windows NT</a>
       support:<br>
     </big>
     <ul>
@@ -338,12 +333,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <li><big>Borland's C++ Compiler 5.5</big></li>
       <li><big>C++ Builder 5</big></li>
     </ul>
-    <big> </big><big><br style="text-decoration: underline;">
-      <span style="text-decoration: underline;"> Windows XP support</span><br>
-      <br>
-      TDM–GCC or Visual C++ 2008 need for <a href="https://en.wikipedia.org/wiki/Windows_XP">Windows
-        XP</a> support.<br>
-    </big>
+    <big> </big><big><span style="text-decoration: underline;"></span> </big>
     <ul>
     </ul>
     <big> </big><big> <span style="text-decoration: underline;"> Compiler
@@ -411,7 +401,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       What is the main point in your game? A game cycle. You can see the
       structure of a typical game cycle below.<br>
       <br>
-      <img style="width: 379px; height: 354px;" alt="" src="game_cycle.png"> </big>
+      <img style="width: 379px; height: 354px;" alt="" src="game_cycle.png">
+    </big>
     <h1><a name="mozTocId760374" class="mozTocH1"></a><big>Part 3. Graphics</big></h1>
     <h2><a name="mozTocId182571" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
@@ -1035,12 +1026,10 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         int target) const;</span> – Return true if target column is valid.<br>
       <br>
     </big><big style="font-style: italic;"> unsigned int Sheet::get_row(</big><big
-
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return row of target frame.<br>
       <br>
       <span style="font-style: italic;"> unsigned int Sheet::get_column(</span></big><big
-
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return</big><big> column</big><big> </big><big>of
       target frame</big><big>.<br>
@@ -1447,8 +1436,43 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;"> void NEONGDK::Halt(const char
         *message);</span> – Terminate the program. Write error message to log
-      file if logging enabled. </big><big> </big>
-    <h2><a name="mozTocId656377" class="mozTocH2"></a><big>Chapter 3. Timer</big></h2>
+      file if logging enabled.<br>
+    </big>
+    <h2><a class="mozTocH2" name="mozTocId635248"></a><big>Chapter 3. Audio</big></h2>
+    <big><span style="text-decoration: underline;">A few words about sound
+        subsystem</span><br>
+      <br>
+      Audio subsystem intend for playing music and sounds.<br>
+      <br>
+      <span style="text-decoration: underline;">Working with sound</span><br>
+      <br>
+      Just use Audio class to work with sound. Let's look at public methods.<br>
+      <br>
+      <span style="font-style: italic;">void Audio::load(const char *target);</span>
+      – Load a sound file.<br>
+      <br>
+      <span style="font-style: italic;">void Audio::play();</span> – Play a
+      sound.<br>
+      <br>
+      <span style="font-style: italic;">void Audio::play_loop();</span> –
+      Checking play status and restart play if needed.<br>
+      <br>
+      <span style="font-style: italic;">void Audio::play(const bool loop);</span>
+      – Play a sound. You can set loop flag as true for loop playing mode.<br>
+      <br style="font-style: italic;">
+      <span style="font-style: italic;">void Audio::close();</span> – Stop
+      playing if needed and close a sound file if it already loaded.<br>
+      <br>
+      <span style="font-style: italic;">void Audio::stop();</span> – Stop
+      playing a sound.<br>
+      <br>
+      <span style="font-style: italic;">bool Audio::check_playing();</span> –
+      Return true if the sound resource is playing.<br>
+      <br>
+      <span style="font-style: italic;">bool Audio::is_load() const;</span> –
+      Return true if the sound is already loaded.<br>
+    </big><big> </big>
+    <h2><a name="mozTocId656377" class="mozTocH2"></a><big>Chapter 4. Timer</big></h2>
     <big> Timer is a very useful thing. Just use <span style="font-style: italic;">Timer</span>
       class to work with the timer. Let's look at public methods.<br>
       <br style="font-style: italic;">
@@ -1464,7 +1488,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;"> bool Timer::check_timer();</span> –
       Return true and reinitialize start point if interval between stop and
       start points large or equal than specific seconds.</big><br>
-    <h2><a name="mozTocId381935" class="mozTocH2"></a><big>Chapter 4. Collision</big></h2>
+    <h2><a name="mozTocId381935" class="mozTocH2"></a><big>Chapter 5. Collision</big></h2>
     <big> <span style="text-decoration: underline;"> An important thing for any
         game</span><br>
       <br>
@@ -1506,8 +1530,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         NEONGDK::BOX &amp;first_target,const NEONGDK::BOX &amp;second_target);</span>
       – Set collision targets and check collision between it.<br>
     </big>
-    <h2><a class="mozTocH2" name="mozTocId949634"></a><a id="mozTocId319275" class="mozTocH2"></a><big>Chapter
-        5. Tile–map</big></h2>
+    <h2><a class="mozTocH2" name="mozTocId949634"></a><big>Chapter 6. Tile–map</big></h2>
     <big><span style="text-decoration: underline;">A few words about tile-map</span><br>
       <br>
       The tile–map is tile matrix. A tile is a small non–transparent sprite. A
@@ -1572,91 +1595,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;">NEONGDK::BOX Tilemap::get_box(const
         unsigned int row,const unsigned int column) const;</span> – Return
-      collision related information.<br>
-    </big><big> </big>
-    <h1><a class="mozTocH1" name="mozTocId203140"></a><big>Part 6. Other
-        important things</big></h1>
-    <big></big>
-    <h2><a class="mozTocH2" name="mozTocId76865"></a><big>Chapter 1. The
-        sub–namespace</big></h2>
-    <big>All subsystems in this section declared in <span style="font-style: italic;">Misc</span>
-      sub–namespace.<br>
-    </big>
-    <h2><a class="mozTocH2" name="mozTocId194608"></a><big>Chapter 2. Memory</big></h2>
-    <big><span style="text-decoration: underline;">Working with&nbsp; memory
-        subsystem</span><br>
-      <br>
-      <a href="https://en.wikipedia.org/wiki/Random-access_memory">RAM</a> is an
-      important resource. Just use <span style="font-style: italic;">Memory</span>
-      class to get total memory size and free memory size. Let's look at public
-      methods.<br>
-      <br>
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_total_physical();</span> – Return total physical memory size
-      in bytes.<br>
-      <br style="font-style: italic;">
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_free_physical();</span> – Return free physical memory size
-      in bytes.<br>
-      <br>
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_total_virtual();</span> – Return total <a href="https://en.wikipedia.org/wiki/Virtual_memory">virtual
-        memory</a> size in bytes.<br>
-      <br>
-      <span style="font-style: italic;">unsigned long int
-        Memory::get_free_virtual();</span> – Return free <a href="https://en.wikipedia.org/wiki/Virtual_memory">virtual
-        memory</a> size in bytes.<br>
-      <br>
-      <span style="font-style: italic;">unsigned long int Memory::get_usage();</span>
-      – Return percentage of physical memory usage.<br>
-      <br>
-      <span style="text-decoration: underline;">Important remark</span><br>
-      <br>
-      This subsystem can give incorrect information under modern system with big
-      RAM.<br>
-    </big>
-    <h2><a class="mozTocH2" name="mozTocId692799"></a><big>Chapter 3. Audio</big></h2>
-    <big><span style="text-decoration: underline;">A few words about sound
-        subsystem</span><br>
-      <br>
-      Audio subsystem intend for playing music and sounds. <a href="https://en.wikipedia.org/wiki/MP3">MPEG
-        Audio Layer 3</a> and <a href="https://en.wikipedia.org/wiki/Windows_Media_Audio">Waveform
-        Audio File Format</a> are supported.<br>
-      <br>
-      <span style="text-decoration: underline;">Additional formats</span><br>
-      <br>
-      You can use an additional format if you install third–party codecs.<br>
-      <span style="text-decoration: underline;"></span><br>
-      <span style="text-decoration: underline;">Working with sound</span><br>
-      <br>
-      Just use <span style="font-style: italic;">Audio</span> class to work
-      with sound. Let's look at public methods.<br>
-      <br>
-      <span style="font-style: italic;">void Audio::load(const char *target);</span>
-      – Load a sound file.<br>
-      <br>
-      <span style="font-style: italic;">void Audio::play();</span> – Play a
-      sound.<br>
-      <br>
-      <span style="font-style: italic;">void Audio::play_loop();</span> –
-      Checking play status and restart play if needed.<br>
-      <br>
-      <span style="font-style: italic;">void Audio::play(const bool loop);</span>
-      – Play a sound. You can set loop flag as true for loop playing mode.<br>
-      <br>
-      <span style="font-style: italic;">void Audio::close();</span> – Stop
-      playing if needed and close a sound file if it already loaded.<br>
-      <br>
-      <span style="font-style: italic;">void Audio::stop();</span> – Stop
-      playing a sound.<br>
-      <br>
-      <span style="font-style: italic;">bool Audio::check_playing();</span> –
-      Return true if the sound resource is playing.<br>
-      <br>
-      <span style="font-style: italic;">bool Audio::is_load() const;</span> –
-      Return true if the sound is already loaded.<br>
-    </big><big> </big> <big> </big>
-    <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 7. Misc</big></h1>
+      collision related information.</big><br>
+    <big> </big><big> </big> <big> </big>
+    <h1><a name="mozTocId209024" class="mozTocH1"></a><big>Part 6. Misc</big></h1>
     <h2><a name="mozTocId608755" class="mozTocH2"></a><big>Chapter 1. File
         system</big></h2>
     <big><br>
@@ -1720,7 +1661,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       resource array if it already exists. This function takes resource array
       handle as argument.<br>
     </big>
-    <h1><a name="mozTocId590919" class="mozTocH1"></a><big> Part 8. Binary files</big></h1>
+    <h1><a name="mozTocId590919" class="mozTocH1"></a><big> Part 7. Binary files</big></h1>
     <h2><a name="mozTocId200879" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
     <big>All subsystems in this section declared in <span style="font-style: italic;">File</span>
@@ -1728,8 +1669,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     <big> </big>
     <h2><a name="mozTocId961921" class="mozTocH2"></a><big> Chapter 2. Base
         binary file subsystem</big></h2>
-    <big> <br>
-      <u> Work with binary files</u><br>
+    <big> <u> Work with binary files</u><br>
       <br>
       <i>Binary_File</i> class provide simple access to base binary subsystem.
       Don't use it directly. Let's look at public methods.<br>
@@ -1788,15 +1728,14 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
     </big> <big><i>void Output_File::flush();</i> – Force writing internal
       buffer data to the file.</big><br>
     <big> </big>
-    <h1><a name="mozTocId291572" class="mozTocH1"></a><big>Part 9. Input</big></h1>
+    <h1><a name="mozTocId291572" class="mozTocH1"></a><big>Part 8. Input</big></h1>
     <h2><a name="mozTocId783369" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
     <big>All subsystems in this section declared in <span style="font-style: italic;">Input</span>
       sub–namespace.</big><br>
     <big> </big>
     <h2><a name="mozTocId685403" class="mozTocH2"></a><big>Chapter 2. Keyboard</big></h2>
-    <big><br>
-      <span style="text-decoration: underline;"> Low–level input</span><br>
+    <big> <span style="text-decoration: underline;"> Low–level input</span><br>
       <br>
       Any keyboard has a built–in chip. It generates a special code when user
       press or release key. This code called «scan code».<br>
@@ -2159,8 +2098,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       Ordinary buttons codes look as predefined constants. First button is
       GAMEPAD_BUTTON1. Last button is GAMEPAD_BUTTON32.<br>
       <br style="text-decoration: underline;">
-      <span style="text-decoration: underline;"> D–pad buttons codes</span><br>
-    </big>
+      <span style="text-decoration: underline;"> D–pad buttons codes</span></big><br>
     <p><big> D–pad button codes look as predefined constants. You can see it
         below.</big></p>
     <big> </big>
@@ -2321,7 +2259,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         Gamepad::get_right_stick_y() const;</span> – Return y–direction of right
       stick.<br>
     </big>
-    <h1><a name="mozTocId309127" class="mozTocH1"></a><big>Part 10. Internal
+    <h1><a name="mozTocId309127" class="mozTocH1"></a><big>Part 9. Internal
         details of the engine subsystems</big></h1>
     <big></big> <big> </big>
     <h2><a name="mozTocId383177" class="mozTocH2"></a><big>Chapter 1. A few
@@ -2600,6 +2538,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       7.2.9 – 7.3.3 – Small changes.<br>
       7.3.4 – Visual C++ 6 support improved.<br>
       7.3.5 – 7.3.6 – Small changes.<br>
+    </big><big> 7.3.7 – Windows 95 support removed.<br>
+      7.3.8 – Memory subsystem removed.<br>
     </big>
   </body>
 </html>
