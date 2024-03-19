@@ -401,8 +401,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       What is the main point in your game? A game cycle. You can see the
       structure of a typical game cycle below.<br>
       <br>
-      <img style="width: 379px; height: 354px;" alt="" src="game_cycle.png">
-    </big>
+      <img style="width: 379px; height: 354px;" alt="" src="game_cycle.png"> </big>
     <h1><a name="mozTocId760374" class="mozTocH1"></a><big>Part 3. Graphics</big></h1>
     <h2><a name="mozTocId182571" class="mozTocH2"></a><big>Chapter 1. The
         sub–namespace</big></h2>
@@ -455,6 +454,10 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;"> bool Screen::update();</span> – Show
       current back–buffer content on screen. Return false if a game is
       terminated. This method ignoring fps limit and need high processor usage.<br>
+      <br>
+      <span style="font-style: italic;">bool Screen::sync(const bool limit);</span>
+      – Show current back–buffer content on screen. Return false if a game is
+      terminated.<br>
       <br>
       <span style="font-style: italic;"> bool Screen::is_ready();</span> –
       Return true if the subsystem is already initialized.<br>
@@ -726,7 +729,6 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         &amp;background);</span> – Load a background </big><big>from the buffer</big><big>.<br>
       <br>
     </big><big><span style="font-style: italic;">void Scene::load(</span></big><big
-
       style="font-style: italic;">const char *name</big><big><span style="font-style: italic;">);</span>
       – Load a background from target file.</big><br>
     <big><br>
@@ -1385,6 +1387,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       </big></h2>
     <big><span style="text-decoration: underline;"></span> Isometric level
       subsystem intend for help you to create an isometric levels. Just use <span
+
         style="font-style: italic;">World</span> class for doing it. Let's look
       at public methods.<br>
       <br>
@@ -2540,6 +2543,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       7.3.5 – 7.3.6 – Small changes.<br>
     </big><big> 7.3.7 – Windows 95 support removed.<br>
       7.3.8 – Memory subsystem removed.<br>
+      7.3.9 – Source code synced with Eugene game development kit 8.4.2.<br>
     </big>
   </body>
 </html>
