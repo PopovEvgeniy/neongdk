@@ -508,22 +508,14 @@ namespace NEONGDK
 
   void WINGL::set_render(HDC target)
   {
-   if (target!=NULL)
-   {
-    this->set_pixel_format(target);
-    this->create_render_context();
-    this->disable_vsync();
-   }
-
+   this->set_pixel_format(target);
+   this->create_render_context();
+   this->disable_vsync();
   }
 
   void WINGL::Swap()
   {
-   if (device!=NULL)
-   {
-    SwapBuffers(device);
-   }
-
+   SwapBuffers(device);
   }
 
   bool WINGL::is_software_render() const
