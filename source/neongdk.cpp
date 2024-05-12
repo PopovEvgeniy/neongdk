@@ -379,7 +379,7 @@ namespace NEONGDK
 
   void Engine::create_window()
   {
-   window=CreateWindowEx(WS_EX_APPWINDOW,window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
+   window=CreateWindowEx(WS_EX_LEFT,window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
    if (window==NULL)
    {
     NEONGDK::Halt("Can't create window");
@@ -1765,7 +1765,7 @@ namespace NEONGDK
    this->set_render(this->get_context());
    this->start_render(this->get_display_width(),this->get_display_height());
    this->create_timer();
-   this->set_timer(20);
+   this->set_timer(17);
   }
 
   void Screen::clear_screen()
