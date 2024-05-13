@@ -369,7 +369,7 @@ namespace NEONGDK
 
   void Engine::take_context()
   {
-   context=GetWindowDC(window);
+   context=GetDC(window);
    if (context==NULL)
    {
     NEONGDK::Halt("Can't take window context");
@@ -449,7 +449,7 @@ namespace NEONGDK
    setting.dwDamageMask=0;
    setting.dwLayerMask=0;
    setting.dwVisibleMask=0;
-   setting.cColorBits=16;
+   setting.cColorBits=24;
    setting.cDepthBits=16;
    setting.nSize=sizeof(PIXELFORMATDESCRIPTOR);
    setting.nVersion=1;
