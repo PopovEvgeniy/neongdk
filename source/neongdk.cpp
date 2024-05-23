@@ -74,6 +74,7 @@ namespace
  const size_t MOUSE=3;
  const unsigned char KEY_RELEASE=0;
  const unsigned char KEY_PRESS=1;
+ bool run=true;
 
  unsigned char Keys[KEYBOARD]={KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,
                                KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,
@@ -117,8 +118,11 @@ namespace NEONGDK
     case WM_PAINT:
     ValidateRect(window,NULL);
     break;
+    case WM_CREATE:
+    run=true;
+    break;
     case WM_CLOSE:
-    DestroyWindow(window);
+    run=false;
     break;
     case WM_DESTROY:
     PostQuitMessage(0);
@@ -307,7 +311,7 @@ namespace NEONGDK
    }
    if (window!=NULL)
    {
-    CloseWindow(window);
+    DestroyWindow(window);
     window=NULL;
    }
    UnregisterClass(window_class.lpszClassName,window_class.hInstance);
@@ -400,10 +404,8 @@ namespace NEONGDK
 
   bool Engine::process_message()
   {
-   bool run;
    MSG Message;
-   run=true;
-   while(PeekMessage(&Message,window,0,0,PM_NOREMOVE)==TRUE)
+   while (PeekMessage(&Message,window,0,0,PM_NOREMOVE)==TRUE)
    {
     if (GetMessage(&Message,window,0,0)==TRUE)
     {
@@ -412,7 +414,6 @@ namespace NEONGDK
     }
     else
     {
-     run=false;
      break;
     }
 
