@@ -121,6 +121,9 @@ namespace NEONGDK
     case WM_CLOSE:
     run=false;
     break;
+    case WM_PAINT:
+    ValidateRect(window,NULL);
+    break;
     case WM_DESTROY:
     PostQuitMessage(0);
     break;
@@ -365,7 +368,7 @@ namespace NEONGDK
 
   void Engine::take_context()
   {
-   context=GetDC(window);
+   context=GetWindowDC(window);
    if (context==NULL)
    {
     NEONGDK::Halt("Can't take window context");
