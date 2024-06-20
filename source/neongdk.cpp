@@ -440,7 +440,7 @@ namespace NEONGDK
   {
    if (render!=NULL)
    {
-    wglMakeCurrent(NULL,NULL);
+    wglMakeCurrent(wglGetCurrentDC(),NULL);
     wglDeleteContext(render);
     render=NULL;
    }
