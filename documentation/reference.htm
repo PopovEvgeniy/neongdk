@@ -348,6 +348,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       optimization.<br>
       <br>
       <span style="text-decoration: underline;"> Note for Visual C++ users</span><br
+
         style="text-decoration: underline;">
       <br>
       Disable pre–compiled headers before start compilation. Old Visual C++
@@ -475,8 +476,8 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <span style="font-style: italic;"> unsigned int Screen::get_fps() const;</span>
       – Return current fps value.<br>
       <br>
-      <span style="font-style: italic;"> unsigned int Screen::get_color()
-        const;</span> – Return current color depth in bits per pixel.<br>
+      <span style="font-style: italic;"> unsigned int Screen::get_color() const;</span>
+      – Return current color depth in bits per pixel.<br>
       <br>
       <span style="font-style: italic;"> unsigned int Screen::get_width() const;</span>
       – Return screen width in pixels.<br>
@@ -733,6 +734,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         &amp;background);</span> – Load a background </big><big>from the buffer</big><big>.<br>
       <br>
     </big><big><span style="font-style: italic;">void Scene::load(</span></big><big
+
       style="font-style: italic;">const char *name</big><big><span style="font-style: italic;">);</span>
       – Load a background from target file.</big><br>
     <big><br>
@@ -1215,9 +1217,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       class provide simple access to image loader. It is a simple class with few
       methods.<br>
       <br style="font-style: italic;">
-      <span style="font-style: italic;"> unsigned char *Image::load(const
-        char *name);</span> – Load a Truevision TGA image and return handle to
-      image buffer.<br>
+      <span style="font-style: italic;"> unsigned char *Image::load(const char
+        *name);</span> – Load a Truevision TGA image and return handle to image
+      buffer.<br>
       <br>
       <span style="font-style: italic;">unsigned char *Image::get_data();</span>
       – Return handle to image buffer.<br>
@@ -1656,13 +1658,12 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       functions. All these functions declared in <span style="font-style: italic;">Resource</span>
       sub–namespace.<br>
       <br>
-      <span style="font-style: italic;"> create</span> function create single
-      resource or terminate the program if operation failed. It didn't take
-      argument and return handle of the resource.<br>
-      <br style="font-style: italic;">
-      <span style="font-style: italic;"> create_array</span> function create
-      resource array or terminate the program if operation failed. It takes
-      resource amount as argument and return handle of resource array.<br>
+      <span style="font-style: italic;">create</span>
+      function create a single resource or array of resources. It has two
+      form. First form create a single resource. First form takes a handle to
+      resource handle as arguments. Second form create array of resources.
+      Second form takes a handle to resource handle and resource amount as
+      arguments.<br>
       <br>
       <span style="font-style: italic;"> destroy</span> function delete resource
       if it already exists. This function takes resource handle as argument.<br>
@@ -2592,6 +2593,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       7.7.9 – Source code synced with Eugene game development kit 8.8.4.<br>
       7.8 – Small changes.<br>
       7.8.1 – Source code synced with Eugene game development kit 8.8.5.<br>
+      7.8.2 – Source code synced with Black game development kit 5.8.2.<br>
     </big>
   </body>
 </html>
