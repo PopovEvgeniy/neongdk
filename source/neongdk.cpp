@@ -2076,14 +2076,16 @@ namespace NEONGDK
 
   Picture::Picture()
   {
-   image.set_length(0);
+   image=NULL;
    image_width=0;
    image_height=0;
+   pixels=0;
   }
 
   Picture::~Picture()
   {
-   image.destroy_buffer();
+   Resource::destroy_array(image);
+   image=NULL;
    image_width=0;
    image_height=0;
   }
@@ -2092,27 +2094,29 @@ namespace NEONGDK
   {
    image_width=width;
    image_height=height;
+   pixels=static_cast<size_t>(width)*static_cast<size_t>(height);
   }
 
   void Picture::create_storage()
   {
-   size_t length;
-   length=static_cast<size_t>(image_width)*static_cast<size_t>(image_height);
-   image.set_length(length);
-   image.create_buffer();
+   Resource::create(&image,pixels);
   }
 
   void Picture::copy_image(const unsigned int *target)
   {
-   image.copy_data(target);
+   size_t index;
+   for (index=0;index<pixels;++index)
+   {
+    image[index]=target[index];
+   }
+
   }
 
   void Picture::convert_image(const unsigned char *target)
   {
-   size_t index,position,length;
-   length=image.get_length();
+   size_t index,position;
    position=0;
-   for (index=0;index<length;++index)
+   for (index=0;index<pixels;++index)
    {
     image[index]=Core::make_pixel(target[position+2],target[position+1],target[position],0);
     if (image[0]!=image[index])
@@ -2142,13 +2146,14 @@ namespace NEONGDK
 
   void Picture::destroy_image()
   {
-   image.destroy_buffer();
+   Resource::destroy_array(image);
+   image=NULL;
    this->set_image_size(0,0);
   }
 
   bool Picture::is_storage_empty() const
   {
-   return image.get_length()==0;
+   return pixels==0;
   }
 
   unsigned int Picture::get_image_width() const
@@ -2163,12 +2168,12 @@ namespace NEONGDK
 
   size_t Picture::get_image_length() const
   {
-   return image.get_length()*sizeof(unsigned int);
+   return pixels*sizeof(unsigned int);
   }
 
   unsigned int *Picture::get_image()
   {
-   return image.get_buffer();
+   return image;
   }
 
   Animation::Animation()
