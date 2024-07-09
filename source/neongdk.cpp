@@ -2088,6 +2088,7 @@ namespace NEONGDK
    image=NULL;
    image_width=0;
    image_height=0;
+   pixels=0;
   }
 
   void Picture::set_image_size(const unsigned int width,const unsigned int height)
@@ -2164,6 +2165,11 @@ namespace NEONGDK
   unsigned int Picture::get_image_height() const
   {
    return image_height;
+  }
+
+  size_t Picture::get_pixel_amount() const
+  {
+   return pixels;
   }
 
   size_t Picture::get_image_length() const
