@@ -1870,6 +1870,7 @@ namespace NEONGDK
    data.set_length(0);
    width=0;
    height=0;
+   uncompressed_length=0;
   }
 
   Image::~Image()
@@ -1877,6 +1878,7 @@ namespace NEONGDK
    data.destroy_buffer();
    width=0;
    height=0;
+   uncompressed_length=0;
   }
 
   size_t Image::get_source_position(const unsigned int x,const unsigned int y,const Core::MIRROR_KIND mirror) const
@@ -1905,7 +1907,7 @@ namespace NEONGDK
    Core::Buffer<unsigned char> original;
    unsigned int x,y;
    size_t index,position;
-   original.set_length(data.get_length());
+   original.set_length(uncompressed_length);
    original.create_buffer();
    original.copy_data(data.get_buffer());
    index=0;
@@ -1925,20 +1927,20 @@ namespace NEONGDK
    original.destroy_buffer();
   }
 
-  void Image::uncompress_tga_data(const unsigned char *target)
+  void Image::uncompress_tga_data(const unsigned char *source,unsigned char *target)
   {
    size_t index,position,amount;
    index=0;
    position=0;
-   while (index<data.get_length())
+   while (index<uncompressed_length)
    {
-    if (target[position]<128)
+    if (source[position]<128)
     {
-     for (amount=target[position]+1;amount>0;--amount)
+     for (amount=source[position]+1;amount>0;--amount)
      {
-      data[index]=target[position+1];
-      data[index+1]=target[position+2];
-      data[index+2]=target[position+3];
+      target[index]=source[position+1];
+      target[index+1]=source[position+2];
+      target[index+2]=source[position+3];
       index+=3;
       position+=3;
      }
@@ -1946,11 +1948,11 @@ namespace NEONGDK
     }
     else
     {
-     for (amount=target[position]-127;amount>0;--amount)
+     for (amount=source[position]-127;amount>0;--amount)
      {
-      data[index]=target[position+1];
-      data[index+1]=target[position+2];
-      data[index+2]=target[position+3];
+      target[index]=source[position+1];
+      target[index+1]=source[position+2];
+      target[index+2]=source[position+3];
       index+=3;
      }
      position+=sizeof(unsigned int);
@@ -1983,7 +1985,7 @@ namespace NEONGDK
   void Image::load_tga(File::Input_File &target)
   {
    Core::Buffer<unsigned char> compressed_buffer;
-   size_t compressed_length,uncompressed_length;
+   size_t compressed_length;
    TGA_head head;
    TGA_map color_map;
    TGA_image image;
@@ -2001,18 +2003,19 @@ namespace NEONGDK
     switch (head.type)
     {
      case 2:
-     target.read(data.get_buffer(),data.get_length());
+     target.read(data.get_buffer(),uncompressed_length);
      break;
      case 10:
      compressed_buffer.set_length(compressed_length);
      compressed_buffer.create_buffer();
      target.read(compressed_buffer.get_buffer(),compressed_buffer.get_length());
-     this->uncompress_tga_data(compressed_buffer.get_buffer());
+     this->uncompress_tga_data(compressed_buffer.get_buffer(),data.get_buffer());
      compressed_buffer.destroy_buffer();
      break;
      default:
      width=0;
      height=0;
+     uncompressed_length=0;
      data.destroy_buffer();
      break;
     }
@@ -2038,7 +2041,7 @@ namespace NEONGDK
 
   size_t Image::get_length() const
   {
-   return data.get_length();
+   return uncompressed_length;
   }
 
   unsigned char *Image::get_data()
@@ -2056,6 +2059,7 @@ namespace NEONGDK
    data.destroy_buffer();
    width=0;
    height=0;
+   uncompressed_length=0;
   }
 
   unsigned char *Image::load(const char *name)
