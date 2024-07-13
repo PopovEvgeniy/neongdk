@@ -341,81 +341,6 @@ typedef enum
  NEONGDK::GAMEPAD_DIRECTION get_inverted_direction(const NEONGDK::GAMEPAD_DIRECTION target);
  NEONGDK::GAMEPAD_DIRECTION get_vertical_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum);
 
- template <class DATA_TYPE>
- class Buffer
- {
-  private:
-  DATA_TYPE *buffer;
-  size_t length;
-  public:
-
-  Buffer()
-  {
-   buffer=NULL;
-   length=0;
-  }
-
-  ~Buffer()
-  {
-   Resource::destroy_array(buffer);
-   buffer=NULL;
-   length=0;
-  }
-
-  void set_length(const size_t amount)
-  {
-   length=amount;
-  }
-
-  void destroy_buffer()
-  {
-   Resource::destroy_array(buffer);
-   buffer=NULL;
-   length=0;
-  }
-
-  void fill_buffer(const DATA_TYPE value)
-  {
-   size_t index;
-   for (index=0;index<length;++index)
-   {
-    buffer[index]=value;
-   }
-
-  }
-
-  void copy_data(const DATA_TYPE *target)
-  {
-   size_t index;
-   for (index=0;index<length;++index)
-   {
-    buffer[index]=target[index];
-   }
-
-  }
-
-  void create_buffer()
-  {
-   Resource::create(&buffer,length);
-  }
-
-  size_t get_length() const
-  {
-   return length;
-  }
-
-  DATA_TYPE *get_buffer()
-  {
-   return buffer;
-  }
-
-  DATA_TYPE& operator[](const size_t index)
-  {
-   return buffer[index];
-  }
-
- };
-
   class Resizer
   {
    private:
@@ -535,7 +460,8 @@ typedef enum
   class Keyboard
   {
    private:
-   Core::Buffer<unsigned char> preversion;
+   unsigned char *preversion;
+   void prepare();
    bool check_state(const unsigned char code,const unsigned char state);
    public:
    Keyboard();

@@ -1177,19 +1177,30 @@ namespace NEONGDK
 
   Keyboard::Keyboard()
   {
-   preversion.set_length(KEYBOARD);
+   preversion=NULL;
   }
 
   Keyboard::~Keyboard()
   {
-   preversion.destroy_buffer();
+   Resource::destroy_array(preversion);
+   preversion=NULL;
+  }
+
+  void Keyboard::prepare()
+  {
+   size_t index;
+   for (index=0;index<KEYBOARD;++index)
+   {
+    preversion[index]=KEY_RELEASE;
+   }
+
   }
 
   bool Keyboard::check_state(const unsigned char code,const unsigned char state)
   {
    bool accept;
    accept=false;
-   if (preversion.get_buffer()!=NULL)
+   if (preversion!=NULL)
    {
     accept=(Keys[code]==state) && (preversion[code]!=state);
     preversion[code]=Keys[code];
@@ -1199,17 +1210,17 @@ namespace NEONGDK
 
   void Keyboard::initialize()
   {
-   if (preversion.get_buffer()==NULL)
+   if (preversion==NULL)
    {
-    preversion.create_buffer();
-    preversion.fill_buffer(KEY_RELEASE);
+    Resource::create(&preversion,KEYBOARD);
+    this->prepare();
    }
 
   }
 
   bool Keyboard::check_hold(const unsigned char code)
   {
-   if (preversion.get_buffer()!=NULL)
+   if (preversion!=NULL)
    {
     preversion[code]=Keys[code];
    }
@@ -1228,7 +1239,7 @@ namespace NEONGDK
 
   bool Keyboard::is_ready() const
   {
-   return preversion.get_length()>0;
+   return preversion!=NULL;
   }
 
   Mouse::Mouse()
@@ -2084,9 +2095,6 @@ namespace NEONGDK
   {
    Resource::destroy_array(image);
    image=NULL;
-   image_width=0;
-   image_height=0;
-   pixels=0;
   }
 
   void Picture::set_image_size(const unsigned int width,const unsigned int height)
