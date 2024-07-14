@@ -260,7 +260,8 @@ typedef enum
    }
    catch (...)
    {
-    NEONGDK::Halt("Can't allocate memory");
+    puts("Can't allocate memory");
+    exit(EXIT_FAILURE);
    }
 
   }
@@ -274,7 +275,8 @@ typedef enum
    }
    catch (...)
    {
-    NEONGDK::Halt("Can't allocate memory");
+    puts("Can't allocate memory");
+    exit(EXIT_FAILURE);
    }
 
   }
@@ -332,14 +334,14 @@ typedef enum
   ALPHA_COMPONENT=24
  } PIXEL_COMPONENT;
 
- float get_start_offset(const float current,const float total);
- float get_end_offset(const float current,const float total);
- unsigned int get_pixel_component(const unsigned int pixel,const Core::PIXEL_COMPONENT component);
- unsigned int make_pixel(const unsigned int red,const unsigned int green,const unsigned int blue,const unsigned int alpha);
- size_t get_offset(const unsigned int x,const unsigned int y,const unsigned int width);
- NEONGDK::GAMEPAD_DIRECTION get_horizontal_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum);
- NEONGDK::GAMEPAD_DIRECTION get_inverted_direction(const NEONGDK::GAMEPAD_DIRECTION target);
- NEONGDK::GAMEPAD_DIRECTION get_vertical_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum);
+  float get_start_offset(const float current,const float total);
+  float get_end_offset(const float current,const float total);
+  unsigned int get_pixel_component(const unsigned int pixel,const Core::PIXEL_COMPONENT component);
+  unsigned int make_pixel(const unsigned int red,const unsigned int green,const unsigned int blue,const unsigned int alpha);
+  size_t get_offset(const unsigned int x,const unsigned int y,const unsigned int width);
+  NEONGDK::GAMEPAD_DIRECTION get_horizontal_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum);
+  NEONGDK::GAMEPAD_DIRECTION get_inverted_direction(const NEONGDK::GAMEPAD_DIRECTION target);
+  NEONGDK::GAMEPAD_DIRECTION get_vertical_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum);
 
   class Resizer
   {
