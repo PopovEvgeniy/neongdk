@@ -658,6 +658,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;"> void Background::destroy();</span> –
       Destroy a background image and destroy a background texture.<br>
+      <br>
+      <span style="font-style: italic;">bool Background::is_load() const;</span>
+      – Return true if a background is already loaded.<br>
       <br style="font-style: italic;">
       <span style="font-style: italic;">bool Background::is_last_frame() const;</span>
       – Return true if current frame is last frame.<br>
@@ -747,6 +750,9 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       <br>
       <span style="font-style: italic;"> void Scene::destroy();</span> – Destroy
       a background image and destroy a background texture.<br>
+      <br>
+      <span style="font-style: italic;">bool Scene::is_load() const;</span> –
+      Return true if a static background is already loaded.<br>
       <span style="font-style: italic;"></span><br>
       <span style="font-style: italic;"> unsigned int Scene::get_width() const;</span>
       – Return the width of the background.<br>
@@ -1038,12 +1044,10 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
         int target) const;</span> – Return true if target column is valid.<br>
       <br>
     </big><big style="font-style: italic;"> unsigned int Sheet::get_row(</big><big
-
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return row of target frame.<br>
       <br>
       <span style="font-style: italic;"> unsigned int Sheet::get_column(</span></big><big
-
       style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
         const;</span> – Return</big><big> column</big><big> </big><big>of
       target frame</big><big>.<br>
@@ -2610,6 +2614,7 @@ C++ Redistributable Packages</a> if you game code compiled under Visual C++
       7.9.6 – Source code synced with Eugene game development kit 9.0.3.<br>
       7.9.7 – Small changes.<br>
       7.9.8 – Source code synced with Eugene game development kit 9.0.4.<br>
+      7.9.9 – Source code synced with Eugene game development kit 9.0.5.<br>
     </big>
   </body>
 </html>
