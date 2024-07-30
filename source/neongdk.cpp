@@ -2480,6 +2480,11 @@ namespace NEONGDK
    return sprite_height;
   }
 
+  bool Billboard::is_load() const
+  {
+   return billboard.is_texture_exist();
+  }
+
   NEONGDK::BOX Billboard::get_box() const
   {
    NEONGDK::BOX collision;
