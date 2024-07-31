@@ -898,7 +898,6 @@ namespace NEONGDK
   {
    if (texture!=0)
    {
-    glBindTexture(GL_TEXTURE_2D,0);
     glDeleteTextures(1,&texture);
     texture=0;
    }
@@ -936,7 +935,7 @@ namespace NEONGDK
   {
    if (glGetError()!=GL_NO_ERROR)
    {
-    NEONGDK::Halt("Can't create the target texture");
+    texture=0;
    }
 
   }
@@ -973,7 +972,6 @@ namespace NEONGDK
   {
    if (texture!=0)
    {
-    glBindTexture(GL_TEXTURE_2D,0);
     glDeleteTextures(1,&texture);
     texture=0;
    }
