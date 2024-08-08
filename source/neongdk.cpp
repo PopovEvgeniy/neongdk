@@ -368,7 +368,7 @@ namespace NEONGDK
 
   void Engine::take_context()
   {
-   context=GetWindowDC(window);
+   context=GetDC(window);
    if (context==NULL)
    {
     NEONGDK::Halt("Can't take window context");
