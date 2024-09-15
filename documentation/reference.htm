@@ -117,10 +117,9 @@
         <br>
         Hello from Russia. My name is Popov Evgeniy Alekseyevich. I am the
         individual programmer. I enjoy creating software. I also like the
-        old-school video games. Do you want to develop a video games for
-        Microsoft Windows? You need a good game engine for doing it. I made my
-        own engine. I hope that my C++ game engine will be useful for many
-        programmers.<br>
+        old-school video games. Do you want to develop video games for Microsoft
+        Windows? You need a good game engine for doing it. I made my own engine.
+        I hope that my C++ game engine will be useful for many programmers.<br>
         <br>
         <span style="text-decoration: underline;"> Features</span><br>
         <br>
@@ -217,14 +216,14 @@
         &nbsp; The above copyright notice and this permission notice shall be
         included<br>
         &nbsp;in all copies or substantial portions of the Materials.<br>
-        &nbsp; THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-        EXPRESS &nbsp;&nbsp; OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-        WARRANTIES OF &nbsp;&nbsp; MERCHANTABILITY, FITNESS FOR A PARTICULAR
-        PURPOSE AND NONINFRINGEMENT. IN &nbsp;&nbsp; NO EVENT SHALL THE AUTHORS
-        OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, &nbsp;&nbsp; DAMAGES OR
-        OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR &nbsp;&nbsp;
-        OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE MATERIALS OR
-        THE &nbsp;&nbsp; USE OR OTHER DEALINGS IN THE MATERIALS.</big><br>
+        &nbsp; THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+        KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+        OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+        LIABLE FOR ANY CLAIM, &nbsp;&nbsp; DAMAGES OR OTHER LIABILITY, WHETHER
+        IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+        CONNECTION WITH THE MATERIALS OR THE USE OR OTHER DEALINGS IN THE
+        MATERIALS.</big><br>
     </p>
     <h2><a class="mozTocH2" name="mozTocId336772"></a><big>Chapter 4. System
         requirements</big></h2>
@@ -267,8 +266,8 @@
     <h2><a class="mozTocH2" name="mozTocId491993"></a><big>Chapter 6. Compilers</big></h2>
     <p><big>This engine was successfully tested with these compilers:</big> </p>
     <ul>
-      <li><a href="https://jmeubank.github.io/tdm-gcc/"><big>TDM–GCC</big></a></li>
-      <li><a href="http://mingw-w64.org/"><big>MINGW–w64</big></a></li>
+      <li><a href="https://jmeubank.github.io/tdm-gcc/"><big>TDM-GCC</big></a></li>
+      <li><a href="http://mingw-w64.org/"><big>MINGW-w64</big></a></li>
       <li><a href="http://openwatcom.org/"><big>Open Watcom</big></a></li>
       <li><big><a href="https://open-watcom.github.io/">Open Watcom V2 Fork</a></big></li>
       <li><big><a href="https://www.digitalmars.com/">Digital Mars C++</a></big></li>
@@ -351,7 +350,7 @@
           Server 2003 SP1 Platform SDK</a> if you are using Visual C++ 2005
         Express.<br>
         <span style="text-decoration: underline;"></span><br>
-        <span style="text-decoration: underline;"> Note for Visual C++ users</span></big></p>
+        <span style="text-decoration: underline;"> Notes for Visual C++ users</span></big></p>
     <p><big> Disable pre-compiled headers before starting compilation. Old
         Visual C++ users can do it via the project creation wizard.<br>
         Visual C++ 2017 or higher users must follow these steps:<br>
@@ -361,7 +360,7 @@
       <li><big>Set the «Precomiled Header» option to «Not Using Precompiled
           Headers».</big></li>
     </ul>
-    <p><big><span style="text-decoration: underline;">Note for MINGW-w64 and
+    <p><big><span style="text-decoration: underline;">Notes for MINGW-w64 and
           TDM-GCC users</span></big></p>
     <p><big>Don't forget to link your program with these files: </big></p>
     <ul>
@@ -462,7 +461,7 @@
         false if a game is terminated.<br>
         <br>
         <span style="font-style: italic;"> bool Screen::is_ready();</span> –
-        Return true if the subsystem is already initialized.<br>
+        Return true if the subsystem has already been initialized.<br>
         <br>
         <span style="font-style: italic;"> bool Screen::is_accelerated() const;</span>
         – Return true if render is hardware-accelerated.<br>
@@ -661,7 +660,7 @@
         Destroy a background image and the texture.<br>
         <br>
       </big><big><span style="font-style: italic;">bool Background::is_load()
-          const;</span> – Return true if a background is already loaded.</big><br>
+          const;</span> – Return true if a background has already been loaded.</big><br>
       <big><br>
         <span style="font-style: italic;">bool Background::is_last_frame()
           const;</span> – Return true if the current frame is the last frame.<br>
@@ -740,7 +739,6 @@
           background);</span> – Load a background </big><big>from the buffer.</big><big><br>
         <br>
       </big><big><span style="font-style: italic;">void Scene::load(</span></big><big
-
         style="font-style: italic;">const char *name</big><big><span style="font-style: italic;">);</span>
         – Load a background from the target file.</big><br>
       <big><br>
@@ -754,7 +752,7 @@
         Destroy a background image and destroy the texture.<br>
         <br>
       </big><big><span style="font-style: italic;">bool Scene::is_load() const;</span>
-        – Return true if a static background is already loaded.</big><br>
+        – Return true if a static background has already been loaded.</big><br>
       <br>
       <big><span style="font-style: italic;">unsigned int Scene::get_width()
           const;</span> – Return the width of the background.<br>
@@ -869,7 +867,7 @@
           const;</span> – Return the height of the sprite.<br>
         <br>
       </big><big><span style="font-style: italic;">bool Billboard::is_load()
-          const;</span> – Return true if the sprite is already loaded.</big><br>
+          const;</span> – Return true if the sprite has already been loaded.</big><br>
       <big><br>
       </big><big><span style="font-style: italic;">NEONGDK::BOX
           Billboard::get_box() const;</span> – Return collision-related
@@ -927,7 +925,6 @@
         <br>
         Just use the <span style="font-style: italic;">Sprite</span> class to
         work with a sprite. It is derived from three classes: </big><big><span
-
           style="font-style: italic;">Billboard</span>, <span style="font-style: italic;">Animation,</span>
         and <span style="font-style: italic;">Picture. </span></big><big>Let's
         look at the publicly available methods.<br>
@@ -1165,7 +1162,7 @@
           NEONGDK::TEXT_KIND target);</span> – Set the current text orientation.<br>
         <br>
       </big><big><span style="font-style: italic;">bool Text::is_font_load()
-          const;</span> – Return true if the font is already loaded.</big><br>
+          const;</span> – Return true if the font has already been loaded.</big><br>
       <br>
       <big><span style="font-style: italic;">unsigned int Text::get_font_width()
           const;</span> – Get the current font width in pixels.<br>
@@ -1521,6 +1518,7 @@
         <span style="font-style: italic;">&nbsp;unsigned int y;</span><br>
         <span style="font-style: italic;">&nbsp;unsigned int width;</span><br>
         <span style="font-style: italic;">&nbsp;unsigned int height;</span><span
+
           style="font-style: italic;"><br>
           } BOX;</span><br>
         <br>
@@ -1624,7 +1622,6 @@
         – Return true if the column is valid.<br>
         <br>
         <span style="font-style: italic;">NEONGDK::BOX Tilemap::get_box(</span></big><big
-
         style="font-style: italic;">const </big><big style="font-style: italic;">unsigned
         int row,const unsigned int column</big><big><span style="font-style: italic;">)
           const;</span> – Return the collision-related information.</big></p>
@@ -2084,8 +2081,8 @@
     <h2><a class="mozTocH2" name="mozTocId686993"></a><big>Chapter 3. Mouse</big></h2>
     <p><big><span style="text-decoration: underline;">A few words about mice</span><br>
         <br>
-        Mouse is very useful for interaction with graphical user interface. But
-        the mouse can also be used in video games.<br>
+        A mouse is very useful for interaction with a graphical user interface.
+        But the mouse can also be used in video games.<br>
         <br>
         <span style="text-decoration: underline;"> Working with the mouse</span><br>
         <br>
@@ -2155,8 +2152,7 @@
           Game-Pads</span><br>
         <br>
         You can connect a few Game-Pads. Any connected gamepad has an internal
-        index. First gamepad is 0. First Gamepad will activate by default at
-        program start.<br>
+        index. The first gamepad index is 0. It will activated by default.<br>
         <br>
         <span style="text-decoration: underline;"> Ordinary button codes</span><br>
         <br>
@@ -2176,7 +2172,8 @@
         </tr>
         <tr>
           <td><big>GAMEPAD_NONE </big></td>
-          <td><big>None of the D-Pad buttons are pressed or holding. </big></td>
+          <td><big>None of the D-Pad buttons are pressed or held down<br>
+            </big></td>
         </tr>
         <tr>
           <td><big>GAMEPAD_UP </big></td>
@@ -2286,8 +2283,8 @@
           style="font-style: italic;"><br>
         </span></big></p>
     <p><big><span style="font-style: italic;">NEONGDK::GAMEPAD_DPAD
-          Gamepad::get_dpad() const;</span> – Return code of current pressed or
-        holding D-Pad button.<br>
+          Gamepad::get_dpad() const;</span> – Return code of the pressed or held
+        D-Pad button.<br>
         <br>
         <span style="font-style: italic;"> bool Gamepad::check_hold(const
           NEONGDK::GAMEPAD_BUTTONS button) const;</span> – Return true if the
@@ -2309,19 +2306,19 @@
         <br>
         <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
           Gamepad::get_left_stick_x() const;</span> – Return the x-direction of
-        left stick.<br>
+        the left stick.<br>
         <br>
         <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
           Gamepad::get_left_stick_y() const;</span> – Return the y-direction of
-        left stick.<br>
+        the left stick.<br>
         <br>
         <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
           Gamepad::get_right_stick_x() const;</span> – Return the x-direction of
-        right stick.<br>
+        the right stick.<br>
         <br>
         <span style="font-style: italic;"> NEONGDK::GAMEPAD_DIRECTION
           Gamepad::get_right_stick_y() const;</span> – Return the y-direction of
-        right stick.<br>
+        the right stick.<br>
       </big></p>
     <h1><a class="mozTocH1" name="mozTocId54918"></a><big>Part 9. Internal
         details of the engine subsystems</big></h1>
@@ -2668,7 +2665,7 @@
       8.0.4: Small changes.<br>
       8.0.5: Source code synced with Eugene game development kit 9.0.9.<br>
       8.0.6: Source code synced with Eugene game development kit 9.1.<br>
-      8.0.6.1: Documentation updated.<br>
+      8.0.6.1 </big><big>– 8.0.6.2</big><big>: Documentation updated.<br>
     </big>
   </body>
 </html>
