@@ -1620,6 +1620,7 @@
         – Return true if the column is valid.<br>
         <br>
         <span style="font-style: italic;">NEONGDK::BOX Tilemap::get_box(</span></big><big
+
         style="font-style: italic;">const </big><big style="font-style: italic;">unsigned
         int row,const unsigned int column</big><big><span style="font-style: italic;">)
           const;</span> – Return the collision-related information.</big></p>
@@ -1634,8 +1635,8 @@
         Just use the <span style="font-style: italic;">Audio</span> class to
         work with audio. Let's look at the publicly available methods.<br>
         <span style="font-style: italic;"></span><br>
-        <span style="font-style: italic;"> void Audio::initialize(const char
-          *target);</span> – Initialize the subsystem and load a sound file.<br>
+        <span style="font-style: italic;"> bool Audio::is_load();</span> –
+        Return true if a sound has already been loaded.<br>
         <br>
         <span style="font-style: italic;"> void Audio::load(const char *target);</span>
         – Load a sound file.<br>
@@ -1697,7 +1698,8 @@
         <br>
         <span style="font-style: italic;">NEONGDK::BOX generate_box(const
           unsigned int x,const unsigned int y,const unsigned int width,const
-          unsigned int height);</span> – Generate the collision-related information.<br>
+          unsigned int height);</span> – Generate the collision-related
+        information.<br>
       </big></p>
     <h2><a class="mozTocH2" name="mozTocId573582"></a><big>Chapter 3. Resource
         Manager</big></h2>
@@ -2492,7 +2494,8 @@
       6.2.3: Source code synced with Eugene game development kit 6.9.2.<br>
       6.2.4: Audio subsystem improved.<br>
       6.2.5 – 6.2.6: Small bug fixed.<br>
-      6.2.7: Synchronization timer backported from Neon game development kit 5.8.5.<br>
+      6.2.7: Synchronization timer backported from Neon game development kit
+      5.8.5.<br>
       6.2.8 – 6.3.1: Synchronization timer improved.<br>
       6.3.2: Audio subsystem improved.<br>
       6.3.3: Source code synced with Eugene game development kit 6.9.4.<br>
@@ -2572,8 +2575,7 @@
       7.0.7: Source code synced with Eugene game development kit 8.1.4.<br>
       7.0.8: Source code synced with Eugene game development kit 8.1.5.<br>
       7.0.9: Source code synced with Eugene game development kit 8.1.6.<br>
-      7.1: Synchronization timer backported from Neon game development kit
-      6.3.1.<br>
+      7.1: Synchronization timer backported from Neon game development kit 6.3.1.<br>
       7.1.1: Synchronization timer improved.<br>
       7.1.2: Source code synced with Eugene game development kit 8.1.7.<br>
       7.1.3: Source code synced with Eugene game development kit 8.1.8.<br>
@@ -2618,8 +2620,7 @@
       7.5.6: Source code synced with Eugene game development kit 8.6.5.<br>
       7.5.7: Source code synced with Eugene game development kit 8.6.6.<br>
       7.5.8: Source code synced with Eugene game development kit 8.6.8.<br>
-      7.5.9: Synchronization timer backported from Neon game development kit
-      7.1.1.<br>
+      7.5.9: Synchronization timer backported from Neon game development kit 7.1.1.<br>
       7.6 – 7.6.1: Synchronization timer improved.<br>
       7.6.2: Small changes.<br>
       7.6.3: Windows 95 support added.<br>
@@ -2665,7 +2666,7 @@
       8.0.4: Small changes.<br>
       8.0.5: Source code synced with Eugene game development kit 9.0.9.<br>
       8.0.6: Source code synced with Eugene game development kit 9.1.<br>
-      8.0.6.1 – 8.0.6.3: Documentation updated.<br>
+      8.0.6.1 – 8.0.6.4: Documentation updated.<br>
     </big>
   </body>
 </html>
