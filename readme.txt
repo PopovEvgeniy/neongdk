@@ -1,10 +1,10 @@
 Project Description
 
-Eugene game development kit is an ultra-fast 2D game engine for Windows 98 and Windows NT 4.0. It uses OPENGL for rendering.
+Neon game development kit is an ultra-fast 2D game engine for Windows 98 and Windows NT 4.0. It uses OPENGL for rendering.
 
 License
 
-Eugene game development kit is distributed under a Zlib license.
+Neon game development kit is distributed under a Zlib license.
 
 Features
 
