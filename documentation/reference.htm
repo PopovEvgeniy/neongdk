@@ -220,9 +220,9 @@
         EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
         MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
         IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-        CLAIM, &nbsp;&nbsp; DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-        CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
-        THE MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.</big><br>
+        CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+        TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+        MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.</big><br>
     </p>
     <h2><a class="mozTocH2" name="mozTocId336772"></a><big>Chapter 4. System
         requirements</big></h2>
@@ -887,12 +887,12 @@
         Set the sprite position to the start position.<br>
         <br>
       </big><big><span style="font-style: italic;">void Billboard::go_start_x();</span>
-        – Set </big><big>the x-coordinate of</big><big> sprite position to </big><big>x-coordinate
-        of</big><big> start position.<br>
+        – Set </big><big>the x-coordinate of</big><big> the sprite position to
+        the </big><big>x-coordinate of</big><big> the start position.<br>
         <br>
       </big><big><span style="font-style: italic;">void Billboard::go_start_y();</span>
-        – Set the </big><big>y-coordinate of</big><big> sprite position to </big><big>y-coordinate
-        of</big><big> start position.</big><br>
+        – Set the </big><big>y-coordinate of</big><big> the sprite position to
+        the </big><big>y-coordinate of</big><big> the start position.</big><br>
       <br>
       <big><span style="font-style: italic;">void Billboard::draw();</span> –
         Draw a sprite.<br>
@@ -923,6 +923,7 @@
         <br>
         Just use the <span style="font-style: italic;">Sprite</span> class to
         work with a sprite. It is derived from three classes: </big><big><span
+
           style="font-style: italic;">Billboard</span>, <span style="font-style: italic;">Animation,</span>
         and <span style="font-style: italic;">Picture. </span></big><big>Let's
         look at the publicly available methods.<br>
@@ -1068,7 +1069,6 @@
           const;</span> – Return</big><big> the number of column</big><big>s.<br>
         <br>
       </big><big><span style="font-style: italic;">void Sheet::destroy()</span></big><big><span
-
           style="font-style: italic;">;</span> – </big><big><span style="font-style: italic;"></span>Destroy
         a sprite sheet image and the texture.<br>
         <br>
@@ -1196,17 +1196,17 @@
           *name);</span> – Load a font from the target file.<br>
         <br>
         <span style="font-style: italic;"> void Text::print(const char target);</span>
-        – Draw a single character in the current position.<br>
+        – Draw a single character at the current position.<br>
         <br>
         <span style="font-style: italic;"> void Text::print(const char *target);</span>
         – Draw a text at the current position.<br>
         <br>
         <span style="font-style: italic;"> void Text::print(const unsigned int
           x, const unsigned int y, const char target);</span> – Draw a single
-        character in the specific position.<br>
+        character at the specific position.<br>
         <br>
         <span style="font-style: italic;"> void Text::print(const unsigned int
-          x, const unsigned int y, const char *target);</span> – Draw a text in
+          x, const unsigned int y, const char *target);</span> – Draw a text at
         the specific position.<br>
         <br>
         <span style="font-style: italic;">void Text::disable_mirror();</span> –
@@ -1507,8 +1507,8 @@
         <br>
         <span style="text-decoration: underline;"> Collision detail</span><br>
       </big></p>
-    <p><big>The detector uses the bounding box collision method to detect
-        collisions. The collision-related information is stored in a custom data
+    <p><big>The detector uses the bounding box collision method to detect a
+        collision. The collision-related information is stored in a custom data
         type.<br>
         <br>
         <span style="font-style: italic;"> typedef struct</span><span style="font-style: italic;"><br>
@@ -1620,7 +1620,6 @@
         – Return true if the column is valid.<br>
         <br>
         <span style="font-style: italic;">NEONGDK::BOX Tilemap::get_box(</span></big><big
-
         style="font-style: italic;">const </big><big style="font-style: italic;">unsigned
         int row,const unsigned int column</big><big><span style="font-style: italic;">)
           const;</span> – Return the collision-related information.</big></p>
@@ -1676,7 +1675,7 @@
       <big> </big></p>
     <h2><a class="mozTocH2" name="mozTocId59386"></a><big>Chapter 2. Tools</big></h2>
     <p><big>This module is implemented as a few functions</big><big>. All these
-        functions are declared in <span style="font-style: italic;">Tools</span>
+        functions are declared in the <span style="font-style: italic;">Tools</span>
         sub-namespace.<br>
         <br>
         <span style="font-style: italic;">void quit();</span> </big><big>–</big><big>
@@ -1708,11 +1707,12 @@
         functions are declared in <span style="font-style: italic;">Resource</span>
         sub-namespace.<br>
         <br>
-        <span style="font-style: italic;">create</span> create a single resource
-        or an array of resources. It has two forms. First, create a single
-        resource. First form takes a handle to resource handle as arguments.
-        Second form: create an array of resources. The second form takes a
-        handle to resource handle and resource amount as arguments.</big></p>
+        <span style="font-style: italic;">create</span>
+        creates a resources. The first form of this function creates a single
+        resource. It takes a handle to a resource handle as an argument. The
+        second form creates an array of resources. It takes a handle to a
+        resource handle and a resource amount.<br>
+      </big></p>
     <p><big><span style="font-style: italic;"> destroy</span> delete a resource
         if it already exists. This function takes resource handle as an
         argument.</big></p>
@@ -2494,8 +2494,7 @@
       6.2.3: Source code synced with Eugene game development kit 6.9.2.<br>
       6.2.4: Audio subsystem improved.<br>
       6.2.5 – 6.2.6: Small bug fixed.<br>
-      6.2.7: Synchronization timer backported from Neon game development kit
-      5.8.5.<br>
+      6.2.7: Synchronization timer backported from Neon game development kit 5.8.5.<br>
       6.2.8 – 6.3.1: Synchronization timer improved.<br>
       6.3.2: Audio subsystem improved.<br>
       6.3.3: Source code synced with Eugene game development kit 6.9.4.<br>
@@ -2666,7 +2665,7 @@
       8.0.4: Small changes.<br>
       8.0.5: Source code synced with Eugene game development kit 9.0.9.<br>
       8.0.6: Source code synced with Eugene game development kit 9.1.<br>
-      8.0.6.1 – 8.0.6.4: Documentation updated.<br>
+      8.0.6.1 – 8.0.6.5: Documentation updated.<br>
     </big>
   </body>
 </html>
