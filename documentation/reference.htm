@@ -583,15 +583,14 @@
     <h2><a class="mozTocH2" name="mozTocId738557"></a><big>Chapter 6. Background</big></h2>
     <p><big><span style="text-decoration: underline;">Level decoration</span><br>
         <br>
-        A
-        background is a big image with a few frames. Any game has a background.
-        The background will be stretched to the screen resolution before
-        rendering the game scene. The background transparency is always
+        A background is a big image with a few frames. Any game has a
+        background. The background will be stretched to the screen resolution
+        before rendering the game scene. The background transparency is always
         disabled.<br>
         <br>
         The horizontal scrolling backgrounds look like the horizontal photo
-        ribbons. The vertical scrolling backgrounds look like the vertical
-        photo ribbons.<span style="text-decoration: underline;"><br>
+        ribbons. The vertical scrolling backgrounds look like the vertical photo
+        ribbons.<span style="text-decoration: underline;"><br>
         </span></big></p>
     <p><big><span style="text-decoration: underline;"></span></big><big><span style="text-decoration: underline;">Work
           with the background</span><br>
@@ -1051,7 +1050,7 @@
         <br>
       </big><big style="font-style: italic;"> unsigned int Sheet::get_row(</big><big
         style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
-          const;</span> – Return the row of the the target frame.<br>
+          const;</span> – Return the row of the target frame.<br>
         <br>
         <span style="font-style: italic;"> unsigned int Sheet::get_column(</span></big><big
         style="font-style: italic;">const unsigned int target</big><big><span style="font-style: italic;">)
@@ -1074,10 +1073,10 @@
         <br>
       </big><big><span style="font-style: italic;">void Sheet::select(const
           unsigned int row,const unsigned int column);</span> – Select the
-        sprite by row and column.<br>
+        target frame by row and column.<br>
         <br>
-      </big><big><span style="font-style: italic;">void Sheet::select(const
-          unsigned int target);</span> – Select the sprite by frame number.<br>
+      </big><big><span style="font-style: italic;">void Sheet::set_target(const
+          unsigned int target);</span> – Select the target frame.<br>
         <br>
       </big><big><span style="font-style: italic;">void Sheet::step();</span> –
         Increase the target frame. Set it to 1 if the target is more than the
@@ -1126,7 +1125,7 @@
       <big>The text orientation looks like the predefined constants. You can see
         it below.<br>
       </big></p>
-    <table style="width: 421px; height: 106px;" border="1">
+    <table style="width: 450px; height: 106px;" border="1">
       <tbody>
         <tr>
           <td><big>Text orientation<br>
@@ -1135,12 +1134,12 @@
         </tr>
         <tr>
           <td><big>HORIZONTAL_TEXT </big></td>
-          <td><big>The horizontal-oriented text<br>
+          <td><big>The horizontally oriented text<br>
             </big></td>
         </tr>
         <tr>
           <td><big>VERTICAL_TEXT </big></td>
-          <td><big>The vertical-oriented text</big></td>
+          <td><big>The vertically oriented text</big></td>
         </tr>
       </tbody>
     </table>
@@ -1247,10 +1246,10 @@
           const;</span> – Return the width of the current image.<br>
         <br>
         <span style="font-style: italic;"> unsigned int Image::get_height()
-          const;</span> – Return height of the current image.<br>
+          const;</span> – Return the height of the current image.<br>
         <br>
         <span style="font-style: italic;"> size_t Image::get_length() const;</span>
-        – Return length of the image buffer in bytes.<br>
+        – Return the length of the image buffer in bytes.<br>
         <br>
         <span style="font-style: italic;"> Image *Image::get_handle();</span> –
         Return the handle to the image loader.<br>
@@ -1261,7 +1260,7 @@
         <span style="text-decoration: underline;"> Important remark</span><br>
         <br>
         A new image will replace the current image if the current image already
-        exists. An incorrect image will be ignored and don't load.<br>
+        exists. An incorrect image will be ignored and won't load.<br>
         The source image will be converted to <a href="https://en.wikipedia.org/wiki/RGBA">RGBA</a>
         format. Pixels equal to the top-left pixel will be marked as
         transparent.<br>
@@ -1452,6 +1451,7 @@
         target point.<br>
         <br>
         <span style="font-style: italic;">int World::get_column(const int y</span></big><big
+
         style="font-style: italic;">,</big><big style="font-style: italic;">
         const int y</big><big><span style="font-style: italic;">) const;</span>
         – Get a column</big><big> from the target point.<br>
@@ -1473,8 +1473,8 @@
       </big><big> </big></p>
     <h2><a class="mozTocH2" name="mozTocId853711"></a><big>Chapter 2. Abnormal
         program termination</big></h2>
-    <p><big>You can use <span style="font-style: italic;">the Halt</span>
-        function to terminate a program. This function is declared in <em>EGENEGDK</em>
+    <p><big>You can use the <span style="font-style: italic;">Halt</span>
+        function to terminate a program. This function is declared in <em>NEONGDK</em>
         namespace.<br>
         <br>
         <span style="font-style: italic;"> void NEONGDK::Halt(const char
@@ -1647,7 +1647,7 @@
         Checking the playback status and restarting playback if needed. <br>
         <br>
         <span style="font-style: italic;">void Audio::play(const bool loop);</span>
-        – Play a sound. You can set the loop mode if you want.<br>
+        – Play a sound. You can set loop mode if you want.<br>
         <br>
         <span style="font-style: italic;"> void Audio::stop();</span> – Stop
         playing the content of the target file.<br>
@@ -2208,9 +2208,9 @@
         </tr>
       </tbody>
     </table>
-    <p><big><span style="text-decoration: underline;">Sticks identifiers</span><br>
+    <p><big><span style="text-decoration: underline;">Stick identifiers</span><br>
       </big></p>
-    <p><big>The sticks identifiers look like the predefined constants. You can
+    <p><big>The stick identifiers look like the predefined constants. You can
         see it below.</big></p>
     <p><big> </big></p>
     <table border="1">
@@ -2438,233 +2438,235 @@
           Audio</a>.<span style="text-decoration: underline;"></span></big></p>
     <h1><a class="mozTocH1" name="mozTocId670307"></a><big>Version history<br>
       </big></h1>
-    <big>0.1 – 5.7.1: Old branch.<br>
-      5.7.2: Source code synced with Eugene game development kit 6.3.1.<br>
+    <big>0.1 – 5.7.1: The old branch.<br>
+      5.7.2: The source code synced with the Eugene game development kit 6.3.1.<br>
       5.7.3 – 5.7.4: Small changes.<br>
-      5.7.5: Display manager backported from the Neon game development kit 4.6.8.<br>
-      5.7.6: Synchronization timer backported from Neon game development kit 4.1.3.<br>
-      5.7.7: Synchronization timer improved.<br>
-      5.7.8: Sound subsystem added.<br>
-      5.7.9: Small bug fixed.<br>
-      5.8: Source code recompiled under Open Watcom V2 Fork.<br>
+      5.7.5: The display manager is backported from the Neon game development kit 4.6.8.<br>
+      5.7.6: The synchronization timer is backported from the Neon game development kit 4.1.3.<br>
+      5.7.7: The synchronization timer improved.<br>
+      5.7.8: The sound subsystem was added.<br>
+      5.7.9: The small bug was fixed.<br>
+      5.8: The source code was recompiled under Open Watcom V2 Fork.<br>
       5.8.1: Small changes.<br>
-      5.8.2: Memory subsystem backported from Gray game development kit 2.0.8.<br>
+      5.8.2: The memory subsystem is backported from the Gray game development kit 2.0.8.<br>
       5.8.3 – 5.8.4: Small changes.<br>
       5.8.4.1: Documentation updated.<br>
       5.8.5: Visual C++ 2005 support added.<br>
-      5.8.6: Synchronization timer rewritten.<br>
-      5.8.7 – 5.8.8: Synchronization timer improved.<br>
-      5.8.9: Memory subsystem removed.<br>
+      5.8.6: The synchronization timer is rewritten.<br>
+      5.8.7 – 5.8.8: The synchronization timer improved.<br>
+      5.8.9: The memory subsystem was removed.<br>
       5.8.9.1 – 5.8.9.2: Documentation updated.<br>
-      5.9: Source code synced with Eugene game development kit 6.3.8.<br>
-      5.9.1: Source code synced with Eugene game development kit 6.3.9.<br>
-      5.9.2: Source code synced with Eugene game development kit 6.4.<br>
-      5.9.3: Source code synced with Eugene game development kit 6.4.1.<br>
+      5.9: The source code synced with the Eugene game development kit 6.3.8.<br>
+      5.9.1: The source code synced with the Eugene game development kit 6.3.9.<br>
+      5.9.2: The source code synced with the Eugene game development kit 6.4.<br>
+      5.9.3: The source code synced with the Eugene game development kit 6.4.1.<br>
       5.9.3.1: Documentation updated.<br>
-      5.9.4: Source code synced with Eugene game development kit 6.4.2.<br>
-      5.9.5: Source code synced with Eugene game development kit 6.4.9.<br>
-      5.9.6: Source code synced with Eugene game development kit 6.5.2.<br>
-      5.9.7: Source code synced with Eugene game development kit 6.5.4.<br>
-      5.9.8: Source code synced with Eugene game development kit 6.5.5.<br>
-      5.9.9: Source code synced with Eugene game development kit 6.5.6.<br>
-      6.0: Source code synced with Eugene game development kit 6.5.7.<br>
+      5.9.4: The source code synced with the Eugene game development kit 6.4.2.<br>
+      5.9.5: The source code synced with the Eugene game development kit 6.4.9.<br>
+      5.9.6: The source code synced with the Eugene game development kit 6.5.2.<br>
+      5.9.7: The source code synced with the Eugene game development kit 6.5.4.<br>
+      5.9.8: The source code synced with the Eugene game development kit 6.5.5.<br>
+      5.9.9: The source code synced with the Eugene game development kit 6.5.6.<br>
+      6.0: The source code synced with the Eugene game development kit 6.5.7.<br>
       6.0.0.1: Documentation updated.<br>
-      6.0.1: Source code synced with Eugene game development kit 6.5.8.<br>
-      6.0.2: Source code synced with Eugene game development kit 6.5.9.<br>
-      6.0.3: Source code synced with Eugene game development kit 6.6.1.<br>
-      6.0.4: Source code synced with Eugene game development kit 6.7.1.<br>
-      6.0.5: Source code synced with Eugene game development kit 6.7.6.<br>
-      6.0.6: Audio subsystem backported from Simple Windows game framework 6.4.9.<br>
-      6.0.7 – 6.0.8: Audio subsystem improved.<br>
-      6.0.9: Simple sound subsystem removed.<br>
-      6.1: Memory subsystem backported from Gray game development kit 2.0.8.<br>
-      6.1.1: Audio subsystem improved.<br>
-      6.1.2: Source code synced with Eugene game development kit 6.7.7.<br>
-      6.1.3: Source code synced with Eugene game development kit 6.7.8.<br>
-      6.1.4: Source code synced with Eugene game development kit 6.7.9.<br>
-      6.1.5: Source code synced with Eugene game development kit 6.8.<br>
-      6.1.6: Source code synced with Eugene game development kit 6.8.2.<br>
-      6.1.7: Source code synced with Eugene game development kit 6.8.4.<br>
-      6.1.8: Source code synced with Eugene game development kit 6.8.5.<br>
-      6.1.9: Source code synced with Eugene game development kit 6.8.7.<br>
-      6.2: Source code synced with Eugene game development kit 6.8.9.<br>
-      6.2.1: Source code synced with Eugene game development kit 6.9.<br>
-      6.2.2: Source code synced with Eugene game development kit 6.9.1.<br>
-      6.2.3: Source code synced with Eugene game development kit 6.9.2.<br>
-      6.2.4: Audio subsystem improved.<br>
-      6.2.5 – 6.2.6: Small bug fixed.<br>
-      6.2.7: Synchronization timer backported from Neon game development kit 5.8.5.<br>
-      6.2.8 – 6.3.1: Synchronization timer improved.<br>
-      6.3.2: Audio subsystem improved.<br>
-      6.3.3: Source code synced with Eugene game development kit 6.9.4.<br>
-      6.3.4: Audio subsystem improved.<br>
-      6.3.5: Source code synced with Eugene game development kit 6.9.7.<br>
-      6.3.6: Image resizer improved.<br>
+      6.0.1: The source code synced with the Eugene game development kit 6.5.8.<br>
+      6.0.2: The source code synced with the Eugene game development kit 6.5.9.<br>
+      6.0.3: The source code synced with the Eugene game development kit 6.6.1.<br>
+      6.0.4: The source code synced with the Eugene game development kit 6.7.1.<br>
+      6.0.5: The source code synced with the Eugene game development kit 6.7.6.<br>
+      6.0.6: The audio subsystem is backported from the Simple Windows game framework 6.4.9.<br>
+      6.0.7 – 6.0.8: The audio subsystem improved.<br>
+      6.0.9: The simple sound subsystem was removed.<br>
+      6.1: The memory subsystem is backported from the Gray game development kit 2.0.8.<br>
+      6.1.1: The audio subsystem improved.<br>
+      6.1.2: The source code synced with the Eugene game development kit 6.7.7.<br>
+      6.1.3: The source code synced with the Eugene game development kit 6.7.8.<br>
+      6.1.4: The source code synced with the Eugene game development kit 6.7.9.<br>
+      6.1.5: The source code synced with the Eugene game development kit 6.8.<br>
+      6.1.6: The source code synced with the Eugene game development kit 6.8.2.<br>
+      6.1.7: The source code synced with the Eugene game development kit 6.8.4.<br>
+      6.1.8: The source code synced with the Eugene game development kit 6.8.5.<br>
+      6.1.9: The source code synced with the Eugene game development kit 6.8.7.<br>
+      6.2: The source code synced with the Eugene game development kit 6.8.9.<br>
+      6.2.1: The source code synced with the Eugene game development kit 6.9.<br>
+      6.2.2: The source code synced with the Eugene game development kit 6.9.1.<br>
+      6.2.3: The source code synced with the Eugene game development kit 6.9.2.<br>
+      6.2.4: The audio subsystem improved.<br>
+      6.2.5 – 6.2.6: The small bug was fixed.<br>
+      6.2.7: The synchronization timer is backported from the Neon game
+      development kit 5.8.5.<br>
+      6.2.8 – 6.3.1: The synchronization timer improved.<br>
+      6.3.2: The audio subsystem improved.<br>
+      6.3.3: The source code synced with the Eugene game development kit 6.9.4.<br>
+      6.3.4: The audio subsystem improved.<br>
+      6.3.5: The source code synced with the Eugene game development kit 6.9.7.<br>
+      6.3.6: The image resizer improved.<br>
       6.3.7: Small changes.<br>
-      6.3.8: Source code synced with Eugene game development kit 7.0.1.<br>
-      6.3.9: Source code synced with Eugene game development kit 7.0.2.<br>
-      6.4: Source code synced with Eugene game development kit 7.0.5.<br>
-      6.4.1: Source code synced with Eugene game development kit 7.0.6.<br>
-      6.4.2: Source code synced with Eugene game development kit 7.0.9.<br>
-      6.4.3: Source code synced with Eugene game development kit 7.1.<br>
-      6.4.4: Source code synced with Eugene game development kit 7.1.3.<br>
-      6.4.5: Source code synced with Eugene game development kit 7.1.4.<br>
-      6.4.6: Source code synced with Eugene game development kit 7.1.5.<br>
-      6.4.7: Source code synced with Eugene game development kit 7.1.6.<br>
-      6.4.8: Source code synced with Eugene game development kit 7.1.7.<br>
-      6.4.9: Source code synced with Eugene game development kit 7.1.8.<br>
-      6.5: Source code synced with Eugene game development kit 7.1.9.<br>
-      6.5.1: Source code synced with Eugene game development kit 7.2.<br>
-      6.5.2: Source code synced with Eugene game development kit 7.2.1.<br>
-      6.5.3: Source code synced with Eugene game development kit 7.2.4.<br>
-      6.5.4: Source code synced with Eugene game development kit 7.2.5.<br>
-      6.5.5: Source code synced with Eugene game development kit 7.2.6.<br>
-      6.5.6: Source code synced with Eugene game development kit 7.2.7.<br>
-      6.5.7: Source code synced with Eugene game development kit 7.2.8.<br>
-      6.5.8: Source code synced with Eugene game development kit 7.2.9.<br>
-      6.5.9: Source code synced with Eugene game development kit 7.3.<br>
-      6.6: Source code synced with Eugene game development kit 7.3.1.<br>
-      6.6.1: Source code synced with Eugene game development kit 7.3.2.<br>
-      6.6.2: Source code synced with Eugene game development kit 7.3.3.<br>
-      6.6.3: Source code synced with Eugene game development kit 7.3.4.<br>
-      6.6.4: Source code synced with Eugene game development kit 7.3.5.<br>
-      6.6.5: Source code synced with Simple Windows Framework 7.3.5.<br>
-      6.6.6: Source code synced with Eugene game development kit 7.3.7.<br>
-      6.6.7: Source code synced with Eugene game development kit 7.4.4.<br>
-      6.6.8: Source code synced with Eugene game development kit 7.4.5.<br>
-      6.6.9: Source code synced with Eugene game development kit 7.5.<br>
-      6.7: Source code synced with Eugene game development kit 7.5.3.<br>
-      6.7.1: Source code synced with Eugene game development kit 7.5.4.<br>
-      6.7.2: Source code synced with Eugene game development kit 7.5.8.<br>
-      6.7.3: Source code synced with Eugene game development kit 7.6.3.<br>
-      6.7.4: Source code synced with Eugene game development kit 7.6.4.<br>
-      6.7.5: Source code synced with Eugene game development kit 7.6.5.<br>
-      6.7.6: Source code synced with Eugene game development kit 7.6.6.<br>
-      6.7.7: Source code synced with Eugene game development kit 7.6.8.<br>
-      6.7.8: Source code synced with Eugene game development kit 7.6.9.<br>
-      6.7.9: Source code synced with Eugene game development kit 7.7.<br>
-      6.8: Source code synced with Eugene game development kit 7.7.2.<br>
-      6.8.1: Source code synced with Eugene game development kit 7.7.3.<br>
-      6.8.2: Source code synced with Eugene game development kit 7.7.4.<br>
-      6.8.3: Source code synced with Eugene game development kit 7.7.5.<br>
-      6.8.4: Source code synced with Eugene game development kit 7.7.6.<br>
-      6.8.5: Source code synced with Eugene game development kit 7.8.<br>
-      6.8.6: Source code synced with Eugene game development kit 7.8.1.<br>
-      6.8.7: Source code synced with Eugene game development kit 7.8.2.<br>
-      6.8.8: Source code synced with Eugene game development kit 7.8.4.<br>
-      6.8.9: Source code synced with Eugene game development kit 7.8.5.<br>
-      6.9: Source code synced with Eugene game development kit 7.8.6.<br>
-      6.9.1: Source code synced with Eugene game development kit 7.8.8.<br>
-      6.9.2: Source code synced with Eugene game development kit 7.8.9.<br>
-      6.9.3: Source code synced with Eugene game development kit 7.9.<br>
-      6.9.4: Source code synced with Eugene game development kit 7.9.1.<br>
-      6.9.5: Source code synced with Eugene game development kit 7.9.2.<br>
-      6.9.6: Source code synced with Eugene game development kit 7.9.3.<br>
-      6.9.7: Source code synced with Eugene game development kit 7.9.4.<br>
-      6.9.8: Source code synced with Eugene game development kit 7.9.5.<br>
-      6.9.9: Source code synced with Eugene game development kit 7.9.6.<br>
-      7.0: Source code synced with Eugene game development kit 7.9.7.<br>
-      7.0.1: Source code synced with Eugene game development kit 7.9.8.<br>
-      7.0.2: Source code synced with Eugene game development kit 8.0.3.<br>
-      7.0.3: Source code synced with Eugene game development kit 8.0.4.<br>
-      7.0.4: Source code synced with Eugene game development kit 8.0.5.<br>
-      7.0.5: Source code synced with Eugene game development kit 8.0.8.<br>
-      7.0.6: Source code synced with Eugene game development kit 8.0.9.<br>
-      7.0.7: Source code synced with Eugene game development kit 8.1.4.<br>
-      7.0.8: Source code synced with Eugene game development kit 8.1.5.<br>
-      7.0.9: Source code synced with Eugene game development kit 8.1.6.<br>
-      7.1: Synchronization timer backported from Neon game development kit 6.3.1.<br>
-      7.1.1: Synchronization timer improved.<br>
-      7.1.2: Source code synced with Eugene game development kit 8.1.7.<br>
-      7.1.3: Source code synced with Eugene game development kit 8.1.8.<br>
-      7.1.4 – 7.1.5: Small bug fixed.<br>
-      7.1.6: Source code synced with Eugene game development kit 8.1.9.<br>
-      7.1.7: Source code synced with Eugene game development kit 8.2.1.<br>
-      7.1.8: Source code synced with Eugene game development kit 8.2.2.<br>
-      7.1.9: Source code synced with Eugene game development kit 8.2.3.<br>
-      7.2: Source code synced with Eugene game development kit 8.2.4.<br>
-      7.2.0.1: Source code recompiled under Borland C++ Compiler 5.5.<br>
-      7.2.1: Source code synced with Eugene game development kit 8.2.5.<br>
-      7.2.1.0.1: Project file updated.<br>
-      7.2.2: Source code synced with Eugene game development kit 8.2.6.<br>
-      7.2.3: Source code synced with Eugene game development kit 8.2.8.<br>
-      7.2.4: Source code synced with Eugene game development kit 8.3.<br>
-      7.2.5: Source code synced with Eugene game development kit 8.3.1.<br>
-      7.2.6: Source code synced with Eugene game development kit 8.3.2.<br>
-      7.2.7: Source code synced with Eugene game development kit 8.3.3.<br>
-      7.2.8: Source code synced with Eugene game development kit 8.3.4.<br>
+      6.3.8: The source code synced with the Eugene game development kit 7.0.1.<br>
+      6.3.9: The source code synced with the Eugene game development kit 7.0.2.<br>
+      6.4: The source code synced with the Eugene game development kit 7.0.5.<br>
+      6.4.1: The source code synced with the Eugene game development kit 7.0.6.<br>
+      6.4.2: The source code synced with the Eugene game development kit 7.0.9.<br>
+      6.4.3: The source code synced with the Eugene game development kit 7.1.<br>
+      6.4.4: The source code synced with the Eugene game development kit 7.1.3.<br>
+      6.4.5: The source code synced with the Eugene game development kit 7.1.4.<br>
+      6.4.6: The source code synced with the Eugene game development kit 7.1.5.<br>
+      6.4.7: The source code synced with the Eugene game development kit 7.1.6.<br>
+      6.4.8: The source code synced with the Eugene game development kit 7.1.7.<br>
+      6.4.9: The source code synced with the Eugene game development kit 7.1.8.<br>
+      6.5: The source code synced with the Eugene game development kit 7.1.9.<br>
+      6.5.1: The source code synced with the Eugene game development kit 7.2.<br>
+      6.5.2: The source code synced with the Eugene game development kit 7.2.1.<br>
+      6.5.3: The source code synced with the Eugene game development kit 7.2.4.<br>
+      6.5.4: The source code synced with the Eugene game development kit 7.2.5.<br>
+      6.5.5: The source code synced with the Eugene game development kit 7.2.6.<br>
+      6.5.6: The source code synced with the Eugene game development kit 7.2.7.<br>
+      6.5.7: The source code synced with the Eugene game development kit 7.2.8.<br>
+      6.5.8: The source code synced with the Eugene game development kit 7.2.9.<br>
+      6.5.9: The source code synced with the Eugene game development kit 7.3.<br>
+      6.6: The source code synced with the Eugene game development kit 7.3.1.<br>
+      6.6.1: The source code synced with the Eugene game development kit 7.3.2.<br>
+      6.6.2: The source code synced with the Eugene game development kit 7.3.3.<br>
+      6.6.3: The source code synced with the Eugene game development kit 7.3.4.<br>
+      6.6.4: The source code synced with the Eugene game development kit 7.3.5.<br>
+      6.6.5: The source code synced with the Simple Windows Framework 7.3.5.<br>
+      6.6.6: The source code synced with the Eugene game development kit 7.3.7.<br>
+      6.6.7: The source code synced with the Eugene game development kit 7.4.4.<br>
+      6.6.8: The source code synced with the Eugene game development kit 7.4.5.<br>
+      6.6.9: The source code synced with the Eugene game development kit 7.5.<br>
+      6.7: The source code synced with the Eugene game development kit 7.5.3.<br>
+      6.7.1: The source code synced with the Eugene game development kit 7.5.4.<br>
+      6.7.2: The source code synced with the Eugene game development kit 7.5.8.<br>
+      6.7.3: The source code synced with the Eugene game development kit 7.6.3.<br>
+      6.7.4: The source code synced with the Eugene game development kit 7.6.4.<br>
+      6.7.5: The source code synced with the Eugene game development kit 7.6.5.<br>
+      6.7.6: The source code synced with the Eugene game development kit 7.6.6.<br>
+      6.7.7: The source code synced with the Eugene game development kit 7.6.8.<br>
+      6.7.8: The source code synced with the Eugene game development kit 7.6.9.<br>
+      6.7.9: The source code synced with the Eugene game development kit 7.7.<br>
+      6.8: The source code synced with the Eugene game development kit 7.7.2.<br>
+      6.8.1: The source code synced with the Eugene game development kit 7.7.3.<br>
+      6.8.2: The source code synced with the Eugene game development kit 7.7.4.<br>
+      6.8.3: The source code synced with the Eugene game development kit 7.7.5.<br>
+      6.8.4: The source code synced with the Eugene game development kit 7.7.6.<br>
+      6.8.5: The source code synced with the Eugene game development kit 7.8.<br>
+      6.8.6: The source code synced with the Eugene game development kit 7.8.1.<br>
+      6.8.7: The source code synced with the Eugene game development kit 7.8.2.<br>
+      6.8.8: The source code synced with the Eugene game development kit 7.8.4.<br>
+      6.8.9: The source code synced with the Eugene game development kit 7.8.5.<br>
+      6.9: The source code synced with the Eugene game development kit 7.8.6.<br>
+      6.9.1: The source code synced with the Eugene game development kit 7.8.8.<br>
+      6.9.2: The source code synced with the Eugene game development kit 7.8.9.<br>
+      6.9.3: The source code synced with the Eugene game development kit 7.9.<br>
+      6.9.4: The source code synced with the Eugene game development kit 7.9.1.<br>
+      6.9.5: The source code synced with the Eugene game development kit 7.9.2.<br>
+      6.9.6: The source code synced with the Eugene game development kit 7.9.3.<br>
+      6.9.7: The source code synced with the Eugene game development kit 7.9.4.<br>
+      6.9.8: The source code synced with the Eugene game development kit 7.9.5.<br>
+      6.9.9: The source code synced with the Eugene game development kit 7.9.6.<br>
+      7.0: The source code synced with the Eugene game development kit 7.9.7.<br>
+      7.0.1: The source code synced with the Eugene game development kit 7.9.8.<br>
+      7.0.2: The source code synced with the Eugene game development kit 8.0.3.<br>
+      7.0.3: The source code synced with the Eugene game development kit 8.0.4.<br>
+      7.0.4: The source code synced with the Eugene game development kit 8.0.5.<br>
+      7.0.5: The source code synced with the Eugene game development kit 8.0.8.<br>
+      7.0.6: The source code synced with the Eugene game development kit 8.0.9.<br>
+      7.0.7: The source code synced with the Eugene game development kit 8.1.4.<br>
+      7.0.8: The source code synced with the Eugene game development kit 8.1.5.<br>
+      7.0.9: The source code synced with the Eugene game development kit 8.1.6.<br>
+      7.1: The synchronization timer is backported from the Neon game development kit 6.3.1.<br>
+      7.1.1: The synchronization timer improved.<br>
+      7.1.2: The source code synced with the Eugene game development kit 8.1.7.<br>
+      7.1.3: The source code synced with the Eugene game development kit 8.1.8.<br>
+      7.1.4 – 7.1.5: The small bug was fixed.<br>
+      7.1.6: The source code synced with the Eugene game development kit 8.1.9.<br>
+      7.1.7: The source code synced with the Eugene game development kit 8.2.1.<br>
+      7.1.8: The source code synced with the Eugene game development kit 8.2.2.<br>
+      7.1.9: The source code synced with the Eugene game development kit 8.2.3.<br>
+      7.2: The source code synced with the Eugene game development kit 8.2.4.<br>
+      7.2.0.1: The source code was recompiled under Borland C++ Compiler 5.5.<br>
+      7.2.1: The source code synced with the Eugene game development kit 8.2.5.<br>
+      7.2.1.0.1: The project file updated.<br>
+      7.2.2: The source code synced with the Eugene game development kit 8.2.6.<br>
+      7.2.3: The source code synced with the Eugene game development kit 8.2.8.<br>
+      7.2.4: The source code synced with the Eugene game development kit 8.3.<br>
+      7.2.5: The source code synced with the Eugene game development kit 8.3.1.<br>
+      7.2.6: The source code synced with the Eugene game development kit 8.3.2.<br>
+      7.2.7: The source code synced with the Eugene game development kit 8.3.3.<br>
+      7.2.8: The source code synced with the Eugene game development kit 8.3.4.<br>
       7.2.9 – 7.3.3: Small changes.<br>
       7.3.4: Visual C++ 6 support improved.<br>
       7.3.5 – 7.3.6: Small changes.<br>
       7.3.7: Windows 95 support removed.<br>
-      7.3.8: Memory subsystem removed.<br>
-      7.3.9: Source code synced with Eugene game development kit 8.4.2.<br>
-      7.4: Source code synced with Eugene game development kit 8.4.3.<br>
-      7.4.1: Source code synced with Eugene game development kit 8.4.4.<br>
-      7.4.2: Source code synced with Eugene game development kit 8.4.5.<br>
-      7.4.3: Source code synced with Eugene game development kit 8.4.6.<br>
-      7.4.4: Source code synced with Eugene game development kit 8.4.8.<br>
-      7.4.5: Source code synced with Eugene game development kit 8.5.<br>
-      7.4.6: Source code synced with Eugene game development kit 8.5.5.<br>
-      7.4.7: Source code synced with Eugene game development kit 8.5.6.<br>
-      7.4.8: Source code synced with Eugene game development kit 8.5.7.<br>
-      7.4.9: Source code synced with Eugene game development kit 8.5.8.<br>
-      7.5: Source code synced with Eugene game development kit 8.5.9.<br>
-      7.5.1: Source code synced with Eugene game development kit 8.6.<br>
-      7.5.2: Source code synced with Eugene game development kit 8.6.1.<br>
-      7.5.3: Source code synced with Eugene game development kit 8.6.2.<br>
-      7.5.4: Source code synced with Eugene game development kit 8.6.3.<br>
-      7.5.5: Source code synced with Eugene game development kit 8.6.4.<br>
-      7.5.6: Source code synced with Eugene game development kit 8.6.5.<br>
-      7.5.7: Source code synced with Eugene game development kit 8.6.6.<br>
-      7.5.8: Source code synced with Eugene game development kit 8.6.8.<br>
-      7.5.9: Synchronization timer backported from Neon game development kit 7.1.1.<br>
-      7.6 – 7.6.1: Synchronization timer improved.<br>
+      7.3.8: The memory subsystem was removed.<br>
+      7.3.9: The source code synced with the Eugene game development kit 8.4.2.<br>
+      7.4: The source code synced with the Eugene game development kit 8.4.3.<br>
+      7.4.1: The source code synced with the Eugene game development kit 8.4.4.<br>
+      7.4.2: The source code synced with the Eugene game development kit 8.4.5.<br>
+      7.4.3: The source code synced with the Eugene game development kit 8.4.6.<br>
+      7.4.4: The source code synced with the Eugene game development kit 8.4.8.<br>
+      7.4.5: The source code synced with the Eugene game development kit 8.5.<br>
+      7.4.6: The source code synced with the Eugene game development kit 8.5.5.<br>
+      7.4.7: The source code synced with the Eugene game development kit 8.5.6.<br>
+      7.4.8: The source code synced with the Eugene game development kit 8.5.7.<br>
+      7.4.9: The source code synced with the Eugene game development kit 8.5.8.<br>
+      7.5: The source code synced with the Eugene game development kit 8.5.9.<br>
+      7.5.1: The source code synced with the Eugene game development kit 8.6.<br>
+      7.5.2: The source code synced with the Eugene game development kit 8.6.1.<br>
+      7.5.3: The source code synced with the Eugene game development kit 8.6.2.<br>
+      7.5.4: The source code synced with the Eugene game development kit 8.6.3.<br>
+      7.5.5: The source code synced with the Eugene game development kit 8.6.4.<br>
+      7.5.6: The source code synced with the Eugene game development kit 8.6.5.<br>
+      7.5.7: The source code synced with the Eugene game development kit 8.6.6.<br>
+      7.5.8: The source code synced with the Eugene game development kit 8.6.8.<br>
+      7.5.9: The synchronization timer is backported from the Neon game development kit 7.1.1.<br>
+      7.6 – 7.6.1: The synchronization timer improved.<br>
       7.6.2: Small changes.<br>
       7.6.3: Windows 95 support added.<br>
       7.6.4: Small changes.<br>
-      7.6.5: Small bug fixed.<br>
+      7.6.5: The small bug was fixed.<br>
       7.6.6: Small changes.<br>
-      7.6.7: Source code synced with Eugene game development kit 8.7.1.<br>
-      7.6.8: Source code synced with Eugene game development kit 8.7.2.<br>
-      7.6.9: Source code synced with Eugene game development kit 8.7.3.<br>
-      7.7: Source code synced with Black Game Development Kit 5.6.8.<br>
-      7.7.1: Source code synced with Black Game Development Kit 5.6.9.<br>
-      7.7.2: Source code synced with Eugene game development kit 8.7.6.<br>
-      7.7.3: Source code synced with Eugene game development kit 8.7.7.<br>
-      7.7.4: Source code synced with Eugene game development kit 8.7.8.<br>
-      7.7.5: Source code synced with Eugene game development kit 8.7.9.<br>
+      7.6.7: The source code synced with the Eugene game development kit 8.7.1.<br>
+      7.6.8: The source code synced with the Eugene game development kit 8.7.2.<br>
+      7.6.9: The source code synced with the Eugene game development kit 8.7.3.<br>
+      7.7: The source code synced with the Black Game Development Kit 5.6.8.<br>
+      7.7.1: The source code synced with the Black Game Development Kit 5.6.9.<br>
+      7.7.2: The source code synced with the Eugene game development kit 8.7.6.<br>
+      7.7.3: The source code synced with the Eugene game development kit 8.7.7.<br>
+      7.7.4: The source code synced with the Eugene game development kit 8.7.8.<br>
+      7.7.5: The source code synced with the Eugene game development kit 8.7.9.<br>
       7.7.6: Small changes.<br>
-      7.7.7: Source code synced with Black Game Development Kit 5.7.6.<br>
+      7.7.7: The source code synced with the Black Game Development Kit 5.7.6.<br>
       7.7.8: Small changes.<br>
-      7.7.9: Source code synced with Eugene game development kit 8.8.4.<br>
+      7.7.9: The source code synced with the Eugene game development kit 8.8.4.<br>
       7.8: Small changes.<br>
-      7.8.1: Source code synced with Eugene game development kit 8.8.5.<br>
-      7.8.2: Source code synced with Black Game Development Kit 5.8.2.<br>
-      7.8.3: Source code synced with Eugene game development kit 8.8.7.<br>
-      7.8.4: Source code synced with Eugene game development kit 8.8.8.<br>
-      7.8.5: Source code synced with Black Game Development Kit 5.8.7.<br>
-      7.8.6: Source code synced with Black Game Development Kit 5.8.8.<br>
-      7.8.7: Source code synced with Black Game Development Kit 5.9.<br>
-      7.8.8: Source code synced with Black Game Development Kit 5.9.4.<br>
-      7.8.9: Source code synced with Black Game Development Kit 5.9.6.<br>
-      7.9 – 7.9.1: Keyboard input subsystem improved.<br>
+      7.8.1: The source code synced with the Eugene game development kit 8.8.5.<br>
+      7.8.2: The source code synced with the Black Game Development Kit 5.8.2.<br>
+      7.8.3: The source code synced with the Eugene game development kit 8.8.7.<br>
+      7.8.4: The source code synced with the Eugene game development kit 8.8.8.<br>
+      7.8.5: The source code synced with the Black Game Development Kit 5.8.7.<br>
+      7.8.6: The source code synced with the Black Game Development Kit 5.8.8.<br>
+      7.8.7: The source code synced with the Black Game Development Kit 5.9.<br>
+      7.8.8: The source code synced with the Black Game Development Kit 5.9.4.<br>
+      7.8.9: The source code synced with the Black Game Development Kit 5.9.6.<br>
+      7.9 – 7.9.1: The keyboard input subsystem improved.<br>
       7.9.2: Small changes.<br>
-      7.9.3: Source code synced with Eugene game development kit 8.9.9.<br>
-      7.9.4: Source code synced with Eugene game development kit 9.0.1.<br>
-      7.9.5: Synchronization timer backported from Neon game development kit 7.5.8.<br>
-      7.9.6: Source code synced with Eugene game development kit 9.0.3.<br>
+      7.9.3: The source code synced with the Eugene game development kit 8.9.9.<br>
+      7.9.4: The source code synced with the Eugene game development kit 9.0.1.<br>
+      7.9.5: The synchronization timer is backported from the Neon game development kit 7.5.8.<br>
+      7.9.6: The source code synced with the Eugene game development kit 9.0.3.<br>
       7.9.7: Small changes.<br>
-      7.9.8: Source code synced with Eugene game development kit 9.0.4.<br>
-      7.9.9: Source code synced with Eugene game development kit 9.0.5.<br>
-      8.0: Source code synced with Eugene game development kit 9.0.6.<br>
-      8.0.1: Source code synced with Eugene game development kit 9.0.7.<br>
-      8.0.2: Source code synced with Eugene game development kit 9.0.8.<br>
-      8.0.3: Synchronization timer backported from Neon game development kit 7.9.4.<br>
+      7.9.8: The source code synced with the Eugene game development kit 9.0.4.<br>
+      7.9.9: The source code synced with the Eugene game development kit 9.0.5.<br>
+      8.0: The source code synced with the Eugene game development kit 9.0.6.<br>
+      8.0.1: The source code synced with the Eugene game development kit 9.0.7.<br>
+      8.0.2: The source code synced with the Eugene game development kit 9.0.8.<br>
+      8.0.3: The synchronization timer is backported from the Neon game development kit 7.9.4.<br>
       8.0.4: Small changes.<br>
-      8.0.5: Source code synced with Eugene game development kit 9.0.9.<br>
-      8.0.6: Source code synced with Eugene game development kit 9.1.<br>
+      8.0.5: The source code synced with the Eugene game development kit 9.0.9.<br>
+      8.0.6: The source code synced with the Eugene game development kit 9.1.<br>
       8.0.6.1 – 8.0.6.8: Documentation updated.<br>
+      8.0.7: The source code synced with the Eugene game development kit 9.2.<br>
     </big>
   </body>
 </html>
