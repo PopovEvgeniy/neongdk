@@ -739,6 +739,7 @@
           background);</span> – Load a background </big><big>from the buffer.</big><big><br>
         <br>
       </big><big><span style="font-style: italic;">void Scene::load(</span></big><big
+
         style="font-style: italic;">const char *name</big><big><span style="font-style: italic;">);</span>
         – Load a background from the target file.</big><br>
       <big><br>
@@ -1068,6 +1069,7 @@
           const;</span> – Return</big><big> the number of column</big><big>s.<br>
         <br>
       </big><big><span style="font-style: italic;">void Sheet::destroy()</span></big><big><span
+
           style="font-style: italic;">;</span> – </big><big><span style="font-style: italic;"></span>Destroy
         a sprite sheet image and the texture.<br>
         <br>
@@ -1076,7 +1078,7 @@
         target frame by row and column.<br>
         <br>
       </big><big><span style="font-style: italic;">void Sheet::set_target(const
-          unsigned int target);</span> – Select the target frame.<br>
+          unsigned int target);</span> – Set the target frame.<br>
         <br>
       </big><big><span style="font-style: italic;">void Sheet::step();</span> –
         Increase the target frame. Set it to 1 if the target is more than the
@@ -1311,12 +1313,12 @@
         subsystem. <br>
         <br>
         <span style="font-style: italic;">int Coordinates::get_viewport_width()
-          const;</span> – Return </big><big> the </big><big>view-port width in
+          const;</span> – Return </big><big> the </big><big>viewport width in
         pixels.<br>
         <br>
         <span style="font-style: italic;">int Coordinates::get_viewport_height()
-          const;</span> – Return </big><big> the </big><big>view-port height
-        in pixels.<br>
+          const;</span> – Return </big><big> the </big><big>viewport height in
+        pixels.<br>
         <br>
         <span style="font-style: italic;">int
           Coordinates::get_lowest_cartesian_x() const;</span> – Return the
@@ -1385,39 +1387,42 @@
         <br>
       </big><big><span style="font-style: italic;">int
           Isometric::get_isometric_x() const;</span> – Convert the x-coordinate
-      </big><big>from Cartesian system to isometric system.<br>
+      </big><big>from the Cartesian system to the isometric system.<br>
         <br>
         <span style="font-style: italic;">int Isometric::get_isometric_y()
           const;</span> – </big><big>Convert the y-coordinate </big><big>from
-        Cartesian system to isometric system.</big><br>
+      </big><big>the </big><big>Cartesian system to </big><big>the </big><big>isometric
+        system.</big><br>
       <big><br>
         <span style="font-style: italic;">int Isometric::get_cartesian_x()
           const;</span> – </big><big>Convert the x-coordinate </big><big>from
-        isometric system to Cartesian system.<br>
+      </big><big>the </big><big>isometric system to </big><big>the </big><big>Cartesian
+        system.<br>
         <br>
       </big><big><span style="font-style: italic;">int
           Isometric::get_cartesian_y() const;</span> – </big><big>Convert the
-        y-coordinate </big><big>from isometric system to Cartesian system.<br>
+        y-coordinate </big><big>from </big><big>the </big><big>isometric
+        system to </big><big>the </big><big>Cartesian system.<br>
         <br>
         <span style="font-style: italic;">int Isometric::get_isometric_x(const
           int x, const int y);</span> – Set </big><big> the </big><big>target
-        point and convert the x-coordinate from Cartesian system to isometric
-        system.<br>
+        point and convert the x-coordinate from </big><big>the </big><big>Cartesian
+        system to </big><big>the </big><big>isometric system.<br>
         <br>
         <span style="font-style: italic;">int Isometric::get_isometric_y(const
           int x, const int y);</span> – </big><big>Set </big><big> the </big><big>target
-        point and c</big><big>onvert the y-coordinate from Cartesian system to
-        isometric system.<br>
+        point and c</big><big>onvert the y-coordinate from </big><big>the </big><big>Cartesian
+        system to </big><big>the </big><big>isometric system.<br>
         <br>
         <span style="font-style: italic;">int Isometric::get_cartesian_x(const
           int x, const int y);</span> – </big><big>Set </big><big> the </big><big>target
-        point and c</big><big>onvert the x-coordinate from isometric system to
-        Cartesian system. <br>
+        point and c</big><big>onvert the x-coordinate from </big><big>the </big><big>isometric
+        system to </big><big>the </big><big>Cartesian system. <br>
         <br>
         <span style="font-style: italic;">int Isometric::get_cartesian_y(const
           int x, const int y);</span> – </big><big>Set </big><big> the </big><big>target
-        point and c</big><big>onvert the y-coordinate from isometric system to
-        Cartesian system.<br>
+        point and c</big><big>onvert the y-coordinate from </big><big>the </big><big>isometric
+        system to </big><big>the </big><big>Cartesian system.<br>
       </big></p>
     <h2><a class="mozTocH2" name="mozTocId143616"></a><big>Chapter 4. Isometric
         Level<br>
@@ -1451,7 +1456,6 @@
         target point.<br>
         <br>
         <span style="font-style: italic;">int World::get_column(const int y</span></big><big
-
         style="font-style: italic;">,</big><big style="font-style: italic;">
         const int y</big><big><span style="font-style: italic;">) const;</span>
         – Get a column</big><big> from the target point.<br>
@@ -2493,8 +2497,7 @@
       6.2.3: The source code synced with the Eugene game development kit 6.9.2.<br>
       6.2.4: The audio subsystem improved.<br>
       6.2.5 – 6.2.6: The small bug was fixed.<br>
-      6.2.7: The synchronization timer is backported from the Neon game
-      development kit 5.8.5.<br>
+      6.2.7: The synchronization timer is backported from the Neon game development kit 5.8.5.<br>
       6.2.8 – 6.3.1: The synchronization timer improved.<br>
       6.3.2: The audio subsystem improved.<br>
       6.3.3: The source code synced with the Eugene game development kit 6.9.4.<br>
@@ -2667,6 +2670,6 @@
       8.0.6: The source code synced with the Eugene game development kit 9.1.<br>
       8.0.6.1 – 8.0.6.8: Documentation updated.<br>
       8.0.7: The source code synced with the Eugene game development kit 9.2.<br>
-    </big>
+    </big><big>8.0.7.1: Documentation updated.</big><br>
   </body>
 </html>
