@@ -118,8 +118,8 @@
         Hello from Russia. My name is Popov Evgeniy Alekseyevich. I am the
         individual programmer. I enjoy creating software. I also like the
         old-school video games. Do you want to develop video games for Microsoft
-        Windows? You need a good game engine for doing it. I made my own engine.
-        I hope that my C++ game engine will be useful for many programmers.<br>
+        Windows? You need a good game engine to do it. I made my own engine. I
+        hope that my C++ game engine will be useful for many programmers.<br>
         <br>
         <span style="text-decoration: underline;"> Features</span><br>
         <br>
@@ -633,7 +633,7 @@
         <br>
         <span style="font-style: italic;"> void Background::set_setting(const
           NEONGDK::IMAGE_KIND kind, const unsigned int frames); -</span> Set the
-        background setting.<br>
+        background settings.<br>
         <br>
         <span style="font-style: italic;"> void Background::load(Image
           *background,const NEONGDK::IMAGE_KIND kind, const unsigned int
@@ -1276,7 +1276,7 @@
         <br>
         You can use a wide range of graphics software to convert your images to
         the correct format. I recommend using <a href="https://www.gimp.org/">GIMP</a>
-        for doing it. It is a powerful image editor.<br>
+        to do it. It is a powerful image editor.<br>
       </big></p>
     <h1><a class="mozTocH1" name="mozTocId130685"></a><big>Part 4.
         Transformation</big></h1>
@@ -1302,7 +1302,7 @@
         also convert screen coordinates to Cartesian coordinates.<br>
         <br>
         Just use the <span style="font-style: italic;">Coordinates</span> class
-        for doing it. Let's look at the publicly available methods.<br>
+        to do it. Let's look at the publicly available methods.<br>
         <br>
         <span style="font-style: italic;">Coordinates
           *Coordinates::get_handle(); -</span> Return the handle to the
@@ -1376,7 +1376,7 @@
         You can convert Cartesian coordinates to isometric coordinates. You can
         also convert isometric coordinates to Cartesian coordinates.<br>
         Just use the <span style="font-style: italic;">Isometric</span> class
-        for doing it. Let's look at the publicly available methods.<br>
+        to do it. Let's look at the publicly available methods.<br>
         <br>
         <span style="font-style: italic;">Isometric *Isometric::get_handle(); -</span>
         Return the handle to the isometric subsystem.<br>
@@ -1429,10 +1429,10 @@
       </big></h2>
     <p><big> The isometric level subsystem is intended to help you create
         isometric levels. Just use the <span style="font-style: italic;">World</span>
-        class for doing it. Let's look at the publicly available methods.<br>
+        class to do it. Let's look at the publicly available methods.<br>
         <br>
         <span style="font-style: italic;">World *World::get_handle(); -</span>
-        Return the handle to isometric level subsystem.<br>
+        Return the handle to the isometric level subsystem.<br>
         <br>
         <span style="font-style: italic;">void World::initialize(const int
           tile_width, const int tile_height, </span></big><big><span style="font-style: italic;">const
@@ -1624,6 +1624,7 @@
         Return true if the column is valid.<br>
         <br>
         <span style="font-style: italic;">NEONGDK::BOX Tilemap::get_box(</span></big><big
+
         style="font-style: italic;">const </big><big style="font-style: italic;">unsigned
         int row,const unsigned int column</big><big><span style="font-style: italic;">)
           const; -</span> Return the collision-related information.</big></p>
@@ -2497,8 +2498,7 @@
       6.2.3: The source code synced with the Eugene game development kit 6.9.2.<br>
       6.2.4: The audio subsystem improved.<br>
       6.2.5-6.2.6: The small bug was fixed.<br>
-      6.2.7: The synchronization timer is backported from the Neon game
-      development kit 5.8.5.<br>
+      6.2.7: The synchronization timer is backported from the Neon game development kit 5.8.5.<br>
       6.2.8-6.3.1: The synchronization timer improved.<br>
       6.3.2: The audio subsystem improved.<br>
       6.3.3: The source code synced with the Eugene game development kit 6.9.4.<br>
@@ -2665,13 +2665,12 @@
       8.0: The source code synced with the Eugene game development kit 9.0.6.<br>
       8.0.1: The source code synced with the Eugene game development kit 9.0.7.<br>
       8.0.2: The source code synced with the Eugene game development kit 9.0.8.<br>
-      8.0.3: The synchronization timer is backported from the Neon game
-      development kit 7.9.4.<br>
+      8.0.3: The synchronization timer is backported from the Neon game development kit 7.9.4.<br>
       8.0.4: Small changes.<br>
       8.0.5: The source code synced with the Eugene game development kit 9.0.9.<br>
       8.0.6: The source code synced with the Eugene game development kit 9.1.<br>
       8.0.6.1-8.0.6.8: Documentation updated.<br>
       8.0.7: The source code synced with the Eugene game development kit 9.2.<br>
-      8.0.7.1-8.0.7.2: Documentation updated.</big><br>
+      8.0.7.1-8.0.7.3: Documentation updated.</big><br>
   </body>
 </html>
