@@ -2852,7 +2852,7 @@ namespace NEONGDK
    column=1;
    if (target>rows)
    {
-    if (target<=this->get_frames())
+    if (this->check_frame(target)==true)
     {
      column+=(target-1)/rows;
     }
