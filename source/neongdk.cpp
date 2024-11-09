@@ -74,7 +74,7 @@ namespace
  const size_t MOUSE=3;
  const unsigned char KEY_RELEASE=0;
  const unsigned char KEY_PRESS=1;
- bool run=true;
+ bool run=false;
 
  unsigned char Keys[KEYBOARD]={KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,
                                KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,KEY_RELEASE,
@@ -128,7 +128,7 @@ namespace NEONGDK
     PostQuitMessage(0);
     break;
     case WM_ACTIVATE:
-    if (LOWORD(lParam)!=WA_INACTIVE) SetFocus(window);
+    if (LOWORD(wParam)!=WA_INACTIVE) SetFocus(window);
     break;
     case WM_LBUTTONDOWN:
     Buttons[NEONGDK::MOUSE_LEFT]=KEY_PRESS;
