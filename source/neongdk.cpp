@@ -1048,13 +1048,13 @@ namespace NEONGDK
 
   void Render::set_image_setting()
   {
-   glPixelStorei(GL_UNPACK_ALIGNMENT,4);
+   glPixelStorei(GL_UNPACK_ALIGNMENT,1);
    glPixelStorei(GL_UNPACK_SWAP_BYTES,0);
    glPixelStorei(GL_UNPACK_LSB_FIRST,0);
    glPixelStorei(GL_UNPACK_ROW_LENGTH,0);
    glPixelStorei(GL_UNPACK_SKIP_PIXELS,0);
    glPixelStorei(GL_UNPACK_SKIP_ROWS,0);
-   glPixelStorei(GL_PACK_ALIGNMENT,4);
+   glPixelStorei(GL_PACK_ALIGNMENT,1);
    glPixelStorei(GL_PACK_SWAP_BYTES,0);
    glPixelStorei(GL_PACK_LSB_FIRST,0);
    glPixelStorei(GL_PACK_ROW_LENGTH,0);
