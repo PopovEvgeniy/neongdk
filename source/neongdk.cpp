@@ -198,7 +198,7 @@ namespace NEONGDK
    interval=timeGetTime()-start;
    if (interval<delay)
    {
-    SleepEx(delay-interval,FALSE);
+    Sleep(delay-interval);
    }
    start=timeGetTime();
   }
@@ -286,16 +286,14 @@ namespace NEONGDK
 
   Engine::Engine()
   {
-   memset(&window_class,0,sizeof(WNDCLASSEX));
+   memset(&window_class,0,sizeof(WNDCLASS));
    window_class.lpszClassName=TEXT("NEONGDK");
    window_class.style=CS_OWNDC;
-   window_class.cbSize=sizeof(WNDCLASSEX);
    window_class.lpfnWndProc=Internal::Process_Message;
    window_class.hInstance=NULL;
    window_class.hbrBackground=NULL;
    window_class.hIcon=NULL;
    window_class.hCursor=NULL;
-   window_class.hIconSm=NULL;
    window_class.cbClsExtra=0;
    window_class.cbWndExtra=0;
    window=NULL;
@@ -359,7 +357,7 @@ namespace NEONGDK
 
   void Engine::register_window_class()
   {
-   if (RegisterClassEx(&window_class)==0)
+   if (RegisterClass(&window_class)==0)
    {
     NEONGDK::Halt("Can't register window class");
    }
@@ -378,7 +376,7 @@ namespace NEONGDK
 
   void Engine::create_window()
   {
-   window=CreateWindowEx(WS_EX_APPWINDOW,window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
+   window=CreateWindow(window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
    if (window==NULL)
    {
     NEONGDK::Halt("Can't create window");

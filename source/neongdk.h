@@ -209,7 +209,7 @@ typedef enum
   class Engine
   {
    private:
-   WNDCLASSEX window_class;
+   WNDCLASS window_class;
    HWND window;
    HDC context;
    void get_instance();
