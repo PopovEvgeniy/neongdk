@@ -4,7 +4,7 @@ Some code taken from wglext.h(https://www.khronos.org/registry/OpenGL/api/GL/wgl
 
 Neon game development kit license
 
-Copyright (C) 2017 - 2024 Popov Evgeniy Alekseyevich
+Copyright (C) 2017 - 2025 Popov Evgeniy Alekseyevich
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -3954,15 +3954,6 @@ namespace NEONGDK
    if (x>cell_width)
    {
     row=x/cell_width;
-    if ((x%cell_width)==0)
-    {
-     --row;
-    }
-    else
-    {
-     ++row;
-    }
-
    }
    return row;
   }
@@ -3974,15 +3965,6 @@ namespace NEONGDK
    if (y>cell_height)
    {
     column=y/cell_height;
-    if ((y%cell_height)==0)
-    {
-     --column;
-    }
-    else
-    {
-     ++column;
-    }
-
    }
    return column;
   }
