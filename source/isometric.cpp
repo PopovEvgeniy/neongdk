@@ -8,7 +8,7 @@ int main()
  NEONGDK::Graphics::Cartoon ground;
  NEONGDK::Graphics::Text text;
  NEONGDK::Transformation::Coordinates cartesian;
- NEONGDK::Transformation::Entity level;
+ NEONGDK::Transformation::Level level;
  NEONGDK::Input::Keyboard keyboard;
  keyboard.initialize();
  screen.initialize();
