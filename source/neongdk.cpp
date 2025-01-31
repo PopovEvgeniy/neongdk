@@ -3564,171 +3564,6 @@ namespace NEONGDK
 
  }
 
- namespace Map
- {
-
-  Tilemap::Tilemap()
-  {
-   cell_width=1;
-   cell_height=1;
-  }
-
-  Tilemap::~Tilemap()
-  {
-
-  }
-
-  Tilemap* Tilemap::get_handle()
-  {
-   return this;
-  }
-
-  void Tilemap::initialize(const unsigned int tile_width,const unsigned int tile_height)
-  {
-   if (tile_width>0)
-   {
-    cell_width=tile_width;
-   }
-   if (tile_height>0)
-   {
-    cell_height=tile_height;
-   }
-
-  }
-
-  unsigned int Tilemap::get_tile_width() const
-  {
-   return cell_width;
-  }
-
-  unsigned int Tilemap::get_tile_height() const
-  {
-   return cell_height;
-  }
-
-  unsigned int Tilemap::get_x(const unsigned int row) const
-  {
-   return row*cell_width;
-  }
-
-  unsigned int Tilemap::get_y(const unsigned int column) const
-  {
-   return column*cell_height;
-  }
-
-  unsigned int Tilemap::get_row(const unsigned int x) const
-  {
-   return x/cell_width;
-  }
-
-  unsigned int Tilemap::get_column(const unsigned int y) const
-  {
-   return y/cell_height;
-  }
-
-  unsigned int Tilemap::get_row_amount(const unsigned int viewport_width) const
-  {
-   unsigned int amount;
-   amount=0;
-   if (viewport_width>0)
-   {
-    amount=viewport_width/cell_width;
-    if ((viewport_width%cell_width)!=0)
-    {
-     ++amount;
-    }
-
-   }
-   return amount;
-  }
-
-  unsigned int Tilemap::get_column_amount(const unsigned int viewport_height) const
-  {
-   unsigned int amount;
-   amount=0;
-   if (viewport_height>0)
-   {
-    amount=viewport_height/cell_height;
-    if ((viewport_height%cell_height)!=0)
-    {
-     ++amount;
-    }
-
-   }
-   return amount;
-  }
-
-  unsigned int Tilemap::get_tile_amount(const unsigned int viewport_width,const unsigned int viewport_height) const
-  {
-   return this->get_row_amount(viewport_width)*this->get_column_amount(viewport_height);
-  }
-
-  bool Tilemap::check_row(const unsigned int row,const unsigned int viewport_width) const
-  {
-   return row<this->get_row_amount(viewport_width);
-  }
-
-  bool Tilemap::check_column(const unsigned int column,const unsigned int viewport_height) const
-  {
-   return column<this->get_column_amount(viewport_height);
-  }
-
-  NEONGDK::BOX Tilemap::get_box(const unsigned int row,const unsigned int column) const
-  {
-   NEONGDK::BOX collision;
-   collision.x=this->get_x(row);
-   collision.y=this->get_y(column);
-   collision.width=cell_width;
-   collision.height=cell_height;
-   return collision;
-  }
-
-  World::World()
-  {
-   half_tile_width=1;
-   full_tile_height=1;
-  }
-
-  World::~World()
-  {
-
-  }
-
-  World* World::get_handle()
-  {
-   return this;
-  }
-
-  void World::initialize(const unsigned int tile_width,const unsigned int tile_height)
-  {
-   if (tile_width>1)
-   {
-    half_tile_width=tile_width/2;
-   }
-   if (tile_height>1)
-   {
-    full_tile_height=tile_height;
-   }
-
-  }
-
-  unsigned int World::get_row_amount(const unsigned int screen_height) const
-  {
-   return screen_height/full_tile_height;
-  }
-
-  unsigned int World::get_column_amount(const unsigned int screen_width) const
-  {
-   return screen_width/half_tile_width;
-  }
-
-  unsigned int World::get_tile_amount(const unsigned int screen_width,const unsigned int screen_height) const
-  {
-   return this->get_row_amount(screen_height)*this->get_column_amount(screen_width);
-  }
-
- }
-
  namespace Common
  {
 
@@ -3949,6 +3784,122 @@ namespace NEONGDK
   {
    this->set_target(first_target,second_target);
    return this->check_collision();
+  }
+
+  Tilemap::Tilemap()
+  {
+   cell_width=1;
+   cell_height=1;
+  }
+
+  Tilemap::~Tilemap()
+  {
+
+  }
+
+  Tilemap* Tilemap::get_handle()
+  {
+   return this;
+  }
+
+  void Tilemap::initialize(const unsigned int tile_width,const unsigned int tile_height)
+  {
+   if (tile_width>0)
+   {
+    cell_width=tile_width;
+   }
+   if (tile_height>0)
+   {
+    cell_height=tile_height;
+   }
+
+  }
+
+  unsigned int Tilemap::get_tile_width() const
+  {
+   return cell_width;
+  }
+
+  unsigned int Tilemap::get_tile_height() const
+  {
+   return cell_height;
+  }
+
+  unsigned int Tilemap::get_x(const unsigned int row) const
+  {
+   return row*cell_width;
+  }
+
+  unsigned int Tilemap::get_y(const unsigned int column) const
+  {
+   return column*cell_height;
+  }
+
+  unsigned int Tilemap::get_row(const unsigned int x) const
+  {
+   return x/cell_width;
+  }
+
+  unsigned int Tilemap::get_column(const unsigned int y) const
+  {
+   return y/cell_height;
+  }
+
+  unsigned int Tilemap::get_row_amount(const unsigned int viewport_width) const
+  {
+   unsigned int amount;
+   amount=0;
+   if (viewport_width>0)
+   {
+    amount=viewport_width/cell_width;
+    if ((viewport_width%cell_width)!=0)
+    {
+     ++amount;
+    }
+
+   }
+   return amount;
+  }
+
+  unsigned int Tilemap::get_column_amount(const unsigned int viewport_height) const
+  {
+   unsigned int amount;
+   amount=0;
+   if (viewport_height>0)
+   {
+    amount=viewport_height/cell_height;
+    if ((viewport_height%cell_height)!=0)
+    {
+     ++amount;
+    }
+
+   }
+   return amount;
+  }
+
+  unsigned int Tilemap::get_tile_amount(const unsigned int viewport_width,const unsigned int viewport_height) const
+  {
+   return this->get_row_amount(viewport_width)*this->get_column_amount(viewport_height);
+  }
+
+  bool Tilemap::check_row(const unsigned int row,const unsigned int viewport_width) const
+  {
+   return row<this->get_row_amount(viewport_width);
+  }
+
+  bool Tilemap::check_column(const unsigned int column,const unsigned int viewport_height) const
+  {
+   return column<this->get_column_amount(viewport_height);
+  }
+
+  NEONGDK::BOX Tilemap::get_box(const unsigned int row,const unsigned int column) const
+  {
+   NEONGDK::BOX collision;
+   collision.x=this->get_x(row);
+   collision.y=this->get_y(column);
+   collision.width=cell_width;
+   collision.height=cell_height;
+   return collision;
   }
 
  }

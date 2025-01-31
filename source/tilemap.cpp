@@ -6,7 +6,7 @@ int main()
  NEONGDK::Graphics::Text text;
  NEONGDK::Graphics::Sheet tile;
  NEONGDK::Input::Keyboard keyboard;
- NEONGDK::Map::Tilemap tilemap;
+ NEONGDK::Common::Tilemap tilemap;
  unsigned int row,column,row_amount,column_amount;
  keyboard.initialize();
  screen.initialize();
