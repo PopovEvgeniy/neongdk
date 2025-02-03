@@ -198,7 +198,7 @@ namespace NEONGDK
    interval=timeGetTime()-start;
    if (interval<delay)
    {
-    Sleep(delay-interval);
+    SleepEx(delay-interval,FALSE);
    }
    start=timeGetTime();
   }
@@ -286,14 +286,16 @@ namespace NEONGDK
 
   Engine::Engine()
   {
-   memset(&window_class,0,sizeof(WNDCLASS));
+   memset(&window_class,0,sizeof(WNDCLASSEX));
    window_class.lpszClassName=TEXT("NEONGDK");
    window_class.style=CS_OWNDC;
+   window_class.cbSize=sizeof(WNDCLASSEX);
    window_class.lpfnWndProc=Internal::Process_Message;
    window_class.hInstance=NULL;
    window_class.hbrBackground=NULL;
    window_class.hIcon=NULL;
    window_class.hCursor=NULL;
+   window_class.hIconSm=NULL;
    window_class.cbClsExtra=0;
    window_class.cbWndExtra=0;
    window=NULL;
@@ -357,7 +359,7 @@ namespace NEONGDK
 
   void Engine::register_window_class()
   {
-   if (RegisterClass(&window_class)==0)
+   if (RegisterClassEx(&window_class)==0)
    {
     NEONGDK::Halt("Can't register window class");
    }
@@ -366,7 +368,7 @@ namespace NEONGDK
 
   void Engine::take_context()
   {
-   context=GetDC(window);
+   context=GetWindowDC(window);
    if (context==NULL)
    {
     NEONGDK::Halt("Can't take window context");
@@ -376,7 +378,7 @@ namespace NEONGDK
 
   void Engine::create_window()
   {
-   window=CreateWindow(window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
+   window=CreateWindowEx(WS_EX_APPWINDOW,window_class.lpszClassName,NULL,WS_VISIBLE|WS_POPUP,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),NULL,NULL,window_class.hInstance,NULL);
    if (window==NULL)
    {
     NEONGDK::Halt("Can't create window");
@@ -447,7 +449,7 @@ namespace NEONGDK
    setting.cDepthBits=16;
    setting.nSize=sizeof(PIXELFORMATDESCRIPTOR);
    setting.nVersion=1;
-   setting.dwFlags=PFD_DRAW_TO_WINDOW|PFD_SUPPORT_OPENGL|PFD_DOUBLEBUFFER;
+   setting.dwFlags=PFD_DRAW_TO_WINDOW|PFD_SUPPORT_OPENGL|PFD_DOUBLEBUFFER|PFD_STEREO_DONTCARE;
    setting.iPixelType=PFD_TYPE_RGBA;
    setting.iLayerType=PFD_MAIN_PLANE;
   }
