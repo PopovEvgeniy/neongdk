@@ -3242,6 +3242,8 @@ namespace NEONGDK
    stage.set_size(0,0);
    u_offset=0.0f;
    v_offset=0.0f;
+   u_speed=0.0f;
+   v_speed=0.0f;
   }
 
   Parallax::~Parallax()
@@ -3249,22 +3251,10 @@ namespace NEONGDK
    stage.destroy();
   }
 
-  void Parallax::calculate_u_offset(const float speed)
+  void Parallax::calculate_offset()
   {
-   if (speed>0.0f)
-   {
-    u_offset+=speed;
-   }
-
-  }
-
-  void Parallax::calculate_v_offset(const float speed)
-  {
-   if (speed>0.0f)
-   {
-    v_offset+=speed;
-   }
-
+   u_offset+=u_speed;
+   v_offset+=v_speed;
   }
 
   void Parallax::reset_u_offset()
@@ -3357,10 +3347,32 @@ namespace NEONGDK
    stage.destroy_image();
   }
 
-  void Parallax::draw(const float horizontal_speed,const float vertical_speed)
+  void Parallax::set_speed(const float horizontal,const float vertical)
   {
-   this->calculate_u_offset(horizontal_speed);
-   this->calculate_v_offset(vertical_speed);
+   if (horizontal>0.0f)
+   {
+    u_speed=horizontal;
+   }
+   if (vertical>0.0f)
+   {
+    v_speed=vertical;
+   }
+
+  }
+
+  float Parallax::get_horizontal_speed() const
+  {
+   return u_speed;
+  }
+
+  float Parallax::get_vertical_speed() const
+  {
+   return v_speed;
+  }
+
+  void Parallax::draw()
+  {
+   this->calculate_offset();
    this->reset_u_offset();
    this->reset_v_offset();
    this->set_texture_coordinates();
