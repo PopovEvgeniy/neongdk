@@ -75,6 +75,14 @@ namespace NEONGDK
 
  typedef enum
  {
+  FIRST_VERTEX=0,
+  SECOND_VERTEX=1,
+  THIRD_VERTEX=2,
+  LAST_VERTEX=3
+ } VERTEX_INDEX;
+
+ typedef enum
+ {
   HORIZONTAL_ANIMATED=0,
   VERTICAL_ANIMATED=1
  } IMAGE_KIND;
@@ -406,7 +414,7 @@ typedef enum
    void set_tile_offset(const float row,const float rows,const float column,const float columns);
    void set_horizontal_offset(const float current,const float total);
    void set_vertical_offset(const float current,const float total);
-   void set_texture_coordinates(const size_t index,const float u,const float v);
+   void set_texture_coordinates(const NEONGDK::VERTEX_INDEX index,const float u,const float v);
   };
 
   class Rectangle:public Shape
@@ -684,7 +692,7 @@ typedef enum
    public:
    Billboard();
    ~Billboard();
-   void set_texture_coordinates(const size_t index,const float u,const float v);
+   void set_texture_coordinates(const NEONGDK::VERTEX_INDEX index,const float u,const float v);
    void set_transparent(const bool enabled);
    bool get_transparent() const;
    void set_width(const unsigned int width);
