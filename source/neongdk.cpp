@@ -1083,6 +1083,7 @@ namespace NEONGDK
    glDisable(GL_COLOR_LOGIC_OP);
    glDisable(GL_FOG);
    glDisable(GL_STENCIL_TEST);
+   glDisable(GL_SCISSOR_TEST);
    glDisable(GL_LIGHTING);
    glDisable(GL_NORMALIZE);
    glDisable(GL_AUTO_NORMAL);
@@ -1111,7 +1112,6 @@ namespace NEONGDK
    glDisable(GL_MAP2_TEXTURE_COORD_4);
    glDisable(GL_MAP2_VERTEX_3);
    glDisable(GL_MAP2_VERTEX_4);
-   glEnable(GL_SCISSOR_TEST);
    glEnable(GL_TEXTURE_2D);
    glEnable(GL_ALPHA_TEST);
    glEnable(GL_BLEND);
@@ -1163,7 +1163,6 @@ namespace NEONGDK
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
    glOrtho(0.0,static_cast<double>(width),static_cast<double>(height),0.0,0.0,1.0);
-   glScissor(0,0,width,height);
    glViewport(0,0,width,height);
   }
 
