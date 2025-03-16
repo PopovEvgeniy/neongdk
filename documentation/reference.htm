@@ -332,7 +332,7 @@
   <br>
   <span style="text-decoration: underline;">Work with the base graphics subsystem</span><br>
   <br>
-  The <span style="font-style: italic;">Screen</span> class provides access to the base graphic subsystem. Let's look at the publicly available methods.<br>
+  The <span style="font-style: italic;">Screen</span> class provides access to the base graphics subsystem. Let's look at the publicly available methods.<br>
   <br>
   <span style="font-style: italic;">void Screen::clear_screen(); -</span> Clear the screen. Fill it with black color.<br>
   <br>
@@ -359,8 +359,10 @@
   <span style="font-style: italic;">unsigned int Screen::get_height() const; -</span> Return the screen height in pixels.<br>
   <br>
   <span style="font-style: italic;">bool Screen::check_x(const unsigned int x) const; -</span> Return true if the x-coordinate is valid.<br>
-  <br></big> <big><span style="font-style: italic;">bool Screen::check_y(const unsigned int y) const; -</span> Return true if the y-coordinate is valid.</big><br>
+  <br></big> <big><span style="font-style: italic;">bool Screen::check_y(const unsigned int y) const; -</span> Return true if the y-coordinate is valid.<br></big></p>
+  <p><big><span style="font-style: italic;">bool Screen::check_horizontal_border(const NEONGDK::BOX target) const; -</span> Return true if a game object is collided with the horizontal screen border.<br>
   <br>
+  <span style="font-style: italic;">bool Screen::check_vertical_border(const NEONGDK::BOX target) const; -</span> Return true if a game object is collided with the vertical screen border.<br></big><br>
   <big><span style="font-style: italic;">Screen *Screen::get_handle(); -</span> Return the handle to the base graphics subsystem object.</big></p>
   <h2><a class="mozTocH2" name="mozTocId289525" id="mozTocId289525"></a><big>Chapter 3. Picture subsystem</big></h2>
   <p><big><span style="text-decoration: underline;">An important subsystem</span><br>
@@ -1605,8 +1607,8 @@
   </table>
   <h2><a class="mozTocH2" name="mozTocId692266" id="mozTocId692266"></a><big>Chapter 6. Audio</big></h2>
   <p><big>The audio subsystem is working over <a href="https://msdn.microsoft.com/ru-ru/library/windows/desktop/dd743606%28v=vs.85%29.aspx">Windows Audio</a>.</big></p>
-  <h1><a class="mozTocH1" name="mozTocId670307" id="mozTocId670307"></a><big>Version history<br></big></h1><big>
-  0.1-5.7.1: The old branch.<br>
+  <h1><a class="mozTocH1" name="mozTocId670307" id="mozTocId670307"></a><big>Version history<br></big></h1>
+  <big>0.1-5.7.1: The old branch.<br>
   5.7.2: The source code synced with the Eugene game development kit 6.3.1.<br>
   5.7.3-5.7.4: The small changes.<br>
   5.7.5: The display manager is backported from the Neon game development kit 4.6.8.<br>
@@ -1871,6 +1873,7 @@
   8.4.3: The source code synced with the Eugene game development kit 9.5.3.<br>
   8.4.4: The source code synced with the Eugene game development kit 9.5.4.<br>
   8.4.5: The source code synced with the Eugene game development kit 9.5.5.<br>
-  8.4.6: The source code synced with the Eugene game development kit 9.5.6.<br></big>
+  8.4.6: The source code synced with the Eugene game development kit 9.5.6.<br>
+  8.4.7: The source code synced with the Eugene game development kit 9.5.7.<br></big>
 </body>
 </html>
