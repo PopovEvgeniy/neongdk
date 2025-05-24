@@ -337,8 +337,8 @@
   <br>
   <span style="font-style: italic;">void Screen::clear_screen(); -</span> Clear the screen. Fill it with black color.<br>
   <br>
-  <span style="font-style: italic;">void Screen::initialize(); -</span> Initializes the base graphic subsystem with the default screen resolution.<br>
-  <br></big> <big style="font-style: italic;">void Screen::initialize(const unsigned int width,</big> <big style="font-style: italic;">const unsigned int height</big><big><span style="font-style: italic;">); -</span> Initializes the base graphic subsystem with the custom screen resolution.<br>
+  <span style="font-style: italic;">void Screen::initialize(); -</span> Initialize the base graphic subsystem with the default screen resolution.<br>
+  <br></big> <big style="font-style: italic;">void Screen::initialize(const unsigned int width,</big> <big style="font-style: italic;">const unsigned int height</big><big><span style="font-style: italic;">); -</span> Initialize the base graphic subsystem with the custom screen resolution.<br>
   <br></big> <big><span style="font-style: italic;">bool Screen::sync(); -</span> Show the current content of the back buffer on the screen. Return false if a game is terminated. This method uses the FPS limits and waits between frames.<br>
   <br>
   <span style="font-style: italic;">bool Screen::update(); -</span> Show the current content of the back buffer on the screen. Return false if a game is terminated. This method ignores the FPS limit and needs high processor usage.<br>
@@ -935,7 +935,7 @@
   <br style="text-decoration: underline;">
   <span style="text-decoration: underline;">Important remark</span><br>
   <br>
-  Always set the viewport size after initialize the camera. Always update the camera before drawing.</big>
+  Always set the viewport size after initializing the camera. Always update the camera before drawing.</big>
   <h1><a class="mozTocH1" name="mozTocId130685" id="mozTocId130685"></a><big>Part 4. Transformation</big></h1>
   <h2><a class="mozTocH2" name="mozTocId679493" id="mozTocId679493"></a><a id="mozTocId833933" class="mozTocH2" name="mozTocId833933"></a><big>Chapter 1. The sub-namespace</big></h2>
   <p><big>All classes in this section are declared in the <span style="font-style: italic;">Transformation</span> sub-namespace.<br></big></p>
@@ -1960,6 +1960,7 @@
   8.4.7: The source code synced with the Eugene game development kit 9.5.7.<br>
   8.4.8: The source code synced with the Black game development kit 7.3.3.<br>
   8.4.9: The source code synced with the Black game development kit 7.3.5.<br>
-  8.5: The source code synced with the Black game development kit 7.3.8.<br></big>
+  8.5: The source code synced with the Black game development kit 7.3.8.<br>
+  8.5.1: The source code synced with the Black game development kit 7.3.9.<br></big>
 </body>
 </html>
