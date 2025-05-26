@@ -3183,7 +3183,7 @@ namespace NEONGDK
    {
     if (this->check_column(column)==true)
     {
-     target=row+column*rows;
+     target+=(row-1)+(column-1)*rows;
     }
 
    }
