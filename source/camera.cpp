@@ -5,7 +5,6 @@ int main()
  NEONGDK::Graphics::Screen screen;
  NEONGDK::Graphics::Scene city;
  NEONGDK::Graphics::Cartoon punk;
- NEONGDK::Graphics::Text text;
  NEONGDK::Graphics::Camera camera;
  NEONGDK::Input::Keyboard keyboard;
  NEONGDK::Input::Mouse mouse;
@@ -14,7 +13,6 @@ int main()
  screen.initialize(640,480);
  city.load("city.tga");
  punk.load("punk.tga");
- text.load_font("font.tga");
  city.prepare(screen);
  camera.initialize(screen);
  camera.set_viewport(320,screen.get_height());
@@ -29,17 +27,27 @@ int main()
   }
   if (keyboard.check_hold(77)==true)
   {
-   punk.increase_x(3);
-   camera.increase_x(5);
+   if (camera.check_horizontal_border(punk.get_box())==true)
+   {
+    camera.increase_x(12);
+   }
+   else
+   {
+    punk.increase_x();
+   }
+
   }
   if (keyboard.check_hold(75)==true)
   {
-   punk.decrease_x(3);
-   camera.decrease_x(5);
-  }
-  if ((punk.get_x()+punk.get_width())>=camera.get_screen_width())
-  {
-   punk.decrease_x(3);
+   if (punk.get_x()<=camera.get_lowest_x())
+   {
+    camera.decrease_x(12);
+   }
+   else
+   {
+    punk.decrease_x();
+   }
+
   }
   camera.update();
   city.draw();
