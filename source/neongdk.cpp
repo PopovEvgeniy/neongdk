@@ -2007,16 +2007,6 @@ namespace NEONGDK
    return y_offset+viewport_height;
   }
 
-  unsigned int Camera::get_lowest_x() const
-  {
-   return this->get_highest_x()-viewport_width;
-  }
-
-  unsigned int Camera::get_lowest_y() const
-  {
-   return this->get_highest_y()-viewport_height;
-  }
-
   unsigned int Camera::get_highest_x_offset() const
   {
    return highest_x_offset;
