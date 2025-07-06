@@ -209,6 +209,7 @@ typedef enum
    unsigned int get_depth() const;
    unsigned int get_display_width() const;
    unsigned int get_display_height() const;
+   unsigned int get_display_rate() const;
    public:
    Display();
    ~Display();
@@ -599,6 +600,7 @@ typedef enum
    unsigned int get_fps() const;
    unsigned int get_width() const;
    unsigned int get_height() const;
+   unsigned int get_rate() const;
    bool check_x(const unsigned int x) const;
    bool check_y(const unsigned int y) const;
    bool check_horizontal_border(const NEONGDK::BOX target) const;

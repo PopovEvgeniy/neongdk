@@ -284,6 +284,11 @@ namespace NEONGDK
    return display.dmPelsHeight;
   }
 
+  unsigned int Display::get_display_rate() const
+  {
+   return display.dmDisplayFrequency;
+  }
+
   Engine::Engine()
   {
    memset(&window_class,0,sizeof(WNDCLASSEX));
@@ -1418,17 +1423,17 @@ namespace NEONGDK
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
    if (configuration.wNumAxes==4)
    {
-    directional=Core::get_horizontal_direction(current.dwRpos,configuration.wRmax,configuration.wRmin); // Old gamepad
+    directional=Core::get_horizontal_direction(current.dwRpos,configuration.wRmax,configuration.wRmin); // An old gamepad
    }
    else
    {
     if (configuration.wMid==1118)
     {
-     directional=Core::get_horizontal_direction(current.dwUpos,configuration.wUmax,configuration.wUmin); // Xbox gamepad;
+     directional=Core::get_horizontal_direction(current.dwUpos,configuration.wUmax,configuration.wUmin); // The Xbox gamepad;
     }
     else
     {
-     directional=Core::get_horizontal_direction(current.dwZpos,configuration.wZmax,configuration.wZmin); // Other modern gamepad
+     directional=Core::get_horizontal_direction(current.dwZpos,configuration.wZmax,configuration.wZmin); // The other modern gamepad
     }
 
    }
@@ -1888,6 +1893,11 @@ namespace NEONGDK
   unsigned int Screen::get_height() const
   {
    return this->get_display_height();
+  }
+
+  unsigned int Screen::get_rate() const
+  {
+   return this->get_display_rate();
   }
 
   bool Screen::check_x(const unsigned int x) const
