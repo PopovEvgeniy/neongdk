@@ -4038,7 +4038,7 @@ namespace NEONGDK
    setting.lpstrAlias=NULL;
    setting.lpstrElementName=name;
    target=0;
-   if (mciSendCommandA(target,MCI_OPEN,MCI_OPEN_ELEMENT|MCI_WAIT,reinterpret_cast<DWORD>(&setting))==0)
+   if (mciSendCommandA(target,MCI_OPEN,MCI_OPEN_ELEMENT|MCI_WAIT,reinterpret_cast<DWORD_PTR>(&setting))==0)
    {
     target=setting.wDeviceID;
    }
@@ -4053,7 +4053,7 @@ namespace NEONGDK
    setting.dwTo=0;
    if (target!=0)
    {
-    mciSendCommand(target,MCI_PLAY,MCI_FROM,reinterpret_cast<DWORD>(&setting));
+    mciSendCommand(target,MCI_PLAY,MCI_FROM,reinterpret_cast<DWORD_PTR>(&setting));
    }
 
   }
@@ -4067,7 +4067,7 @@ namespace NEONGDK
    setting.nCmdShow=SW_HIDE;
    if (target!=0)
    {
-    mciSendCommand(target,MCI_WINDOW,MCI_OVLY_WINDOW_STATE,reinterpret_cast<DWORD>(&setting));
+    mciSendCommand(target,MCI_WINDOW,MCI_OVLY_WINDOW_STATE,reinterpret_cast<DWORD_PTR>(&setting));
    }
 
   }
@@ -4081,7 +4081,7 @@ namespace NEONGDK
    status.dwReturn=MCI_MODE_STOP;
    if (target!=0)
    {
-    if (mciSendCommand(target,MCI_STATUS,MCI_STATUS_ITEM|MCI_WAIT,reinterpret_cast<DWORD>(&status))!=0)
+    if (mciSendCommand(target,MCI_STATUS,MCI_STATUS_ITEM|MCI_WAIT,reinterpret_cast<DWORD_PTR>(&status))!=0)
     {
      status.dwReturn=MCI_MODE_STOP;
     }
