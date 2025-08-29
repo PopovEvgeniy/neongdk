@@ -4,7 +4,7 @@ Neon game development kit is an ultra-fast 2D game engine for Windows 98 and Win
 
 License
 
-Neon game development kit is distributed under a Zlib license.
+Neon game development kit is distributed under a zlib license.
 
 Features
 
@@ -16,11 +16,11 @@ Features
  Animated and static sprites.
  Animated backgrounds.
  Parallax and static backgrounds.
- Sprite-sheets.
- Tile-maps.
+ Sprite sheets.
+ Tilemaps.
  Image transformation: resizing and mirroring.
  Image loader with TGA support.
- Text drawing subsystem.
+ Text printing subsystem.
  Custom fonts.
  Coordinates transformation.
  Isometric.
