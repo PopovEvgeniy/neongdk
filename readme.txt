@@ -8,7 +8,7 @@ Neon Game Development Kit is distributed under a zlib license.
 
 Features
 
- Minimum external dependencies: only OPENGL and standard Windows API libraries.
+ Minimum external dependencies: OPENGL and standard the Windows API libraries.
  You don't need to link a main program with the engine binary file. The engine is just the source code files.
  Wide range of supported compilers.
  Two render backends: hardware-accelerated OPENGL and software OPENGL.
