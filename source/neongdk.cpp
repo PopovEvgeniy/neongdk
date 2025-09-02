@@ -2,7 +2,7 @@
 Neon game development kit was made by Popov Evgeniy Alekseyevich
 Some code taken from wglext.h(https://www.khronos.org/registry/OpenGL/api/GL/wglext.h) by The Khronos Group Inc
 
-Neon game development kit license
+The Neon Game Development Kit license
 
 Copyright (C) 2017 - 2025 Popov Evgeniy Alekseyevich
 
@@ -22,7 +22,7 @@ freely, subject to the following restrictions:
    misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 
-Third-party license
+The third-party license
 
 Copyright (c) 2007-2010 The Khronos Group Inc.
 
