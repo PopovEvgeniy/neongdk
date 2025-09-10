@@ -1,5 +1,5 @@
 /*
-Neon game development kit was made by Popov Evgeniy Alekseyevich
+Neon Game Development Kit was made by Popov Evgeniy Alekseyevich
 Some code taken from wglext.h(https://www.khronos.org/registry/OpenGL/api/GL/wglext.h) by The Khronos Group Inc
 
 The Neon Game Development Kit license
@@ -205,7 +205,7 @@ typedef enum
    void set_video_mode();
    void get_video_mode();
    void correct_depth();
-   void set_setting(const unsigned int width,const unsigned int height);
+   void set_settings(const unsigned int width,const unsigned int height);
    unsigned int get_depth() const;
    unsigned int get_display_width() const;
    unsigned int get_display_height() const;
@@ -363,7 +363,7 @@ typedef enum
    unsigned int get_next_x(const unsigned int x) const;
    unsigned int get_next_y(const unsigned int y) const;
    void scale_image(const unsigned int *target);
-   void set_setting(const unsigned int width,const unsigned int height);
+   void set_settings(const unsigned int width,const unsigned int height);
    void correct_size(const unsigned int limit);
    void calculate_ratio();
    void calculate_size();
@@ -442,12 +442,12 @@ typedef enum
   {
    private:
    unsigned int get_maximum_texture_size() const;
-   void set_image_setting();
-   void set_perfomance_setting();
+   void set_image_settings();
+   void set_perfomance_settings();
    void set_render_hints();
-   void set_common_setting();
+   void set_common_settings();
    void disable_depth_buffer();
-   void set_matrix_setting();
+   void set_matrix_settings();
    void set_perspective(const unsigned int width,const unsigned int height);
    void create_render(const unsigned int width,const unsigned int height);
    protected:
@@ -656,6 +656,7 @@ typedef enum
    bool check_horizontal_border(const NEONGDK::BOX target) const;
    bool check_vertical_border(const NEONGDK::BOX target) const;
    void update();
+   void update(const unsigned int x,const unsigned int y);
    void reset();
   };
 
@@ -715,7 +716,7 @@ typedef enum
    unsigned int frames;
    unsigned int frame;
    protected:
-   void reset_animation_setting();
+   void reset_animation_settings();
    void increase_frame();
    void set_frame(const unsigned int target);
    void set_frames(const unsigned int amount);
@@ -743,7 +744,7 @@ typedef enum
    void draw_sprite_image();
    protected:
    Core::Rectangle billboard;
-   void reset_billboard_setting();
+   void reset_billboard_settings();
    void prepare(const unsigned int width,const unsigned int height,const unsigned int *picture);
    public:
    Billboard();
@@ -791,8 +792,8 @@ typedef enum
   {
    private:
    NEONGDK::IMAGE_KIND current_kind;
-   void reset_sprite_setting();
-   void set_sprite_setting();
+   void reset_sprite_settings();
+   void set_sprite_settings();
    void configure_sprite();
    void set_sprite_frame();
    void set_kind(const NEONGDK::IMAGE_KIND kind);
@@ -831,7 +832,7 @@ typedef enum
    private:
    unsigned int rows;
    unsigned int columns;
-   void reset_sheet_setting();
+   void reset_sheet_settings();
    void prepare_sheet();
    public:
    Sheet();
