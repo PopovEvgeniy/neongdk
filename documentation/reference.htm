@@ -850,9 +850,9 @@
    <br>
    <i> void Billboard::go_start_y(); -</i> Set the y-coordinate of the sprite position to the y-coordinate of the start position.<br>
    <br>
-   <i> void Billboard::draw(); -</i> Draw a sprite.<br>
+   <i> bool Billboard::draw(); -</i> Draw a sprite and return the transparent mode status.<br>
    <br>
-   <i> void Billboard::draw(const unsigned int x, const unsigned int y); -</i> Set the sprite position and draw it.<br>
+   <i> bool Billboard::draw(const unsigned int x, const unsigned int y); -</i> Draw a sprite at the target position and return the transparent mode status.<br>
    <i><br>
     void Billboard::draw(const bool transparency); -</i> Set the transparent mode and draw a sprite.<br>
    <br>
@@ -2436,6 +2436,7 @@
    8.6.3: Visual C++ 5 support has been added.<br>
    8.6.3.1-8.6.3.3: The documentation has been updated.<br>
    8.6.4: The source code synced with the Eugene Game Development Kit 9.7.1.<br>
+   8.6.5: The source code synced with the Eugene Game Development Kit 9.7.2.<br>
   </big>
  </body>
 </html>
