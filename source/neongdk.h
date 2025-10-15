@@ -868,9 +868,9 @@ typedef enum
    void prepare(Screen &screen);
    void prepare(const unsigned int width,const unsigned int height);
    void set_settings(const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
-   void load(Image *background,const IMAGE_KIND kind,const unsigned int frames);
-   void load(Image &background,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
-   void load(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
+   bool load(Image *background,const IMAGE_KIND kind,const unsigned int frames);
+   bool load(Image &background,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
+   bool load(const char *name,const NEONGDK::IMAGE_KIND kind,const unsigned int frames);
    void disable_mirror();
    void horizontal_mirror();
    void vertical_mirror();
@@ -902,9 +902,9 @@ typedef enum
    void prepare(const Screen *screen);
    void prepare(Screen &screen);
    void prepare(const unsigned int width,const unsigned int height);
-   void load(Image *background);
-   void load(Image &background);
-   void load(const char *name);
+   bool load(Image *background);
+   bool load(Image &background);
+   bool load(const char *name);
    void disable_mirror();
    void horizontal_mirror();
    void vertical_mirror();
@@ -935,9 +935,9 @@ typedef enum
    void prepare(const Screen *screen);
    void prepare(Screen &screen);
    void prepare(const unsigned int width,const unsigned int height);
-   void load(Image *background);
-   void load(Image &background);
-   void load(const char *name);
+   bool load(Image *background);
+   bool load(Image &background);
+   bool load(const char *name);
    void disable_mirror();
    void horizontal_mirror();
    void vertical_mirror();

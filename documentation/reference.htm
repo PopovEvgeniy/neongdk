@@ -596,14 +596,14 @@
     void Background::set_settings(const NEONGDK::IMAGE_KIND kind, const
     unsigned int frames); -</i> Set the background settings.<br>
    <br>
-   <i> void Background::load(Image *background, const NEONGDK::IMAGE_KIND
-    kind, const unsigned int frames); -</i> Load a background from the buffer.<br>
+   <i> bool Background::load(Image *background, const NEONGDK::IMAGE_KIND
+    kind, const unsigned int frames); -</i> Load a background from the buffer and return true if it is loaded.<br>
    <br>
-   <i> void Background::load(Image &amp;background, const NEONGDK::IMAGE_KIND
-    kind, const unsigned int frames); -</i> Load a background from the buffer.<br>
+   <i> bool Background::load(Image &amp;background, const NEONGDK::IMAGE_KIND
+    kind, const unsigned int frames); -</i> Load a background from the buffer and return true if it is loaded.<br>
    <br>
-   <i> void Background::load(const char *name, const NEONGDK::IMAGE_KIND kind,
-    const unsigned int frames); -</i> Load a background from the target file.<br>
+   <i> bool Background::load(const char *name, const NEONGDK::IMAGE_KIND kind,
+    const unsigned int frames); -</i> Load a background from the target file and return true if it is loaded.<br>
    <br>
    <i> void Background::draw(); -</i> Draw a background.<br>
    <i><br>
@@ -666,11 +666,11 @@
    <i> void Scene::complex_mirror(); -</i> Set both the horizontal background
    mirroring mode and the vertical background mirroring mode.<br>
    <i><br>
-    void Scene::load(Image *background); -</i> Load a background from the buffer.<br>
+    bool Scene::load(Image *background); -</i> Load a background from the buffer and return true if it is loaded.<br>
    <br>
-   <i> void Scene::load(Image &amp; background); -</i> Load a background from the buffer.<br>
+   <i> bool Scene::load(Image &amp; background); -</i> Load a background from the buffer and return true if it is loaded.<br>
    <i><br>
-    void Scene::load(const char *name); -</i> Load a background from the target file.<br>
+    bool Scene::load(const char *name); -</i> Load a background from the target file and return true if it is loaded.<br>
    <br>
    <i> void Scene::draw(); -</i> Draw a background.<br>
    <br>
@@ -726,11 +726,11 @@
     void Parallax::complex_mirror(); -</i> Set both the horizontal
    background mirroring mode and the vertical background mirroring mode.<br>
    <br>
-   <i> void Parallax::load(Image *background); -</i> Load a background from the buffer.<br>
+   <i> bool Parallax::load(Image *background); -</i> Load a background from the buffer and return true if it is loaded.<br>
    <i><br>
-    void Parallax::load(Image &amp; background); -</i> Load a background from the buffer.<br>
+    bool Parallax::load(Image &amp; background); -</i> Load a background from the buffer and return true if it is loaded.<br>
    <i><br>
-    void Parallax::load(const char *name); -</i> Load a background from the target file.<br>
+    bool Parallax::load(const char *name); -</i> Load a background from the target file and return true if it is loaded.<br>
    <br>
    <i>void Parallax::set_horizontal_speed(const float speed); -</i> Set the horizontal scrolling speed.<br>
    <br>
@@ -2438,6 +2438,7 @@
    8.6.4: The source code synced with the Eugene Game Development Kit 9.7.1.<br>
    8.6.5: The source code synced with the Eugene Game Development Kit 9.7.2.<br>
    8.6.6: The source code synced with the Eugene Game Development Kit 9.7.3.<br>
+   8.6.7: The source code synced with the Eugene Game Development Kit 9.7.4.<br>
   </big>
  </body>
 </html>
