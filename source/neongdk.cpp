@@ -3676,6 +3676,11 @@ namespace NEONGDK
    return stage.is_complex_mirrored();
   }
 
+  bool Parallax::is_mirrored() const
+  {
+   return stage.is_mirrored();
+  }
+
   void Parallax::destroy_image()
   {
    stage.destroy_image();
