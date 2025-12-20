@@ -556,12 +556,12 @@ namespace NEONGDK
    return static_cast<size_t>(x)+static_cast<size_t>(y)*static_cast<size_t>(width);
   }
 
-  NEONGDK::GAMEPAD_DIRECTION get_horizontal_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum)
+  NEONGDK::GAMEPAD_DIRECTION get_horizontal_direction(const unsigned int current,const unsigned int maximum)
   {
    NEONGDK::GAMEPAD_DIRECTION directional;
    unsigned int center,dead;
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
-   center=(maximum-minimum)/2;
+   center=maximum/2;
    dead=maximum/10;
    if (current>(center+dead))
    {
@@ -592,9 +592,9 @@ namespace NEONGDK
    return directional;
   }
 
-  NEONGDK::GAMEPAD_DIRECTION get_vertical_direction(const unsigned int current,const unsigned int maximum,const unsigned int minimum)
+  NEONGDK::GAMEPAD_DIRECTION get_vertical_direction(const unsigned int current,const unsigned int maximum)
   {
-   return Core::get_inverted_direction(Core::get_horizontal_direction(current,maximum,minimum));
+   return Core::get_inverted_direction(Core::get_horizontal_direction(current,maximum));
   }
 
   Resizer::Resizer()
@@ -1418,17 +1418,17 @@ namespace NEONGDK
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
    if (configuration.wNumAxes==4)
    {
-    directional=Core::get_horizontal_direction(current.dwRpos,configuration.wRmax,configuration.wRmin); // An old gamepad
+    directional=Core::get_horizontal_direction(current.dwRpos,configuration.wRmax); // An old gamepad
    }
    else
    {
     if (configuration.wMid==1118)
     {
-     directional=Core::get_horizontal_direction(current.dwUpos,configuration.wUmax,configuration.wUmin); // The Xbox gamepad;
+     directional=Core::get_horizontal_direction(current.dwUpos,configuration.wUmax); // The Xbox gamepad;
     }
     else
     {
-     directional=Core::get_horizontal_direction(current.dwZpos,configuration.wZmax,configuration.wZmin); // The other modern gamepad
+     directional=Core::get_horizontal_direction(current.dwZpos,configuration.wZmax); // The other modern gamepad
     }
 
    }
@@ -1441,11 +1441,11 @@ namespace NEONGDK
    directional=NEONGDK::GAMEPAD_NEUTRAL_DIRECTION;
    if (configuration.wNumAxes==4)
    {
-    directional=Core::get_vertical_direction(current.dwUpos,configuration.wUmax,configuration.wUmin); // Old gamepad
+    directional=Core::get_vertical_direction(current.dwUpos,configuration.wUmax); // An old gamepad
    }
    else
    {
-    directional=Core::get_vertical_direction(current.dwRpos,configuration.wRmax,configuration.wRmin); // Modern gamepad
+    directional=Core::get_vertical_direction(current.dwRpos,configuration.wRmax); // The modern gamepad
    }
    return directional;
   }
@@ -1534,7 +1534,7 @@ namespace NEONGDK
    {
     if (this->get_stick_amount()>0)
     {
-     directional=Core::get_horizontal_direction(current.dwXpos,configuration.wXmax,configuration.wXmin);
+     directional=Core::get_horizontal_direction(current.dwXpos,configuration.wXmax);
     }
 
    }
@@ -1557,7 +1557,7 @@ namespace NEONGDK
    {
     if (this->get_stick_amount()>0)
     {
-     directional=Core::get_vertical_direction(current.dwYpos,configuration.wYmax,configuration.wYmin);
+     directional=Core::get_vertical_direction(current.dwYpos,configuration.wYmax);
     }
 
    }
