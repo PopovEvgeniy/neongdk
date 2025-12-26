@@ -4313,15 +4313,10 @@ namespace NEONGDK
   unsigned int Tilemap::get_row_amount(const unsigned int viewport_width) const
   {
    unsigned int amount;
-   amount=0;
-   if (viewport_width>0)
+   amount=viewport_width/cell_width;
+   if ((viewport_width%cell_width)!=0)
    {
-    amount=viewport_width/cell_width;
-    if ((viewport_width%cell_width)!=0)
-    {
-     ++amount;
-    }
-
+    ++amount;
    }
    return amount;
   }
@@ -4329,15 +4324,10 @@ namespace NEONGDK
   unsigned int Tilemap::get_column_amount(const unsigned int viewport_height) const
   {
    unsigned int amount;
-   amount=0;
-   if (viewport_height>0)
+   amount=viewport_height/cell_height;
+   if ((viewport_height%cell_height)!=0)
    {
-    amount=viewport_height/cell_height;
-    if ((viewport_height%cell_height)!=0)
-    {
-     ++amount;
-    }
-
+    ++amount;
    }
    return amount;
   }
