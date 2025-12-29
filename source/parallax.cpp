@@ -11,7 +11,7 @@ int main()
  NEONGDK::Common::Audio media;
  NEONGDK::Graphics::Screen screen;
  NEONGDK::Graphics::Parallax sky;
- NEONGDK::Graphics::Sprite ship;
+ NEONGDK::Graphics::Ribbon ship;
  NEONGDK::Graphics::Text text;
  NEONGDK::Tools::enable_logging("log.txt");
  keyboard.initialize();
@@ -19,7 +19,7 @@ int main()
  sky.load("sky.tga");
  sky.prepare(screen);
  sky.set_vertical_speed(0.001f);
- ship.load("ship.tga",NEONGDK::HORIZONTAL_ANIMATED,2);
+ ship.load("ship.tga",2);
  ship.set_position(screen.get_width()/2,screen.get_height()/2);
  text.load_font("font.tga");
  text.set_position(text.get_font_width(),text.get_font_height());
