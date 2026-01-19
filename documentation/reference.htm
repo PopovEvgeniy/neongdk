@@ -406,7 +406,11 @@
    <i>bool Screen::check_x(const unsigned int x) const; -</i> Return true if the x-coordinate is valid.<br>
    <br>
    <i>bool Screen::check_y(const unsigned int y) const; -</i> Return true if the y-coordinate is valid.<br>
+   <br>   
+   <i>bool Screen::check_horizontal_border(const unsigned int x, const unsigned int width) const; -</i> Return true if a game object has collided with the horizontal screen border.<br>
    <br>
+   <i>bool Screen::check_vertical_border(const unsigned int y, const unsigned int height) const; -</i> Return true if a game object has collided with the vertical screen border.<br>
+   <br>   
    <i>bool Screen::check_horizontal_border(const NEONGDK::BOX target) const; -</i> Return true if a game object has collided with the horizontal screen border.<br>
    <br>
    <i>bool Screen::check_vertical_border(const NEONGDK::BOX target) const; -</i> Return true if a game object has collided with the vertical screen border.<br>
@@ -2515,6 +2519,7 @@
    8.9.4: The source code synced with the Black Game Development Kit 7.9.3.<br>
    8.9.5: The source code synced with the Black Game Development Kit 7.9.4.<br>
    8.9.5.1-8.9.5.3: The documentation has been updated.<br>
+   8.9.6: The source code synced with the Eugene Game Development Kit 10.1.7.<br>
   </big>
  </body>
 </html>
