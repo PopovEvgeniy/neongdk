@@ -1324,7 +1324,11 @@
    <i>void Camera::set_viewport(const unsigned int width, const unsigned int height); -</i> Set the viewport settings.<br>
    <br>
    <i>void Camera::set_offset(const unsigned int x, const unsigned int y); -</i> Set the camera offset.<br>
+   <br>   
+   <i>bool Camera::check_horizontal_border(const unsigned int x, const unsigned int width) const; -</i> Return true if a game object has collided with the horizontal visible area border.<br>
    <br>
+   <i>bool Camera::check_vertical_border(const unsigned int y, const unsigned int height) const; -</i> Return true if a game object has collided with the vertical visible area border.<br>
+   <br>   
    <i>bool Camera::check_horizontal_border(const NEONGDK::BOX target) const; -</i> Return true if a game object has collided with the horizontal visible area border.<br>
    <br>
    <i>bool Camera::check_vertical_border(const NEONGDK::BOX target) const; -</i> Return true if a game object has collided with the vertical visible area border.<br>
@@ -2520,6 +2524,7 @@
    8.9.5: The source code synced with the Black Game Development Kit 7.9.4.<br>
    8.9.5.1-8.9.5.3: The documentation has been updated.<br>
    8.9.6: The source code synced with the Eugene Game Development Kit 10.1.7.<br>
+   8.9.7: The source code synced with the Eugene Game Development Kit 10.1.8.<br>
   </big>
  </body>
 </html>
