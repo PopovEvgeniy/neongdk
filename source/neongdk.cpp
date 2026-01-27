@@ -3412,7 +3412,7 @@ namespace NEONGDK
       columns=column_amount;
       this->reset_animation_settings();
       this->set_frames(rows*columns);
-      this->set_target(1);
+      this->select(1,1);
       this->prepare_sheet();
      }
 
