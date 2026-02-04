@@ -4,7 +4,7 @@ int main()
 {
  char perfomance[8];
  bool limit;
- NEONGDK::Common::Timer timer;
+ NEONGDK::Common::Timer timer(1.0);
  NEONGDK::Common::Audio media;
  NEONGDK::Input::Keyboard keyboard;
  NEONGDK::Input::Gamepad gamepad;
@@ -23,7 +23,6 @@ int main()
  text.load_font("font.tga");
  text.set_position(text.get_font_width(),text.get_font_height());
  mouse.hide();
- timer.set_timer(1);
  media.load("space.wav");
  memset(perfomance,0,8);
  limit=true;
