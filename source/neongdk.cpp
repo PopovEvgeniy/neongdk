@@ -2323,11 +2323,13 @@ namespace NEONGDK
     {
      case 2:
      target.read(data,length);
+     this->mirror_tga(image.descriptor);
      break;
      case 10:
      Resource::create(&buffer,compressed_length);
      target.read(buffer,compressed_length);
      this->uncompress_tga_data(buffer);
+     this->mirror_tga(image.descriptor);
      Resource::destroy_array(buffer);
      buffer=NULL;
      break;
@@ -2335,7 +2337,7 @@ namespace NEONGDK
      this->destroy_image();
      break;
     }
-    this->mirror_tga(image.descriptor);
+
    }
 
   }
