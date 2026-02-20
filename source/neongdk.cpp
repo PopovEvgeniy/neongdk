@@ -302,16 +302,16 @@ namespace NEONGDK
 
   Engine::~Engine()
   {
-   if (context!=NULL)
-   {
-    ReleaseDC(window,context);
-    context=NULL;
-   }
    if (window!=NULL)
    {
+    if (context!=NULL)
+    {
+     ReleaseDC(window,context);
+    }
     DestroyWindow(window);
-    window=NULL;
    }
+   window=NULL;
+   context=NULL;
    UnregisterClass(window_class.lpszClassName,window_class.hInstance);
   }
 
