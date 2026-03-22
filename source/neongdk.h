@@ -1121,7 +1121,7 @@ typedef enum
    void play_loop();
    void play(const bool loop);
    bool is_load() const;
-   void load(const char *name);
+   bool load(const char *name);
   };
 
   class Timer

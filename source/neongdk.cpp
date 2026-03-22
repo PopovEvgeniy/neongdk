@@ -4251,10 +4251,11 @@ namespace NEONGDK
    return target!=0;
   }
 
-  void Audio::load(const char *name)
+  bool Audio::load(const char *name)
   {
    this->close();
    this->open(name);
+   return this->is_load();
   }
 
   Timer::Timer()
