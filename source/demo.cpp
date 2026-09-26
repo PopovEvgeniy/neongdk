@@ -3,7 +3,7 @@
 int main()
 {
  char perfomance[8];
- bool limit;
+ bool limit=true;
  NEONGDK::Common::Timer timer(1.0);
  NEONGDK::Common::Audio media;
  NEONGDK::Input::Keyboard keyboard;
@@ -25,12 +25,11 @@ int main()
  mouse.hide();
  media.load("space.wav");
  memset(perfomance,0,8);
- limit=true;
  while(screen.sync(limit))
  {
   gamepad.update();
   media.play_loop();
-  if (mouse.check_press(NEONGDK::MOUSE_LEFT)==true)
+  if (keyboard.check_hold(1)==true)
   {
    break;
   }
@@ -57,10 +56,6 @@ int main()
   if (keyboard.check_hold(64)==true)
   {
    limit=false;
-  }
-  if (keyboard.check_hold(57)==true)
-  {
-   break;
   }
   if (keyboard.check_hold(72)==true)
   {
