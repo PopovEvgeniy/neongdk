@@ -2,7 +2,8 @@
 
 int main()
 {
- int row,column;
+ int row=0;
+ int column=0;
  NEONGDK::Graphics::Screen screen;
  NEONGDK::Graphics::Scene sky;
  NEONGDK::Graphics::Cartoon ground;
