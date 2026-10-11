@@ -555,7 +555,7 @@ typedef enum
    public:
    Input_File();
    ~Input_File();
-   Input_File* get_handle();
+   Input_File* get_pointer();
    void open(const char *name);
    size_t read(void *buffer,const size_t length);
   };
@@ -565,7 +565,7 @@ typedef enum
    public:
    Output_File();
    ~Output_File();
-   Output_File* get_handle();
+   Output_File* get_pointer();
    void open(const char *name);
    void create_temp();
    void flush();
@@ -606,7 +606,7 @@ typedef enum
    bool check_vertical_border(const unsigned int y,const unsigned int height) const;
    bool check_horizontal_border(const NEONGDK::BOX target) const;
    bool check_vertical_border(const NEONGDK::BOX target) const;
-   Screen* get_handle();
+   Screen* get_pointer();
   };
 
   class Camera
@@ -626,7 +626,7 @@ typedef enum
    public:
    Camera();
    ~Camera();
-   Camera* get_handle();
+   Camera* get_pointer();
    unsigned int get_x() const;
    unsigned int get_y() const;
    unsigned int get_screen_width() const;
@@ -686,7 +686,7 @@ typedef enum
    unsigned int get_height() const;
    unsigned char *get_data();
    unsigned char *load(const char *name);
-   Image* get_handle();
+   Image* get_pointer();
   };
 
   class Picture
@@ -802,7 +802,7 @@ typedef enum
    public:
    Ribbon();
    ~Ribbon();
-   Ribbon* get_handle();
+   Ribbon* get_pointer();
    bool load(Image *buffer,const unsigned int frames);
    bool load(Image &buffer,const unsigned int frames);
    bool load(const char *name,const unsigned int frames);
@@ -818,7 +818,7 @@ typedef enum
    public:
    Tier();
    ~Tier();
-   Tier* get_handle();
+   Tier* get_pointer();
    bool load(Image *buffer,const unsigned int frames);
    bool load(Image &buffer,const unsigned int frames);
    bool load(const char *name,const unsigned int frames);
@@ -832,7 +832,7 @@ typedef enum
    public:
    Cartoon();
    ~Cartoon();
-   Cartoon* get_handle();
+   Cartoon* get_pointer();
    bool load(Image *buffer);
    bool load(Image &buffer);
    bool load(const char *name);
@@ -849,7 +849,7 @@ typedef enum
    public:
    Sheet();
    ~Sheet();
-   Sheet* get_handle();
+   Sheet* get_pointer();
    bool check_row(const unsigned int target) const;
    bool check_column(const unsigned int target) const;
    bool check_cell(const unsigned int row,const unsigned int column) const;
@@ -874,7 +874,7 @@ typedef enum
    public:
    Segment();
    ~Segment();
-   Segment* get_handle();
+   Segment* get_pointer();
    void prepare(const Screen *screen);
    void prepare(Screen &screen);
    void prepare(const unsigned int width,const unsigned int height);
@@ -911,7 +911,7 @@ typedef enum
    public:
    Section();
    ~Section();
-   Section* get_handle();
+   Section* get_pointer();
    void prepare(const Screen *screen);
    void prepare(Screen &screen);
    void prepare(const unsigned int width,const unsigned int height);
@@ -948,7 +948,7 @@ typedef enum
    public:
    Scene();
    ~Scene();
-   Scene* get_handle();
+   Scene* get_pointer();
    void prepare(const Screen *screen);
    void prepare(Screen &screen);
    void prepare(const unsigned int width,const unsigned int height);
@@ -985,7 +985,7 @@ typedef enum
    public:
    Parallax();
    ~Parallax();
-   Parallax* get_handle();
+   Parallax* get_pointer();
    void prepare(const Screen *screen);
    void prepare(Screen &screen);
    void prepare(const unsigned int width,const unsigned int height);
@@ -1023,7 +1023,7 @@ typedef enum
    public:
    Text();
    ~Text();
-   Text* get_handle();
+   Text* get_pointer();
    NEONGDK::TEXT_KIND get_orientation() const;
    void set_orientation(const NEONGDK::TEXT_KIND target);
    bool is_font_load() const;
@@ -1060,7 +1060,7 @@ typedef enum
    public:
    Coordinates();
    ~Coordinates();
-   Coordinates* get_handle();
+   Coordinates* get_pointer();
    void initialize(const int viewport_width,const int viewport_height);
    int get_viewport_width() const;
    int get_viewport_height() const;
@@ -1095,7 +1095,7 @@ typedef enum
    public:
    Level();
    ~Level();
-   Level *get_handle();
+   Level *get_pointer();
    void initialize(const int tile_width,const int tile_height);
    void set_offset(const int x_offset,const int y_offset);
    int get_x_offset() const;
@@ -1138,7 +1138,7 @@ typedef enum
    Timer();
    Timer(const double seconds);
    ~Timer();
-   Timer* get_handle();
+   Timer* get_pointer();
    void set_timer(const double seconds);
    double get_interval() const;
    bool check_timer();
@@ -1154,7 +1154,7 @@ typedef enum
    public:
    Collision();
    ~Collision();
-   Collision* get_handle();
+   Collision* get_pointer();
    void set_target(const NEONGDK::BOX first_target,const NEONGDK::BOX second_target);
    bool check_collision() const;
    bool check_collision(const NEONGDK::BOX first_target,const NEONGDK::BOX second_target);
@@ -1168,7 +1168,7 @@ typedef enum
    public:
    Tilemap();
    ~Tilemap();
-   Tilemap* get_handle();
+   Tilemap* get_pointer();
    void initialize(const unsigned int tile_width,const unsigned int tile_height);
    unsigned int get_tile_width() const;
    unsigned int get_tile_height() const;

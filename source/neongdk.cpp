@@ -1707,7 +1707,7 @@ namespace NEONGDK
 
   }
 
-  Input_File* Input_File::get_handle()
+  Input_File* Input_File::get_pointer()
   {
    return this;
   }
@@ -1742,7 +1742,7 @@ namespace NEONGDK
 
   }
 
-  Output_File* Output_File::get_handle()
+  Output_File* Output_File::get_pointer()
   {
    return this;
   }
@@ -1949,7 +1949,7 @@ namespace NEONGDK
    return (target.y+target.height)>=this->get_height();
   }
 
-  Screen* Screen::get_handle()
+  Screen* Screen::get_pointer()
   {
    return this;
   }
@@ -2003,7 +2003,7 @@ namespace NEONGDK
 
   }
 
-  Camera* Camera::get_handle()
+  Camera* Camera::get_pointer()
   {
    return this;
   }
@@ -2112,7 +2112,7 @@ namespace NEONGDK
 
   void Camera::initialize(Screen &screen)
   {
-   this->initialize(screen.get_handle());
+   this->initialize(screen.get_pointer());
   }
 
   void Camera::set_viewport(const unsigned int width,const unsigned int height)
@@ -2317,7 +2317,7 @@ namespace NEONGDK
 
   void Image::mirror_tga(const unsigned char descriptor)
   {
-   switch (descriptor)
+   switch (descriptor & 0x30)
    {
     case 0x00: // Bottom-left
     this->mirror_image(Core::VERTICAL_MIRROR);
@@ -2420,7 +2420,7 @@ namespace NEONGDK
    return data;
   }
 
-  Image* Image::get_handle()
+  Image* Image::get_pointer()
   {
    return this;
   }
@@ -2893,7 +2893,7 @@ namespace NEONGDK
    billboard.set_horizontal_offset(static_cast<float>(this->get_frame()),static_cast<float>(this->get_frames()));
   }
 
-  Ribbon* Ribbon::get_handle()
+  Ribbon* Ribbon::get_pointer()
   {
    return this;
   }
@@ -2913,7 +2913,7 @@ namespace NEONGDK
 
   bool Ribbon::load(Image &buffer,const unsigned int frames)
   {
-   return this->load(buffer.get_handle(),frames);
+   return this->load(buffer.get_pointer(),frames);
   }
 
   bool Ribbon::load(const char *name,const unsigned int frames)
@@ -2959,7 +2959,7 @@ namespace NEONGDK
    billboard.set_vertical_offset(static_cast<float>(this->get_frame()),static_cast<float>(this->get_frames()));
   }
 
-  Tier* Tier::get_handle()
+  Tier* Tier::get_pointer()
   {
    return this;
   }
@@ -2979,7 +2979,7 @@ namespace NEONGDK
 
   bool Tier::load(Image &buffer,const unsigned int frames)
   {
-   return this->load(buffer.get_handle(),frames);
+   return this->load(buffer.get_pointer(),frames);
   }
 
   bool Tier::load(const char *name,const unsigned int frames)
@@ -3020,7 +3020,7 @@ namespace NEONGDK
 
   }
 
-  Cartoon* Cartoon::get_handle()
+  Cartoon* Cartoon::get_pointer()
   {
    return this;
   }
@@ -3039,7 +3039,7 @@ namespace NEONGDK
 
   bool Cartoon::load(Image &buffer)
   {
-   return this->load(buffer.get_handle());
+   return this->load(buffer.get_pointer());
   }
 
   bool Cartoon::load(const char *name)
@@ -3067,7 +3067,7 @@ namespace NEONGDK
 
   }
 
-  Sheet* Sheet::get_handle()
+  Sheet* Sheet::get_pointer()
   {
    return this;
   }
@@ -3195,7 +3195,7 @@ namespace NEONGDK
 
   bool Sheet::load(Image &sheet,const unsigned int row_amount,const unsigned int column_amount)
   {
-   return this->load(sheet.get_handle(),row_amount,column_amount);
+   return this->load(sheet.get_pointer(),row_amount,column_amount);
   }
 
   bool Sheet::load(const char *name,const unsigned int row_amount,const unsigned int column_amount)
@@ -3215,7 +3215,7 @@ namespace NEONGDK
    stage.destroy();
   }
 
-  Segment* Segment::get_handle()
+  Segment* Segment::get_pointer()
   {
    return this;
   }
@@ -3236,7 +3236,7 @@ namespace NEONGDK
 
   void Segment::prepare(Screen &screen)
   {
-   this->prepare(screen.get_handle());
+   this->prepare(screen.get_pointer());
   }
 
   bool Segment::load(Image *background,const unsigned int frames)
@@ -3370,7 +3370,7 @@ namespace NEONGDK
    stage.destroy();
   }
 
-  Section* Section::get_handle()
+  Section* Section::get_pointer()
   {
    return this;
   }
@@ -3391,7 +3391,7 @@ namespace NEONGDK
 
   void Section::prepare(Screen &screen)
   {
-   this->prepare(screen.get_handle());
+   this->prepare(screen.get_pointer());
   }
 
   bool Section::load(Image *background,const unsigned int frames)
@@ -3525,7 +3525,7 @@ namespace NEONGDK
    stage.destroy();
   }
 
-  Scene* Scene::get_handle()
+  Scene* Scene::get_pointer()
   {
    return this;
   }
@@ -3546,7 +3546,7 @@ namespace NEONGDK
 
   void Scene::prepare(Screen &screen)
   {
-   this->prepare(screen.get_handle());
+   this->prepare(screen.get_pointer());
   }
 
   bool Scene::load(Image *background)
@@ -3675,7 +3675,7 @@ namespace NEONGDK
    stage.set_texture_coordinates(NEONGDK::LAST_VERTEX,u_offset,v_offset);
   }
 
-  Parallax* Parallax::get_handle()
+  Parallax* Parallax::get_pointer()
   {
    return this;
   }
@@ -3696,7 +3696,7 @@ namespace NEONGDK
 
   void Parallax::prepare(Screen &screen)
   {
-   this->prepare(screen.get_handle());
+   this->prepare(screen.get_pointer());
   }
 
   bool Parallax::load(Image *background)
@@ -3832,7 +3832,7 @@ namespace NEONGDK
    text.destroy();
   }
 
-  Text* Text::get_handle()
+  Text* Text::get_pointer()
   {
    return this;
   }
@@ -3993,7 +3993,7 @@ namespace NEONGDK
 
   }
 
-  Coordinates* Coordinates::get_handle()
+  Coordinates* Coordinates::get_pointer()
   {
    return this;
   }
@@ -4104,7 +4104,7 @@ namespace NEONGDK
 
   }
 
-  Level* Level::get_handle()
+  Level* Level::get_pointer()
   {
    return this;
   }
@@ -4306,7 +4306,7 @@ namespace NEONGDK
 
   }
 
-  Timer* Timer::get_handle()
+  Timer* Timer::get_pointer()
   {
    return this;
   }
@@ -4347,7 +4347,7 @@ namespace NEONGDK
 
   }
 
-  Collision* Collision::get_handle()
+  Collision* Collision::get_pointer()
   {
    return this;
   }
@@ -4390,7 +4390,7 @@ namespace NEONGDK
 
   }
 
-  Tilemap* Tilemap::get_handle()
+  Tilemap* Tilemap::get_pointer()
   {
    return this;
   }
