@@ -936,12 +936,12 @@ namespace NEONGDK
 
   void Shape::set_horizontal_offset(const float current,const float total)
   {
-   this->set_tile_offset(current,total,1.0f,1.0f);
+   this->set_tile_offset(current,total,0.0f,1.0f);
   }
 
   void Shape::set_vertical_offset(const float current,const float total)
   {
-   this->set_tile_offset(1.0f,1.0f,current,total);
+   this->set_tile_offset(0.0f,1.0f,current,total);
   }
 
   void Shape::set_texture_coordinates(const NEONGDK::VERTEX_INDEX index,const float u,const float v)
