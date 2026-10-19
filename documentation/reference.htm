@@ -110,11 +110,7 @@
   <h2><a id="mozTocId275509" class="mozTocH2"></a><big>Chapter 1. About the engine</big></h2>
   <big><u>About the engine.</u><br>
    <br>
-   Hello! My name is Popov Evgeniy Alekseyevich. I am a solo programmer. I
-   enjoy creating software. I also like old-school video games. Do you
-   want to develop video games for Microsoft Windows? You need a good game
-   engine to do so. I made my own engine. I hope that my C++ game engine
-   will be useful for many programmers. <br>
+   Hello! My name is Popov Evgeniy Alekseyevich. I am a solo programmer. I enjoy creating software. I also like old-school video games. Do you want to develop video games for Microsoft Windows? You need a good game engine to do so. I made my own engine. I hope that my C++ game engine will be useful for many programmers. <br>
    <br>
    <u>Features.</u><br>
    <br>
@@ -125,7 +121,7 @@
    <li><big>Open-source code.</big></li>
    <li><big>Very fast.</big></li>
    <li><big>An easy-to-use object-oriented design.</big></li>
-   <li><big>The minimum set of external dependencies: <a href="https://opengl.org">OpenGL</a> and the standard <a
+   <li><big>A minimum set of external dependencies: <a href="https://opengl.org">OpenGL</a> and the standard <a
 
       href="https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list">Windows API</a> libraries.</big></li>
    <li><big>You don't need to link a main program with the engine binary file. The engine is just the source code files.</big></li>
@@ -192,13 +188,7 @@
    the following conditions:<br>
    The above copyright notice and this permission notice shall be included<br>
    in all copies or substantial portions of the Materials.<br>
-   THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-   MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.<br>
+   THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.<br>
   </big>
   <h2><a id="mozTocId169645" class="mozTocH2"></a><big> Chapter 4. System requirements</big></h2>
   <big>You can see the minimum system requirements below.<br>
@@ -223,7 +213,8 @@
     </tr>
     <tr>
      <td colspan="1" rowspan="1"><big>Processor</big></td>
-     <td colspan="1" rowspan="1"><big>Intel Pentium 60 MHz</big></td>
+     <td colspan="1" rowspan="1"><big>Intel Pentium 60 MHz or better<br>
+      </big></td>
     </tr>
    </tbody>
   </table>
@@ -343,10 +334,7 @@
   </big>
   <h1><a id="mozTocId574970" class="mozTocH1"></a><big> Part 2. Basic things</big></h1>
   <h2><a id="mozTocId833553" class="mozTocH2"></a><big> Chapter 1. Coordinate system</big></h2>
-  <big>
-   The engine uses the standard coordinate system by default. The
-   coordinates start at the top-left corner. Look at this picture to
-   understand it.<br>
+  <big> The engine uses the standard coordinate system by default. The coordinates start at the top-left corner. Look at this picture to understand it.<br>
    <br>
    <img alt="" src="coordinate_system.png" height="111" width="107"><br>
    <br>
@@ -366,23 +354,15 @@
    <br>
    The base graphics subsystem renders a game scene. This subsystem uses <a
 
-    href="http://opengl.org">OpenGL</a>
-   for rendering. All modern video cards support hardware acceleration.
-   The software implementation will activate if the acceleration is not
-   available. <br>
+    href="http://opengl.org">OpenGL</a> for rendering. All modern video cards support hardware acceleration. The software implementation will activate if the acceleration is not available. <br>
    <br>
    <u>The rendering performance.</u><br>
    <br>
-   Always
-   use the latest video card drivers. It may improve the rendering
-   performance. You can also try to change the screen resolution if you
-   have low rendering performance. <br>
+   Always use the latest video card drivers. It may improve the rendering performance. You can also try to change the screen resolution if you have low rendering performance. <br>
    <u><br>
     The FPS limitation.</u><br>
    <br>
-   FPS is an
-   important thing. A high FPS is needed for a smooth animation, but it
-   also needs high processor usage. The FPS limit is 60 by default. <br>
+   FPS is an important thing. A high FPS is needed for a smooth animation, but it also needs high processor usage. The FPS limit is 60 by default. <br>
    <br>
    <u>Working with the base graphics subsystem.</u><br>
    <br>
@@ -447,7 +427,7 @@
    <br>
    <i>unsigned int Picture::get_image_height() const; -</i> Return the image height in pixels.<br>
    <br>
-   <i>size_t Picture::get_pixel_amount() const; -</i> Return the number of the image pixels.<br>
+   <i>size_t Picture::get_pixel_amount() const; -</i> Return the number of image pixels.<br>
    <br>
    <i>size_t Picture::get_image_length() const; -</i> Return the image length in bytes.<br>
    <br>
@@ -466,7 +446,7 @@
    <br>
    The <i>Animation</i> class provides simple access to the animation subsystem. Don't use it directly. Let's look at the publicly available methods.<br>
    <br>
-   <i>unsigned int Animation::get_frames() const; -</i> Return the number of the frames.<br>
+   <i>unsigned int Animation::get_frames() const; -</i> Return the number of frames.<br>
    <br>
    <i>unsigned int Animation::get_frame() const; -</i> Return the current frame.<br>
    <br>
@@ -475,7 +455,7 @@
    <i>bool Animation::check_frame(const unsigned int target) const; -</i> Return true if the target frame is valid.<br>
   </big>
   <h2><a id="mozTocId357427" class="mozTocH2"></a><big> Chapter 5. Vertex index</big></h2>
-  <big> The vertex index corresponds to the predefined constants. You can see it below.<br>
+  <big> The vertex index corresponds to the predefined constants. You can see them below.<br>
    <br>
   </big>
   <table style="width: 358px; height: 139px;" border="1">
@@ -510,14 +490,9 @@
   <big><br>
   </big>
   <h2><a id="mozTocId462098" class="mozTocH2"></a><big> Chapter 6. Background</big></h2>
-  <big>
-   A background is a big image with a few frames. Any game has a
-   background. The background will be scaled to fit the screen. The
-   background transparency is always disabled.<br>
+  <big> A background is a big image with a few frames. Any game has a background. The background will be scaled to fit the screen. The background transparency is always disabled.<br>
    <br>
-   The horizontal animated backgrounds look like the horizontal photo
-   ribbons. The vertical animated backgrounds look like the vertical photo
-   ribbons.</big><br>
+   The horizontal animated backgrounds look like the horizontal photo ribbons. The vertical animated backgrounds look like the vertical photo ribbons.</big><br>
   <h2><a id="mozTocId60858" class="mozTocH2"></a><big>Chapter 7. Segment</big></h2>
   <big><u>A few words about the segment.</u><br>
    <br>
@@ -553,7 +528,7 @@
    <br>
    <i>unsigned int Segment::set_target(const unsigned int target);</i> - Set the target frame and return it.<br>
    <br>
-   <i>void Segment::step();</i> - Go to the next frame or jump to the start if the current frame is the last.<br>
+   <i>void Segment::step();</i> - Go to the next frame or jump to the start if the current frame is the last one.<br>
    <br>
    <i>bool Segment::load(Image *background, const unsigned int frames);</i> - Load a background from the buffer and return true if it is loaded.<br>
    <br>
@@ -577,7 +552,7 @@
    <br>
    <i>unsigned int Segment::get_frame() const;</i> - Return the current frame.<br>
    <br>
-   <i>unsigned int Segment::get_frames() const;</i> - Return the number of the frames.<br>
+   <i>unsigned int Segment::get_frames() const;</i> - Return the number of frames.<br>
    <br>
    <i>unsigned int Segment::get_width() const;</i> - Return the width of the background.<br>
    <br>
@@ -585,7 +560,7 @@
    <br>
    <u>A background texture.</u><br>
    <br>
-   The background isn't drawn if the background texture doesn't exist. It will be automatically created when you load an image. <br>
+   The background isn't drawn if the background texture doesn't exist. It will create when you load an image. <br>
    <u><br>
     An important notice.</u><br>
    <br>
@@ -625,7 +600,7 @@
    <br>
    <i>unsigned int Section::set_target(const unsigned int target);</i> - Set the target frame and return it.<br>
    <br>
-   <i>void Section::step();</i> - Go to the next frame or jump to the start if the current frame is the last.<br>
+   <i>void Section::step();</i> - Go to the next frame or jump to the start if the current frame is the last one.<br>
    <br>
    <i>bool Section::load(Image *background, const unsigned int frames);</i> - Load a background from the buffer and return true if it is loaded.<br>
    <br>
@@ -649,7 +624,7 @@
    <br>
    <i>unsigned int Section::get_frame() const;</i> - Return the current frame.<br>
    <br>
-   <i>unsigned int Section::get_frames() const;</i> - Return the number of the frames.<br>
+   <i>unsigned int Section::get_frames() const;</i> - Return the number of frames.<br>
    <br>
    <i>unsigned int Section::get_width() const;</i> - Return the width of the background.<br>
    <br>
@@ -657,7 +632,7 @@
    <br>
    <u>A background texture.</u><br>
    <br>
-   The background isn't drawn if the background texture doesn't exist. It will be automatically created when you load an image. <br>
+   The background isn't drawn if the background texture doesn't exist. It will create when you load an image. <br>
    <u><br>
     An important notice.</u><br>
    <br>
@@ -706,7 +681,7 @@
    <br>
    <i>void Scene::destroy_image(); -</i> Destroy the background image.<br>
    <br>
-   <i>void Scene::destroy(); -</i> Total destroy the background.<br>
+   <i>void Scene::destroy(); -</i> Completely destroy the background.<br>
    <br>
    <i>bool Scene::is_load() const; -</i> Return true if a static background has already been loaded.<br>
    <br>
@@ -716,7 +691,7 @@
    <u><br>
     A background texture.</u><br>
    <br>
-   The background isn't drawn if the background texture doesn't exist. It will be automatically created when you load an image. <br>
+   The background isn't drawn if the background texture doesn't exist. It will create when you load an image. <br>
    <br>
    <u>An important notice.</u><br>
    <br>
@@ -780,7 +755,7 @@
    <br>
    <i>void Parallax::destroy_image(); -</i> Destroy the background image.<br>
    <br>
-   <i>void Parallax::destroy(); -</i> Total destroy the background.<br>
+   <i>void Parallax::destroy(); -</i> Completely destroy the background.<br>
    <br>
    <i>bool Parallax::is_load() const; -</i> Return true if a parallax background has already been loaded.<br>
    <br>
@@ -790,7 +765,7 @@
    <br>
    <u>A background texture.</u><br>
    <br>
-   The background isn't drawn if the background texture doesn't exist. It will be automatically created when you load an image. <br>
+   The background isn't drawn if the background texture doesn't exist. It will create when you load an image. <br>
    <br>
    <u>An important notice.</u><br>
    <br>
@@ -888,9 +863,7 @@
    <i>void Billboard::draw(const bool transparency, const unsigned int x, const unsigned int y); -</i> Set the transparent mode and draw a sprite at the target position.<br>
   </big>
   <h2><a id="mozTocId156967" class="mozTocH2"></a><big> Chapter 12. Animated sprites</big></h2>
-  <big>
-   There are two kinds of animated sprites: the horizontal strips and the
-   vertical strips. Each sprite is a small image with a few frames.<br>
+  <big> There are two kinds of animated sprites: the horizontal strips and the vertical strips. Each sprite is a small image with a few frames.<br>
    The horizontal strip looks like the horizontal photo ribbon. The vertical strip looks like the vertical photo ribbon.</big><br>
   <h2><a id="mozTocId306371" class="mozTocH2"></a><big>Chapter 13. Ribbons<br>
    </big></h2>
@@ -910,15 +883,15 @@
    <br>
    <i>unsigned int Ribbon::set_target(const unsigned int target); -</i> Set the target frame and return it.<br>
    <br>
-   <i>void Ribbon::step(); -</i> Go to the next frame or jump to the start if the current frame is the last.<br>
+   <i>void Ribbon::step(); -</i> Go to the next frame or jump to the start if the current frame is the last one.<br>
    <br>
    <i>Ribbon *Ribbon::get_pointer(); -</i> Return a pointer to the ribbon object.<br>
    <br>
-   <i>void Ribbon::destroy(); -</i> Total destroy the sprite.<br>
+   <i>void Ribbon::destroy(); -</i> Completely destroy the sprite.<br>
    <br>
    <u>A sprite texture.</u><br>
    <br>
-   A sprite isn't drawn if the sprite texture doesn't exist. It will automatically be created when you load a sprite.<br>
+   A sprite isn't drawn if the sprite texture doesn't exist. It will create when you load a sprite.<br>
   </big>
   <h2><a id="mozTocId718095" class="mozTocH2"></a><big>Chapter 14. Tier</big></h2>
   <big><u>A few words about the tier.</u><br>
@@ -937,15 +910,15 @@
    <br>
    <i>unsigned int Tier::set_target(const unsigned int target);</i> - Set the target frame and return it.<br>
    <br>
-   <i>void Tier::step();</i> - Go to the next frame or jump to the start if the current frame is the last.<br>
+   <i>void Tier::step();</i> - Go to the next frame or jump to the start if the current frame is the last one.<br>
    <br>
    <i>Tier *Tier::get_pointer();</i> - Return a pointer to the tier object.<br>
    <br>
-   <i>void Tier::destroy();</i> - Total destroy the sprite.<br>
+   <i>void Tier::destroy();</i> - Completely destroy the sprite.<br>
    <br>
    <u>A sprite texture</u><br>
    <br>
-   A sprite isn't drawn if the sprite texture doesn't exist. It will automatically be created when you load a sprite.<br>
+   A sprite isn't drawn if the sprite texture doesn't exist. It will create when you load a sprite.<br>
   </big>
   <h2><a id="mozTocId34673" class="mozTocH2"></a><big> Chapter 15. Static sprites</big></h2>
   <big><u>A few words about the static sprites.</u><br>
@@ -954,9 +927,7 @@
    <u><br>
     Working with the static sprites.</u><br>
    <br>
-   Use the <i>Cartoon</i>
-   class to work with a static sprite. It is derived from two classes:
-   Billboard and Picture. Let's look at the publicly available methods.<br>
+   Use the <i>Cartoon</i> class to work with a static sprite. It is derived from two classes: Billboard and Picture. Let's look at the publicly available methods.<br>
    <br>
    <i>bool Cartoon::load(Image *buffer); -</i> Load a sprite from the buffer and return true if it is loaded.<br>
    <br>
@@ -970,14 +941,12 @@
    <u><br>
     A sprite texture.</u><br>
    <br>
-   A sprite isn't drawn if the sprite texture doesn't exist. It will automatically be created when you load a sprite.<br>
+   A sprite isn't drawn if the sprite texture doesn't exist. It will create when you load a sprite.<br>
   </big>
   <h2><a id="mozTocId796640" class="mozTocH2"></a><big> Chapter 16. Sprite sheet</big></h2>
   <big><u>Some words about the sprite sheet.</u><br>
    <br>
-   A sprite sheet is a special kind of animated sprite. Each frame has a
-   fixed size. The sheet is a matrix of frames. Look at this picture to
-   understand it.<br>
+   A sprite sheet is a special kind of animated sprite. Each frame has a fixed size. The sheet is a matrix of frames. Look at this picture to understand it.<br>
    <br>
    <img alt="" src="sheet.png" height="249" width="380"><br>
    <br>
@@ -1011,7 +980,7 @@
    <br>
    <i>unsigned int Sheet::set_target(const unsigned int target); -</i> Set the target frame and return it.<br>
    <br>
-   <i>void Sheet::step(); -</i> Go to the next frame or jump to the start if the current frame is the last.<br>
+   <i>void Sheet::step(); -</i> Go to the next frame or jump to the start if the current frame is the last one.<br>
    <br>
    <i>bool Sheet::load(Image *sheet, const unsigned int row_amount, const unsigned int column_amount); -</i> Load a sprite sheet from the buffer and return true if it is loaded.<br>
    <br>
@@ -1023,14 +992,12 @@
    <br>
    <u>A sprite sheet texture.</u><br>
    <br>
-   A sprite sheet isn't drawn if the sprite sheet texture doesn't exist. It will be automatically created when you load a sheet.<br>
+   A sprite sheet isn't drawn if the sprite sheet texture doesn't exist. It will create when you load a sheet.<br>
   </big>
   <h2><a id="mozTocId604453" class="mozTocH2"></a><big> Chapter 17. Text</big></h2>
   <big><u>How to print text?</u><br>
    <br>
-   Use the text subsystem to print the text. This subsystem needs a font
-   for text printing. You must load a font before starting to print the
-   text. The font is just a sprite sheet with 16 rows and 16 columns. <br>
+   Use the text subsystem to print the text. This subsystem needs a font for text printing. You must load a font before starting to print the text. The font is just a sprite sheet with 16 rows and 16 columns. <br>
    <br>
    <u>The supported characters.</u><br>
    <br>
@@ -1038,7 +1005,7 @@
    <br>
    <u>The text orientation.</u><br>
    <br>
-   The text orientation corresponds to the predefined constants. You can see it below.<br>
+   The text orientation corresponds to the predefined constants. You can see them below.<br>
    <br>
   </big>
   <table style="width: 450px; height: 106px;" border="1">
@@ -1066,19 +1033,19 @@
    <br>
    <i>Text *Text::get_pointer(); -</i> Return a pointer to the text printing subsystem.<br>
    <br>
-   <i>NEONGDK::TEXT_KIND Text::get_orientation() const; -</i> Get the current text orientation.<br>
+   <i>NEONGDK::TEXT_KIND Text::get_orientation() const; -</i> Return the current text orientation.<br>
    <br>
    <i>void Text::set_orientation(const NEONGDK::TEXT_KIND target); -</i> Set the current text orientation.<br>
    <br>
    <i>bool Text::is_font_load() const; -</i> Return true if the font has already been loaded.<br>
    <br>
-   <i>unsigned int Text::get_font_width() const; -</i> Get the current font width in pixels.<br>
+   <i>unsigned int Text::get_font_width() const; -</i> Return the current font width in pixels.<br>
    <br>
-   <i>unsigned int Text::get_font_height() const; -</i> Get the current font height in pixels.<br>
+   <i>unsigned int Text::get_font_height() const; -</i> Return the current font height in pixels.<br>
    <br>
-   <i>unsigned int Text::get_x() const; -</i> Get the x-coordinate of the text output position.<br>
+   <i>unsigned int Text::get_x() const; -</i> Return the x-coordinate of the text output position.<br>
    <br>
-   <i>unsigned int Text::get_y() const; -</i> Get the y-coordinate of the text output position.<br>
+   <i>unsigned int Text::get_y() const; -</i> Return the y-coordinate of the text output position.<br>
    <br>
    <i>void Text::set_position(const unsigned int x, const unsigned int y); -</i> Set the output position.<br>
    <br>
@@ -1098,11 +1065,11 @@
    <br>
    <i>void Text::print(const char target); -</i> Print a single glyph at the current position.<br>
    <br>
-   <i>void Text::print(const unsigned int x, const unsigned int y, const char target); -</i> Print a single glyph at the specific position.<br>
+   <i>void Text::print(const unsigned int x, const unsigned int y, const char target); -</i> Print a single glyph at the target position.<br>
    <br>
    <i>size_t Text::print(const char *target); -</i> Print text at the current position and return the text length.<br>
    <br>
-   <i>size_t Text::print(const unsigned int x, const unsigned int y, const char *target); -</i> Print text at the specific position and return the text length.<br>
+   <i>size_t Text::print(const unsigned int x, const unsigned int y, const char *target); -</i> Print text at the target position and return the text length.<br>
    <br>
    <i>void Text::destroy_image(); -</i> Destroy a font image.<br>
    <br>
@@ -1111,9 +1078,7 @@
   <h2><a id="mozTocId33343" class="mozTocH2"></a><big> Chapter 18. Loading an image</big></h2>
   <big><u>Load an image from a file.</u><br>
    <br>
-   Use the image loader to load an image from a file. The Image class
-   provides simple access to the image loader. It is a simple class with a
-   few methods.<br>
+   Use the image loader to load an image from a file. The Image class provides simple access to the image loader. It is a simple class with a few methods.<br>
    <br>
    <i>unsigned char *Image::load(const char *name); -</i> Load a Truevision TGA image and return a pointer to the image buffer.<br>
    <br>
@@ -1133,8 +1098,7 @@
    <br>
    <u>An important note.</u><br>
    <br>
-   A new image will replace the current image if the current image already
-   exists. An incorrect image will be ignored and will fail to load.<br>
+   A new image will replace the current image if the current image already exists. An incorrect image will be ignored and will fail to load.<br>
    The source image will be converted to the <a href="https://en.wikipedia.org/wiki/RGBA">RGBA</a> format. The pixels matching the top-left pixel will be marked as transparent. <br>
    <br>
    <u>The supported format.</u><br>
@@ -1280,13 +1244,11 @@
   <h2><a id="mozTocId128521" class="mozTocH2"></a><big> Chapter 3. Cartesian coordinates and the isometric coordinates</big></h2>
   <big><u>A few words about the isometric games.</u><br>
    <br>
-   <a href="https://en.wikipedia.org/wiki/Isometric_projection"> Isometric projection</a> is a very popular way for pseudo-3D games. Many old-school games are isometric games.<br>
+   <a href="https://en.wikipedia.org/wiki/Isometric_projection"> Isometric projection</a> is a very popular way of making pseudo-3D games. Many old-school games are isometric games.<br>
    <br>
    <u>Coordinate conversion.</u><br>
    <br>
-   You can convert the Cartesian coordinates to the isometric coordinates.
-   You can also convert the isometric coordinates to the Cartesian
-   coordinates. Use the <i>Isometric</i> class to do it. Let's look at the publicly available methods.<br>
+   You can convert the Cartesian coordinates to the isometric coordinates. You can also convert the isometric coordinates to the Cartesian coordinates. Use the <i>Isometric</i> class to do it. Let's look at the publicly available methods.<br>
    <br>
    <i>static int Isometric::get_isometric_x(const int x, const int y); -</i> Convert the x-coordinate from the Cartesian system to the isometric system.<br>
    <br>
@@ -1320,7 +1282,7 @@
   <h2><a id="mozTocId60260" class="mozTocH2"></a><big> Chapter 2. Terminating the application</big></h2>
   <big> You can use the <i>Halt</i> function to terminate a program. This function is declared in the NEONGDK namespace.<br>
    <br>
-   <i>void NEONGDK::Halt(const char *message); -</i> Terminate the program. Write an error message to the log file if logging is enabled.<br>
+   <i>void NEONGDK::Halt(const char *message); -</i> Terminate the program. Write an error message to the standard error stream.<br>
   </big>
   <h2><a id="mozTocId781655" class="mozTocH2"></a><big> Chapter 3. Timers</big></h2>
   <big> A timer is a very useful thing. Use the <i>Timer</i> class to work with the timer. Let's look at the publicly available methods.<br>
@@ -1333,7 +1295,10 @@
    <br>
    <i>double Timer::get_interval() const; -</i> Return the current timer interval.<br>
    <br>
-   <i>bool Timer::check_timer(); -</i> Return true and reinitialize the start point if the interval between the stop and start points is greater or equal to a specific number of seconds.<br>
+   <i>bool Timer::check_timer(); -</i>
+   Return true and reinitialize the start point if the interval between
+   the stop and start points is greater than or equal to a specified
+   number of seconds.<br>
   </big>
   <h2><a id="mozTocId957858" class="mozTocH2"></a><big> Chapter 4. Collision detection<br>
    </big></h2>
@@ -1343,9 +1308,7 @@
    <u><br>
     The collision details.</u><br>
    <br>
-   The detector uses the bounding box collision method to detect a
-   collision. The collision-related information is stored in a custom data
-   type.<br>
+   The detector uses the bounding box collision method to detect a collision. The collision-related information is stored in a custom data type.<br>
    <br>
    <i>typedef struct<br>
     {<br>
@@ -1357,9 +1320,7 @@
    <br>
    <u>Working with the collision detector.</u><br>
    <br>
-   The <i>Collision</i>
-   class provides easy access to the collision detectors. It is a simple
-   class with a few methods. Let's look at the publicly available methods.<br>
+   The <i>Collision</i> class provides easy access to the collision detectors. It is a simple class with a few methods. Let's look at the publicly available methods.<br>
    <br>
    <i>Collision *Collision::get_pointer(); -</i> Return a pointer to the collision detector.<br>
    <br>
@@ -1380,9 +1341,7 @@
    <br>
    <u>Working with the tilemap.</u><br>
    <br>
-   The <i>Tilemap</i>
-   class provides easy access to the tilemap. It is a simple class with a
-   few methods. Let's look at the publicly available methods.<br>
+   The <i>Tilemap</i> class provides easy access to the tilemap. It is a simple class with a few methods. Let's look at the publicly available methods.<br>
    <br>
    <i>Tilemap *Tilemap::get_pointer(); -</i> Return a pointer to the tilemap subsystem.<br>
    <br>
@@ -1392,19 +1351,19 @@
    <br>
    <i>unsigned int Tilemap::get_tile_height() const; -</i> Return the tile height in pixels.<br>
    <br>
-   <i>unsigned int Tilemap::get_x(const unsigned int row) const; -</i> Get the x-coordinate from the target row.<br>
+   <i>unsigned int Tilemap::get_x(const unsigned int row) const; -</i> Return the x-coordinate from the target row.<br>
    <br>
-   <i>unsigned int Tilemap::get_y(const unsigned int column) const; -</i> Get the y-coordinate from the target column.<br>
+   <i>unsigned int Tilemap::get_y(const unsigned int column) const; -</i> Return the y-coordinate from the target column.<br>
    <br>
-   <i>unsigned int Tilemap::get_row(const unsigned int x) const; -</i> Get the row from the x-coordinate.<br>
+   <i>unsigned int Tilemap::get_row(const unsigned int x) const; -</i> Return the row from the x-coordinate.<br>
    <br>
-   <i>unsigned int Tilemap::get_column(const unsigned int y) const; -</i> Get the column from the y-coordinate.<br>
+   <i>unsigned int Tilemap::get_column(const unsigned int y) const; -</i> Return the column from the y-coordinate.<br>
    <br>
-   <i>unsigned int Tilemap::get_row_amount(const unsigned int viewport_width) const; -</i> Get the maximum number of the visible rows.<br>
+   <i>unsigned int Tilemap::get_row_amount(const unsigned int viewport_width) const; -</i> Return the maximum number of the visible rows.<br>
    <br>
-   <i>unsigned int Tilemap::get_column_amount(const unsigned int viewport_width) const; -</i> Get the maximum number of the visible columns.<br>
+   <i>unsigned int Tilemap::get_column_amount(const unsigned int viewport_width) const; -</i> Return the maximum number of the visible columns.<br>
    <br>
-   <i>unsigned int Tilemap::get_tile_amount(const unsigned int viewport_width, const unsigned int viewport_height) const; -</i> Get the maximum number of the visible tiles.<br>
+   <i>unsigned int Tilemap::get_tile_amount(const unsigned int viewport_width, const unsigned int viewport_height) const; -</i> Return the maximum number of the visible tiles.<br>
    <br>
    <i>bool Tilemap::check_row(const unsigned int row, const unsigned int viewport_width) const; -</i> Return true if the row is valid.<br>
    <br>
@@ -1427,7 +1386,7 @@
    <br>
    <i>void Audio::play(); -</i> Play a sound.<br>
    <br>
-   <i>void Audio::play_loop(); -</i> Checking the playback status and restarting playback if needed.<br>
+   <i>void Audio::play_loop(); -</i> Check the playback status and restarting playback if needed.<br>
    <br>
    <i>void Audio::play(const bool loop); -</i> Play a sound. You can set the loop mode if you want.<br>
    <br>
@@ -1441,7 +1400,7 @@
    <br>
    <i>file_exists</i>: Check the target file to see if one exists.<br>
    <br>
-   <i>delete_file</i>: Deletes the target file.<br>
+   <i>delete_file</i>: Delete the target file.<br>
    <br>
    All functions take the target file name as an argument and return false if the operation failed.<br>
   </big>
@@ -1461,16 +1420,9 @@
    <i>NEONGDK::BOX generate_box(const unsigned int x, const unsigned int y, const unsigned int width, const unsigned int height); -</i> Generate the collision-related information.<br>
   </big>
   <h2><a id="mozTocId316744" class="mozTocH2"></a><big> Chapter 3. Resource management</big></h2>
-  <big>
-   A resource is an instance of a user-defined class or structure. The
-   resource manager is implemented as a few template functions. All these
-   functions are declared in the <i>Resource</i> sub-namespace.<br>
+  <big> A resource is an instance of a user-defined class or structure. The resource manager is implemented as a few template functions. All these functions are declared in the <i>Resource</i> sub-namespace.<br>
    <br>
-   <i>create</i>:
-   Create a resource. The first form of this function creates a single
-   resource. It takes a pointer to a resource pointer as an argument. The
-   second form creates an array of resources. It takes a pointer to a
-   resource pointer and a resource amount.<br>
+   <i>create</i>: Create a resource. The first form of this function creates a single resource. It takes a pointer to a resource pointer as an argument. The second form creates an array of resources. It takes a pointer to a resource pointer and a resource amount.<br>
    <br>
    <i>destroy</i>: Delete a resource if it already exists. This function takes a resource pointer as an argument.<br>
    <br>
@@ -1530,9 +1482,7 @@
   <h2><a id="mozTocId848948" class="mozTocH2"></a><big> Chapter 2. Keyboard</big></h2>
   <big><u>Low-level input.</u><br>
    <br>
-   Any keyboard contains a built-in controller. It generates a special
-   code when the user presses or releases the key. This code is called a
-   «scan code». <br>
+   Any keyboard contains a built-in controller. It generates a special code when the user presses or releases the key. This code is called a «scan code». <br>
    <u><br>
     Working with the keyboard.</u><br>
    <br>
@@ -1548,9 +1498,9 @@
    <br>
    <i>bool Keyboard::is_ready() const; -</i> Return true if the subsystem is already initialized.<br>
    <br>
-   <u>The list of the supported scan codes.</u><br>
+   <u>The list of supported scan codes.</u><br>
    <br>
-   You can see a list of the scan codes below.<br>
+   You can see a list of scan codes below.<br>
    <br>
   </big>
   <table border="1">
@@ -1827,7 +1777,7 @@
    <br>
    <u>The mouse buttons.</u><br>
    <br>
-   The mouse button codes correspond to the predefined constants. You can see it below.<br>
+   The mouse button codes correspond to the predefined constants. You can see them below.<br>
    <br>
   </big>
   <table border="1">
@@ -1855,15 +1805,11 @@
   <h2><a id="mozTocId837875" class="mozTocH2"></a><big> Chapter 4. Gamepad</big></h2>
   <big><u>The best friend of a retro gamer.</u><br>
    <br>
-   What is a good choice for a game control device when the user plays an
-   arcade or an old-school video game? A gamepad. This engine provides
-   simple access to it. <br>
+   What is a good choice for a game control device when the user plays an arcade or an old-school video game? A gamepad. This engine provides simple access to it. <br>
    <br>
    <u>The number of the connected gamepads.</u><br>
    <br>
-   You can connect a several gamepads. Any connected gamepad has an
-   internal index. The first gamepad index is 0. It will select by
-   default. <br>
+   You can connect a several gamepads. Any connected gamepad has an internal index. The first gamepad index is 0. It is selected by default. <br>
    <br>
    <u>The standard button codes.</u><br>
    <br>
@@ -1871,7 +1817,7 @@
    <br>
    <u>The D-pad button codes.</u><br>
    <br>
-   The D-pad button codes correspond to the predefined constants. You can see it below.<br>
+   The D-pad button codes correspond to the predefined constants. You can see them below.<br>
    <br>
   </big>
   <table border="1">
@@ -1922,7 +1868,7 @@
   <big><br>
    <u>The stick identifiers.</u><br>
    <br>
-   The stick identifiers corresponds to the predefined constants. You can see it below.<br>
+   The stick identifiers corresponds to the predefined constants. You can see them below.<br>
    <br>
   </big>
   <table border="1">
@@ -1944,7 +1890,7 @@
   <big><br>
    <u>The stick direction</u><br>
    <br>
-   The stick direction corresponds to the the predefined constants. You can see it below.<br>
+   The stick direction corresponds to the the predefined constants. You can see them below.<br>
    <br>
   </big>
   <table border="1">
@@ -1978,9 +1924,9 @@
    <br>
    <i>unsigned int Gamepad::get_amount(); -</i> Return the number of connected gamepads.<br>
    <br>
-   <i>unsigned int Gamepad::get_button_amount() const; -</i> Return the number of the gamepad buttons.<br>
+   <i>unsigned int Gamepad::get_button_amount() const; -</i> Return the number of gamepad buttons.<br>
    <br>
-   <i>unsigned int Gamepad::get_stick_amount() const; -</i> Return the number of the gamepad sticks.<br>
+   <i>unsigned int Gamepad::get_stick_amount() const; -</i> Return the number of gamepad sticks.<br>
    <br>
    <i>void Gamepad::update(); -</i> Update the internal gamepad state.<br>
    <br>
@@ -2008,10 +1954,7 @@
   </big>
   <h1><a id="mozTocId406682" class="mozTocH1"></a><big> Part 9. Internal details of the engine subsystems</big></h1>
   <h2><a id="mozTocId93257" class="mozTocH2"></a><big> Chapter 1. Few words for a curious programmer</big></h2>
-  <big>
-   The engine subsystems have a different internal structure. This
-   structure is hidden from you, and you don't have access to it. Do you
-   want to know about the hidden things? Just read the next chapter.<br>
+  <big>Each subsystem has its own internal structure. This structure is hidden from you, and you don't have access to it. Do you want to know about the hidden things? Just read the next chapter.<br>
   </big>
   <h2><a id="mozTocId277395" class="mozTocH2"></a><big> Chapter 2. Internal classes</big></h2>
   <big><u>The internal classes.</u><br>
@@ -2044,9 +1987,7 @@
    <br>
    <u>Textures.</u><br>
    <br>
-   A texture width must be a power of two. A texture height also must be a
-   power of two. Any image will be automatically resized before uploading.
-   <br>
+   A texture width must be a power of two. A texture height must also be a power of two. Any image will be automatically resized before uploading. <br>
    <br>
    <u>The vertex array and the texture coordinate array</u><br>
    <br>
@@ -2079,7 +2020,7 @@
    <br>
    <u>The internal key state.</u><br>
    <br>
-   The internal state of a key corresponds to the predefined constants. You can see it below.<br>
+   The internal state of a key corresponds to the predefined constants. You can see them below.<br>
    <br>
   </big>
   <table border="1">
@@ -2106,16 +2047,16 @@
   <h1><a id="mozTocId576707" class="mozTocH1"></a><big>Version history</big></h1>
   <big> 0.1-5.7.1: The old branch.<br>
    5.7.2: The changes have been merged with the Eugene Game Development Kit 6.3.1.<br>
-   5.7.3-5.7.4: The small changes.<br>
-   5.7.5: The display manager is backported from the Neon Game Development Kit 4.6.8.<br>
-   5.7.6: The synchronization timer is backported from the Neon Game Development Kit 4.1.3.<br>
+   5.7.3-5.7.4: A small changes.<br>
+   5.7.5: The display manager has been ported from the Neon Game Development Kit 4.6.8.<br>
+   5.7.6: The synchronization timer has been ported from the Neon Game Development Kit 4.1.3.<br>
    5.7.7: The synchronization timer has been improved.<br>
    5.7.8: The sound subsystem has been added.<br>
-   5.7.9: The small bug has been fixed.<br>
+   5.7.9: A small bug has been fixed.<br>
    5.8: The source code was recompiled under Open Watcom V2 Fork.<br>
-   5.8.1: The small changes.<br>
-   5.8.2: The memory subsystem is backported from the Gray Game Development Kit 2.0.8.<br>
-   5.8.3-5.8.4: The small changes.<br>
+   5.8.1: A small changes.<br>
+   5.8.2: The memory subsystem has been ported from the Gray Game Development Kit 2.0.8.<br>
+   5.8.3-5.8.4: A small changes.<br>
    5.8.4.1: The documentation has been updated.<br>
    5.8.5: Visual C++ 2005 support has been added.<br>
    5.8.6: The synchronization timer is rewritten.<br>
@@ -2140,10 +2081,10 @@
    6.0.3: The changes have been merged with the Eugene Game Development Kit 6.6.1.<br>
    6.0.4: The changes have been merged with the Eugene Game Development Kit 6.7.1.<br>
    6.0.5: The changes have been merged with the Eugene Game Development Kit 6.7.6.<br>
-   6.0.6: The audio subsystem is backported from the Simple Windows game framework 6.4.9.<br>
+   6.0.6: The audio subsystem has been ported from the Simple Windows game framework 6.4.9.<br>
    6.0.7-6.0.8: The audio subsystem has been improved.<br>
    6.0.9: The simple sound subsystem has been removed.<br>
-   6.1: The memory subsystem is backported from the Gray Game Development Kit 2.0.8.<br>
+   6.1: The memory subsystem has been ported from the Gray Game Development Kit 2.0.8.<br>
    6.1.1: The audio subsystem has been improved.<br>
    6.1.2: The changes have been merged with the Eugene Game Development Kit 6.7.7.<br>
    6.1.3: The changes have been merged with the Eugene Game Development Kit 6.7.8.<br>
@@ -2158,15 +2099,15 @@
    6.2.2: The changes have been merged with the Eugene Game Development Kit 6.9.1.<br>
    6.2.3: The changes have been merged with the Eugene Game Development Kit 6.9.2.<br>
    6.2.4: The audio subsystem has been improved.<br>
-   6.2.5-6.2.6: The small bug has been fixed.<br>
-   6.2.7: The synchronization timer is backported from the Neon Game Development Kit 5.8.5.<br>
+   6.2.5-6.2.6: A small bug has been fixed.<br>
+   6.2.7: The synchronization timer has been ported from the Neon Game Development Kit 5.8.5.<br>
    6.2.8-6.3.1: The synchronization timer has been improved.<br>
    6.3.2: The audio subsystem has been improved.<br>
    6.3.3: The changes have been merged with the Eugene Game Development Kit 6.9.4.<br>
    6.3.4: The audio subsystem has been improved.<br>
    6.3.5: The changes have been merged with the Eugene Game Development Kit 6.9.7.<br>
    6.3.6: The image resizer has been improved.<br>
-   6.3.7: The small changes.<br>
+   6.3.7: A small changes.<br>
    6.3.8: The changes have been merged with the Eugene Game Development Kit 7.0.1.<br>
    6.3.9: The changes have been merged with the Eugene Game Development Kit 7.0.2.<br>
    6.4: The changes have been merged with the Eugene Game Development Kit 7.0.5.<br>
@@ -2239,11 +2180,11 @@
    7.0.7: The changes have been merged with the Eugene Game Development Kit 8.1.4.<br>
    7.0.8: The changes have been merged with the Eugene Game Development Kit 8.1.5.<br>
    7.0.9: The changes have been merged with the Eugene Game Development Kit 8.1.6.<br>
-   7.1: The synchronization timer is backported from the Neon Game Development Kit 6.3.1.<br>
+   7.1: The synchronization timer has been ported from the Neon Game Development Kit 6.3.1.<br>
    7.1.1: The synchronization timer has been improved.<br>
    7.1.2: The changes have been merged with the Eugene Game Development Kit 8.1.7.<br>
    7.1.3: The changes have been merged with the Eugene Game Development Kit 8.1.8.<br>
-   7.1.4-7.1.5: The small bug has been fixed.<br>
+   7.1.4-7.1.5: A small bug has been fixed.<br>
    7.1.6: The changes have been merged with the Eugene Game Development Kit 8.1.9.<br>
    7.1.7: The changes have been merged with the Eugene Game Development Kit 8.2.1.<br>
    7.1.8: The changes have been merged with the Eugene Game Development Kit 8.2.2.<br>
@@ -2261,7 +2202,7 @@
    7.2.8: The changes have been merged with the Eugene Game Development Kit 8.3.4.<br>
    7.2.9-7.3.3: Small changes.<br>
    7.3.4: Visual C++ 6 support has been improved.<br>
-   7.3.5-7.3.6: The small changes.<br>
+   7.3.5-7.3.6: A small changes.<br>
    7.3.7: Windows 95 support has been removed.<br>
    7.3.8: The memory subsystem has been removed.<br>
    7.3.9: The changes have been merged with the Eugene Game Development Kit 8.4.2.<br>
@@ -2284,13 +2225,13 @@
    7.5.6: The changes have been merged with the Eugene Game Development Kit 8.6.5.<br>
    7.5.7: The changes have been merged with the Eugene Game Development Kit 8.6.6.<br>
    7.5.8: The changes have been merged with the Eugene Game Development Kit 8.6.8.<br>
-   7.5.9: The synchronization timer is backported from the Neon Game Development Kit 7.1.1.<br>
+   7.5.9: The synchronization timer has been ported from the Neon Game Development Kit 7.1.1.<br>
    7.6-7.6.1: The synchronization timer has been improved.<br>
-   7.6.2: The small changes.<br>
+   7.6.2: A small changes.<br>
    7.6.3: Windows 95 support has been added.<br>
-   7.6.4: The small changes.<br>
-   7.6.5: The small bug has been fixed.<br>
-   7.6.6: The small changes.<br>
+   7.6.4: A small changes.<br>
+   7.6.5: A small bug has been fixed.<br>
+   7.6.6: A small changes.<br>
    7.6.7: The changes have been merged with the Eugene Game Development Kit 8.7.1.<br>
    7.6.8: The changes have been merged with the Eugene Game Development Kit 8.7.2.<br>
    7.6.9: The changes have been merged with the Eugene Game Development Kit 8.7.3.<br>
@@ -2300,11 +2241,11 @@
    7.7.3: The changes have been merged with the Eugene Game Development Kit 8.7.7.<br>
    7.7.4: The changes have been merged with the Eugene Game Development Kit 8.7.8.<br>
    7.7.5: The changes have been merged with the Eugene Game Development Kit 8.7.9.<br>
-   7.7.6: The small changes.<br>
+   7.7.6: A small changes.<br>
    7.7.7: The changes have been merged with the Black Game Development Kit 5.7.6.<br>
-   7.7.8: The small changes.<br>
+   7.7.8: A small changes.<br>
    7.7.9: The changes have been merged with the Eugene Game Development Kit 8.8.4.<br>
-   7.8: The small changes.<br>
+   7.8: A small changes.<br>
    7.8.1: The changes have been merged with the Eugene Game Development Kit 8.8.5.<br>
    7.8.2: The changes have been merged with the Black Game Development Kit 5.8.2.<br>
    7.8.3: The changes have been merged with the Eugene Game Development Kit 8.8.7.<br>
@@ -2315,19 +2256,19 @@
    7.8.8: The changes have been merged with the Black Game Development Kit 5.9.4.<br>
    7.8.9: The changes have been merged with the Black Game Development Kit 5.9.6.<br>
    7.9-7.9.1: The keyboard input subsystem has been improved.<br>
-   7.9.2: The small changes.<br>
+   7.9.2: A small changes.<br>
    7.9.3: The changes have been merged with the Eugene Game Development Kit 8.9.9.<br>
    7.9.4: The changes have been merged with the Eugene Game Development Kit 9.0.1.<br>
-   7.9.5: The synchronization timer is backported from the Neon Game Development Kit 7.5.8.<br>
+   7.9.5: The synchronization timer has been ported from the Neon Game Development Kit 7.5.8.<br>
    7.9.6: The changes have been merged with the Eugene Game Development Kit 9.0.3.<br>
-   7.9.7: The small changes.<br>
+   7.9.7: A small changes.<br>
    7.9.8: The changes have been merged with the Eugene Game Development Kit 9.0.4.<br>
    7.9.9: The changes have been merged with the Eugene Game Development Kit 9.0.5.<br>
    8.0: The changes have been merged with the Eugene Game Development Kit 9.0.6.<br>
    8.0.1: The changes have been merged with the Eugene Game Development Kit 9.0.7.<br>
    8.0.2: The changes have been merged with the Eugene Game Development Kit 9.0.8.<br>
-   8.0.3: The synchronization timer is backported from the Neon Game Development Kit 7.9.4.<br>
-   8.0.4: The small changes.<br>
+   8.0.3: The synchronization timer has been ported from the Neon Game Development Kit 7.9.4.<br>
+   8.0.4: A small changes.<br>
    8.0.5: The changes have been merged with the Eugene Game Development Kit 9.0.9.<br>
    8.0.6: The changes have been merged with the Eugene Game Development Kit 9.1.<br>
    8.0.6.1-8.0.6.8: The documentation has been updated.<br>
@@ -2338,12 +2279,12 @@
    8.0.9.1: The documentation has been updated.<br>
    8.1: The changes have been merged with the Eugene Game Development Kit 9.2.3.<br>
    8.1.1: The changes have been merged with the Eugene Game Development Kit 9.2.4.<br>
-   8.1.2-8.1.5: The small changes.<br>
+   8.1.2-8.1.5: A small changes.<br>
    8.1.5.1-8.1.5.3: The documentation has been updated.<br>
    8.1.6: The changes have been merged with the Eugene Game Development Kit 9.2.6.<br>
    8.1.7: The changes have been merged with the Eugene Game Development Kit 9.2.7.<br>
    8.1.7.1: The documentation has been updated.<br>
-   8.1.8: The small changes.<br>
+   8.1.8: A small changes.<br>
    8.1.9: The changes have been merged with the Eugene Game Development Kit 9.2.8.<br>
    8.2: The changes have been merged with the Eugene Game Development Kit 9.2.9.<br>
    8.2.1: The changes have been merged with the Eugene Game Development Kit 9.3.<br>
@@ -2360,7 +2301,7 @@
    8.3.2: The changes have been merged with the Eugene Game Development Kit 9.4.6.<br>
    8.3.3: The changes have been merged with the Eugene Game Development Kit 9.4.7.<br>
    8.3.4: The synchronization timer has been improved.<br>
-   8.3.5-8.3.7: The small changes.<br>
+   8.3.5-8.3.7: A small changes.<br>
    8.3.8: The changes have been merged with the Eugene Game Development Kit 9.4.8.<br>
    8.3.9: The changes have been merged with the Eugene Game Development Kit 9.4.9.<br>
    8.4: The changes have been merged with the Black Game Development Kit 6.4.7.<br>
@@ -2385,7 +2326,7 @@
    8.5.8: The changes have been merged with the Eugene Game Development Kit 9.6.8.<br>
    8.5.9: The changes have been merged with the Eugene Game Development Kit 9.6.9.<br>
    8.5.9.1-8.5.9.2: The documentation has been updated.<br>
-   8.6-8.6.1: The small changes.<br>
+   8.6-8.6.1: A small changes.<br>
    8.6.1.1: The project files are updated.<br>
    8.6.1.2: The documentation has been updated.<br>
    8.6.2: The changes have been merged with the Eugene Game Development Kit 9.7.<br>
@@ -2447,11 +2388,11 @@
    9.1.2: The changes have been merged with the Eugene Game Development Kit 10.3.3.<br>
    9.1.3: The changes have been merged with the Eugene Game Development Kit 10.5.2.<br>
    9.1.4: The rendering performance has been improved.<br>
-   9.1.5: The small changes.<br>
+   9.1.5: A small changes.<br>
    9.1.6: The rendering performance has been improved.<br>
    9.1.7: The changes have been merged with the Eugene Game Development Kit 10.5.6.<br>
    9.1.8: The rendering performance has been improved.<br>
-   9.1.9-9.2: The small changes.<br>
+   9.1.9-9.2: A small changes.<br>
    9.2.1: The changes have been merged with the Eugene Game Development Kit 10.6.<br>
    9.2.2: The changes have been merged with the Eugene Game Development Kit 10.6.1.<br>
    9.2.3: The changes have been merged with the Eugene Game Development Kit 10.6.2.<br>
@@ -2463,7 +2404,7 @@
    9.2.9: The changes have been merged with the Eugene Game Development Kit 10.6.8.<br>
    9.3: The changes have been merged with the Eugene Game Development Kit 10.6.9.<br>
    9.3.1: The changes have been merged with the Eugene Game Development Kit 10.7.<br>
-   9.3.1.1: The documentation has been updated.<br>
+   9.3.1.1-9.3.1.2: The documentation has been updated.<br>
   </big>
  </body>
 </html>
