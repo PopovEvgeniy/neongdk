@@ -798,8 +798,6 @@ typedef enum
 
   class Ribbon:public Billboard,public Animation,public Picture
   {
-   private:
-   void set_sprite_frame();
    public:
    Ribbon();
    ~Ribbon();
