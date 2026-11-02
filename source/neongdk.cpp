@@ -2954,11 +2954,6 @@ namespace NEONGDK
 
   }
 
-  void Tier::set_sprite_frame()
-  {
-   billboard.set_vertical_offset(this->get_frame(),this->get_frames());
-  }
-
   Tier* Tier::get_pointer()
   {
    return this;
@@ -2970,9 +2965,8 @@ namespace NEONGDK
    if (this->is_storage_empty()==false)
    {
     this->prepare(this->get_image_width(),this->get_image_height(),this->get_image());
-    this->set_frames(frames);
-    this->set_size(this->get_image_width(),this->get_image_height()/this->get_frames());
-    this->set_sprite_frame();
+    this->set_size(this->get_image_width(),this->get_image_height()/this->set_frames(frames));
+    this->set_target(0);
    }
    return this->is_loaded();
   }
@@ -2991,15 +2985,13 @@ namespace NEONGDK
 
   unsigned int Tier::set_target(const unsigned int target)
   {
-   this->set_frame(target);
-   this->set_sprite_frame();
+   billboard.set_vertical_offset(this->set_frame(target),this->get_frames());
    return this->get_frame();
   }
 
   void Tier::step()
   {
-   this->increase_frame();
-   this->set_sprite_frame();
+   this->set_target(this->increase_frame());
   }
 
   void Tier::destroy()
