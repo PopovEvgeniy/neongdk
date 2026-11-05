@@ -3164,9 +3164,7 @@ namespace NEONGDK
 
   unsigned int Sheet::set_target(const unsigned int target)
   {
-   this->set_frame(target);
-   this->select(this->get_row(this->get_frame()),this->get_column(this->get_frame()));
-   return this->get_frame();
+   return this->select(this->get_row(target),this->get_column(target));
   }
 
   void Sheet::step()
@@ -4099,8 +4097,8 @@ namespace NEONGDK
   {
    start_x=0;
    start_y=0;
-   halft_tile_width=0;
-   halft_tile_height=0;
+   half_tile_width=0;
+   half_tile_height=0;
   }
 
   Level::~Level()
@@ -4117,11 +4115,11 @@ namespace NEONGDK
   {
    if (tile_width>0)
    {
-    halft_tile_width=tile_width/2;
+    half_tile_width=tile_width/2;
    }
    if (tile_height>0)
    {
-    halft_tile_height=tile_height/2;
+    half_tile_height=tile_height/2;
    }
 
   }
@@ -4144,12 +4142,12 @@ namespace NEONGDK
 
   int Level::get_x(const int row,const int column) const
   {
-   return start_x+(row-column)*halft_tile_width;
+   return start_x+(row-column)*half_tile_width;
   }
 
   int Level::get_y(const int row,const int column) const
   {
-   return start_y+(row+column)*halft_tile_height;
+   return start_y+(row+column)*half_tile_height;
   }
 
  }
